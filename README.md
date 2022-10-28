@@ -16,7 +16,7 @@ SETUP
 	- instance_email_username
 	
 3 - changer url du projet (toujours dans la table settings)
-	- instance_url
+	- instance_url ( par ex http://localhost )
 	
 	
 	
