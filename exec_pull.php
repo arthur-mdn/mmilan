@@ -15,18 +15,18 @@
 </head>
 
 <body>
-    <?php
-    if (isset($_POST['submit'])) {
-        $output = shell_exec('bash /home/mmilan/public_html/script.sh');
-        var_dump($output);
-    }
-    ?>
 
     <h1>Pull Repo</h1>
     <form action="" method="post">
         <input type="submit" value="Pull">
     </form>
 
+    <?php
+    if (isset($_POST['submit'])) {
+        $output = shell_exec('sh /home/mmilan/public_html/script.sh > /home/mmilan/logs/logs.txt &');
+        echo "<pre>$output</pre>";
+    }
+    ?>
 
 </body>
 
