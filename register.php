@@ -76,13 +76,25 @@
             $result3 = $check_games->fetchAll(PDO::FETCH_ASSOC);
 
             if ($result3 === 1) {
+                // if there is no player in the database, the first player will have the id 1
                 if (!isset($result2['NewPlayerId'])) {
                     $result2['NewPlayerId'] = 1;
                 }
+
+                // check if the profile is allowed
                 $profile_allowed = ['mmi1', 'mmi2', 'enseignant', 'other'];
                 if (!in_array($_POST['ProfilUtilisateur'], $profile_allowed)) {
                     $_POST['ProfilUtilisateur'] = 'other';
                 }
+
+                // Log account creation attempt
+                $logconn = $conn2->prepare("INSERT INTO logs (LogMsg, LogUserMail) 
+                    VALUES (?, ?)");
+                $logconn->bindValue(1, "Account creation : " . $_POST['MailUtilisateur'] . "successfully created its account");
+                $logconn->bindValue(2, $_POST['MailUtilisateur']);
+                $logconn->execute();
+
+                // create the account - insert the player in the database
                 $query = $conn2->prepare("INSERT INTO players (PlayerId, PlayerLastname, PlayerFirstname, PlayerEmail, PlayerTel, PlayerPassword, PlayerCreation_date, PlayerDiscord, PlayerProfil,PlayerUsername, PlayerFavGameId) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?)");
                 $query->bindValue(1, $result2['NewPlayerId']);
@@ -99,9 +111,11 @@
                 $query->execute(); // create user
                 $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
+                // new session for the new player
                 $_SESSION["PlayerId"] = $result2['NewPlayerId'];
                 header("location: index.php?msg=accountCreated");
             } else {
+                // if the game selected does not exist, log hack attempt
                 $logHack = $conn2->prepare("INSERT INTO logs (LogMsg, LogUserMail) 
                     VALUES (?, ?)");
                 $logHack->bindValue(1, "Hack attempt : " . $_POST['FavGameUtilisateur'] . " is not a valid game");
