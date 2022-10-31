@@ -23,7 +23,7 @@
 
     <?php
     if (isset($_POST['submit'])) {
-        $output = exec('sh /home/mmilan/public_html/script.sh > /home/mmilan/logs/logs.txt &');
+        $output = exec('sudo sh /home/mmilan/public_html/script.sh');
         echo "<pre>$output</pre>";
         echo "data updated";
     }
