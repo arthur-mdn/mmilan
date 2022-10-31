@@ -18,7 +18,7 @@
     <?php
     if (isset($_POST['submit'])) {
         if ($_POST['submit'] == 'Pull') {
-            $output = shell_exec('git pull git@github.com:arthur-mdn/mmilan');
+            $output = shell_exec('bash /home/mmilan/public_html/script.sh');
             echo "<pre>$output</pre>";
         }
     }
