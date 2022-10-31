@@ -554,6 +554,13 @@ form > textarea {
   border: 1px solid #ff0000;
 }
 
+#game-error-msg {
+  margin-block: 1rem;
+  color: black;
+  font-size: 1rem;
+  padding: 0.25rem;
+}
+
 .success {
   border: 1px solid #a2d246;
   background-color: #ebf8a4;

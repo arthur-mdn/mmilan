@@ -67,31 +67,48 @@
         FROM players";
             $result2 = $conn2->query($query)->fetch(); // look for the highest number of PlayerId and add 1. ==> Home-made Auto-Increment
 
-            if (!isset($result2['NewPlayerId'])) {
-                $result2['NewPlayerId'] = 1;
-            }
-            $profile_allowed = ['mmi1', 'mmi2', 'enseignant', 'other'];
-            if (!in_array($_POST['ProfilUtilisateur'], $profile_allowed)) {
-                $_POST['ProfilUtilisateur'] = 'other';
-            }
-            $query = $conn2->prepare("INSERT INTO players (PlayerId, PlayerLastname, PlayerFirstname, PlayerEmail, PlayerTel, PlayerPassword, PlayerCreation_date, PlayerDiscord, PlayerProfil,PlayerUsername, PlayerFavGameId) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?)");
-            $query->bindValue(1, $result2['NewPlayerId']);
-            $query->bindValue(2, htmlspecialchars($_POST['NomUtilisateur'], ENT_QUOTES, 'UTF-8'));
-            $query->bindValue(3, htmlspecialchars($_POST['PrenomUtilisateur'], ENT_QUOTES, 'UTF-8'));
-            $query->bindValue(4, htmlspecialchars($_POST['MailUtilisateur'], ENT_QUOTES, 'UTF-8'));
-            $query->bindValue(5, htmlspecialchars($_POST['TelUtilisateur'], ENT_QUOTES, 'UTF-8'));
-            $query->bindValue(6, password_hash($_POST['MdpUtilisateur'], PASSWORD_DEFAULT));
-            $query->bindValue(7, date('Y-m-d H:i:s'));
-            $query->bindValue(8, htmlspecialchars($_POST['DiscordUtilisateur'], ENT_QUOTES, 'UTF-8'));
-            $query->bindValue(9, htmlspecialchars($_POST['ProfilUtilisateur'], ENT_QUOTES, 'UTF-8'));
-            $query->bindValue(10, htmlspecialchars($_POST['UsernameUtilisateur'], ENT_QUOTES, 'UTF-8'));
-            $query->bindValue(11, htmlspecialchars($_POST['FavGameUtilisateur'], ENT_QUOTES, 'UTF-8'));
-            $query->execute(); // create user
-            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            // check if game selected exists
+            $check_games = $conn2->prepare("SELECT count(*) as NombreJeux
+                        FROM games 
+                        WHERE games.GameId = ? ");
+            $check_games->bindValue(1, $_POST['FavGameUtilisateur']);
+            $check_games->execute();
+            $result3 = $check_games->fetchAll(PDO::FETCH_ASSOC);
 
-            $_SESSION["PlayerId"] = $result2['NewPlayerId'];
-            header("location: index.php?msg=accountCreated");
+            if ($result3 === 1) {
+                if (!isset($result2['NewPlayerId'])) {
+                    $result2['NewPlayerId'] = 1;
+                }
+                $profile_allowed = ['mmi1', 'mmi2', 'enseignant', 'other'];
+                if (!in_array($_POST['ProfilUtilisateur'], $profile_allowed)) {
+                    $_POST['ProfilUtilisateur'] = 'other';
+                }
+                $query = $conn2->prepare("INSERT INTO players (PlayerId, PlayerLastname, PlayerFirstname, PlayerEmail, PlayerTel, PlayerPassword, PlayerCreation_date, PlayerDiscord, PlayerProfil,PlayerUsername, PlayerFavGameId) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?)");
+                $query->bindValue(1, $result2['NewPlayerId']);
+                $query->bindValue(2, htmlspecialchars($_POST['NomUtilisateur'], ENT_QUOTES, 'UTF-8'));
+                $query->bindValue(3, htmlspecialchars($_POST['PrenomUtilisateur'], ENT_QUOTES, 'UTF-8'));
+                $query->bindValue(4, htmlspecialchars($_POST['MailUtilisateur'], ENT_QUOTES, 'UTF-8'));
+                $query->bindValue(5, htmlspecialchars($_POST['TelUtilisateur'], ENT_QUOTES, 'UTF-8'));
+                $query->bindValue(6, password_hash($_POST['MdpUtilisateur'], PASSWORD_DEFAULT));
+                $query->bindValue(7, date('Y-m-d H:i:s'));
+                $query->bindValue(8, htmlspecialchars($_POST['DiscordUtilisateur'], ENT_QUOTES, 'UTF-8'));
+                $query->bindValue(9, htmlspecialchars($_POST['ProfilUtilisateur'], ENT_QUOTES, 'UTF-8'));
+                $query->bindValue(10, htmlspecialchars($_POST['UsernameUtilisateur'], ENT_QUOTES, 'UTF-8'));
+                $query->bindValue(11, htmlspecialchars($_POST['FavGameUtilisateur'], ENT_QUOTES, 'UTF-8'));
+                $query->execute(); // create user
+                $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                $_SESSION["PlayerId"] = $result2['NewPlayerId'];
+                header("location: index.php?msg=accountCreated");
+            } else {
+                $logHack = $conn2->prepare("INSERT INTO logs (LogMsg, LogUserMail) 
+                    VALUES (?, ?)");
+                $logHack->bindValue(1, "Hack attempt : " . $_POST['FavGameUtilisateur'] . " is not a valid game");
+                $logHack->bindValue(2, $_POST['MailUtilisateur']);
+                $logHack->execute();
+                header("location: register.php?hack_log=true");
+            }
         } else {
             $generated_id = generateRandomString(5);
             echo '<div class="modal error" id="modal_' . $generated_id . '" onclick="close_modal(\'' . $generated_id . '\')"> Un compte utilisant cette adresse mail et/ou ce numéro de téléphone existe déjà. <script> hideIt("modal_' . $generated_id . '"); </script> </div>';
@@ -143,6 +160,7 @@
                 </div>
                 <div class="input_container">
                     <label for="FavGameUtilisateur">Jeu préféré</label>
+                    <p class="error" id="game-error-msg">Veuillez choisir un jeux présent dans la liste. Toutes tentatives de hack est prohibée et sera sanctionnée.</p>
                     <select name="FavGameUtilisateur" id="FavGameUtilisateur" required style="width:100%;color: black;">
                         <?php
                         $query = $conn2->prepare("SELECT * 
@@ -192,6 +210,8 @@
     <br><br><br>
     <br><br><br>
     <br><br><br>
+
+    <script src="js/main_script.js"></script>
 </body>
 
 </html>
