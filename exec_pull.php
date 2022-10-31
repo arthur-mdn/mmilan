@@ -5,7 +5,7 @@
  */
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -17,10 +17,8 @@
 <body>
     <?php
     if (isset($_POST['submit'])) {
-        if ($_POST['submit'] == 'Pull') {
-            $output = shell_exec('bash /home/mmilan/public_html/script.sh');
-            echo "<pre>$output</pre>";
-        }
+        $output = shell_exec('bash /home/mmilan/public_html/script.sh');
+        var_dump($output);
     }
     ?>
 
