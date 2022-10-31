@@ -89,6 +89,22 @@ CREATE TABLE `invitations` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `logs`
+--
+
+DROP TABLE IF EXISTS `logs`;
+CREATE TABLE IF NOT EXISTS `logs` (
+  `LogId` int NOT NULL AUTO_INCREMENT,
+  `LogMsg` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `LogUserMail` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `LogDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`LogId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+
+--
 -- Structure de la table `players`
 --
 
