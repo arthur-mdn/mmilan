@@ -16,8 +16,12 @@
 
 <body>
     <?php
-    $output = shell_exec('git pull git@github.com:arthur-mdn/mmilan');
-    echo "<pre>$output</pre>";
+    if (isset($_POST['submit'])) {
+        if ($_POST['submit'] == 'Pull') {
+            $output = shell_exec('git pull git@github.com:arthur-mdn/mmilan');
+            echo "<pre>$output</pre>";
+        }
+    }
     ?>
 
     <h1>Pull Repo</h1>
