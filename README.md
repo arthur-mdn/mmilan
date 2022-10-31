@@ -11,11 +11,11 @@ SETUP
 	éditer table settings avec les valeurs correspondantes.
 	
 	- Requêtes pour modifier les parametres smtp gmail
-	UPDATE `settings` SET `instance_email_host` = 'smtp.gmail.com' WHERE `settings`.`SettingsName` = 'instance_email_host';
-	UPDATE `settings` SET `instance_email_port` = '587' WHERE `settings`.`SettingsName` = 'instance_email_port';
-	UPDATE `settings` SET `instance_email_username` = 'mmilan.tln@gmail.com' WHERE `settings`.`SettingsName` = 'instance_email_username';
-	UPDATE `settings` SET `instance_email_password` = 'MMILAN2022' WHERE `settings`.`SettingsName` = 'instance_email_password';
-	
+	UPDATE `settings` SET `SettingsValue` = 'smtp.gmail.com' WHERE `settings`.`SettingsName` = 'instance_email_host';
+	UPDATE `settings` SET `SettingsValue` = '587' WHERE `settings`.`SettingsName` = 'instance_email_port';
+	UPDATE `settings` SET `SettingsValue` = 'mmilan.tln@gmail.com' WHERE `settings`.`SettingsName` = 'instance_email_username';
+	UPDATE `settings` SET `SettingsValue` = 'MMILAN2022' WHERE `settings`.`SettingsName` = 'instance_email_password';
+
 	
 3 - changer url du projet (toujours dans la table settings)
 	- instance_url ( par ex http://localhost )
