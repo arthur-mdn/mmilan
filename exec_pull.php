@@ -18,7 +18,7 @@
 
     <h1>Pull Repo</h1>
     <form action="" method="post">
-        <input type="submit" value="Pull">
+        <input type="submit" name="submit" value="Pull">
     </form>
 
     <?php
