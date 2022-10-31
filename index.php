@@ -1,4 +1,5 @@
 <?php
+
 /**
  * mmilan, website that manage e-sport teams
  * Propulsed by Arthur Mondon.
@@ -13,57 +14,62 @@ session_start();
 define('MyConst', TRUE);
 require('app/config.php');
 
-if(isset($_SESSION["PlayerId"])){
+if (isset($_SESSION["PlayerId"])) {
     $query = $conn2->prepare("SELECT * 
 									FROM players
 									WHERE players.PlayerStatus = 'ok'
 									and players.PlayerId = ?");
     $query->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
-    $query->execute(); 
+    $query->execute();
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
-    if(empty($result)){
+    if (empty($result)) {
         header("Location: logout.php?blocked=true");
         exit();
     }
 }
 ?>
-    <!DOCTYPE html>
-    <html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>Accueil</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <script src="js/jquery.min.js"></script>
-        <link rel="icon" type="image/png" href="Elements/placeholder_logo.svg" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/loader.css" />
-    </head>
+<!DOCTYPE html>
+<html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Accueil</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <script src="js/jquery.min.js"></script>
+    <link rel="icon" type="image/png" href="Elements/placeholder_logo.svg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/loader.css" />
+</head>
+
 <body>
     <div class="loader_container" id="loader_container">
-        <div class="a"><div></div><div></div></div>
+        <div class="a">
+            <div></div>
+            <div></div>
+        </div>
         <p>Un instant ...</p>
         <script>
-            function active_loader(){
+            function active_loader() {
                 document.getElementById('loader_container').style.display = 'flex';
             }
         </script>
     </div>
     <?php
-        require('menu.php'); // afficher le menu en fonction de connecté ou pas.
-
+    require('menu.php'); // afficher le menu en fonction de connecté ou pas.
     ?>
 
     <style>
-        body{
+        body {
             padding-top: 64px;
         }
-        .bt-lg{
+
+        .bt-lg {
             border-top: 1px solid #d3d3d37d;
         }
     </style>
 
 
-    <div  style="background-image: url(Elements/backgrounds/background03.jpg);
+    <div style="background-image: url(Elements/backgrounds/background03.jpg);
     height:400px;
     background-size: cover;
     background-position: center;
@@ -89,15 +95,15 @@ if(isset($_SESSION["PlayerId"])){
 									WHERE games.GameStatus != 'del'");
         $query->execute();
         $games = $query->fetchAll(PDO::FETCH_ASSOC); // get all games in bdd
-        if(!empty($games)){
+        if (!empty($games)) {
             echo '<h2> Jeux </h2>';
-            foreach ($games as $game){
+            foreach ($games as $game) {
                 echo '
                 <div>
                 <br>
-                    <h4>'.$game['GameName'].'</h4>
-                    <p>'.$game['GameDescription'].'</p>
-                    <img src="'.$game['GamePicture'].'" style="width: 50px;">
+                    <h4>' . $game['GameName'] . '</h4>
+                    <p>' . $game['GameDescription'] . '</p>
+                    <img src="' . $game['GamePicture'] . '" style="width: 50px;">
                 </div>
                 ';
             }
@@ -105,5 +111,6 @@ if(isset($_SESSION["PlayerId"])){
         ?>
     </div>
 
-    </body>
+</body>
+
 </html>

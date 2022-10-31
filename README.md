@@ -5,15 +5,17 @@ SETUP
 
 1 - Se connecter à phpmyadmin. 
 	Créer une base de donnée avec encodage utf-8_unicode !
-	importer le fichier dump.
+	importer le fichier dump mmilan.sql.
 
-2 - créer (ou utiliser une existante) une configuration adresse mail et récupérer les identifiants SMTP
+2 - UTILISER LE SMTP GMAIL EXISTANT
 	éditer table settings avec les valeurs correspondantes.
 	
-	- instance_email_host
-	- instance_email_password
-	- instance_email_port
-	- instance_email_username
+	- Requêtes pour modifier les parametres smtp gmail
+	UPDATE `settings` SET `instance_email_host` = 'smtp.gmail.com' WHERE `settings`.`SettingsName` = 'instance_email_host';
+	UPDATE `settings` SET `instance_email_port` = '587' WHERE `settings`.`SettingsName` = 'instance_email_port';
+	UPDATE `settings` SET `instance_email_username` = 'mmilan.tln@gmail.com' WHERE `settings`.`SettingsName` = 'instance_email_username';
+	UPDATE `settings` SET `instance_email_password` = 'MMILAN2022' WHERE `settings`.`SettingsName` = 'instance_email_password';
+	
 	
 3 - changer url du projet (toujours dans la table settings)
 	- instance_url ( par ex http://localhost )
