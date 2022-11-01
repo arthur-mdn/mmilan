@@ -71,11 +71,11 @@
             $check_games = $conn2->prepare("SELECT count(*) as NombreJeux
                         FROM games 
                         WHERE games.GameId = ? ");
-            $check_games->bindValue(1, $_POST['FavGameUtilisateur']);
+            $check_games->bindValue(1, intval($_POST['FavGameUtilisateur']));
             $check_games->execute();
             $result3 = $check_games->fetchAll(PDO::FETCH_ASSOC);
 
-            if ($result3 === 1) {
+            if ($result3[0]['NombreJeux'] == 1) {
                 // if there is no player in the database, the first player will have the id 1
                 if (!isset($result2['NewPlayerId'])) {
                     $result2['NewPlayerId'] = 1;
@@ -90,7 +90,7 @@
                 // Log account creation attempt
                 $logconn = $conn2->prepare("INSERT INTO logs (LogMsg, LogUserMail) 
                     VALUES (?, ?)");
-                $logconn->bindValue(1, "Account creation : " . $_POST['MailUtilisateur'] . "successfully created its account");
+                $logconn->bindValue(1, "Account creation : " . $_POST['MailUtilisateur'] . " successfully created its account");
                 $logconn->bindValue(2, $_POST['MailUtilisateur']);
                 $logconn->execute();
 
