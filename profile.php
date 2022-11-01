@@ -107,6 +107,7 @@ if (!isset($_SESSION["PlayerId"])) {
     <h4>' . $playerTeam['TeamName'] . '</h4>
     <p>' . $playerTeam['TeamDesc'] . '</p>
     <img src="' . $playerTeam['TeamLogo'] . '" alt="team_logo" style="width: 100px;">
+    <br>
     ';
             if ($playerTeam['AppartientRole'] === "chef") { // affichage en tant que chef d'équipe
                 $query = $conn2->prepare("SELECT * 
@@ -122,14 +123,70 @@ if (!isset($_SESSION["PlayerId"])) {
                 $query->execute();
                 $playersOfPlayerTeam = $query->fetchAll(PDO::FETCH_ASSOC); //
                 if (!empty($playersOfPlayerTeam)) {
-                    // si membres équipe === 2 , les afficher
-                    // si membres équipe === 1 , l'afficher + statut invitation en cours (en cours, refusé,etc..)
+                    // si membres équipe === 3 , les afficher
+                    if (count($playersOfPlayerTeam) === 3) {
+                        echo 'Membres de votre équipe :
+                        <ul>';
+                        foreach ($playersOfPlayerTeam as $player) {
+                            echo '<li>' . $player['PlayerUsername'] . '</li>';
+                        }
+                        echo '</ul>';
+                    } elseif (count($playersOfPlayerTeam) === 2) {
+                        // si membres équipe === 2 , l'afficher + statut invitation en cours (en cours, refusé,etc..)
+                        echo 'Membres de votre équipe :
+                        <ul>';
+                        foreach ($playersOfPlayerTeam as $player) {
+                            echo '<li>' . $player['PlayerUsername'] . '</li>';
+                        }
+                        echo '</ul>';
+                        echo 'Vous pouvez inviter un joueur à rejoindre votre équipe en utilisant le formulaire ci-dessous.';
+
+                        // formulaire d'invitation pour le joueur restant
+
+                        echo '<form action="" method="post">
+                        <input type="text" name="playerToInvite" placeholder="Email du joueur à inviter">
+                        <input type="hidden" name="teamId" value="' . $playerTeam['TeamId'] . '">
+                        <input type="submit" value="Inviter">
+                        </form>';
+                    } elseif (count($playersOfPlayerTeam) === 1) {
+                        // si membres équipe === 1 , l'afficher + statut invitation en cours (en cours, refusé,etc..)
+                        echo 'Membres de votre équipe :
+                        <ul>';
+                        foreach ($playersOfPlayerTeam as $player) {
+                            echo '<li>' . $player['PlayerUsername'] . '</li>';
+                        }
+                        echo '</ul>';
+                        echo 'Vous pouvez inviter deux joueurs à rejoindre votre équipe en utilisant le formulaire ci-dessous.';
+
+                        echo '<form action="" method="post">
+                        <input type="text" name="playerToInvite" placeholder="Email du joueur à inviter">
+                        <input type="text" name="playerToInvite" placeholder="Email du joueur à inviter">
+                        <input type="hidden" name="teamId" value="' . $playerTeam['TeamId'] . '">
+                        <input type="submit" value="Inviter">
+                        </form>';
+                    }
                 } else {
                     // si invitations lancées, affichage statut
                     // si aucunes invitations, demander mail membres, vérifier qu'ils n'appartiennent pas à une autre équipe, insérer en bdd invitation avec status en attente
                 }
             } else { // affichage en tant que membre équipe
                 // afficher les membres de l'équipe
+                $query = $conn2->prepare("SELECT * 
+									FROM players, appartient, teams
+									WHERE players.PlayerStatus = 'ok'
+									and teams.TeamStatus = 'ok'
+									and appartient.AppartientStatus not in ('del','canceled')
+                                    and players.PlayerId = appartient.AppartientPlayerId
+                                    and appartient.AppartientTeamId = teams.TeamId
+                                    and appartient.AppartientTeamId = ?
+									");
+                $query->bindValue(1, htmlspecialchars($playerTeam["TeamId"], ENT_QUOTES, 'UTF-8'));
+                $query->execute();
+                $playersOfPlayerTeam = $query->fetchAll(PDO::FETCH_ASSOC); //
+
+                foreach ($playersOfPlayerTeam as $playerOfPlayerTeam) {
+                    echo '<p>' . $playerOfPlayerTeam['PlayerName'] . ' ' . $playerOfPlayerTeam['PlayerSurname'] . ' (' . $playerOfPlayerTeam['AppartientRole'] . ')</p>';
+                }
             }
         } else {
             if (isset($_POST['TeamName']) and isset($_POST['TeamDesc']) and isset($_FILES['TeamLogo'])) { // si le formulaire pour créer une équipe est rempli :
@@ -150,8 +207,7 @@ if (!isset($_SESSION["PlayerId"])) {
                 if ($upload) { // upload respecte toutes les conditions
                     $file = 'data:' . $_FILES['TeamLogo']['type'] . ';base64,' . base64_encode(file_get_contents($_FILES['TeamLogo']['tmp_name']));
 
-                    $query = "SELECT IFNULL(MAX(TeamId), 0) + 1 as NewTeamId
-				FROM teams";
+                    $query = "SELECT IFNULL(MAX(TeamId), 0) + 1 as NewTeamId FROM teams";
                     $newTeamId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment
 
                     $query = $conn2->prepare("INSERT INTO teams 
