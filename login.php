@@ -82,6 +82,8 @@
             if (isset($NombreTentatives[0]['NombreTentatives']) and $NombreTentatives[0]['NombreTentatives'] < 5) {
                 if (password_verify($_POST['MdpUtilisateur'], $result['PlayerPassword'])) {  //correct password => login
                     $_SESSION["PlayerId"] = $result['PlayerId'];
+                    $_SESSION["PlayerMail"] = $result['PlayerEmail'];
+
                     $query = $conn2->prepare("UPDATE tentative SET tentative.StatusTentative = 'old' WHERE tentative.PlayerId = ?  ");
                     $query->bindValue(1, $result['PlayerId']);
                     $query->execute(); // delete tentatives of the user logged

@@ -518,8 +518,47 @@ if (!isset($_SESSION["PlayerId"])) {
                     ';
                 } elseif ($_POST['select'] === "solo") { // si le bouton solo a été cliqué
                     // s'inscrire en tant que joueur solo
-                    // afficher "êtes-vous sûr de pas vouloir rejoindre [EXEMPLE] ? Cela va annuler votre invitation." (si une invitation est désignée à ce joueur).
+                    //* Requête SQL permettant d'afficher les différentes invitations reçus pour ce joueur
+                    $query = $conn2->prepare("SELECT * 
+									FROM players, invitations, teams
+									WHERE players.PlayerID = ?
+                                    and invitations.InvitationStatus = 'ok'
+                                    and invitations.InvitationEmail = players.PlayerEmail
+                                    and invitations.InvitationTeamId = teams.TeamId
+									");
+                    $query->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+                    $query->execute();
+                    //* Stockage du fetch dans une variable
+                    $invitationsinqueue = $query->fetchAll(PDO::FETCH_ASSOC); //
+                    //* Déclaration d'une auto-incrémentation
+                    $query = "SELECT IFNULL(MAX(AppartientSoloId), 0) + 1 as NewSoloId FROM appartient_solo";
+                    $newSoloId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment
+                    //* Si la variable possède au minimum 1 ligne, affiche le nom de l'équipe pour chaque invitations
+                    if (sizeof($invitationsinqueue) > 0) {
+                        // afficher "Êtes-vous sûr de rejeté les invitations des équipes suivantes ? Cela va annuler votre invitation." (si une invitation est désignée à ce joueur).
+                        echo 'Êtes-vous sûr de rejeté les invitations des équipes suivantes ? Cela va annuler vos invitations. :';
+                        foreach ($invitationsinqueue as $invitationsinqueue) {
+                            echo '<p>- ' . $invitationsinqueue['TeamName'] . '</p>';
+                        }
+                        //* Bouton Validation de l'inscription
+                        echo '
+                        <form method="post" >
+                            <input type="hidden" name="PlayerId" value="validationSolo">
+                            <input  type="submit" name="validationSolo" value="Valider l\'inscription">
+                        </form>
+                        ';
+                    } else {
 
+                        //* Requête SQL permettant d'insérer le joueur dans la table appartient_solo
+                        $query = $conn2->prepare("INSERT INTO appartient_solo 
+                        (AppartientSoloId, AppartientSoloPlayerId, AppartientSoloStatus)
+                        VALUES (?, ?, 'ok')
+                      ");
+
+                        $query->bindValue(1, $newSoloId["NewSoloId"]);
+                        $query->bindValue(2, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+                        $query->execute();
+                    }
                 }
             } else { // aucune équipe
                 //vérifier en bdd si une invitation a été adressée au joueur connecté, possibilité d'accepter ou refuser = changer statut de l'invitation en bdd, et de rejoindre, ou pas, l'équipe
@@ -535,6 +574,33 @@ if (!isset($_SESSION["PlayerId"])) {
             <button type="submit">Je suis solo pour le moment</button>
         </form>
         ';
+            }
+            //* Si le bouton de validation de l'inscription solo est submit
+            if (isset($_POST["validationSolo"])) {
+                //* Déclaration de l'auto-incrément pour la suite
+                $query = "SELECT IFNULL(MAX(AppartientSoloId), 0) + 1 as NewSoloId FROM appartient_solo";
+                $newSoloId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment
+
+                //* Requête SQL permettant d'insérer le joueur dans la table appartient_solo
+                $query = $conn2->prepare("INSERT INTO appartient_solo 
+                        (AppartientSoloId, AppartientSoloPlayerId, AppartientSoloStatus)
+                        VALUES (?, ?, 'ok')
+                      ");
+
+                $query->bindValue(1, $newSoloId["NewSoloId"]);
+                $query->bindValue(2, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+                $query->execute();
+
+                //* Requête SQL permettant l'update des invitations reçus pour ce joueur
+                $query = $conn2->prepare("UPDATE invitations,teams,players
+                SET  InvitationStatus = 'refusé'
+                WHERE players.PlayerId = ?
+                and invitations.InvitationEmail = players.PlayerEmail
+                and invitations.InvitationTeamId = teams.TeamId
+          ");
+
+                $query->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+                $query->execute();
             }
         }
 
