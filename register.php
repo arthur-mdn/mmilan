@@ -43,6 +43,7 @@
 
     <?php
     $redirect_join = (isset($_GET['JoinId']) and isset($_GET['JoinToken']));
+    var_dump($redirect_join);
     define('MyConst', TRUE);
     require('app/config.php');
     session_start();
@@ -111,6 +112,34 @@
                 $query->execute(); // create user
                 $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
+                // join the team if tokens and id are set
+                if (isset($_POST['JoinId']) and isset($_POST['JoinToken'])) {
+                    $check_teamId_who_invites = $conn2->prepare("SELECT InvitationTeamId
+                        FROM invitations 
+                        WHERE InvitationId = ? and InvitationToken = ? and InvitationStatus = 'En cours'");
+                    $check_teamId_who_invites->bindValue(1, $_POST['JoinId']);
+                    $check_teamId_who_invites->bindValue(2, $_POST['JoinToken']);
+                    $check_teamId_who_invites->execute();
+                    $teamId_who_invites = $check_teamId_who_invites->fetchAll(PDO::FETCH_ASSOC);
+
+                    var_dump($teamId_who_invites);
+
+                    $update_invite = $conn2->prepare("UPDATE invitations 
+                        SET InvitationStatus = 'Acceptée' 
+                        WHERE InvitationId = ? and InvitationToken = ? and InvitationStatus = 'En cours'");
+                    $update_invite->bindValue(1, $_POST['JoinId']);
+                    $update_invite->bindValue(2, $_POST['JoinToken']);
+                    $update_invite->execute();
+
+                    $query = $conn2->prepare("INSERT INTO appartient (AppartientPlayerId, AppartientTeamId, AppartientRole, AppartientStatus)
+                    VALUES (?, ?, ?, ?)");
+                    $query->bindValue(1, $result2['NewPlayerId']);
+                    $query->bindValue(2, htmlspecialchars($teamId_who_invites[0]['InvitationTeamId'], ENT_QUOTES, 'UTF-8'));
+                    $query->bindValue(3, 'Joueur');
+                    $query->bindValue(4, 'ok');
+                    $query->execute(); // créer l'appartenance
+                }
+
                 // new session for the new player
                 $_SESSION["PlayerId"] = $result2['NewPlayerId'];
                 $_SESSION['PlayerMail'] = $_POST['MailUtilisateur'];
@@ -158,7 +187,26 @@
                 </div>
                 <div class="input_container">
                     <label for="MailUtilisateur">Adresse Email</label>
-                    <input type="email" pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" required class="box-input" style="width:100%" name="MailUtilisateur" id="MailUtilisateur" autocomplete="new-mail" placeholder="Entrez ici votre adresse Email">
+                    <?php
+                    $join_mail = "";
+                    if ($redirect_join) {
+                        $query = $conn2->prepare("SELECT invitations.InvitationEmail FROM invitations WHERE InvitationId = ? and InvitationToken = ? and InvitationStatus = 'En cours'");
+                        $query->bindValue(1, $_GET['JoinId']);
+                        $query->bindValue(2, $_GET['JoinToken']);
+                        $query->execute();
+                        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                        if (!empty($result)) {
+                            $join_mail = $result[0]['InvitationEmail'];
+                        } else {
+                            $redirect_join = false;
+                        }
+                    } else {
+                        $join_mail = "";
+                    }
+                    ?>
+                    <input type="email" pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" required class="box-input" style="width:100%" name="MailUtilisateur" id="MailUtilisateur" autocomplete="new-mail" placeholder="Entrez ici votre adresse Email" value="<?= $join_mail ?>" <?php if ($redirect_join == true) {
+                                                                                                                                                                                                                                                                                            echo 'disabled';
+                                                                                                                                                                                                                                                                                        } ?>>
                 </div>
                 <div class="input_container">
                     <label for="DiscordUtilisateur">Discord</label>

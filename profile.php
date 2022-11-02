@@ -267,7 +267,12 @@ if (!isset($_SESSION["PlayerId"])) {
                     //génération d'un token
                     $token = generateRandomString();
 
-                    $invite_link = $settings['instance_url'] . '/register.php?token=' . $token;
+                    $query = "SELECT IFNULL(MAX(InvitationId), 0) + 1 as NewInvitationId FROM invitations";
+                    $NewInvitationId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment
+
+                    var_dump($NewInvitationId);
+
+                    $invite_link = $settings['instance_url'] . '/register.php?JoinId=' . $NewInvitationId['NewInvitationId'] . '&JoinToken=' . $token;
 
                     $mail_template_invite = file_get_contents('lib/mail_template_invite.html');
                     $mail_template_invite = str_replace("{[URL_INVITE]}", $invite_link, $mail_template_invite);
@@ -331,17 +336,20 @@ if (!isset($_SESSION["PlayerId"])) {
                                     $mail->Subject = 'Invitation à rejoindre une équipe - Evenement MMI LAN';
                                     $mail->Body    = $mail_template_invite;
                                     $mail->AltBody = 'Bonjour, vous avez été invité à rejoindre une équipe sur Evenement MMI LAN. Pour accepter l\'invitation, veuillez cliquer sur
-                                    le lien suivant : ' . $settings['instance_url'] . '/register.php?token=' . $token;
+                                    le lien suivant : ' . $invite_link;
 
                                     $mail->send();
 
+
+
                                     // enregistrement de l'invitation
-                                    $insertInvitation = $conn2->prepare("INSERT INTO invitations (InvitationEmail, InvitationTeamId, InvitationStatus, InvitationToken)
-                                                                                                                                    VALUES (?, ?, ?, ?)");
-                                    $insertInvitation->bindValue(1, htmlspecialchars($_POST['playerToInvite'], ENT_QUOTES, 'UTF-8'));
-                                    $insertInvitation->bindValue(2, htmlspecialchars($_POST['teamId'], ENT_QUOTES, 'UTF-8'));
-                                    $insertInvitation->bindValue(3, 'En cours');
-                                    $insertInvitation->bindValue(4, $token);
+                                    $insertInvitation = $conn2->prepare("INSERT INTO invitations (InvitationId,InvitationEmail, InvitationTeamId, InvitationStatus, InvitationToken)
+                                                                                                                                    VALUES (?, ?, ?, ?, ?)");
+                                    $insertInvitation->bindValue(1, $NewInvitationId['NewInvitationId']);
+                                    $insertInvitation->bindValue(2, htmlspecialchars($_POST['playerToInvite'], ENT_QUOTES, 'UTF-8'));
+                                    $insertInvitation->bindValue(3, htmlspecialchars($_POST['teamId'], ENT_QUOTES, 'UTF-8'));
+                                    $insertInvitation->bindValue(4, 'En cours');
+                                    $insertInvitation->bindValue(5, $token);
                                     $insertInvitation->execute();
 
                                     echo $email_sent;
@@ -403,17 +411,20 @@ if (!isset($_SESSION["PlayerId"])) {
                                     $mail->Subject = 'Invitation à rejoindre une équipe - Evenement MMI LAN';
                                     $mail->Body    = $mail_template_invite;
                                     $mail->AltBody = 'Bonjour, vous avez été invité à rejoindre une équipe sur Evenement MMI LAN. Pour accepter l\'invitation, veuillez cliquer sur
-                                    le lien suivant : ' . $settings['instance_url'] . '/register.php?token=' . $token;
+                                    le lien suivant : ' . $invite_link;
 
                                     $mail->send();
 
+
+
                                     // enregistrement de l'invitation
-                                    $insertInvitation = $conn2->prepare("INSERT INTO invitations (InvitationEmail, InvitationTeamId, InvitationStatus, InvitationToken)
-                                                                                                                                    VALUES (?, ?, ?, ?)");
-                                    $insertInvitation->bindValue(1, htmlspecialchars($_POST['playerToInvite'], ENT_QUOTES, 'UTF-8'));
-                                    $insertInvitation->bindValue(2, htmlspecialchars($_POST['teamId'], ENT_QUOTES, 'UTF-8'));
-                                    $insertInvitation->bindValue(3, 'En cours');
-                                    $insertInvitation->bindValue(4, $token);
+                                    $insertInvitation = $conn2->prepare("INSERT INTO invitations (InvitationId,InvitationEmail, InvitationTeamId, InvitationStatus, InvitationToken)
+                                                                                                                                    VALUES (?, ?, ?, ?, ?)");
+                                    $insertInvitation->bindValue(1, $NewInvitationId['NewInvitationId']);
+                                    $insertInvitation->bindValue(2, htmlspecialchars($_POST['playerToInvite'], ENT_QUOTES, 'UTF-8'));
+                                    $insertInvitation->bindValue(3, htmlspecialchars($_POST['teamId'], ENT_QUOTES, 'UTF-8'));
+                                    $insertInvitation->bindValue(4, 'En cours');
+                                    $insertInvitation->bindValue(5, $token);
                                     $insertInvitation->execute();
 
                                     echo $email_sent;
