@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI KIT - MMI LAN</title>
+
+    <link rel="stylesheet" href="style/ui-kit.css" />
+
+    <style>
+      .container {
+        padding: 3rem;
+        text-align: center;
+      }
+      .kit-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+      .kit-card {
+        width: 300px;
+        min-height: 300px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>MMI LAN</h1>
+      <p>
+        This is a UI Kit for the MMI LAN website. It contains all the components
+        that are used on the website.
+      </p>
+      <div class="kit-container">
+        <div class="kit-card">
+          <h2>Formulaire :</h2>
+          <div class="input-group">
+            <input
+              type="text"
+              name=""
+              id="label"
+              class="outside-form"
+              placeholder=" "
+            />
+            <label for="label">Label</label>
+          </div>
+          <div class="input-group error">
+            <input
+              type="text"
+              name=""
+              id="error"
+              class="outside-form"
+              placeholder=" "
+            />
+            <label for="error">Error</label>
+          </div>
+        </div>
+        <div class="kit-card" style="align-items: center">
+          <h2>Bouttons :</h2>
+          <button class="btn btn__primary">btn__primary</button>
+          <button class="btn btn__secondary">btn__secondary</button>
+          <div style="width: 100%; background-color: #e7e7e7">
+            <button class="btn btn__dark">btn__dark</button>
+          </div>
+
+          <button class="btn btn__light">btn__light</button>
+        </div>
+        <div class="kit-card" style="align-items: center">
+          <h2>Burger Menu</h2>
+          <div class="burger-menu"><span></span><span></span><span></span></div>
+          <div class="burger-menu white">
+            <span></span><span></span><span></span>
+          </div>
+          <script>
+            const burgers = document.querySelectorAll(".burger-menu");
+            burgers.forEach((burger) => {
+              burger.addEventListener("click", () => {
+                burger.classList.toggle("active");
+              });
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
