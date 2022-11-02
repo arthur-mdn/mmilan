@@ -24,10 +24,10 @@ SETUP
 	
 4 - Copier le fichier /app/config_sample.php en tant que /app/config.php et NE PAS modifier le fichier sample.
 5 - Modifier le fichier /app/config.php  : 
-	- DB_SERVER	url mysql
-	- DB_USERNAME	username mysql		
-	- DB_PASSWORD	password mysql
-	- DB_NAME		database name
+	DB_SERVER	url mysql
+	DB_USERNAME	username mysql		
+	DB_PASSWORD	password mysql
+	DB_NAME		database name
 	
 
 
