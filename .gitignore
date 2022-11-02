@@ -1,2 +1,4 @@
 ## Ignore config files 
 /app/config.php
+/phpmyadmin/
+/roundcube/
