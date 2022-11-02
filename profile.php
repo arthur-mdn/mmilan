@@ -22,9 +22,33 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
-require './lib/PHPMailer/src/Exception.php';
-require './lib/PHPMailer/src/PHPMailer.php';
-require './lib/PHPMailer/src/SMTP.php';
+require 'lib/PHPMailer/src/Exception.php';
+require 'lib/PHPMailer/src/PHPMailer.php';
+require 'lib/PHPMailer/src/SMTP.php';
+
+$email_sent = ' <div style="display: flex;padding:15px;gap:15px;flex-direction: column;justify-content: center;align-items: center">
+            <img src="Elements/icons/valid_check.gif" style="width:150px">
+            <h3>Demande d\'invitation envoyée !!</h3>
+
+       </div> <br><br><br>';
+$email_not_sent = ' <div style="display: flex;padding:15px;gap:15px;flex-direction: column;justify-content: center;align-items: center">
+            <img src="Elements/icons/invalid_cross.gif" style="width:150px">
+            <h3>Erreur d\'envoi</h3>
+            <p>Une erreur s\'est produite lors de l\'envoi du mail. </p>
+
+       </div> <br><br><br>';
+$invalid_email_or_already_sent = ' <div style="display: flex;padding:15px;gap:15px;flex-direction: column;justify-content: center;align-items: center">
+            <img src="Elements/icons/invalid_cross.gif" style="width:150px">
+            <h3>Erreur d\'envoi</h3>
+            <p>Il semblerai qu\'aucun compte n\'est associé à cette adresse mail. <br>Ou une réinitialisation esr déjà en cours. </p>
+
+       </div> <br><br><br>';
+$expired_recover = ' <div style="display: flex;padding:15px;gap:15px;flex-direction: column;justify-content: center;align-items: center">
+            <img src="Elements/icons/invalid_cross.gif" style="width:150px">
+            <h3>Demande expirée</h3>
+            <p>Votre demande de réinitialisation a expiré. Veuillez réitérer votre demande </p>
+
+       </div> <br><br><br>';
 
 
 if (!isset($_SESSION["PlayerId"])) {
@@ -159,7 +183,7 @@ if (!isset($_SESSION["PlayerId"])) {
                 $invitations = $query->fetchAll(PDO::FETCH_ASSOC);
 
                 if ($number_of_players === 3) {
-                    echo '<p>Vous avez atteint le nombre maximum de membres dans votre équipe</p>';
+                    echo '<h4>Vous avez atteint le nombre maximum de membres dans votre équipe</h4>';
                 } else {
                     //checker si invitations en cours
                     $checkInvitations = $conn2->prepare("SELECT *
@@ -172,11 +196,11 @@ if (!isset($_SESSION["PlayerId"])) {
                     $checkInvitations->execute();
                     $invitations = $checkInvitations->fetchAll(PDO::FETCH_ASSOC);
 
+                    echo '<h4>Invitations en cours :</h4>';
                     if ($number_of_players === 2) {
                         // si membres équipe === 2 , l'afficher + statut invitation en cours (en cours, refusé,etc..)
                         if (!empty($invitations)) {
-                            echo '<h4>Invitations en cours :</h4>
-                            <ul>';
+                            echo '<ul>';
                             foreach ($invitations as $invitation) {
                                 echo '<li>' . $invitation['InvitationEmail'] . ' - ' . $invitation['InvitationStatus'] . '</li>';
         ?>
@@ -193,7 +217,7 @@ if (!isset($_SESSION["PlayerId"])) {
 
                             echo
                             '<form action="" method="post">
-                            <input type="email" name="playerToInvite" placeholder="Email du joueur à inviter">
+                            <input type="email" name="playerToInvite" placeholder="Email du joueur à inviter" required>
                             <input type="hidden" name="teamId" value="' . $playerTeam['TeamId'] . '">
                             <input type="submit" value="Inviter" name="monoInvitation">
                             </form>';
@@ -201,50 +225,55 @@ if (!isset($_SESSION["PlayerId"])) {
                     } elseif ($number_of_players === 1) {
                         if (!empty($invitations)) {
                             if (count($invitations) === 2) {
-                                echo 'Membres de votre équipe :
-                                <ul>';
-                                foreach ($playersOfPlayerTeam as $player) {
-                                    echo '<li>' . $player['PlayerUsername'] . '</li>';
-                                }
-                                echo '</ul>';
                                 // Toutes les invitations
-                                echo 'Vos invitations : 
-                                <ul>';
+                                echo '<ul>';
                                 foreach ($invitations as $invitation) {
                                     echo '<li>' . $invitation['PlayerUsername'] . ' - ' . $invitation['InvitationStatus'] . '</li>';
                                 }
                                 echo '</ul>';
                             } elseif (count($invitations) === 1) {
-                                echo 'Membres de votre équipe :
-                                <ul>';
-                                foreach ($playersOfPlayerTeam as $player) {
-                                    echo '<li>' . $player['PlayerUsername'] . '</li>';
-                                }
-                                echo '</ul>';
                                 // Toutes les invitations
-                                echo 'Vos invitations : 
-                                <ul>';
+                                echo '<ul>';
                                 foreach ($invitations as $invitation) {
                                     echo '<li>' . $invitation['PlayerUsername'] . ' - ' . $invitation['InvitationStatus'] . '</li>';
                                 }
                                 echo '</ul>';
 
-
                                 echo 'Vous pouvez inviter un joueur à rejoindre votre équipe en utilisant le formulaire ci-dessous.';
                                 // formulaire d'invitation pour le joueur restant
                                 echo
                                 '<form action="" method="post">
-                                    <input type="email" name="playerToInvite" placeholder="Email du joueur à inviter">
+                                    <input type="email" name="playerToInvite" placeholder="Email du joueur à inviter" required>
                                     <input type="hidden" name="teamId" value="' . $playerTeam['TeamId'] . '">
-                                    <input type="submit" value="Inviter">
+                                    <input type="submit" value="Inviter" name="monoInvitation">
                                 </form>';
                             }
+                        } else {
+                            echo 'Vous pouvez inviter deux joueurs à rejoindre votre équipe en utilisant le formulaire ci-dessous.';
+                            // formulaire d'invitation pour les deux joueurs restants
+                            echo
+                            '<form action="" method="post">
+                            <input type="email" name="playerToInvite_1" placeholder="Email du joueur à inviter" required>
+                            <input type="email" name="playerToInvite_2" placeholder="Email du joueur à inviter" required>
+                            <input type="hidden" name="teamId" value="' . $playerTeam['TeamId'] . '">
+                                <input type="submit" value="Inviter" name="multiInvitation">
+                            </form>';
                         }
                     }
                 }
 
                 // checking POSTS 
                 if (isset($_POST['monoInvitation'])) {
+                    //génération d'un token
+                    $token = generateRandomString();
+
+                    $invite_link = $settings['instance_url'] . '/register.php?token=' . $token;
+
+                    $mail_template_invite = file_get_contents('lib/mail_template_invite.html');
+                    $mail_template_invite = str_replace("{[URL_INVITE]}", $invite_link, $mail_template_invite);
+                    $mail_template_invite = str_replace("{[MAIL_INVITE]}", $settings['instance_email_support'], $mail_template_invite);
+                    $mail_template_invite = str_replace("{[NAME_INVITE]}", $settings['name'], $mail_template_invite);
+
                     // check si email existe
                     $checkPlayer = $conn2->prepare("SELECT *
                                                     FROM players
@@ -259,111 +288,143 @@ if (!isset($_SESSION["PlayerId"])) {
                         $checkInvitation = $conn2->prepare("SELECT *
                                                             FROM invitations
                                                             WHERE invitations.InvitationEmail = ?
-                                                            and invitations.InvitationTeamId = ?
                                                             ");
                         $checkInvitation->bindValue(1, htmlspecialchars($_POST['playerToInvite'], ENT_QUOTES, 'UTF-8'));
-                        $checkInvitation->bindValue(2, htmlspecialchars($_POST['teamId'], ENT_QUOTES, 'UTF-8'));
                         $checkInvitation->execute();
                         $invitation = $checkInvitation->fetch(PDO::FETCH_ASSOC);
                         // var_dump($invitation);
                         if (empty($invitation)) {
                             // check si email est déjà membre de l'équipe
                             $checkPlayerOfTeam = $conn2->prepare("SELECT *
-                                                                FROM players, teams
-                                                                WHERE players.PlayerEmail = ?
-                                                                and teams.TeamId = ?
-                                                                and players.PlayerTeamId = teams.TeamId
-                                                                ");
+                                                                FROM players, teams, appartient
+                                                                WHERE players.PlayerId = appartient.AppartientPlayerId
+                                                                AND teams.TeamId = appartient.AppartientTeamId
+                                                                AND players.PlayerEmail = ?
+                                                                AND teams.TeamId = ?");
                             $checkPlayerOfTeam->bindValue(1, htmlspecialchars($_POST['playerToInvite'], ENT_QUOTES, 'UTF-8'));
                             $checkPlayerOfTeam->bindValue(2, htmlspecialchars($_POST['teamId'], ENT_QUOTES, 'UTF-8'));
                             $checkPlayerOfTeam->execute();
-                            $playerOfTeam = $checkPlayerOfTeam->fetch(PDO::FETCH_ASSOC);
+                            $isPlayerOfTeam = $checkPlayerOfTeam->fetch(PDO::FETCH_ASSOC);
                             // var_dump($playerOfTeam);
-                            if (empty($playerOfTeam)) {
-                                // check si email est déjà invité par un autre membre de l'équipe
-                                $checkInvitationByOther = $conn2->prepare("SELECT *
-                                                                        FROM invitations, players, teams
-                                                                        WHERE invitations.InvitationEmail = ?
-                                                                        and invitations.InvitationTeamId = teams.TeamId
-                                                                        and teams.TeamId = ?
-                                                                        and invitations.InvitationEmail = players.PlayerEmail
-                                                                        and players.PlayerTeamId = teams.TeamId
-                                                                        ");
-                                $checkInvitationByOther->bindValue(1, htmlspecialchars($_POST['playerToInvite'], ENT_QUOTES, 'UTF-8'));
-                                $checkInvitationByOther->bindValue(2, htmlspecialchars($_POST['teamId'], ENT_QUOTES, 'UTF-8'));
-                                $checkInvitationByOther->execute();
-                                $invitationByOther = $checkInvitationByOther->fetch(PDO::FETCH_ASSOC);
-                                // var_dump($invitationByOther);
+                            if (empty($isPlayerOfTeam)) {
+                                echo "Un mail lui sera envoyé pour l'inviter à créer un compte.";
+                                // envoi mail
+                                $mail = new PHPMailer(true);
+                                try {
+                                    $mail->isSMTP();
+                                    $mail->Host       = $settings['instance_email_host'];
+                                    $mail->SMTPAuth   = true;
+                                    $mail->Username   = $settings['instance_email_username'];
+                                    $mail->Password   = $settings['instance_email_password'];
+                                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                                    $mail->Port       = $settings['instance_email_port'];
 
+                                    $mail->Encoding = 'base64';
+                                    $mail->CharSet = 'UTF-8';
+
+                                    $mail->setFrom($settings['instance_email_username'], $settings['name']);
+                                    $mail->addAddress($_POST['playerToInvite']);
+                                    $mail->addReplyTo($settings['instance_email_username'], $settings['name']);
+                                    $mail->addCC('arthur@mondon.pro');
+
+                                    $mail->isHTML(true);
+                                    $mail->Subject = 'Invitation à rejoindre une équipe - Evenement MMI LAN';
+                                    $mail->Body    = $mail_template_invite;
+                                    $mail->AltBody = 'Bonjour, vous avez été invité à rejoindre une équipe sur Evenement MMI LAN. Pour accepter l\'invitation, veuillez cliquer sur
+                                    le lien suivant : ' . $settings['instance_url'] . '/register.php?token=' . $token;
+
+                                    $mail->send();
+
+                                    // enregistrement de l'invitation
+                                    $insertInvitation = $conn2->prepare("INSERT INTO invitations (InvitationEmail, InvitationTeamId, InvitationStatus, InvitationToken)
+                                                                                                                                    VALUES (?, ?, ?, ?)");
+                                    $insertInvitation->bindValue(1, htmlspecialchars($_POST['playerToInvite'], ENT_QUOTES, 'UTF-8'));
+                                    $insertInvitation->bindValue(2, htmlspecialchars($_POST['teamId'], ENT_QUOTES, 'UTF-8'));
+                                    $insertInvitation->bindValue(3, 'En cours');
+                                    $insertInvitation->bindValue(4, $token);
+                                    $insertInvitation->execute();
+
+                                    echo $email_sent;
+                                } catch (Exception $e) {
+                                    echo $email_not_sent . "<br>Merci de transmettre ces informations à l'administrateur : {$mail->ErrorInfo}";
+                                }
+                            } else {
+                                echo 'Ce joueur est déjà membre de votre équipe.';
                             }
+                        } else {
+                            echo 'Ce joueur est déjà invité dans une équipe.';
                         }
                     } else {
                         echo "<p>Ce joueur n'a pas encore de compte.</p>";
-                        echo "Un mail lui sera envoyé pour l'inviter à créer un compte.";
-                        // envoi mail
-                        //génération d'un token
-                        $token = generateRandomString();
+                        // check si email est déjà invité
+                        $checkInvitation = $conn2->prepare("SELECT *
+                                                            FROM invitations
+                                                            WHERE invitations.InvitationEmail = ?
+                                                            ");
+                        $checkInvitation->bindValue(1, htmlspecialchars($_POST['playerToInvite'], ENT_QUOTES, 'UTF-8'));
+                        $checkInvitation->execute();
+                        $invitation = $checkInvitation->fetch(PDO::FETCH_ASSOC);
+                        // var_dump($invitation);
+                        if (empty($invitation)) {
+                            // check si email est déjà membre de l'équipe
+                            $checkPlayerOfTeam = $conn2->prepare("SELECT *
+                                                                FROM players, appartient, teams
+                                                                WHERE players.PlayerEmail = ?
+                                                                and teams.TeamId = ?
+                                                                and appartient.AppartientPlayerId = players.PlayerId
+                                                                and appartient.AppartientTeamId = teams.TeamId");
+                            $checkPlayerOfTeam->bindValue(1, htmlspecialchars($_POST['playerToInvite'], ENT_QUOTES, 'UTF-8'));
+                            $checkPlayerOfTeam->bindValue(2, htmlspecialchars($_POST['teamId'], ENT_QUOTES, 'UTF-8'));
+                            $checkPlayerOfTeam->execute();
+                            $isPlayerOfTeam = $checkPlayerOfTeam->fetch(PDO::FETCH_ASSOC);
+                            // var_dump($playerOfTeam);
+                            if (empty($isPlayerOfTeam)) {
+                                echo "Un mail lui sera envoyé pour l'inviter à créer un compte.";
+                                // envoi mail
+                                $mail = new PHPMailer(true);
+                                try {
+                                    $mail->isSMTP();
+                                    $mail->Host       = $settings['instance_email_host'];
+                                    $mail->SMTPAuth   = true;
+                                    $mail->Username   = $settings['instance_email_username'];
+                                    $mail->Password   = $settings['instance_email_password'];
+                                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                                    $mail->Port       = $settings['instance_email_port'];
 
-                        // obtention des parametres de connexion au smtp
-                        $smtp = $conn2->prepare("SELECT settings.settingsValue FROM `settings` WHERE settings.settingsName = 'instance_email_host'");
-                        $smtp->execute();
-                        $smtp = $smtp->fetch(PDO::FETCH_ASSOC);
+                                    $mail->Encoding = 'base64';
+                                    $mail->CharSet = 'UTF-8';
 
-                        $port = $conn2->prepare("SELECT settings.settingsValue FROM `settings` WHERE settings.settingsName = 'instance_email_port'");
-                        $port->execute();
-                        $port = $port->fetch(PDO::FETCH_ASSOC);
+                                    $mail->setFrom($settings['instance_email_username'], $settings['name']);
+                                    $mail->addAddress($_POST['playerToInvite']);
+                                    $mail->addReplyTo($settings['instance_email_username'], $settings['name']);
+                                    $mail->addCC('arthur@mondon.pro');
 
-                        $username = $conn2->prepare("SELECT settings.settingsValue FROM `settings` WHERE settings.settingsName = 'instance_email_username'");
-                        $username->execute();
-                        $username = $username->fetch(PDO::FETCH_ASSOC);
+                                    $mail->isHTML(true);
+                                    $mail->Subject = 'Invitation à rejoindre une équipe - Evenement MMI LAN';
+                                    $mail->Body    = $mail_template_invite;
+                                    $mail->AltBody = 'Bonjour, vous avez été invité à rejoindre une équipe sur Evenement MMI LAN. Pour accepter l\'invitation, veuillez cliquer sur
+                                    le lien suivant : ' . $settings['instance_url'] . '/register.php?token=' . $token;
 
-                        $password = $conn2->prepare("SELECT settings.settingsValue FROM `settings` WHERE settings.settingsName = 'instance_email_password'");
-                        $password->execute();
-                        $password = $password->fetch(PDO::FETCH_ASSOC);
+                                    $mail->send();
 
-                        $mailArr = [
-                            'host' => $smtp['settingsValue'],
-                            'port' => $port['settingsValue'],
-                            'username' => $username['settingsValue'],
-                            'password' => $password['settingsValue'],
-                        ];
+                                    // enregistrement de l'invitation
+                                    $insertInvitation = $conn2->prepare("INSERT INTO invitations (InvitationEmail, InvitationTeamId, InvitationStatus, InvitationToken)
+                                                                                                                                    VALUES (?, ?, ?, ?)");
+                                    $insertInvitation->bindValue(1, htmlspecialchars($_POST['playerToInvite'], ENT_QUOTES, 'UTF-8'));
+                                    $insertInvitation->bindValue(2, htmlspecialchars($_POST['teamId'], ENT_QUOTES, 'UTF-8'));
+                                    $insertInvitation->bindValue(3, 'En cours');
+                                    $insertInvitation->bindValue(4, $token);
+                                    $insertInvitation->execute();
 
-
-                        try {
-                            // Création du mail
-                            $mail = new PHPMailer(true);
-                            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-                            $mail->isSMTP();                                            //Send using SMTP
-                            $mail->Host       = $mailArr['host'];           //Set the SMTP server to send through
-                            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                            $mail->Username   = $mailArr['username'];       //SMTP username
-                            $mail->Password   = $mailArr['password'];       //SMTP password
-                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                            $mail->Port       = 465;           //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-                            //Recipients
-                            $mail->setFrom($mailArr['username'], 'MMI LAN');
-                            $mail->addAddress($_POST['playerToInvite']);     //Add a recipient
-
-                            //Content
-                            $mail->isHTML(true);                                  //Set email format to HTML
-                            $mail->Subject = 'Here is the subject';
-                            $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-                            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-                            $mail->send();
-                            echo 'Message has been sent';
-
-                            // enregistrement de l'invitation
-                            $insertInvitation = $conn2->prepare("INSERT INTO invitations (InvitationEmail, InvitationTeamId, InvitationStatus, InvitationToken)
-                                                            VALUES (?, ?, ?, ?)");
-                            $insertInvitation->bindValue(1, htmlspecialchars($_POST['playerToInvite'], ENT_QUOTES, 'UTF-8'));
-                            $insertInvitation->bindValue(2, htmlspecialchars($_POST['teamId'], ENT_QUOTES, 'UTF-8'));
-                            $insertInvitation->bindValue(3, 'En cours');
-                            $insertInvitation->bindValue(4, $token);
-                            $insertInvitation->execute();
-                        } catch (Exception $e) {
-                            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                                    echo $email_sent;
+                                } catch (Exception $e) {
+                                    echo $email_not_sent . "<br>Merci de transmettre ces informations à l'administrateur : {$mail->ErrorInfo}";
+                                }
+                            } else {
+                                echo 'Ce joueur est déjà membre de votre équipe.';
+                            }
+                        } else {
+                            echo 'Ce joueur est déjà invité dans une équipe.';
                         }
                     }
                 }
@@ -420,14 +481,6 @@ if (!isset($_SESSION["PlayerId"])) {
                         <input type="submit" name="acceptInvitation" value="Accepter">
                         <input type="submit" name="refuseInvitation" value="Refuser">
                     </form>';
-            } else {
-                // si aucune invitation, afficher formulaire pour créer une équipe
-                echo 'Vous n\'avez pas d\'équipe. Vous pouvez en créer une en utilisant le formulaire ci-dessous.';
-                echo
-                '<form action="" method="post">
-                    <input type="text" name="teamName" placeholder="Nom de l\'équipe">
-                    <input type="submit" value="Créer">
-                </form>';
             }
 
             if (isset($_POST['acceptInvitation'])) {
