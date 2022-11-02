@@ -113,6 +113,7 @@
 
                 // new session for the new player
                 $_SESSION["PlayerId"] = $result2['NewPlayerId'];
+                $_SESSION['PlayerMail'] = $_POST['MailUtilisateur'];
                 header("location: index.php?msg=accountCreated");
             } else {
                 // if the game selected does not exist, log hack attempt
