@@ -143,10 +143,11 @@ if (!isset($_SESSION["PlayerId"])) {
 
                         // formulaire d'invitation pour le joueur restant
 
-                        echo '<form action="" method="post">
-                        <input type="text" name="playerToInvite" placeholder="Email du joueur à inviter">
-                        <input type="hidden" name="teamId" value="' . $playerTeam['TeamId'] . '">
-                        <input type="submit" value="Inviter">
+                        echo
+                        '<form action="" method="post">
+                            <input type="email" name="playerToInvite" placeholder="Email du joueur à inviter">
+                            <input type="hidden" name="teamId" value="' . $playerTeam['TeamId'] . '">
+                            <input type="submit" value="Inviter">
                         </form>';
                     } elseif (count($playersOfPlayerTeam) === 1) {
                         // si membres équipe === 1 , l'afficher + statut invitation en cours (en cours, refusé,etc..)
@@ -158,11 +159,12 @@ if (!isset($_SESSION["PlayerId"])) {
                         echo '</ul>';
                         echo 'Vous pouvez inviter deux joueurs à rejoindre votre équipe en utilisant le formulaire ci-dessous.';
 
-                        echo '<form action="" method="post">
-                        <input type="text" name="playerToInvite" placeholder="Email du joueur à inviter">
-                        <input type="text" name="playerToInvite" placeholder="Email du joueur à inviter">
-                        <input type="hidden" name="teamId" value="' . $playerTeam['TeamId'] . '">
-                        <input type="submit" value="Inviter">
+                        echo '
+                        <form action="" method="post">
+                            <input type="email" name="playerToInvite" placeholder="Email du joueur à inviter">
+                            <input type="email" name="playerToInvite" placeholder="Email du joueur à inviter">
+                            <input type="hidden" name="teamId" value="' . $playerTeam['TeamId'] . '">
+                            <input type="submit" value="Inviter">
                         </form>';
                     }
                 } else {
