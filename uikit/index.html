@@ -25,8 +25,8 @@
         margin-top: 2rem;
       }
       .kit-card {
-        width: 300px;
-        min-height: 300px;
+        width: 350px;
+        min-height: 350px;
         border: 1px solid #ccc;
         border-radius: 5px;
         padding: 1rem;
@@ -34,17 +34,57 @@
         flex-direction: column;
       }
     </style>
+
+    <script>
+      // set current width of the screen to --screen-width
+      const rootcss = document.documentElement.style;
+      rootcss.setProperty("--screen-width", window.innerWidth + "px");
+    </script>
   </head>
   <body>
     <div class="frise">
       <img src="../Elements/graphics/frise.svg" alt="frise" />
     </div>
+
+    <!-- SECTION VIEWER -->
+    <div class="section-viewer">
+      <ul>
+        <li><a href="#1" class="active">1</a></li>
+        <li><a href="#2">2</a></li>
+        <li><a href="#3">3</a></li>
+        <li><a href="#4">4</a></li>
+        <div class="cursor"></div>
+      </ul>
+      <script>
+        const cursor = document.querySelector(".cursor");
+        const sections = document.querySelectorAll(".section-viewer ul li");
+        const links_viewer = document.querySelectorAll(
+          ".section-viewer ul li a"
+        );
+        const sectionWidth = sections[0].getBoundingClientRect().height;
+
+        links_viewer.forEach((link, index) => {
+          console.log(index, sectionWidth);
+          link.addEventListener("click", () => {
+            links_viewer.forEach((link) => {
+              link.classList.remove("active");
+            });
+            link.classList.add("active");
+            cursor.style.top = index * sectionWidth + "px";
+          });
+        });
+      </script>
+    </div>
+
+    <!-- HEAD -->
     <div class="container">
       <h1>MMI LAN</h1>
       <p>
         This is a UI Kit for the MMI LAN website. It contains all the components
         that are used on the website.
       </p>
+
+      <!-- FORMULAIRES -->
       <div class="kit-container">
         <div class="kit-card">
           <h2>Formulaire :</h2>
@@ -64,8 +104,14 @@
             <label for="error">Error</label>
           </div>
         </div>
+
+        <!-- BOUTONS  -->
         <div class="kit-card" style="align-items: center">
           <h2>Buttons :</h2>
+          <p>
+            les boutons doivent porter la class .btn + la classe du boutons
+            voulu (texte des boutons ci dessous)
+          </p>
           <button class="btn btn__primary">btn__primary</button>
           <button class="btn btn__secondary">btn__secondary</button>
           <div style="width: 100%; background-color: #e7e7e7">
@@ -74,8 +120,15 @@
 
           <button class="btn btn__light">btn__light</button>
         </div>
+
+        <!-- BURGER MENU -->
         <div class="kit-card" style="align-items: center">
           <h2>Burger Menu</h2>
+          <p>
+            Pour faire un burger menu, vous avez juste à créer une div avec la
+            class .burger-menu et trois span à l'interieur pour le burger blanc,
+            juste rajouter la class .white
+          </p>
           <div class="burger-menu"><span></span><span></span><span></span></div>
           <div class="burger-menu white">
             <span></span><span></span><span></span>
@@ -88,6 +141,72 @@
               });
             });
           </script>
+        </div>
+
+        <!-- TITRES -->
+        <div class="kit-card" style="padding-inline: 0">
+          <h2>Titles :</h2>
+          <p>
+            créer un titre de hx niveau, et ajouter la classe primaire
+            .head_title et la classe secondaire : primary ou secondary
+          </p>
+          <h1 class="head_title primary">Head Title</h1>
+          <h2 class="head_title primary">h2 primary</h2>
+          <br />
+          <div style="width: 100%; background-color: #f9d71c">
+            <h1 class="head_title secondary">Head Title</h1>
+            <h2 class="head_title secondary">h2 secondary</h2>
+          </div>
+        </div>
+
+        <!-- LIENS EN NAVBAR -->
+        <div class="kit-card">
+          <h2>NavLinks :</h2>
+          <p>
+            liste placée dans une div avec la classe .nav-links-container vous
+            pouvez cliquer dessus pour voir l'effet active (page active)
+          </p>
+          <div class="nav-links-container">
+            <ul>
+              <li><a href="#">Accueil</a></li>
+              <li><a href="#">Actualité</a></li>
+              <li><a href="#">Médias</a></li>
+              <li><a href="#">Équipes</a></li>
+            </ul>
+          </div>
+          <script>
+            const links = document.querySelectorAll(".nav-links-container li");
+            links.forEach((link) => {
+              link.addEventListener("click", () => {
+                links.forEach((link) => {
+                  link.classList.remove("active");
+                });
+                link.classList.add("active");
+              });
+            });
+          </script>
+        </div>
+
+        <!-- ICONES DE PROFIL -->
+        <div class="kit-card">
+          <h2>Profile icons :</h2>
+          <p>
+            Pour ajouter une photo de profil créer une div avec la class
+            profil-pic et mettez l'image à l'interieur
+          </p>
+          <br />
+          <div class="profil-pic">
+            <img src="../Elements/avatars/players/p1.jpg" alt="logo" />
+          </div>
+        </div>
+
+        <!-- RESAUX SOCIAUX -->
+        <div class="kit-card">
+          <h2>Socials :</h2>
+          <p>
+            pour afficher les icones de réseaux sociaux, créer une div avec la
+            class .socials et ajouter les icones à l'interieur
+          </p>
         </div>
       </div>
     </div>
