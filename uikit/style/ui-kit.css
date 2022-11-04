@@ -27,6 +27,23 @@
 body {
   font-family: "Work Sans", sans-serif;
   background-color: var(--color-dark);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.frise {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  z-index: -1;
+}
+.frise img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 /* All titles style */
@@ -60,11 +77,12 @@ p {
   color: var(--color-dark);
   transition: all 0.3s ease;
   transform: translateY(-50%);
+  z-index: 1;
 }
 .input-group input {
   padding: 10px;
-  border: none;
   width: 100%;
+  z-index: 1;
 }
 .input-group input:not(:-moz-placeholder-shown) + label {
   top: -0.75rem;
@@ -98,17 +116,30 @@ p {
 .input-group.error input:focus + label, .input-group.error input:not(:placeholder-shown) + label {
   color: red;
 }
+.input-group::after {
+  content: "";
+  position: absolute;
+  top: 0.35rem;
+  left: 0.35rem;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-primary);
+  z-index: -1;
+  border-radius: 5px;
+}
 
 input {
   font-family: "Work Sans", sans-serif;
   color: var(--color-dark);
   background-color: var(--color-light);
-  border: none;
+  border: 2px solid var(--color-dark);
+  outline: none;
   border-radius: 5px;
   padding: 5px;
 }
 input:focus {
-  outline: 2px solid var(--color-primary);
+  border: 2px solid var(--color-primary);
+  outline: none;
 }
 
 /*  BOUTONS  */
