@@ -9,10 +9,10 @@ SETUP
 
 2. Utilisez les requêtes suivante pour configurer le smtp commun dans la table settings (vous pouvez utiliser votre propre configuration)
 	```sql 
-	UPDATE `settings` SET `SettingsValue` = 'smtp.gmail.com' WHERE `settings`.`SettingsName` = 'instance_email_host';
-	UPDATE `settings` SET `SettingsValue` = '587' WHERE `settings`.`SettingsName` = 'instance_email_port';
-	UPDATE `settings` SET `SettingsValue` = 'mmilan.tln@gmail.com' WHERE `settings`.`SettingsName` = 'instance_email_username';
-	UPDATE `settings` SET `SettingsValue` = 'MMILAN2022' WHERE `settings`.`SettingsName` = 'instance_email_password';
+	UPDATE `settings` SET `SettingsValue` = 'mail45.lwspanel.com' WHERE `settings`.`SettingsName` = 'instance_email_host';
+	UPDATE `settings` SET `SettingsValue` = '465' WHERE `settings`.`SettingsName` = 'instance_email_port';
+	UPDATE `settings` SET `SettingsValue` = 'mmilan@mondon.pro' WHERE `settings`.`SettingsName` = 'instance_email_username';
+	UPDATE `settings` SET `SettingsValue` = 'xZ8*54wk!ttpAnd' WHERE `settings`.`SettingsName` = 'instance_email_password';
 	```
 
 3. changer url du projet (toujours dans la table settings)
