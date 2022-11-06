@@ -24,7 +24,6 @@
        <link rel="stylesheet" href="css/loader.css" />
        <link rel="stylesheet" href="css/mediaCss.css" />
        <link rel="stylesheet" href="uikit/style/ui-kit.css" />
-
    </head>
 
    <body class="body-panel">
@@ -154,17 +153,17 @@
 
 
 
-       <div class="twitchtitle">
-           <h1 class="mediatitle"> Connexion </h1>
-           <div class="boxshadow3"></div>
-       </div>
+       <div style="width: 100%;">
+           <h1 class="head_title secondary">Connexion </h1>
+       </div>>
 
        <div style="display: bloc; height: 70vh; flex-wrap: wrap; align-items: center; justify-content: center; align-content: flex-start;">
 
            <form method="post" class="form" style="width: 80%;max-width: 380px; margin:0 auto !important; " onsubmit="active_loader()">
                <div class="input-group">
                    <input type="email" pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" id="mail_input" name="MailUtilisateur" style="width:100%" placeholder="Adresse Email" autocomplete="current-mail" required>
-
+               </div>
+               <div class="input-group">
                    <input type="password" name="MdpUtilisateur" style="width:100%" autocomplete="current-password" placeholder="Mot de passe " required>
                </div>
                <a href="recover.php" class="more_txt " onclick="active_loader(); ">Mot de passe oublié ? </a>
@@ -172,13 +171,14 @@
                     echo '<input type="hidden" name="JoinId" value="' . $_GET['JoinId'] . '">';
                     echo '<input type="hidden" name="JoinToken" value="' . $_GET['JoinToken'] . '">';
                 } ?>
-               <input type="submit" style="font-weight:bold" value="Se connecter" class="box-button">
+               <input class="btn btn__primary" type="submit" style="font-weight:bold" value="valider">
+
                <?php if ($redirect_join) {
                     echo '<a href="register.php?JoinToken=' . htmlspecialchars($_GET['JoinToken'], ENT_QUOTES, 'UTF-8') . '&JoinId=' . htmlspecialchars($_GET['JoinId'], ENT_QUOTES, 'UTF-8') . '" class="links_txt " onclick="active_loader(); ">';
                 } else {
                     echo '<a href="register.php" class="links_txt " onclick="active_loader(); ">';
                 } ?>
-               Créer un compte
+               Inscription ?
                </a>
 
            </form>

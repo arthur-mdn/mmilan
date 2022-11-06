@@ -156,19 +156,19 @@
             <label for="mail_input" id="mail_input_label" style="color:white">Adresse Mail
                 <input type="email" pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" id="mail_input" name="MailUtilisateur" style="width:100%" placeholder="Adresse Email" autocomplete="current-mail" required>
             </label>
-            <label for="tel_input" id="tel_input_label" style="color:white;display: none">Numéro de Téléphone
+            <label for="tel_input" id="tel_input_label" style="color:white;display: none">Numéo de Téépéne
                 <input type="tel" id="tel_input" name="TelUtilisateur" style="width:100%" placeholder="Numéro de Téléphone" autocomplete="current-tel">
             </label>
             <label style="color:white">
                 Mot de passe
                 <input type="password" name="MdpUtilisateur" style="width:100%" autocomplete="current-password" placeholder="Mot de passe " required>
             </label>
-            <a href="recover.php" class="more_txt " onclick="active_loader(); ">Mot de passe oublié ? </a>
+            <a href="recover.php" class="more_txt " onclick="active_loader(); ">Mot de passe oublié? </a>
             <?php if ($redirect_join) { // si l'url contient le token d'équipe
                 echo '<input type="hidden" name="JoinId" value="' . $_GET['JoinId'] . '">';
                 echo '<input type="hidden" name="JoinToken" value="' . $_GET['JoinToken'] . '">';
             } ?>
-            <input type="submit" style="font-weight:bold" value="Se connecter" class="box-button">
+            <input type="submit" style="font-weight:bold" value="Se connecter" class="btn btn-primar">
             <?php if ($redirect_join) {
                 echo '<a href="register.php?JoinToken=' . htmlspecialchars($_GET['JoinToken'], ENT_QUOTES, 'UTF-8') . '&JoinId=' . htmlspecialchars($_GET['JoinId'], ENT_QUOTES, 'UTF-8') . '" class="links_txt " onclick="active_loader(); ">';
             } else {
