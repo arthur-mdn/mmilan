@@ -110,10 +110,9 @@ input[type="submit"]:hover {
 }
 
 .more_txt {
-  margin-left: -395px;
-  margin-top: -5px;
-  cursor: pointer;
+  margin-top: 0.5em;
   font-size: 14px;
+  align-self: flex-start;
   color: white;
   text-decoration: underline;
 }
