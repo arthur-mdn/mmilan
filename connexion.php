@@ -174,7 +174,7 @@
                     echo '<input type="hidden" name="JoinId" value="' . $_GET['JoinId'] . '">';
                     echo '<input type="hidden" name="JoinToken" value="' . $_GET['JoinToken'] . '">';
                 } ?>
-               <input class="btn btn__primary" type="submit" style="font-weight:bold" value="valider">
+               <button class="btn btn__primary" type="submit" style="font-weight:bold">valider</button>
 
                <?php if ($redirect_join) {
                     echo '<a href="register.php?JoinToken=' . htmlspecialchars($_GET['JoinToken'], ENT_QUOTES, 'UTF-8') . '&JoinId=' . htmlspecialchars($_GET['JoinId'], ENT_QUOTES, 'UTF-8') . '" class="links_txt " onclick="active_loader(); ">';
