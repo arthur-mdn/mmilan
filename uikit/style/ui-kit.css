@@ -360,6 +360,13 @@ button {
   align-items: center;
   transition: all 0.3s ease;
 }
+.space-between {
+  justify-content: space-between;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+}
 .nav-links-container.active {
   opacity: 1;
   visibility: visible;

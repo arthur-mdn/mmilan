@@ -55,6 +55,7 @@ if (isset($_SESSION["PlayerId"])) {
     </div>
     <?php
     require('menu.php'); // afficher le menu en fonction de connecté ou pas.
+    // require('navbar.php'); afficher la navbar en fonction de connecté ou pas.
     ?>
 
     <style>
