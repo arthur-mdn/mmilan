@@ -18,13 +18,15 @@ let hack_attempt = pageParams.get("hack_log");
 const gameInput = document.getElementById("FavGameUtilisateur");
 const gameHackMessage = document.getElementById("game-error-msg");
 
-if (hack_attempt == "true") {
-  gameInput.classList.add("error");
-  gameHackMessage.style.display = "block";
-  gameInput.addEventListener("focus", () => {
+if (hack_attempt && gameInput) {
+  if (hack_attempt == "true") {
+    gameInput.classList.add("error");
+    gameHackMessage.style.display = "block";
+    gameInput.addEventListener("focus", () => {
+      gameInput.classList.remove("error");
+    });
+  } else {
     gameInput.classList.remove("error");
-  });
-} else {
-  gameInput.classList.remove("error");
-  gameHackMessage.style.display = "none";
+    gameHackMessage.style.display = "none";
+  }
 }

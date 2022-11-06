@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/loader.css" />
     <link rel="stylesheet" href="uikit/style/ui-kit.css"/>
-    <link rel="stylesheet" href="css/media.css"/>
+    <link rel="stylesheet" href="css/mediaCss.css"/>
  
 </head>
 
@@ -26,19 +26,17 @@
             <div class="boxshadow3"></div>
         </div>
         <div class="sectiontwitch">
-            <iframe 
-                class="twitchflux"
-                src="https://player.twitch.tv/?channel=wolfabelle&parent=www.mmilan.fr/media.php" 
-                frameborder="0" 
-                allowfullscreen="true" 
-                scrolling="no" 
+        <iframe src="https://player.twitch.tv/?channel=oximuss_&parent=mmilan.fr" 
+            frameborder="0" 
+            allowfullscreen="true" 
+            scrolling="no" 
                 height="500" 
                 width="889">
             </iframe> 
             <iframe
                 class="twitchchat"
                 id="chat_embed"
-                src="https://www.twitch.tv/embed/oximuss_/chat?parent=ww.mmilan.fr/media.php"
+                src="https://www.twitch.tv/embed/oximuss_/chat?parent=mmilan.fr"
                 height="500"
                 width="350">
             </iframe>   
