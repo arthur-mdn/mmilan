@@ -161,10 +161,12 @@
 
            <form method="post" class="form" style="width: 80%;max-width: 380px; margin:0 auto !important; " onsubmit="active_loader()">
                <div class="input-group">
-                   <input type="email" pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" id="mail_input" name="MailUtilisateur" style="width:100%" placeholder="Adresse Email" autocomplete="current-mail" required>
+                   <label for="mail_input">Adresse email</label>
+                   <input type="email" pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" id="mail_input" name="MailUtilisateur" style="width:100%" placeholder=" " autocomplete="current-mail" required>
                </div>
                <div class="input-group">
-                   <input type="password" name="MdpUtilisateur" style="width:100%" autocomplete="current-password" placeholder="Mot de passe " required>
+                   <label for="mdp_input">Mot de passe</label>
+                   <input type="password" id="mdp_input" name="MdpUtilisateur" style="width:100%" autocomplete="current-password" placeholder=" " required>
                </div>
                <a href="recover.php" class="more_txt " onclick="active_loader(); ">Mot de passe oublié ? </a>
                <?php if ($redirect_join) { // si l'url contient le token d'équipe
