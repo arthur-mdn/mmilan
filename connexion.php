@@ -155,7 +155,7 @@
 
        <div style="width: 100%;">
            <h1 class="head_title secondary">Connexion </h1>
-       </div>>
+       </div>
 
        <div style="display: bloc; height: 70vh; flex-wrap: wrap; align-items: center; justify-content: center; align-content: flex-start;">
 
