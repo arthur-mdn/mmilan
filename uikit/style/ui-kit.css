@@ -151,6 +151,8 @@ p {
 .input-group {
   position: relative;
   margin-top: 1.75rem;
+  width: 100%;
+  max-width: 400px;
 }
 .input-group label {
   position: absolute;
@@ -227,7 +229,8 @@ input:focus {
 }
 
 /*  BOUTONS  */
-button {
+button,
+.btn {
   background-color: var(--color-light);
   border: none;
   border-radius: 5px;
