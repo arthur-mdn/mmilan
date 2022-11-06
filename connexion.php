@@ -160,6 +160,7 @@
        <div style="display: bloc; height: 70vh; flex-wrap: wrap; align-items: center; justify-content: center; align-content: flex-start;">
 
            <form method="post" class="form" style="width: 80%;max-width: 380px; margin:0 auto !important; " onsubmit="active_loader()">
+               <h2>Connexion</h2>
                <div class="input-group">
                    <input type="email" pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" id="mail_input" name="MailUtilisateur" style="width:100%" placeholder=" " autocomplete="current-mail" required>
                    <label for="mail_input">Adresse email</label>
