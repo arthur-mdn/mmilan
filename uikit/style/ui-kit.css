@@ -240,7 +240,7 @@ p {
   height: 100%;
   background-color: var(--color-primary);
   z-index: -1;
-  border-radius: 5px;
+  border-radius: 2px;
 }
 
 input {
