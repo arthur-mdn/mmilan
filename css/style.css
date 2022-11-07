@@ -9,6 +9,7 @@
  *
  */
 
+@import url("../uikit/style/ui-kit.css");
 /* RESET */
 *,
 *:before,
@@ -22,6 +23,7 @@ html {
   scroll-behavior: smooth !important;
 }
 body {
+  background-color: var(--color-dark);
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica Neue, Helvetica, sans-serif;

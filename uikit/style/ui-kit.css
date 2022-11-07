@@ -359,19 +359,21 @@ button,
 }
 
 /* NAVLINKS */
-.nav-links-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.3s ease;
-}
 .space-between {
   justify-content: space-between;
 }
+
 .row {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-links-container {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
 }
 .nav-links-container.active {
   opacity: 1;
@@ -382,7 +384,7 @@ button,
   padding: 0;
   margin: 0;
 }
-.nav-links-container ul li a {
+.nav-links-container ul li a:not(.no-style) {
   position: relative;
   overflow-x: hidden;
   display: block;
@@ -395,10 +397,10 @@ button,
   color: var(--color-light);
   text-decoration: none;
   transition: all 0.3s ease;
-  margin: 0.5rem 1rem;
-  padding: 0.5rem 0;
+  margin: 0 1rem;
+  padding: 1rem 0;
 }
-.nav-links-container ul li a::after {
+.nav-links-container ul li a:not(.no-style)::after {
   content: "";
   display: block;
   position: absolute;
@@ -408,11 +410,14 @@ button,
   background-color: var(--color-primary);
   transition: all 0.3s ease;
 }
-.nav-links-container ul li a:hover {
+.nav-links-container ul li a:not(.no-style):hover {
   color: var(--color-primary);
 }
-.nav-links-container ul li a:hover::after {
+.nav-links-container ul li a:not(.no-style):hover::after {
   left: 0;
+}
+.nav-links-container ul li .no-style img {
+  image-rendering: optimizeQuality;
 }
 .nav-links-container ul li.active a::after {
   left: 0;
