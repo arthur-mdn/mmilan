@@ -283,9 +283,11 @@ button,
   background-color: var(--color-primary);
   color: var(--color-dark);
   border: 2px solid var(--color-primary);
+  text-transform: capitalize;
+  padding: 0.4rem 20px;
 }
 .btn.btn__primary:hover {
-  background-color: var(--color-dark);
+  background-color: transparent;
   color: var(--color-primary);
 }
 .btn.btn__secondary {
