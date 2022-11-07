@@ -71,7 +71,7 @@ if (isset($_SESSION["PlayerId"])) {
             <div>
                 <p>Site en construction.</p>
                 <p>Revenez plus tard !</p>
-                <p>Vous pouvez quand même créez un compte et commencer à composer votre équipe !</p>
+                <p>Vous pouvez quand même créer un compte et commencer à composer votre équipe !</p>
             </div>
         </div>
     </div>
