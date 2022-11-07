@@ -222,13 +222,19 @@ label {
 }
 #connexion .form {
   margin-bottom: 5rem;
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.2);
 }
-
 .tgl1 {
   position: absolute;
   width: 100%;
-  transform: translateX(-50%);
   z-index: -1;
+}
+.tgl1 img {
+  height: 1634px;
+  margin-left: -495px;
+  margin-bottom: -338px;
+  rotate: -335deg;
 }
 
 .frise {
