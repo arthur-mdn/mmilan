@@ -1,0 +1,27 @@
+<Files "mmilan.sql">
+require all denied
+require host localhost
+require ip 127.0.0.1
+</Files>
+
+# remove extensions from URL
+RewriteEngine On
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*index\ HTTP/
+RewriteRule ^(.*)index$ http://mmilan.fr/$1 [L,R=301]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/$ http://mmilan.fr/$1 [L,R=301]
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.+)\.php\ HTTP/
+RewriteRule ^(.+)\.php$ http://mmilan.fr/$1 [L,R=301]
+RewriteRule ^([a-z]+)$ /$1.php [L]
+
+
+# allow to open .php files
+Options +FollowSymlinks
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+)$ /$1.php [L,QSA]
