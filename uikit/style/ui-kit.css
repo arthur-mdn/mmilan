@@ -25,7 +25,16 @@
 }
 
 *::-webkit-scrollbar {
-  width: 0.5rem;
+  width: 1rem;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--color-dark);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border: 0.25rem solid var(--color-dark);
 }
 
 body {
@@ -41,10 +50,10 @@ body {
 }
 
 .container {
+  padding-top: 100px;
   max-width: 75rem;
   height: auto;
   margin: 0 auto;
-  padding: 0 1.25rem;
 }
 
 .frise {
