@@ -156,7 +156,7 @@
             <label for="mail_input" id="mail_input_label" style="color:white">Adresse Mail
                 <input type="email" pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" id="mail_input" name="MailUtilisateur" style="width:100%" placeholder="Adresse Email" autocomplete="current-mail" required>
             </label>
-            <label for="tel_input" id="tel_input_label" style="color:white;display: none">Numéo de Téépéne
+            <label for="tel_input" id="tel_input_label" style="color:white;display: none">Numéro de Téléphone
                 <input type="tel" id="tel_input" name="TelUtilisateur" style="width:100%" placeholder="Numéro de Téléphone" autocomplete="current-tel">
             </label>
             <label style="color:white">

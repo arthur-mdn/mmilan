@@ -655,3 +655,22 @@ input[type=button], input[type=submit] {
   -o-object-fit: cover;
      object-fit: cover;
 }/*# sourceMappingURL=ui-kit.css.map */
+#connexion #reseauxsocial #sponsorSection {
+    position: relative;
+    width: 100%;
+  }
+
+  #connexion .tgl1  {
+    position: absolute;
+    z-index: -1;
+    position: absolute;
+
+  }
+
+  .tgl1 {
+    width:923.56px;
+    height:922.91px;
+    top: -300;
+    left: -300;
+    transform: rotate(112.06deg);
+}
