@@ -24,6 +24,10 @@
   box-sizing: border-box;
 }
 
+*::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
 body {
   font-family: "Work Sans", sans-serif;
   background-color: var(--color-dark);
@@ -188,21 +192,22 @@ p {
   color: var(--color-primary);
 }
 .input-group.error input {
-  border: 1px solid red;
-  color: red;
-  background-color: rgb(255, 189, 182);
+  border: 1px solid red !important;
+  color: red !important;
+  background-color: rgb(255, 189, 182) !important;
 }
 .input-group.error input:focus {
-  outline: 1px solid red;
+  border: 1px solid red !important;
+  outline: none;
 }
 .input-group.error input:not(:-moz-placeholder-shown) + label {
-  color: red;
+  color: red !important;
 }
 .input-group.error input:not(:-ms-input-placeholder) + label {
-  color: red;
+  color: red !important;
 }
 .input-group.error input:focus + label, .input-group.error input:not(:placeholder-shown) + label {
-  color: red;
+  color: red !important;
 }
 .input-group::after {
   content: "";
@@ -392,7 +397,7 @@ button,
   width: -moz-fit-content;
   width: fit-content;
   font-family: "Work Sans", sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 800;
   color: var(--color-light);
   text-decoration: none;
