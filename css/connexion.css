@@ -23,7 +23,7 @@ body {
   color: black;
   font-size: 16px;
   margin-top: 64px;
-  padding-top: 15px;
+  /* padding-top: 15px; */
   /*display: flex;*/
   /*justify-content: center;*/
   background-size: cover;
@@ -238,4 +238,10 @@ label {
   width: 100%;
   transform: translateX(-50%);
   z-index: -1;
+}
+
+.frise {
+  position: absolute;
+  height: 100%;
+  overflow: hidden;
 }

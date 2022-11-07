@@ -22,7 +22,6 @@
        <link rel="stylesheet" href="css/connexion.css" />
        <script src="js/main_script.js"></script>
        <link rel="stylesheet" href="css/loader.css" />
-       <link rel="stylesheet" href="css/mediaCss.css" />
        <link rel="stylesheet" href="uikit/style/ui-kit.css" />
    </head>
 
@@ -156,7 +155,7 @@
            <div class="tgl1">
                <img src="Elements/others/TriangleJB.svg" alt="Triangle Blanc & Jaune" />
            </div>
-           <div class="el_4">
+           <div class="frise">
                <img src="Elements/others/Vector.svg" alt="Chemin Vectoriel parcourant la page" />
            </div>
 
