@@ -161,26 +161,25 @@
            </div>
            <div style="width: 100%;">
                <h1 class="head_title secondary">Connexion </h1>
-           </div>
+           </div
            <div style="display: bloc; height: 70vh; flex-wrap: wrap; align-items: center; justify-content: center; align-content: flex-start;">
 
-               <form method="post" class="form" style="width: 80%;max-width: 380px; margin:0 auto !important; " onsubmit="active_loader()">
-
-               
+           <form method="post" class="form" style="width: 80%;max-width: 380px; margin:0 auto !important; " onsubmit="active_loader()">
+               <h2>Connexion</h2>
                <div class="input-group">
-                       <input type="email" pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" id="mail_input" name="MailUtilisateur" style="width:100%" placeholder=" " required>
-                       <label for="MailUtilisateur">Adresse Mail</label>
-                    </div>
-                   <div class="input-group">
-                       <input type="password" name="MdpUtilisateur" style="width:100%" placeholder=" " required>
-                       <label for="MdpUtilisateur">Mot de passe</label>
-                   </div>
-                   <a href="recover.php" class="more_txt " onclick="active_loader(); ">Mot de passe oublié ? </a>
-                   <?php if ($redirect_join) { // si l'url contient le token d'équipe
-                        echo '<input type="hidden" name="JoinId" value="' . $_GET['JoinId'] . '">';
-                        echo '<input type="hidden" name="JoinToken" value="' . $_GET['JoinToken'] . '">';
-                    } ?>
-                   <input class="btn btn__primary" type="submit" style="font-weight:bold" value="valider">
+                   <input type="email" pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" id="mail_input" name="MailUtilisateur" style="width:100%" placeholder=" " autocomplete="current-mail" required>
+                   <label for="mail_input">Adresse email</label>
+               </div>
+               <div class="input-group">
+                   <input type="password" id="mdp_input" name="MdpUtilisateur" style="width:100%" autocomplete="current-password" placeholder=" " required>
+                   <label for="mdp_input">Mot de passe</label>
+               </div>
+               <a href="recover.php" class="more_txt " onclick="active_loader(); ">Mot de passe oublié ? </a>
+               <?php if ($redirect_join) { // si l'url contient le token d'équipe
+                    echo '<input type="hidden" name="JoinId" value="' . $_GET['JoinId'] . '">';
+                    echo '<input type="hidden" name="JoinToken" value="' . $_GET['JoinToken'] . '">';
+                } ?>
+               <button class="btn btn__primary" type="submit">valider</button>
 
                    <?php if ($redirect_join) {
                         echo '<a href="register.php?JoinToken=' . htmlspecialchars($_GET['JoinToken'], ENT_QUOTES, 'UTF-8') . '&JoinId=' . htmlspecialchars($_GET['JoinId'], ENT_QUOTES, 'UTF-8') . '" class="links_txt " onclick="active_loader(); ">';

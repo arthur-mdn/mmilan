@@ -14,6 +14,36 @@
 </head>
 
 <body>
+     <!-- SECTION VIEWER -->
+     <div class="section-viewer">
+      <ul>
+        <li><a href="#1" class="active">1</a></li>
+        <li><a href="#2">2</a></li>
+        <li><a href="#3">3</a></li>
+        <div class="cursor"></div>
+      </ul>
+      <script>
+        const cursor = document.querySelector(".cursor");
+        const sections = document.querySelectorAll(".section-viewer ul li");
+        const links_viewer = document.querySelectorAll(
+          ".section-viewer ul li a"
+        );
+        const sectionWidth = sections[0].getBoundingClientRect().height;
+
+        links_viewer.forEach((link, index) => {
+          console.log(index, sectionWidth);
+          link.addEventListener("click", () => {
+            links_viewer.forEach((link) => {
+              link.classList.remove("active");
+            });
+            link.classList.add("active");
+            cursor.style.top = index * sectionWidth + "px";
+          });
+        });
+      </script>
+    </div>
+
+
     <section id="twitch">
         <div class="el_1">
             <img src="Elements/others/TriangleJB.svg" alt="Triangle Blanc & Jaune"/>
@@ -25,20 +55,22 @@
             <h1 class="mediatitle"> Live Twitch </h1>
             <div class="boxshadow3"></div>
         </div>
-        <div class="sectiontwitch">
+        <div id="1" class="sectiontwitch">
         <iframe src="https://player.twitch.tv/?channel=oximuss_&parent=mmilan.fr" 
             frameborder="0" 
             allowfullscreen="true" 
             scrolling="no" 
                 height="500" 
-                width="889">
+                width="889"
+                class="twitchflux">
             </iframe> 
             <iframe
                 class="twitchchat"
                 id="chat_embed"
                 src="https://www.twitch.tv/embed/oximuss_/chat?parent=mmilan.fr"
                 height="500"
-                width="350">
+                width="350"
+                >
             </iframe>   
         </div>
     </section>
@@ -46,7 +78,7 @@
 
     <section id="reseauxSocial">
         <div class="el_2">
-            <img src="Elements/others/01blue.svg" alt="Num01 Bleu"/>
+            <img id="2" src="Elements/others/01blue.svg" alt="Num01 Bleu"/>
         </div>  
         <div class="rstitle">
             <h1 class="titrers">Reseaux sociaux</h1>
@@ -79,7 +111,7 @@
         <div class="el_3    ">
             <img src="Elements/others/02White.svg" alt="Num02 Blanc"/>
         </div>
-        <div class="sponsor">
+        <div id="3" class="sponsor">
             <div class="sponsortitle">
                 <h1 class="titresponsor"> Sponsor de notre lan</h1>
                 <div class="boxshadow2"></div>

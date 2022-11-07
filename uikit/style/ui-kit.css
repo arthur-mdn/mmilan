@@ -151,10 +151,13 @@ p {
 .input-group {
   position: relative;
   margin-top: 1.75rem;
+  width: 100%;
+  max-width: 400px;
 }
 .input-group label {
   position: absolute;
-  top: 45%;
+  top: 50%;
+  line-height: 1rem;
   left: 0.25rem;
   padding: 0 10px;
   background-color: transparent;
@@ -162,6 +165,7 @@ p {
   transition: all 0.3s ease;
   transform: translateY(-50%);
   z-index: 1;
+  cursor: pointer;
 }
 .input-group input {
   padding: 10px;
@@ -227,7 +231,8 @@ input:focus {
 }
 
 /*  BOUTONS  */
-button {
+button,
+.btn {
   background-color: var(--color-light);
   border: none;
   border-radius: 5px;
@@ -238,9 +243,10 @@ button {
 .btn {
   font-family: "Work Sans", sans-serif;
   font-weight: 800;
+  font-size: 1em;
   border: none;
   border-radius: 10px;
-  padding: 0.5rem 1.25rem;
+  padding: 0.4rem 1rem;
   margin-block: 0.5rem;
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -353,10 +359,19 @@ button {
 }
 
 /* NAVLINKS */
+.space-between {
+  justify-content: space-between;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
 .nav-links-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-grow: 1;
+  justify-content: space-between;
   align-items: center;
   transition: all 0.3s ease;
 }
@@ -369,7 +384,7 @@ button {
   padding: 0;
   margin: 0;
 }
-.nav-links-container ul li a {
+.nav-links-container ul li a:not(.no-style) {
   position: relative;
   overflow-x: hidden;
   display: block;
@@ -382,10 +397,10 @@ button {
   color: var(--color-light);
   text-decoration: none;
   transition: all 0.3s ease;
-  margin: 0.5rem 1rem;
-  padding: 0.5rem 0;
+  margin: 0 1rem;
+  padding: 1rem 0;
 }
-.nav-links-container ul li a::after {
+.nav-links-container ul li a:not(.no-style)::after {
   content: "";
   display: block;
   position: absolute;
@@ -395,11 +410,14 @@ button {
   background-color: var(--color-primary);
   transition: all 0.3s ease;
 }
-.nav-links-container ul li a:hover {
+.nav-links-container ul li a:not(.no-style):hover {
   color: var(--color-primary);
 }
-.nav-links-container ul li a:hover::after {
+.nav-links-container ul li a:not(.no-style):hover::after {
   left: 0;
+}
+.nav-links-container ul li .no-style img {
+  image-rendering: optimizeQuality;
 }
 .nav-links-container ul li.active a::after {
   left: 0;

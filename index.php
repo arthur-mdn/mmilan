@@ -54,22 +54,12 @@ if (isset($_SESSION["PlayerId"])) {
         </script>
     </div>
     <?php
-    require('menu.php'); // afficher le menu en fonction de connecté ou pas.
+    // require('menu.php'); // afficher le menu en fonction de connecté ou pas.
+    require('navbar.php'); //afficher la navbar en fonction de connecté ou pas.
     ?>
 
-    <style>
-        body {
-            padding-top: 64px;
-        }
-
-        .bt-lg {
-            border-top: 1px solid #d3d3d37d;
-        }
-    </style>
-
-
-    <div style="background-image: url(Elements/backgrounds/background03.jpg);
-    height:400px;
+    <div style="background-image: url(Elements/backgrounds/bg_1.jpg);
+    height:700px;
     background-size: cover;
     background-position: center;
     margin: 0 auto;
