@@ -377,6 +377,7 @@ button,
 }
 .head_title.primary::after {
   background-color: var(--color-primary);
+  opacity: 0.5;
 }
 .head_title.secondary {
   color: var(--color-dark);
