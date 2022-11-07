@@ -79,13 +79,14 @@ body {
   position: relative;
 }
 .section-viewer ul li {
-  width: 2.5rem;
-  aspect-ratio: 1/1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .section-viewer ul li a {
+  display: block;
+  padding: 15px;
+  line-height: 10px;
   color: white;
   text-decoration: none;
   cursor: pointer;
