@@ -1,16 +1,23 @@
     <style>
         .nav {
+            position: fixed;
+            width: 100%;
             display: flex;
             align-items: center;
             background-color: #0A1929;
             padding: 0 7rem;
             height: 100px;
+            z-index: 10000;
         }
 
         .nav__links-container {
             display: flex;
             align-items: center;
             gap: 2rem;
+        }
+
+        .nav__links-container a {
+            text-decoration: none;
         }
 
         .nav__logo {
@@ -49,30 +56,49 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">Accueil</a>
+                    <a href="index.php">Accueil</a>
                 </li>
                 <li>
-                    <a href="#">Actualités</a>
+                    <a href="news.php">Actualités</a>
                 </li>
                 <li>
-                    <a href="#">Médias</a>
+                    <a href="media.php">Médias</a>
                 </li>
                 <li>
-                    <a href="#">Équipes</a>
+                    <a href="teams.php">Équipes</a>
                 </li>
             </ul>
 
             <div class="nav__links-container">
-                <button class="btn btn__light button">
-                    <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="24" height="24">
-                        <path d="M22.763,10.232l-4.95-4.95L16.4,6.7,20.7,11H6.617v2H20.7l-4.3,4.3,1.414,1.414,4.95-4.95a2.5,2.5,0,0,0,0-3.536Z" />
-                        <path d="M10.476,21a1,1,0,0,1-1,1H3a1,1,0,0,1-1-1V3A1,1,0,0,1,3,2H9.476a1,1,0,0,1,1,1V8.333h2V3a3,3,0,0,0-3-3H3A3,3,0,0,0,0,3V21a3,3,0,0,0,3,3H9.476a3,3,0,0,0,3-3V15.667h-2Z" />
-                    </svg>
+                <?php
+                if (isset($_SESSION['PlayerId'])) {
+                ?>
+                    <a class="btn btn__light button" href="login.php">
+                        <?php
+                        $getUsername = $conn2->prepare('SELECT * FROM players WHERE PlayerId = ?');
+                        $getUsername->bindValue(1, $_SESSION['PlayerId']);
+                        $getUsername->execute();
+                        $UsernameResult = $getUsername->fetch(PDO::FETCH_ASSOC);
 
-                    <!-- CHANGER LE SVG, LA C'EST CELUI DE DECONNEXION, IL FAUT LE REMPLACER -->
+                        echo $UsernameResult['PlayerUsername'];
+                        ?>
+                    </a>
+                <?php
+                } else {
+                ?>
+                    <a class="btn btn__light button" href="login.php">
+                        <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="24" height="24">
+                            <path d="M22.763,10.232l-4.95-4.95L16.4,6.7,20.7,11H6.617v2H20.7l-4.3,4.3,1.414,1.414,4.95-4.95a2.5,2.5,0,0,0,0-3.536Z" />
+                            <path d="M10.476,21a1,1,0,0,1-1,1H3a1,1,0,0,1-1-1V3A1,1,0,0,1,3,2H9.476a1,1,0,0,1,1,1V8.333h2V3a3,3,0,0,0-3-3H3A3,3,0,0,0,0,3V21a3,3,0,0,0,3,3H9.476a3,3,0,0,0,3-3V15.667h-2Z" />
+                        </svg>
 
-                    Connexion
-                </button>
+                        <!-- CHANGER LE SVG, LA C'EST CELUI DE DECONNEXION, IL FAUT LE REMPLACER -->
+
+                        Connexion
+                    </a>
+                <?php
+                }
+                ?>
             </div>
 
         </div>

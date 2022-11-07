@@ -98,6 +98,7 @@ if (!isset($_SESSION["PlayerId"])) {
     require('navbar.php');
     ?>
     <div class="container">
+        <a href="logout.php">Se déconnecter</a>
         <?php
         // Easter Egg - NE PAS TOUCHER
         goto yZY1K;

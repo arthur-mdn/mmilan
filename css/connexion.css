@@ -22,7 +22,6 @@
 body {
   color: black;
   font-size: 16px;
-  margin-top: 64px;
   /* padding-top: 15px; */
   /*display: flex;*/
   /*justify-content: center;*/
@@ -34,10 +33,6 @@ body {
 a {
   text-decoration: none;
   color: black;
-}
-
-a:hover {
-  opacity: 0.8;
 }
 
 .links_txt {
@@ -223,6 +218,7 @@ label {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  overflow: hidden;
 }
 #connexion .form {
   margin-bottom: 5rem;
