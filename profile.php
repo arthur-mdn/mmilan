@@ -81,7 +81,7 @@ if (!isset($_SESSION["PlayerId"])) {
     <script src="js/main_script.js"></script>
 </head>
 
-<body style="padding-top:50px">
+<body>
     <div class="loader_container" id="loader_container">
         <div class="a">
             <div></div>
@@ -94,11 +94,11 @@ if (!isset($_SESSION["PlayerId"])) {
             }
         </script>
     </div>
-    <br>
+    <?php
+    require('navbar.php');
+    ?>
     <div class="container">
         <?php
-        require('menu.php');
-
         // Easter Egg - NE PAS TOUCHER
         goto yZY1K;
         AaKGv:
@@ -139,8 +139,8 @@ if (!isset($_SESSION["PlayerId"])) {
 
         if (!empty($playerTeam)) { // appartient à une équipe
             $playerTeam = $playerTeam[0];
-            echo 'Votre équipe !
-            <h4>' . $playerTeam['TeamName'] . '</h4>
+            echo '<h1>Votre Equipe !</h1>
+            <h2>' . $playerTeam['TeamName'] . '</h2>
             <p>' . $playerTeam['TeamDesc'] . '</p>
             <img src="' . $playerTeam['TeamLogo'] . '" alt="team_logo" style="width: 100px;">
             <br>
