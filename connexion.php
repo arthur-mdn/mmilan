@@ -159,19 +159,15 @@
            <div class="el_4">
                <img src="Elements/others/Vector.svg" alt="Chemin Vectoriel parcourant la page" />
            </div>
-           <div style="width: 100%;">
-               <h1 class="head_title secondary">Connexion </h1>
-           </div
-           <div style="display: bloc; height: 70vh; flex-wrap: wrap; align-items: center; justify-content: center; align-content: flex-start;">
 
-           <form method="post" class="form" style="width: 80%;max-width: 380px; margin:0 auto !important; " onsubmit="active_loader()">
+           <form method="post" class="form" onsubmit="active_loader()">
                <h2>Connexion</h2>
                <div class="input-group">
-                   <input type="email" pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" id="mail_input" name="MailUtilisateur" style="width:100%" placeholder=" " autocomplete="current-mail" required>
+                   <input type="email" pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" id="mail_input" name="MailUtilisateur" placeholder=" " autocomplete="current-mail" required>
                    <label for="mail_input">Adresse email</label>
                </div>
                <div class="input-group">
-                   <input type="password" id="mdp_input" name="MdpUtilisateur" style="width:100%" autocomplete="current-password" placeholder=" " required>
+                   <input type="password" id="mdp_input" name="MdpUtilisateur" autocomplete="current-password" placeholder=" " required>
                    <label for="mdp_input">Mot de passe</label>
                </div>
                <a href="recover.php" class="more_txt " onclick="active_loader(); ">Mot de passe oublié ? </a>
@@ -181,16 +177,16 @@
                 } ?>
                <button class="btn btn__primary" type="submit">valider</button>
 
-                   <?php if ($redirect_join) {
-                        echo '<a href="register.php?JoinToken=' . htmlspecialchars($_GET['JoinToken'], ENT_QUOTES, 'UTF-8') . '&JoinId=' . htmlspecialchars($_GET['JoinId'], ENT_QUOTES, 'UTF-8') . '" class="links_txt " onclick="active_loader(); ">';
-                    } else {
-                        echo '<a href="register.php" class="links_txt " onclick="active_loader(); ">';
-                    } ?>
-                   Inscription ?
-                   </a>
+               <?php if ($redirect_join) {
+                    echo '<a href="register.php?JoinToken=' . htmlspecialchars($_GET['JoinToken'], ENT_QUOTES, 'UTF-8') . '&JoinId=' . htmlspecialchars($_GET['JoinId'], ENT_QUOTES, 'UTF-8') . '" class="links_txt " onclick="active_loader(); ">';
+                } else {
+                    echo '<a href="register.php" class="links_txt " onclick="active_loader(); ">';
+                } ?>
+               Inscription ?
+               </a>
 
-               </form>
-           </div>
+           </form>
+
        </section>
 
    </body>
