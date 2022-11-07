@@ -4,6 +4,7 @@
             width: 100%;
             display: flex;
             align-items: center;
+            justify-content: center;
             background-color: #0A1929;
             padding: 0 7rem;
             height: 100px;
@@ -45,7 +46,7 @@
     </style>
 
     <nav class="nav">
-        <div class="nav-links-container row space-between">
+        <div class="nav-links-container row space-between" style="max-width:1900px;">
 
             <!-- METTRE L'URL QUI CORRESPOND POUR CHAQUE LIENS, ILS NE POINTENT VERS RIEN POUR L'INSTANT -->
 
