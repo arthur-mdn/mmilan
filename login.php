@@ -130,7 +130,7 @@
             }
         }
         echo '<style> body{ background: var(--color-dark) !important;}</style>';
-        require('navbar.php');
+        require('menu.php');
 
         if ($need_account) {
             $generated_id = generateRandomString(5);

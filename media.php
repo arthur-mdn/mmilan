@@ -14,6 +14,9 @@
 </head>
 
 <body>
+    <?php
+    include 'menu.php';
+    ?>
     <!-- SECTION VIEWER -->
     <div class="section-viewer">
         <ul>

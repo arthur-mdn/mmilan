@@ -95,7 +95,7 @@ if (!isset($_SESSION["PlayerId"])) {
         </script>
     </div>
     <?php
-    require('navbar.php');
+    require('menu.php');
     ?>
     <div class="container">
         <a href="logout.php">Se déconnecter</a>
@@ -331,7 +331,6 @@ if (!isset($_SESSION["PlayerId"])) {
                                     $mail->setFrom($settings['instance_email_username'], $settings['name']);
                                     $mail->addAddress($_POST['playerToInvite']);
                                     $mail->addReplyTo($settings['instance_email_username'], $settings['name']);
-                                    $mail->addCC('arthur@mondon.pro');
 
                                     $mail->isHTML(true);
                                     $mail->Subject = 'Invitation à rejoindre une équipe - Evenement MMI LAN';
@@ -406,7 +405,6 @@ if (!isset($_SESSION["PlayerId"])) {
                                     $mail->setFrom($settings['instance_email_username'], $settings['name']);
                                     $mail->addAddress($_POST['playerToInvite']);
                                     $mail->addReplyTo($settings['instance_email_username'], $settings['name']);
-                                    $mail->addCC('arthur@mondon.pro');
 
                                     $mail->isHTML(true);
                                     $mail->Subject = 'Invitation à rejoindre une équipe - Evenement MMI LAN';

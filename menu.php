@@ -1,303 +1,121 @@
-<?php
-/**
- * mmilan, website that manage e-sport teams
- * Propulsed by Arthur Mondon.
- *
- * @author     Arthur Mondon
- *
- * Contributors :
- * -
- *
- */
-if(!defined('MyConst')) {
-    die('Direct access not permitted');
-}
-?>
-
-<style>
-
-    :root {
-        --color-black: hsl(0, 0%, 10%);
-        --color-darks: hsl(0, 0%, 25%);
-        --color-greys: hsl(0, 0%, 60%);
-        --color-light: hsl(0, 0%, 96%);
-        --color-white: hsl(0, 0%, 100%);
-        --color-green-100: hsl(152, 24%, 45%);
-        --color-green-200: hsl(152, 24%, 40%);
-        --color-green-300: hsl(152, 24%, 35%);
-        --display-100: clamp(0.88rem, calc(0.8rem + 0.38vw), 1rem);
-        --display-200: clamp(1rem, calc(0.96rem + 0.18vw), 1.13rem);
-        --display-300: clamp(1.2rem, calc(1.11rem + 0.43vw), 1.5rem);
-        --shadow-small: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
-        0 1px 2px 0 rgba(0, 0, 0, 0.06);
-        --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-        0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        --shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-        0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    }
-
-    *,
-    *::before,
-    *::after {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        list-style: none;
-        list-style-type: none;
-        text-decoration: none;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-rendering: optimizeLegibility;
-    }
-
-    html {
-        font-size: 100%;
-        box-sizing: inherit;
-        scroll-behavior: smooth;
-        /*height: -webkit-fill-available;*/
-    }
-
-    body {
-        font-family: "Rubik", ui-sans-serif, system-ui, -apple-system, sans-serif;
-        font-size: var(--display-200);
-        font-weight: 400;
-        line-height: 1.5;
-        /*height: -webkit-fill-available;*/
-        color: var(--color-black);
-        background-color: var(--color-white);
-    }
-
-    main {
-        overflow: hidden;
-    }
-
-    a,
-    button {
-        cursor: pointer;
-        border: none;
-        outline: none;
-        background: none;
-        text-transform: unset;
-        text-decoration: none;
-    }
-
-    /*img,*/
-    /*video {*/
-    /*    display: block;*/
-    /*    max-width: 100%;*/
-    /*    height: auto;*/
-    /*    object-fit: cover;*/
-    /*}*/
-
-    /*img {*/
-    /*    image-rendering: -webkit-optimize-contrast;*/
-    /*    image-rendering: -moz-crisp-edges;*/
-    /*    image-rendering: crisp-edges;*/
-    /*}*/
-
-    .section {
-        margin: 0 auto;
-        padding: 6rem 0 1rem;
-    }
-
-    .container {
-        max-width: 75rem;
-        height: auto;
-        margin: 0 auto;
-        padding: 0 1.25rem;
-    }
-
-    .brand {
-        font-family: inherit;
-        font-size: 1.5rem;
-        font-weight: 600;
-        line-height: 1.5;
-        letter-spacing: -1px;
-        text-transform: uppercase;
-        color: var(--color-green-300);
-    }
-
-    .header {
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: auto;
-        z-index: 10;
-        margin: 0 auto;
-        background-color: var(--color-white);
-        box-shadow: var(--shadow-medium);
-    }
-
-    .navbar {
-        position: relative;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        height: 4rem;
-        flex-direction: row-reverse;
-        margin: 0 auto;
-    }
-
-    .menu {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 80%;
-        height: 100%;
-        z-index: 10;
-        overflow-y: auto;
-        background-color: var(--color-white);
-        box-shadow: var(--shadow-medium);
-        transition: all 0.45s ease-in-out;
-    }
-    .menu.is-active {
-        top: 0;
-        right: 0;
-    }
-    .menu-inner {
-        display: flex;
-        flex-direction: column;
-        row-gap: 1.25rem;
-        margin: 2rem 1.25rem;
-    }
-    .menu-link {
-        font-family: inherit;
-        font-size: 1rem;
-        font-weight: 500;
-        line-height: 1.5;
-        text-transform: uppercase;
-        color: var(--color-black);
-        transition: all 0.3s ease;
-    }
-    .menu-link:hover{
-        opacity:0.5
-    }
-    @media only screen and (min-width: 52rem) {
-        .menu {
-            position: relative;
-            top: 0;
-            left: 0;
-            width: auto;
-            height: auto;
-            margin-left: auto;
-            background: none;
-            box-shadow: none;
-        }
-        .menu-inner {
+    <style>
+        .nav {
+            position: fixed;
+            width: 100%;
             display: flex;
-            flex-direction: row;
-            column-gap: 1.75rem;
-            margin: 0 auto;
-            margin-right: 3rem;
+            align-items: center;
+            background-color: #0A1929;
+            padding: 0 7rem;
+            height: 100px;
+            z-index: 10000;
         }
-        .menu-link {
-            text-transform: capitalize;
-        }
-        .menu-block {
-            margin-left: 2rem;
-        }
-        .navbar{
-            flex-direction: row;
-        }
-    }
 
-    .burger {
-        position: relative;
-        display: block;
-        cursor: pointer;
-        order: -1;
-        width: 1.75rem;
-        height: auto;
-        border: none;
-        outline: none;
-        visibility: visible;
-    }
-    .burger-line {
-        display: block;
-        cursor: pointer;
-        width: 100%;
-        height: 2px;
-        margin: 6px auto;
-        transform: rotate(0deg);
-        background-color: var(--color-black);
-        transition: all 0.3s ease-in-out;
-    }
-    @media only screen and (min-width: 52rem) {
-        .burger {
-            display: none;
-            visibility: hidden;
+        .nav__links-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
-    }
 
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 9;
-        opacity: 0;
-        visibility: hidden;
-        background-color: rgba(0, 0, 0, 0.6);
-        transition: all 0.3s ease-in-out;
-    }
-    .overlay.is-active {
-        display: block;
-        opacity: 1;
-        visibility: visible;
-    }
-</style>
+        .nav__links-container a {
+            text-decoration: none;
+        }
 
-<header class="header" id="header">
-    <nav class="navbar container">
-        <a href="index.php" class="brand " onclick="active_loader(); "><img alt="user_icon" src="Elements/placeholder_logo_txt.svg" style="height:30px"></a>
-        <div class="burger" id="burger">
-            <span class="burger-line"></span>
-            <span class="burger-line"></span>
-            <span class="burger-line"></span>
-        </div>
-        <span class="overlay"></span>
-        <div class="menu" id="menu">
-            <ul class="menu-inner">
-                <li class="menu-item"><a class="menu-link" href="index.php" onclick="active_loader(); ">Accueil</a></li>
+        .nav__logo {
+            width: 200px;
+        }
 
-                <?php if(isset($_SESSION["PlayerId"])){ // si connecté
-                    echo'<li class="menu-item"><a class="menu-link" onclick="active_loader(); " href="profile.php">Mon profil</a></li>';
-                    echo ' <li class="menu-item"><a class="menu-link " onclick="active_loader(); " href="logout.php"><img alt="logout" src="Elements/icons/logout.svg" style="width:30px"></a></li> ';
-                }
-                else{
-                    echo' <li class="menu-item"><a class="menu-link" onclick="active_loader(); " href="logout.php">Se connecter</a></li>';
+        .button {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #fff;
+
+            font-size: 1.25rem;
+            padding: 0.8rem 2rem;
+
+            background-color: inherit;
+            border: 3px solid #fff;
+            border-radius: 50px;
+        }
+
+        svg {
+            fill: #fff;
+            transform: rotate(180deg);
+        }
+    </style>
+
+    <nav class="nav">
+        <div class="nav-links-container row space-between">
+
+            <!-- METTRE L'URL QUI CORRESPOND POUR CHAQUE LIENS, ILS NE POINTENT VERS RIEN POUR L'INSTANT -->
+
+            <ul class="nav__links-container">
+                <li>
+                    <a href="index.php" class="no-style">
+                        <img class="nav__logo" src="./Elements/others/Logo_blanc.png" alt="Logo MMILan" />
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php">Accueil</a>
+                </li>
+                <li>
+                    <a href="program.php">Programme</a>
+                </li>
+                <li>
+                    <a href="media.php">Médias</a>
+                </li>
+                <li>
+                    <a href="teams.php">Équipes</a>
+                </li>
+            </ul>
+
+            <div class="nav__links-container">
+                <?php
+                if (isset($_SESSION['PlayerId'])) {
+                ?>
+                    <a class="btn btn__light button" href="login.php">
+                        <?php
+                        $getUsername = $conn2->prepare('SELECT * FROM players WHERE PlayerId = ?');
+                        $getUsername->bindValue(1, $_SESSION['PlayerId']);
+                        $getUsername->execute();
+                        $UsernameResult = $getUsername->fetch(PDO::FETCH_ASSOC);
+
+                        echo $UsernameResult['PlayerUsername'];
+                        ?>
+                    </a>
+                <?php
+                } else {
+                ?>
+                    <a class="btn btn__light button" href="login.php">
+                        <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="24" height="24">
+                            <path d="M22.763,10.232l-4.95-4.95L16.4,6.7,20.7,11H6.617v2H20.7l-4.3,4.3,1.414,1.414,4.95-4.95a2.5,2.5,0,0,0,0-3.536Z" />
+                            <path d="M10.476,21a1,1,0,0,1-1,1H3a1,1,0,0,1-1-1V3A1,1,0,0,1,3,2H9.476a1,1,0,0,1,1,1V8.333h2V3a3,3,0,0,0-3-3H3A3,3,0,0,0,0,3V21a3,3,0,0,0,3,3H9.476a3,3,0,0,0,3-3V15.667h-2Z" />
+                        </svg>
+
+                        <!-- CHANGER LE SVG, LA C'EST CELUI DE DECONNEXION, IL FAUT LE REMPLACER -->
+
+                        Connexion
+                    </a>
+                <?php
                 }
                 ?>
-            </ul>
+            </div>
+
         </div>
-
     </nav>
-   
-</header>
 
-<script>
-    const navbarMenu = document.getElementById("menu");
-    const burgerMenu = document.getElementById("burger");
-    const bgOverlay = document.querySelector(".overlay");
-    if (burgerMenu && bgOverlay) {
-        burgerMenu.addEventListener("click", () => {
-            navbarMenu.classList.add("is-active");
-            bgOverlay.classList.toggle("is-active");
-        });
+    <script>
+        const button = document.querySelector('.button');
+        const svg = document.querySelector('svg');
 
-        bgOverlay.addEventListener("click", () => {
-            navbarMenu.classList.remove("is-active");
-            bgOverlay.classList.toggle("is-active");
-        });
-    }
-    document.querySelectorAll(".menu-link").forEach((link) => {
-        link.addEventListener("click", () => {
-            navbarMenu.classList.remove("is-active");
-            bgOverlay.classList.remove("is-active");
-        });
-    });
-</script>
+        //add an event listener for the button hover
+        if (button) {
+            svg.style.transition = 'all 0.3 ease';
+            button.addEventListener('mouseover', () => {
+                svg.style.fill = '#0A1929';
+            });
+            button.addEventListener('mouseout', () => {
+                svg.style.fill = '#fff';
+            });
+        }
+    </script>
