@@ -9,6 +9,8 @@
             padding: 0 7rem;
             height: 100px;
             z-index: 10000;
+
+            transition: all 0.3s ease-in-out;
         }
 
         .nav__links-container {
@@ -22,7 +24,8 @@
         }
 
         .nav__logo {
-            width: 200px;
+            width: 175px;
+            transition: width 0.3s ease-in-out;
         }
 
         .button {
@@ -52,6 +55,25 @@
         .overlay-menu__mobile,
         .side-menu__mobile {
             display: none;
+        }
+
+        .nav.scrolled {
+            background-color: #0A1929;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+            height: 75px;
+        }
+
+        .nav.scrolled .nav__links-container a {
+            font-size: 1rem !important;
+        }
+
+        .nav.scrolled .nav__links-container .button {
+            padding: 0.4rem 1rem;
+        }
+
+        .nav.scrolled .nav__logo {
+            width: 150px;
         }
 
         @media only screen and (max-width:1300px) {

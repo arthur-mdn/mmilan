@@ -286,11 +286,11 @@ button,
   border: 2px solid var(--color-primary);
 }
 .btn.btn__primary:hover {
-  background-color: var(--color-dark);
+  background-color: transparent;
   color: var(--color-primary);
 }
 .btn.btn__secondary {
-  background-color: var(--color-dark);
+  background-color: transparent;
   color: var(--color-primary);
   border: 2px solid var(--color-primary);
 }
@@ -299,7 +299,7 @@ button,
   color: var(--color-dark);
 }
 .btn.btn__dark {
-  background-color: var(--color-light);
+  background-color: transparent;
   color: var(--color-dark);
   border: 2px solid var(--color-dark);
 }
@@ -308,7 +308,7 @@ button,
   color: var(--color-light);
 }
 .btn.btn__light {
-  background-color: var(--color-dark);
+  background-color: transparent;
   color: var(--color-light);
   border: 2px solid var(--color-light);
 }
