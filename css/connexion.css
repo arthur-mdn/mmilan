@@ -36,11 +36,15 @@ a {
 }
 
 .links_txt {
-  font-size: 14px;
-  color: white;
-  text-decoration: underline;
+  font-size: 13px;
+  color: #ffffffd1;
+  text-decoration: underline !important;
 }
-
+a.links_txt:hover {
+  color: #ffffffa1;
+  text-decoration: none !important;
+  transition:0.3s;
+}
 .form {
   display: flex;
   flex-direction: column;
@@ -110,8 +114,13 @@ input[type="submit"]:hover {
   margin-top: 0.5em;
   font-size: 13px;
   align-self: flex-start;
-  color: white;
-  text-decoration: underline;
+  color: #ffffffd1;
+  text-decoration: underline !important;
+}
+a.more_txt:hover{
+  color:#ffffffa1;
+  text-decoration: none !important;
+  transition:0.3s;
 }
 
 .modal {
