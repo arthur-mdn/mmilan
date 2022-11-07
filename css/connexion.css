@@ -36,11 +36,15 @@ a {
 }
 
 .links_txt {
-  font-size: 14px;
-  color: white;
-  text-decoration: underline;
+  font-size: 13px;
+  color: #ffffffd1;
+  text-decoration: underline !important;
 }
-
+a.links_txt:hover {
+  color: #ffffffa1;
+  text-decoration: none !important;
+  transition:0.3s;
+}
 .form {
   display: flex;
   flex-direction: column;
@@ -70,7 +74,7 @@ textarea,
 select {
   background-color: white;
   padding: 0px 1em;
-  border-radius: 5px;
+  border-radius: 2px;
   height: 2.5em;
   border: 1px solid rgb(200, 200, 200);
   font-size: 16px;
@@ -108,10 +112,15 @@ input[type="submit"]:hover {
 
 .more_txt {
   margin-top: 0.5em;
-  font-size: 14px;
+  font-size: 13px;
   align-self: flex-start;
-  color: white;
-  text-decoration: underline;
+  color: #ffffffd1;
+  text-decoration: underline !important;
+}
+a.more_txt:hover{
+  color:#ffffffa1;
+  text-decoration: none !important;
+  transition:0.3s;
 }
 
 .modal {
@@ -222,13 +231,19 @@ label {
 }
 #connexion .form {
   margin-bottom: 5rem;
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.2);
 }
-
 .tgl1 {
   position: absolute;
   width: 100%;
-  transform: translateX(-50%);
   z-index: -1;
+}
+.tgl1 img {
+  height: 1634px;
+  margin-left: -495px;
+  margin-bottom: -338px;
+  rotate: -335deg;
 }
 
 .frise {
