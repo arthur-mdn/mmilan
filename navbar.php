@@ -59,7 +59,7 @@
                     <a href="index.php">Accueil</a>
                 </li>
                 <li>
-                    <a href="news.php">Actualités</a>
+                    <a href="program.php">Programme</a>
                 </li>
                 <li>
                     <a href="media.php">Médias</a>
