@@ -21,7 +21,7 @@
     <link rel="icon" type="image/png" href="Elements/placeholder_logo.svg" />
     <link rel="stylesheet" href="css/login_style.css" />
     <script src="js/main_script.js"></script>
-
+    <link rel="stylesheet" href="uikit/style/ui-kit.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/loader.css" />
 </head>
