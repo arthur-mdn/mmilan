@@ -82,13 +82,74 @@
 
                 if (isset($NombreTentatives[0]['NombreTentatives']) and $NombreTentatives[0]['NombreTentatives'] < 5) {
                     if (password_verify($_POST['MdpUtilisateur'], $result['PlayerPassword'])) {  //correct password => login
-                        $_SESSION["PlayerId"] = $result['PlayerId'];
-                        $_SESSION["PlayerMail"] = $result['PlayerEmail'];
+                        if (isset($_POST['JoinId']) and isset($_POST['JoinToken'])) {
+                            // redirect to join team
+                            $invitationId = htmlspecialchars($_GET['JoinId'], ENT_QUOTES, 'UTF-8');
+                            $invitationToken = htmlspecialchars($_GET['JoinToken'], ENT_QUOTES, 'UTF-8');
 
-                        $query = $conn2->prepare("UPDATE tentative SET tentative.StatusTentative = 'old' WHERE tentative.PlayerId = ?  ");
-                        $query->bindValue(1, $result['PlayerId']);
-                        $query->execute(); // delete tentatives of the user logged
-                        header("location: index.php");
+
+                            // check if the invitation exists
+                            $checkInvitationStatus = $conn2->prepare("SELECT *
+                        FROM invitations 
+                        WHERE InvitationId = ? and InvitationToken = ?");
+                            $checkInvitationStatus->bindValue(1, $invitationId);
+                            $checkInvitationStatus->bindValue(2, $invitationToken);
+                            $checkInvitationStatus->execute();
+                            $resultInvitationStatus = $checkInvitationStatus->fetchAll(PDO::FETCH_ASSOC);
+
+                            if ($resultInvitationStatus[0]['InvitationStatus'] != 'En cours') {
+                                header('Location: register.php?error=Cette-invitation-n\'est-plus-valide');
+                            } else if ($resultInvitationStatus[0]['InvitationEmail'] != $_SESSION["PlayerMail"]) {
+                                header('Location: login.php?error=Cette-invitation-n\'est-pas-pour-vous');
+                            } else if ($resultInvitationStatus[0]['InvitationStatus'] == 'En cours') {
+                                $_SESSION["PlayerId"] = $result['PlayerId'];
+                                $_SESSION["PlayerMail"] = $result['PlayerEmail'];
+
+                                $query = $conn2->prepare("UPDATE tentative SET tentative.StatusTentative = 'old' WHERE tentative.PlayerId = ?  ");
+                                $query->bindValue(1, $result['PlayerId']);
+                                $query->execute(); // delete tentatives of the user logged
+
+                                $getTeamId = $conn2->prepare("SELECT InvitationTeamId
+                        FROM invitations 
+                        WHERE InvitationId = ? and InvitationToken = ?");
+                                $getTeamId->bindValue(1, $invitationId);
+                                $getTeamId->bindValue(2, $invitationToken);
+                                $getTeamId->execute();
+                                $resultTeamId = $getTeamId->fetchAll(PDO::FETCH_ASSOC);
+
+
+                                $query = "SELECT IFNULL(MAX(AppartientId), 0) + 1 as NewAppartientId FROM appartient";
+                                $NewAppartientId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment;
+
+                                $query = $conn2->prepare("UPDATE invitations
+                                            SET InvitationStatus = 'Acceptée'
+                                            WHERE InvitationId = ?
+                                            AND InvitationToken = ?");
+
+                                $query->bindValue(1, $invitationId);
+                                $query->bindValue(2, $invitationToken);
+                                $query->execute();
+
+                                $query = $conn2->prepare("INSERT INTO appartient (AppartientId,AppartientPlayerId, AppartientTeamId, AppartientRole)
+                                            VALUES (?, ?, ?, 'player')
+                                            ");
+                                $query->bindValue(1, $NewAppartientId['NewAppartientId']);
+                                $query->bindValue(2, $_SESSION["PlayerId"]);
+                                $query->bindValue(3, $resultTeamId[0]['InvitationTeamId']);
+                                $query->execute();
+                                header('Location: profile.php?msg=joined');
+                            }
+
+                            header('Location: login.php?error=Ce-lien-ne-vous-est-pas-destiné');
+                        } else {
+                            $_SESSION["PlayerId"] = $result['PlayerId'];
+                            $_SESSION["PlayerMail"] = $result['PlayerEmail'];
+
+                            $query = $conn2->prepare("UPDATE tentative SET tentative.StatusTentative = 'old' WHERE tentative.PlayerId = ?  ");
+                            $query->bindValue(1, $result['PlayerId']);
+                            $query->execute(); // delete tentatives of the user logged
+                            header('Location: index.php');
+                        }
                     } else {
                         $query = $conn2->prepare("INSERT INTO tentative (CodeTentative, DateTentative, LibTentative, PlayerId) 
 											VALUES (NULL, ?, ?, ?) ");
@@ -161,6 +222,7 @@
 
            <form method="post" class="form" onsubmit="active_loader()">
                <h2>Connexion</h2>
+               <div id="error_container" class="error" style="display: none;"></div>
                <div class="input-group">
                    <input type="email" pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" id="mail_input" name="MailUtilisateur" placeholder=" " autocomplete="current-mail" required>
                    <label for="mail_input">Adresse email</label>
