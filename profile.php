@@ -588,6 +588,7 @@ if (!isset($_SESSION["PlayerId"])) {
                     $upload = false;
                 }
                 if ($upload) { // upload respecte toutes les conditions
+
                     $file = 'data:' . $_FILES['TeamLogo']['type'] . ';base64,' . base64_encode(file_get_contents($_FILES['TeamLogo']['tmp_name']));
 
                     $query = "SELECT IFNULL(MAX(TeamId), 0) + 1 as NewTeamId FROM teams";
@@ -603,13 +604,16 @@ if (!isset($_SESSION["PlayerId"])) {
                     $query->bindValue(4, $file);
                     $query->execute();
 
-                    $query = $conn2->prepare("INSERT INTO appartient 
-                                    (AppartientPlayerId, AppartientTeamId, AppartientRole)
-                                    VALUES (?, ?, 'chef')
-                                  ");
+                    $query = "SELECT IFNULL(MAX(AppartientId), 0) + 1 as NewAppartientId FROM appartient";
+                    $NewAppartientId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment;
 
-                    $query->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
-                    $query->bindValue(2, $newTeamId["NewTeamId"]);
+                    $query = $conn2->prepare("INSERT INTO appartient 
+                                    (AppartientId, AppartientPlayerId, AppartientTeamId, AppartientRole)
+                                    VALUES (?, ?, ?, 'chef')
+                                  ");
+                    $query->bindValue(1, $NewAppartientId["NewAppartientId"]);
+                    $query->bindValue(2, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+                    $query->bindValue(3, $newTeamId["NewTeamId"]);
                     $query->execute();
 
                     echo ' <form method="post" id="refresher" ><input type="hidden" name="msg" value="successfullAddedTeam"><input type="submit" value="Suite" style="background-color:white"><script>document.getElementById("refresher").submit()</script> </form>';

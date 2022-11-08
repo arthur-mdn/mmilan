@@ -52,7 +52,7 @@ body {
 
 .container {
   padding-top: 100px;
-  max-width: 75rem;
+  max-width: 1300px;
   height: auto;
   margin: 0 auto;
   padding-inline: 20px;
@@ -429,7 +429,6 @@ button,
   width: fit-content;
   font-family: "Work Sans", sans-serif;
   font-size: clamp(1rem, 1.5vw, 1.2rem);
-  font-weight: 800;
   color: var(--color-light);
   text-decoration: none;
   transition: all 0.3s ease;

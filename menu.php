@@ -8,7 +8,7 @@
             background-color: #0A1929;
             padding: 0 20px;
 
-            height: 100px;
+            height: 95px;
             z-index: 10000;
 
             transition: all 0.3s ease-in-out;
@@ -16,6 +16,7 @@
 
         .nav-links-container {
             padding: 0 20px;
+            max-width: 1300px;
 
         }
 
@@ -172,25 +173,25 @@
     </style>
 
     <nav class="nav">
-        <div class="nav-links-container row space-between" style="max-width:1200px;">
+        <div class="nav-links-container row space-between"">
 
             <!-- METTRE L'URL QUI CORRESPOND POUR CHAQUE LIENS, ILS NE POINTENT VERS RIEN POUR L'INSTANT -->
 
-            <ul class="nav__links-container">
-                <li>
-                    <a href="index.php" class="no-style">
-                        <img class="nav__logo" src="./Elements/others/Logo_blanc.png" alt="Logo MMILan" />
-                    </a>
-                </li>
-                <li>
-                    <a href="program.php">Programme</a>
-                </li>
-                <li>
-                    <a href="media.php">Médias</a>
-                </li>
-                <li>
-                    <a href="teams.php">Équipes</a>
-                </li>
+            <ul class=" nav__links-container">
+            <li>
+                <a href="index.php" class="no-style">
+                    <img class="nav__logo" src="./Elements/others/Logo_blanc.png" alt="Logo MMILan" />
+                </a>
+            </li>
+            <li>
+                <a href="program.php">Programme</a>
+            </li>
+            <li>
+                <a href="media.php">Médias</a>
+            </li>
+            <li>
+                <a href="teams.php">Équipes</a>
+            </li>
             </ul>
 
             <div class="nav__links-container">

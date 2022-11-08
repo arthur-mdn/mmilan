@@ -49,8 +49,7 @@ body {
   display: flex;
   /* align-items: center; */
   flex-direction: column;
-  max-width: 1200px;
-  max-width: 75rem;
+  max-width: 1300px;
   height: auto;
   margin: 0 auto;
   /* padding: 0 1.25rem; */
