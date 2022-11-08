@@ -21,10 +21,9 @@
     <link rel="icon" type="image/png" href="Elements/placeholder_logo.svg" />
     <link rel="stylesheet" href="css/login_style.css" />
     <script src="js/main_script.js"></script>
-    <link rel="stylesheet" href="uikit/style/ui-kit.css" />
+    
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/loader.css" />
-    
 </head>
 
 <body class="body-panel">
@@ -116,12 +115,16 @@
 
                 // join the team if tokens and id are set
                 if (isset($_POST['JoinId']) and isset($_POST['JoinToken'])) {
+                    $invitationId = htmlspecialchars($_GET['JoinId'], ENT_QUOTES, 'UTF-8');
+                    $invitationToken = htmlspecialchars($_GET['JoinToken'], ENT_QUOTES, 'UTF-8');
+
+
                     // check if the invitation exists
                     $checkInvitationStatus = $conn2->prepare("SELECT InvitationStatus
                         FROM invitations 
                         WHERE InvitationId = ? and InvitationToken = ?");
-                    $checkInvitationStatus->bindValue(1, htmlspecialchars($_POST['JoinId'], ENT_QUOTES, 'UTF-8'));
-                    $checkInvitationStatus->bindValue(2, htmlspecialchars($_POST['JoinToken'], ENT_QUOTES, 'UTF-8'));
+                    $checkInvitationStatus->bindValue(1, $invitationId);
+                    $checkInvitationStatus->bindValue(2, $invitationToken);
                     $checkInvitationStatus->execute();
                     $resultInvitationStatus = $checkInvitationStatus->fetchAll(PDO::FETCH_ASSOC);
 
@@ -150,7 +153,7 @@
                         $query->execute();
 
                         $query = $conn2->prepare("INSERT INTO appartient (AppartientId,AppartientPlayerId, AppartientTeamId, AppartientRole)
-                                            VALUES (?, ?, ?, 'joueur')
+                                            VALUES (?, ?, ?, 'player')
                                             ");
                         $query->bindValue(1, $NewAppartientId['NewAppartientId']);
                         $query->bindValue(2, $result2['NewPlayerId']);
@@ -201,9 +204,9 @@
                     <label for="PrenomUtilisateur">Prénom</label>
                     <input type="text" required class="box-input" style="width:100%" name="PrenomUtilisateur" id="PrenomUtilisateur" autocomplete="new-surname" placeholder="Entrez ici votre prénom">
                 </div>
-                <div class="input_group">
-                    <label class="mail_input" for="UsernameUtilisateur">Nom d'utilisateur</label>
-                    <input type="text" required class="box-input" style="width:100%" name="UsernameUtilisateur" id="UsernameUtilisateur" placeholder=" ">
+                <div class="input_container">
+                    <label for="UsernameUtilisateur">Nom d'utilisateur</label>
+                    <input type="text" required class="box-input" style="width:100%" name="UsernameUtilisateur" id="UsernameUtilisateur" placeholder="Entrez ici votre nom d'utilisateur">
                 </div>
                 <div class="input_container">
                     <label for="MailUtilisateur">Adresse Email</label>
