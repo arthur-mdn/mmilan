@@ -464,6 +464,8 @@ if (!isset($_SESSION["PlayerId"])) {
                                     $insertInvitation->execute();
 
                                     echo $email_sent;
+                                    // reload page after 2 seconds
+                                    echo '<meta http-equiv="refresh" content="2;url=profile.php">';
                                 } catch (Exception $e) {
                                     echo $email_not_sent . "<br><p>Merci de transmettre ces informations à l'administrateur : {$mail->ErrorInfo}</p>";
                                 }
@@ -539,6 +541,8 @@ if (!isset($_SESSION["PlayerId"])) {
                                     $insertInvitation->execute();
 
                                     echo $email_sent;
+                                    // reload page after 2 seconds
+                                    echo '<meta http-equiv="refresh" content="2;url=profile.php">';
                                 } catch (Exception $e) {
                                     echo $email_not_sent . "<br>Merci de transmettre ces informations à l'administrateur : {$mail->ErrorInfo}";
                                 }
@@ -573,7 +577,7 @@ if (!isset($_SESSION["PlayerId"])) {
             // affichage en tant que joueur solo
             echo '<p>Vous êtes inscrit en solo.</p>';
             echo '<form method="post"><button class="btn btn__primary" name="leaveSolo" type="submit">Quitter le mode solo</button></form>';
-        } else {
+        } else { // affichage en tant que joueur non inscrit
             if (isset($_POST['TeamName']) and isset($_POST['TeamDesc']) and isset($_FILES['TeamLogo'])) { // si le formulaire pour créer une équipe est rempli :
                 $upload = true;
                 $extensions = array('image/jpeg', 'image/jpg', 'image/png');
@@ -591,45 +595,55 @@ if (!isset($_SESSION["PlayerId"])) {
                 }
                 if ($upload) { // upload respecte toutes les conditions
 
-                    //TODO: vérifier que le nom de l'équipe n'est pas déjà utilisé
+                    //vérifier que le nom de l'équipe n'est pas déjà utilisé
+                    $checkTeamName = $conn2->prepare("SELECT * FROM teams WHERE teams.TeamName = ?");
+                    $checkTeamName->bindValue(1, htmlspecialchars($_POST['TeamName'], ENT_QUOTES, 'UTF-8'));
+                    $checkTeamName->execute();
+                    $teamName = $checkTeamName->fetch(PDO::FETCH_ASSOC);
 
-                    $file = 'data:' . $_FILES['TeamLogo']['type'] . ';base64,' . base64_encode(file_get_contents($_FILES['TeamLogo']['tmp_name']));
+                    if (empty($teamName)) { // le nom de l'équipe n'est pas déjà utilisé
+                        // enregistrement de l'équipe
+                        $file = 'data:' . $_FILES['TeamLogo']['type'] . ';base64,' . base64_encode(file_get_contents($_FILES['TeamLogo']['tmp_name']));
 
-                    $query = "SELECT IFNULL(MAX(TeamId), 0) + 1 as NewTeamId FROM teams";
-                    $newTeamId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment
+                        $query = "SELECT IFNULL(MAX(TeamId), 0) + 1 as NewTeamId FROM teams";
+                        $newTeamId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment
 
-                    $query = $conn2->prepare("INSERT INTO teams 
+                        $query = $conn2->prepare("INSERT INTO teams 
                                     (TeamId, TeamName, TeamDesc, TeamLogo)
                                     VALUES (?, ?, ?, ?)
                                   ");
-                    $query->bindValue(1, $newTeamId["NewTeamId"]);
-                    $query->bindValue(2, htmlspecialchars($_POST['TeamName'], ENT_QUOTES, 'UTF-8'));
-                    $query->bindValue(3, htmlspecialchars($_POST['TeamDesc'], ENT_QUOTES, 'UTF-8'));
-                    $query->bindValue(4, $file);
-                    $query->execute();
+                        $query->bindValue(1, $newTeamId["NewTeamId"]);
+                        $query->bindValue(2, htmlspecialchars($_POST['TeamName'], ENT_QUOTES, 'UTF-8'));
+                        $query->bindValue(3, htmlspecialchars($_POST['TeamDesc'], ENT_QUOTES, 'UTF-8'));
+                        $query->bindValue(4, $file);
+                        $query->execute();
 
-                    $query = "SELECT IFNULL(MAX(AppartientId), 0) + 1 as NewAppartientId FROM appartient";
-                    $NewAppartientId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment;
+                        $query = "SELECT IFNULL(MAX(AppartientId), 0) + 1 as NewAppartientId FROM appartient";
+                        $NewAppartientId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment;
 
-                    $query = $conn2->prepare("INSERT INTO appartient 
+                        $query = $conn2->prepare("INSERT INTO appartient 
                                     (AppartientId, AppartientPlayerId, AppartientTeamId, AppartientRole)
                                     VALUES (?, ?, ?, 'chef')
                                   ");
-                    $query->bindValue(1, $NewAppartientId["NewAppartientId"]);
-                    $query->bindValue(2, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
-                    $query->bindValue(3, $newTeamId["NewTeamId"]);
-                    $query->execute();
+                        $query->bindValue(1, $NewAppartientId["NewAppartientId"]);
+                        $query->bindValue(2, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+                        $query->bindValue(3, $newTeamId["NewTeamId"]);
+                        $query->execute();
 
-                    echo ' <form method="post" id="refresher" ><input type="hidden" name="msg" value="successfullAddedTeam"><input type="submit" value="Suite" style="background-color:white"><script>document.getElementById("refresher").submit()</script> </form>';
-                    die();
+                        echo ' <form method="post" id="refresher" ><input type="hidden" name="msg" value="successfullAddedTeam"><input type="submit" value="Suite" style="background-color:white"><script>document.getElementById("refresher").submit()</script> </form>';
+                        die();
+                    } else {
+                        echo '<p>Le nom de l\'équipe est déjà utilisé. Veuillez en choisir un différent</p>';
+                    }
                 }
             } elseif (isset($_POST['select']) and in_array($_POST['select'], ['team', 'solo'])) { // si le bouton solo ou chef d'équipe a été cliqué
-                echo '
-        <form method="post">
-            <button type="submit" class="N_button">Retour</button>
-        </form>
-        ';
+
                 if ($_POST['select'] === "team") { // si le bouton chef d'équipe a été cliqué
+                    echo '
+                        <form method="post">
+                            <button type="submit" class="N_button">Retour</button>
+                        </form>
+                        ';
                     echo ' inscrivez votre équipe';
                     echo '
                     <form method="post" enctype="multipart/form-data" style="display: flex;flex-direction: column;gap: 15px">
@@ -640,48 +654,77 @@ if (!isset($_SESSION["PlayerId"])) {
                     </form>
                     ';
                 } elseif ($_POST['select'] === "solo") { // si le bouton solo a été cliqué 
-                    //TODO: vérifier que le joueur n'est pas déjà inscrit en solo
-                    // s'inscrire en tant que joueur solo
-                    //* Requête SQL permettant d'afficher les différentes invitations reçus pour ce joueur
-                    $query = $conn2->prepare("SELECT * 
-									FROM players, invitations, teams
-									WHERE players.PlayerID = ?
-                                    and invitations.InvitationStatus = 'ok'
-                                    and invitations.InvitationEmail = players.PlayerEmail
-                                    and invitations.InvitationTeamId = teams.TeamId
-									");
-                    $query->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
-                    $query->execute();
-                    //* Stockage du fetch dans une variable
-                    $invitationsinqueue = $query->fetchAll(PDO::FETCH_ASSOC); //
-                    //* Déclaration d'une auto-incrémentation
-                    $query = "SELECT IFNULL(MAX(AppartientSoloId), 0) + 1 as NewSoloId FROM appartient_solo";
-                    $newSoloId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment
-                    //* Si la variable possède au minimum 1 ligne, affiche le nom de l'équipe pour chaque invitations
-                    if (sizeof($invitationsinqueue) > 0) {
-                        // afficher "Êtes-vous sûr de rejeté les invitations des équipes suivantes ? Cela va annuler votre invitation." (si une invitation est désignée à ce joueur).
-                        echo 'Êtes-vous sûr de rejeter les invitations des équipes suivantes ? Cela va annuler vos invitations. :';
-                        foreach ($invitationsinqueue as $invitationsinqueue) {
-                            echo '<p>' . $invitationsinqueue['TeamName'] . '</p>';
+                    $checkSolo = $conn2->prepare("select * from appartient_solo where AppartientSoloPlayerId = ?");
+                    $checkSolo->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+                    $checkSolo->execute();
+                    $checkSoloResult = $checkSolo->fetch(PDO::FETCH_ASSOC);
+
+                    if (empty($checkSoloResult)) {
+                        // s'inscrire en tant que joueur solo
+                        // Check if the player with a pending invitation
+                        $checkInvitation = $conn2->prepare("select * from invitations where InvitationEmail = ?");
+                        $checkInvitation->bindValue(1, htmlspecialchars($_SESSION["PlayerMail"], ENT_QUOTES, 'UTF-8'));
+                        $checkInvitation->execute();
+                        $checkInvitationResult = $checkInvitation->fetch(PDO::FETCH_ASSOC);
+
+                        if (!empty($checkInvitationResult)) {
+                            // If the player has a pending invitation, ask him/her if he/she really wants to cancel it
+                            //Select team name from invitation
+                            $query = $conn2->prepare("SELECT teams.TeamName FROM teams, invitations WHERE invitations.InvitationTeamId = teams.TeamId AND invitations.InvitationEmail = ?");
+                            $query->bindValue(1, htmlspecialchars($_SESSION["PlayerMail"], ENT_QUOTES, 'UTF-8'));
+                            $query->execute();
+                            $teamName = $query->fetch(PDO::FETCH_ASSOC);
+
+                            echo '<div class="alert">Vous avez une invitation en attente de la part de ' . $teamName['TeamName'] . '. Si vous vous inscrivez en solo, celle-ci sera annulée.</div>';
+                            echo '
+                            <form action="" method="post">
+                                <button type="submit" class="btn btn__primary" name="validateJoinSolo">Confirmer</button>
+                                <button type="submit" class="btn btn__secondary ">Annuler</button>
+                            </form>
+                            ';
+                        } else {
+                            // If the player has no pending invitation, he/she can register as a solo player
+                            echo '
+                            <form action="" method="post">
+                                <button type="submit" class="btn btn__primary" name="validateJoinSolo">Confirmer</button>
+                                <button type="submit" class="btn btn__secondary ">Annuler</button>
+                            </form>
+                            ';
                         }
-                        //* Bouton Validation de l'inscription
-                        echo '
-                        <form method="post" >
-                            <input type="hidden" name="PlayerId" value="validationSolo">
-                            <input  type="submit" name="validationSolo" value="Valider l\'inscription">
-                        </form>
-                        ';
-                    } else {
+                    } else if ($checkSoloResult['AppartientSoloStatus'] == "ok") {
+                        echo "Vous êtes déjà inscrit en solo";
+                    } else if ($checkSoloResult['AppartientSoloStatus'] == "old") {
+                        // s'inscrire en tant que joueur solo
+                        // Check if the player with a pending invitation
+                        $checkInvitation = $conn2->prepare("select * from invitations where InvitationEmail = ?");
+                        $checkInvitation->bindValue(1, htmlspecialchars($_SESSION["PlayerMail"], ENT_QUOTES, 'UTF-8'));
+                        $checkInvitation->execute();
+                        $checkInvitationResult = $checkInvitation->fetch(PDO::FETCH_ASSOC);
 
-                        //* Requête SQL permettant d'insérer le joueur dans la table appartient_solo
-                        $query = $conn2->prepare("INSERT INTO appartient_solo 
-                        (AppartientSoloId, AppartientSoloPlayerId, AppartientSoloStatus)
-                        VALUES (?, ?, 'ok')
-                      ");
+                        if (!empty($checkInvitationResult)) {
+                            // If the player has a pending invitation, ask him/her if he/she really wants to cancel it
+                            //Select team name from invitation
+                            $query = $conn2->prepare("SELECT teams.TeamName FROM teams, invitations WHERE invitations.InvitationTeamId = teams.TeamId AND invitations.InvitationEmail = ?");
+                            $query->bindValue(1, htmlspecialchars($_SESSION["PlayerMail"], ENT_QUOTES, 'UTF-8'));
+                            $query->execute();
+                            $teamName = $query->fetch(PDO::FETCH_ASSOC);
 
-                        $query->bindValue(1, $newSoloId["NewSoloId"]);
-                        $query->bindValue(2, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
-                        $query->execute();
+                            echo '<div class="alert">Vous avez une invitation en attente de la part de ' . $teamName['TeamName'] . '. Si vous vous inscrivez en solo, celle-ci sera annulée.</div>';
+                            echo '
+                            <form action="" method="post">
+                                <button type="submit" class="btn btn__primary" name="validationSolo">Confirmer</button>
+                                <button type="submit" class="btn btn__secondary ">Annuler</button>
+                            </form>
+                            ';
+                        } else {
+                            // se réinscrire en tant que joueur solo
+                            $joinSolo = $conn2->prepare("UPDATE appartient_solo SET AppartientSoloStatus = 'ok' WHERE AppartientSoloPlayerId = ?");
+                            $joinSolo->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+                            $joinSolo->execute();
+                            echo "Vous êtes maintenant à nouveau inscrit en solo, la page va se recharger.";
+                            // reload page after 2 seconds
+                            echo '<meta http-equiv="refresh" content="2;url=profile.php">';
+                        }
                     }
                 }
             } else { // aucune équipe
@@ -701,30 +744,51 @@ if (!isset($_SESSION["PlayerId"])) {
             }
             //* Si le bouton de validation de l'inscription solo est submit
             if (isset($_POST["validationSolo"])) {
-                //* Déclaration de l'auto-incrément pour la suite
-                $query = "SELECT IFNULL(MAX(AppartientSoloId), 0) + 1 as NewSoloId FROM appartient_solo";
-                $newSoloId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment
+                // se réinscrire en tant que joueur solo
+                $joinSolo = $conn2->prepare("UPDATE appartient_solo SET AppartientSoloStatus = 'ok' WHERE AppartientSoloPlayerId = ?");
+                $joinSolo->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+                $joinSolo->execute();
+                echo "Vous êtes maintenant à nouveau inscrit en solo, la page va se recharger.";
+                // reload page after 2 seconds
+                echo '<meta http-equiv="refresh" content="2;url=profile.php">';
+            }
+            if (isset($_POST['validateJoinSolo'])) {
+                // Check if the player with a pending invitation
+                $checkInvitation = $conn2->prepare("select * from invitations where InvitationEmail = ?");
+                $checkInvitation->bindValue(1, htmlspecialchars($_SESSION["PlayerMail"], ENT_QUOTES, 'UTF-8'));
+                $checkInvitation->execute();
+                $checkInvitationResult = $checkInvitation->fetch(PDO::FETCH_ASSOC);
 
-                //* Requête SQL permettant d'insérer le joueur dans la table appartient_solo
-                $query = $conn2->prepare("INSERT INTO appartient_solo 
-                        (AppartientSoloId, AppartientSoloPlayerId, AppartientSoloStatus)
-                        VALUES (?, ?, 'ok')
-                      ");
+                if (!empty($checkInvitationResult)) {
 
-                $query->bindValue(1, $newSoloId["NewSoloId"]);
-                $query->bindValue(2, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
-                $query->execute();
+                    // cancel invitation and join solo
+                    $cancelInvitation = $conn2->prepare("UPDATE invitations SET invitations.InvitationStatus = 'Refusée' WHERE InvitationEmail = ?");
+                    $cancelInvitation->bindValue(1, htmlspecialchars($_SESSION["PlayerMail"], ENT_QUOTES, 'UTF-8'));
+                    $cancelInvitation->execute();
 
-                //* Requête SQL permettant l'update des invitations reçus pour ce joueur
-                $query = $conn2->prepare("UPDATE invitations,teams,players
-                SET  InvitationStatus = 'refusé'
-                WHERE players.PlayerId = ?
-                and invitations.InvitationEmail = players.PlayerEmail
-                and invitations.InvitationTeamId = teams.TeamId
-          ");
+                    $query = "SELECT IFNULL(MAX(AppartientSoloId), 0) + 1 as NewAppartientSoloId FROM appartient_solo";
+                    $NewAppartientSoloId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment;
 
-                $query->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
-                $query->execute();
+                    $joinSolo = $conn2->prepare("INSERT INTO appartient_solo (AppartientSoloId, AppartientSoloPlayerId, AppartientSoloStatus) VALUES (?, ?, 'ok')");
+                    $joinSolo->bindValue(1, $NewAppartientSoloId['NewAppartientSoloId']);
+                    $joinSolo->bindValue(2, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+                    $joinSolo->execute();
+                    echo "Vous êtes maintenant en tant que joueur solo, la page va se recharger.";
+                    // reload page after 2 seconds
+                    echo '<meta http-equiv="refresh" content="2;url=profile.php">';
+                } else {
+                    // join solo
+                    $query = "SELECT IFNULL(MAX(AppartientSoloId), 0) + 1 as NewAppartientSoloId FROM appartient_solo";
+                    $NewAppartientSoloId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment;
+
+                    $joinSolo = $conn2->prepare("INSERT INTO appartient_solo (AppartientSoloId, AppartientSoloPlayerId, AppartientSoloStatus) VALUES (?, ?, 'ok')");
+                    $joinSolo->bindValue(1, $NewAppartientSoloId['NewAppartientSoloId']);
+                    $joinSolo->bindValue(2, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+                    $joinSolo->execute();
+                    echo "Vous êtes maintenant en tant que joueur solo, la page va se recharger.";
+                    // reload page after 2 seconds
+                    echo '<meta http-equiv="refresh" content="2;url=profile.php">';
+                }
             }
         }
         //check invitations of the player
