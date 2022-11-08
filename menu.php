@@ -40,8 +40,7 @@
             gap: 0.75rem;
             color: #fff;
 
-            font-size: 1.25rem;
-            padding: 0.8rem 2rem;
+            font-size: 1rem;
 
             background-color: inherit;
             border: 3px solid #fff;
