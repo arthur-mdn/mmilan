@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="uikit/style/ui-kit.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/loader.css" />
+    
 </head>
 
 <body class="body-panel">
@@ -200,9 +201,9 @@
                     <label for="PrenomUtilisateur">Prénom</label>
                     <input type="text" required class="box-input" style="width:100%" name="PrenomUtilisateur" id="PrenomUtilisateur" autocomplete="new-surname" placeholder="Entrez ici votre prénom">
                 </div>
-                <div class="input_container">
-                    <label for="UsernameUtilisateur">Nom d'utilisateur</label>
-                    <input type="text" required class="box-input" style="width:100%" name="UsernameUtilisateur" id="UsernameUtilisateur" placeholder="Entrez ici votre nom d'utilisateur">
+                <div class="input_group">
+                    <label class="mail_input" for="UsernameUtilisateur">Nom d'utilisateur</label>
+                    <input type="text" required class="box-input" style="width:100%" name="UsernameUtilisateur" id="UsernameUtilisateur" placeholder=" ">
                 </div>
                 <div class="input_container">
                     <label for="MailUtilisateur">Adresse Email</label>
