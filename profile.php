@@ -271,7 +271,8 @@ if (!isset($_SESSION["PlayerId"])) {
                             '<form action="" method="post">
                             <input type="email" name="playerToInvite" placeholder="Email du joueur à inviter" required>
                             <input type="hidden" name="teamId" value="' . $playerTeam['TeamId'] . '">
-                            <input type="submit" value="Inviter" name="monoInvitation">
+                            <button class="btn btn__primary" type="submit" value="Inviter" name="monoInvitation">Inviter</button>
+
                             </form>';
                         }
                     } elseif ($number_of_players === 1) {
@@ -297,7 +298,8 @@ if (!isset($_SESSION["PlayerId"])) {
                                 '<form action="" method="post">
                                     <input type="email" name="playerToInvite" placeholder="Email du joueur à inviter" required>
                                     <input type="hidden" name="teamId" value="' . $playerTeam['TeamId'] . '">
-                                    <input type="submit" value="Inviter" name="monoInvitation">
+                                    <button class="btn btn__primary" type="submit" value="Inviter" name="monoInvitation">Inviter</button>
+
                                 </form>';
                             }
                         } else {
@@ -307,13 +309,14 @@ if (!isset($_SESSION["PlayerId"])) {
                             '<form action="" method="post">
                                     <input type="email" name="playerToInvite" placeholder="Email du joueur à inviter" required>
                                     <input type="hidden" name="teamId" value="' . $playerTeam['TeamId'] . '">
-                                    <input type="submit" value="Inviter" name="monoInvitation">
+                                    <button class="btn btn__primary" type="submit" value="Inviter" name="monoInvitation">Inviter</button>
                                 </form>';
                             echo
                             '<form action="" method="post">
                                     <input type="email" name="playerToInvite" placeholder="Email du joueur à inviter" required>
                                     <input type="hidden" name="teamId" value="' . $playerTeam['TeamId'] . '">
-                                    <input type="submit" value="Inviter" name="monoInvitation">
+                                    <button class="btn btn__primary" type="submit" value="Inviter" name="monoInvitation">Inviter</button>
+
                                 </form>';
                         }
                     }
