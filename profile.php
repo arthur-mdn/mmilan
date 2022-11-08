@@ -96,6 +96,28 @@ if (!isset($_SESSION["PlayerId"])) {
     </div>
     <?php
     if (isset($_POST['acceptInvitation'])) {
+        /* Check if player is part of appartient_solo */
+        $query = $conn2->prepare("SELECT * 
+                                    FROM players, appartient_solo
+                                    WHERE players.PlayerStatus = 'ok'
+                                    and appartient_solo.AppartientSoloStatus not in ('ancien','old')
+                                    and players.PlayerId = ?
+                                    and players.PlayerId = appartient_solo.AppartientSoloPlayerId
+                                    ");
+        $query->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+        $query->execute();
+        $playerSolo = $query->fetchAll(PDO::FETCH_ASSOC); // données sur le joueur
+
+        // set AppartientSoloStatus to 'old'
+        if (!empty($playerSolo)) {
+            $setOld = $conn2->prepare("UPDATE appartient_solo
+                                    SET AppartientSoloStatus = 'old'
+                                    WHERE AppartientSoloPlayerId = ?
+                                    ");
+            $setOld->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+            $setOld->execute();
+        }
+
         $query = "SELECT IFNULL(MAX(AppartientId), 0) + 1 as NewAppartientId FROM appartient";
         $NewAppartientId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment;
 
@@ -181,7 +203,7 @@ if (!isset($_SESSION["PlayerId"])) {
         $query = $conn2->prepare("SELECT * 
                                     FROM players, appartient_solo
                                     WHERE players.PlayerStatus = 'ok'
-                                    and appartient_solo.AppartientSoloStatus not in ('del','canceled')
+                                    and appartient_solo.AppartientSoloStatus not in ('ancien','old')
                                     and players.PlayerId = ?
                                     and players.PlayerId = appartient_solo.AppartientSoloPlayerId
                                     ");
@@ -541,37 +563,6 @@ if (!isset($_SESSION["PlayerId"])) {
             // affichage en tant que joueur solo
             echo '<p>Vous êtes inscrit en solo.</p>';
         } else {
-            //check invitations of the player
-            $checkInvitation = $conn2->prepare("SELECT *
-                                                FROM players, invitations, teams
-                                                WHERE players.PlayerStatus = 'ok'
-                                                and teams.TeamStatus = 'ok'
-                                                and invitations.InvitationStatus not in ('Refusée','Acceptée')
-                                                and invitations.InvitationTeamId = teams.TeamId
-                                                and invitations.InvitationEmail = players.PlayerEmail
-                                                and invitations.InvitationEmail = ?
-                                                ");
-            $checkInvitation->bindValue(1, htmlspecialchars($_SESSION['PlayerMail'], ENT_QUOTES, 'UTF-8'));
-            $checkInvitation->execute();
-            $invitation = $checkInvitation->fetchAll(PDO::FETCH_ASSOC);
-
-            if (!empty($invitation)) {
-                echo "<h1> Vos invitations </h1> <br />";
-                // si invitation en cours, afficher statut
-                echo '<p>Vous avez une invitation en attente.</p><br />';
-                echo '<ul>';
-                echo '<li><h3>' . $invitation[0]['TeamName'] . ' - ' . $invitation[0]['InvitationStatus'] . '</h3></li>';
-                echo '</ul>';
-                echo '<form action="" method="post">
-                        <input type="hidden" name="invitationId" value="' . $invitation[0]['InvitationId'] . '">
-                        <input type="hidden" name="teamId" value="' . $invitation[0]['TeamId'] . '">
-                        <button type="submit"  class="btn btn__light" name="acceptInvitation">Accepter</button>
-                        <button type="submit"  class="btn btn__light" name="refuseInvitation">Refuser</button>
-                    </form>';
-            }
-
-
-
             if (isset($_POST['TeamName']) and isset($_POST['TeamDesc']) and isset($_FILES['TeamLogo'])) { // si le formulaire pour créer une équipe est rempli :
                 $upload = true;
                 $extensions = array('image/jpeg', 'image/jpg', 'image/png');
@@ -721,6 +712,34 @@ if (!isset($_SESSION["PlayerId"])) {
                 $query->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
                 $query->execute();
             }
+        }
+        //check invitations of the player
+        $checkInvitation = $conn2->prepare("SELECT *
+                                                FROM players, invitations, teams
+                                                WHERE players.PlayerStatus = 'ok'
+                                                and teams.TeamStatus = 'ok'
+                                                and invitations.InvitationStatus not in ('Refusée','Acceptée')
+                                                and invitations.InvitationTeamId = teams.TeamId
+                                                and invitations.InvitationEmail = players.PlayerEmail
+                                                and invitations.InvitationEmail = ?
+                                                ");
+        $checkInvitation->bindValue(1, htmlspecialchars($_SESSION['PlayerMail'], ENT_QUOTES, 'UTF-8'));
+        $checkInvitation->execute();
+        $invitation = $checkInvitation->fetchAll(PDO::FETCH_ASSOC);
+
+        if (!empty($invitation)) {
+            echo "<h1> Vos invitations </h1> <br />";
+            // si invitation en cours, afficher statut
+            echo '<p>Vous avez une invitation en attente.</p><br />';
+            echo '<ul>';
+            echo '<li><h3>' . $invitation[0]['TeamName'] . ' - ' . $invitation[0]['InvitationStatus'] . '</h3></li>';
+            echo '</ul>';
+            echo '<form action="" method="post">
+                        <input type="hidden" name="invitationId" value="' . $invitation[0]['InvitationId'] . '">
+                        <input type="hidden" name="teamId" value="' . $invitation[0]['TeamId'] . '">
+                        <button type="submit"  class="btn btn__light" name="acceptInvitation">Accepter</button>
+                        <button type="submit"  class="btn btn__light" name="refuseInvitation">Refuser</button>
+                    </form>';
         }
 
         ?>
