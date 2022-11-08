@@ -6,11 +6,17 @@
             align-items: center;
             justify-content: center;
             background-color: #0A1929;
-            padding: 0 7rem;
+            padding: 0 20px;
+
             height: 100px;
             z-index: 10000;
 
             transition: all 0.3s ease-in-out;
+        }
+
+        .nav-links-container {
+            padding: 0 20px;
+
         }
 
         .nav__links-container {
@@ -42,9 +48,14 @@
             border-radius: 50px;
         }
 
+        .button:hover svg {
+            fill: var(--color-dark);
+        }
+
         svg {
-            fill: #fff;
+            fill: #F7F7F7;
             transform: rotate(180deg);
+            transition: all 0.3s ease-in-out;
         }
 
         .nav__links-container__mobile {
@@ -77,8 +88,10 @@
         }
 
         @media only screen and (max-width:1300px) {
-            .nav {
-                padding: 0 4rem;
+
+            .nav-links-container {
+                padding: 0;
+
             }
 
             .nav__links-container {
@@ -88,13 +101,7 @@
 
         @media only screen and (max-width:1000px) {
             .nav {
-                padding: 0;
                 height: 85px;
-            }
-
-            .nav-links-container {
-                width: 90%;
-                flex-grow: 0;
             }
 
             .overlay-menu__mobile {
@@ -162,7 +169,7 @@
     </style>
 
     <nav class="nav">
-        <div class="nav-links-container row space-between" style="max-width:1900px;">
+        <div class="nav-links-container row space-between" style="max-width:1200px;">
 
             <!-- METTRE L'URL QUI CORRESPOND POUR CHAQUE LIENS, ILS NE POINTENT VERS RIEN POUR L'INSTANT -->
 
@@ -171,9 +178,6 @@
                     <a href="index.php" class="no-style">
                         <img class="nav__logo" src="./Elements/others/Logo_blanc.png" alt="Logo MMILan" />
                     </a>
-                </li>
-                <li>
-                    <a href="index.php">Accueil</a>
                 </li>
                 <li>
                     <a href="program.php">Programme</a>
@@ -234,7 +238,6 @@
         <div class="side-menu__mobile" id="side-menu">
             <div class="nav__links">
 
-                <a href="index.php">Accueil</a>
 
                 <a href="program.hp">Programme</a>
 
@@ -245,19 +248,3 @@
             </div>
         </div>
     </nav>
-
-    <script>
-        const button = document.querySelector('.button');
-        const svg = document.querySelector('svg');
-
-        //add an event listener for the button hover
-        /*    if (button) {
-               svg.style.transition = 'all 0.3 ease';
-               button.addEventListener('mouseover', () => {
-                   svg.style.fill = '#0A1929';
-               });
-               button.addEventListener('mouseout', () => {
-                   svg.style.fill = '#fff';
-               });
-           } */
-    </script>
