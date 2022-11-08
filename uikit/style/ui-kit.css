@@ -242,7 +242,7 @@ p {
   height: 100%;
   background-color: var(--color-primary);
   z-index: -1;
-  border-radius: 5px;
+  border-radius: 3px;
 }
 
 input {
@@ -251,7 +251,7 @@ input {
   background-color: var(--color-light);
   border: 2px solid var(--color-dark);
   outline: none;
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 5px;
 }
 input:focus {
@@ -264,7 +264,7 @@ button,
 .btn {
   background-color: var(--color-light);
   border: none;
-  border-radius: 5px;
+  border-radius: 50vw;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -274,7 +274,6 @@ button,
   font-weight: 800;
   font-size: 1em;
   border: none;
-  border-radius: 10px;
   padding: 0.4rem 1rem;
   margin-block: 0.5rem;
   width: -webkit-fit-content;
