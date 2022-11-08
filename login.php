@@ -94,7 +94,7 @@
 
                             if ($resultInvitationStatus[0]['InvitationStatus'] != 'En cours') {
                                 header('Location: register.php?error=Cette-invitation-n\'est-plus-valide');
-                            } else if ($resultInvitationStatus[0]['InvitationEmail'] != $_SESSION["PlayerMail"]) {
+                            } else if ($resultInvitationStatus[0]['InvitationEmail'] != $result['PlayerEmail']) {
                                 header('Location: login.php?error=Cette-invitation-n\'est-pas-pour-vous');
                             } else if ($resultInvitationStatus[0]['InvitationStatus'] == 'En cours') {
                                 $_SESSION["PlayerId"] = $result['PlayerId'];
@@ -133,9 +133,9 @@
                                 $query->bindValue(3, $resultTeamId[0]['InvitationTeamId']);
                                 $query->execute();
                                 header('Location: profile.php?msg=joined');
+                            } else {
+                                header('Location: login.php?error=Ce-lien-ne-vous-est-pas-destiné');
                             }
-
-                            header('Location: login.php?error=Ce-lien-ne-vous-est-pas-destiné');
                         } else {
                             $_SESSION["PlayerId"] = $result['PlayerId'];
                             $_SESSION["PlayerMail"] = $result['PlayerEmail'];
