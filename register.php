@@ -115,16 +115,12 @@
 
                 // join the team if tokens and id are set
                 if (isset($_POST['JoinId']) and isset($_POST['JoinToken'])) {
-                    $invitationId = htmlspecialchars($_GET['JoinId'], ENT_QUOTES, 'UTF-8');
-                    $invitationToken = htmlspecialchars($_GET['JoinToken'], ENT_QUOTES, 'UTF-8');
-
-
                     // check if the invitation exists
                     $checkInvitationStatus = $conn2->prepare("SELECT InvitationStatus
                         FROM invitations 
                         WHERE InvitationId = ? and InvitationToken = ?");
-                    $checkInvitationStatus->bindValue(1, $invitationId);
-                    $checkInvitationStatus->bindValue(2, $invitationToken);
+                    $checkInvitationStatus->bindValue(1, htmlspecialchars($_POST['JoinId'], ENT_QUOTES, 'UTF-8'));
+                    $checkInvitationStatus->bindValue(2, htmlspecialchars($_POST['JoinToken'], ENT_QUOTES, 'UTF-8'));
                     $checkInvitationStatus->execute();
                     $resultInvitationStatus = $checkInvitationStatus->fetchAll(PDO::FETCH_ASSOC);
 
@@ -153,7 +149,7 @@
                         $query->execute();
 
                         $query = $conn2->prepare("INSERT INTO appartient (AppartientId,AppartientPlayerId, AppartientTeamId, AppartientRole)
-                                            VALUES (?, ?, ?, 'player')
+                                            VALUES (?, ?, ?, 'joueur')
                                             ");
                         $query->bindValue(1, $NewAppartientId['NewAppartientId']);
                         $query->bindValue(2, $result2['NewPlayerId']);

@@ -41,7 +41,7 @@
             color: #fff;
 
             font-size: 1.25rem;
-            padding: 0.8rem 2rem;
+            padding: 0.6rem 1.25rem;
 
             background-color: inherit;
             border: 3px solid #fff;
