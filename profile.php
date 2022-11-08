@@ -95,6 +95,16 @@ if (!isset($_SESSION["PlayerId"])) {
         </script>
     </div>
     <?php
+    if (isset($_POST['leaveSolo'])) {
+        $setOld = $conn2->prepare("UPDATE appartient_solo
+                                    SET AppartientSoloStatus = 'old'
+                                    WHERE AppartientSoloPlayerId = ?
+                                    ");
+        $setOld->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+        $setOld->execute();
+        header("Location: profile.php");
+        exit();
+    }
     if (isset($_POST['acceptInvitation'])) {
         /* Check if player is part of appartient_solo */
         $query = $conn2->prepare("SELECT * 
@@ -562,6 +572,7 @@ if (!isset($_SESSION["PlayerId"])) {
         } else if (!empty($playerSolo)) {
             // affichage en tant que joueur solo
             echo '<p>Vous êtes inscrit en solo.</p>';
+            echo '<form method="post"><button class="btn btn__primary" name="leaveSolo" type="submit">Quitter le mode solo</button></form>';
         } else {
             if (isset($_POST['TeamName']) and isset($_POST['TeamDesc']) and isset($_FILES['TeamLogo'])) { // si le formulaire pour créer une équipe est rempli :
                 $upload = true;
@@ -579,6 +590,8 @@ if (!isset($_SESSION["PlayerId"])) {
                     $upload = false;
                 }
                 if ($upload) { // upload respecte toutes les conditions
+
+                    //TODO: vérifier que le nom de l'équipe n'est pas déjà utilisé
 
                     $file = 'data:' . $_FILES['TeamLogo']['type'] . ';base64,' . base64_encode(file_get_contents($_FILES['TeamLogo']['tmp_name']));
 
@@ -626,7 +639,8 @@ if (!isset($_SESSION["PlayerId"])) {
                         <button class="Y_button" type="submit">Enregistrer l\'équipe</button>
                     </form>
                     ';
-                } elseif ($_POST['select'] === "solo") { // si le bouton solo a été cliqué
+                } elseif ($_POST['select'] === "solo") { // si le bouton solo a été cliqué 
+                    //TODO: vérifier que le joueur n'est pas déjà inscrit en solo
                     // s'inscrire en tant que joueur solo
                     //* Requête SQL permettant d'afficher les différentes invitations reçus pour ce joueur
                     $query = $conn2->prepare("SELECT * 
@@ -646,9 +660,9 @@ if (!isset($_SESSION["PlayerId"])) {
                     //* Si la variable possède au minimum 1 ligne, affiche le nom de l'équipe pour chaque invitations
                     if (sizeof($invitationsinqueue) > 0) {
                         // afficher "Êtes-vous sûr de rejeté les invitations des équipes suivantes ? Cela va annuler votre invitation." (si une invitation est désignée à ce joueur).
-                        echo 'Êtes-vous sûr de rejeté les invitations des équipes suivantes ? Cela va annuler vos invitations. :';
+                        echo 'Êtes-vous sûr de rejeter les invitations des équipes suivantes ? Cela va annuler vos invitations. :';
                         foreach ($invitationsinqueue as $invitationsinqueue) {
-                            echo '<p>- ' . $invitationsinqueue['TeamName'] . '</p>';
+                            echo '<p>' . $invitationsinqueue['TeamName'] . '</p>';
                         }
                         //* Bouton Validation de l'inscription
                         echo '
