@@ -83,17 +83,12 @@
                 if (isset($NombreTentatives[0]['NombreTentatives']) and $NombreTentatives[0]['NombreTentatives'] < 5) {
                     if (password_verify($_POST['MdpUtilisateur'], $result['PlayerPassword'])) {  //correct password => login
                         if (isset($_POST['JoinId']) and isset($_POST['JoinToken'])) {
-                            // redirect to join team
-                            $invitationId = htmlspecialchars($_GET['JoinId'], ENT_QUOTES, 'UTF-8');
-                            $invitationToken = htmlspecialchars($_GET['JoinToken'], ENT_QUOTES, 'UTF-8');
-
-
                             // check if the invitation exists
                             $checkInvitationStatus = $conn2->prepare("SELECT *
                         FROM invitations 
                         WHERE InvitationId = ? and InvitationToken = ?");
-                            $checkInvitationStatus->bindValue(1, $invitationId);
-                            $checkInvitationStatus->bindValue(2, $invitationToken);
+                            $checkInvitationStatus->bindValue(1, htmlspecialchars($_POST['JoinId'], ENT_QUOTES, 'UTF-8'));
+                            $checkInvitationStatus->bindValue(2, htmlspecialchars($_POST['JoinToken'], ENT_QUOTES, 'UTF-8'));
                             $checkInvitationStatus->execute();
                             $resultInvitationStatus = $checkInvitationStatus->fetchAll(PDO::FETCH_ASSOC);
 
@@ -112,8 +107,8 @@
                                 $getTeamId = $conn2->prepare("SELECT InvitationTeamId
                         FROM invitations 
                         WHERE InvitationId = ? and InvitationToken = ?");
-                                $getTeamId->bindValue(1, $invitationId);
-                                $getTeamId->bindValue(2, $invitationToken);
+                                $getTeamId->bindValue(1, htmlspecialchars($_POST['JoinId'], ENT_QUOTES, 'UTF-8'));
+                                $getTeamId->bindValue(2, htmlspecialchars($_POST['JoinToken'], ENT_QUOTES, 'UTF-8'));
                                 $getTeamId->execute();
                                 $resultTeamId = $getTeamId->fetchAll(PDO::FETCH_ASSOC);
 
@@ -126,8 +121,8 @@
                                             WHERE InvitationId = ?
                                             AND InvitationToken = ?");
 
-                                $query->bindValue(1, $invitationId);
-                                $query->bindValue(2, $invitationToken);
+                                $query->bindValue(1, htmlspecialchars($_POST['JoinId'], ENT_QUOTES, 'UTF-8'));
+                                $query->bindValue(2, htmlspecialchars($_POST['JoinToken'], ENT_QUOTES, 'UTF-8'));
                                 $query->execute();
 
                                 $query = $conn2->prepare("INSERT INTO appartient (AppartientId,AppartientPlayerId, AppartientTeamId, AppartientRole)
