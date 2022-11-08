@@ -15,11 +15,12 @@ function hideIt(elId, timer = 5000) {
 
 window.onload = function () {
   let pageParams = new URLSearchParams(window.location.search);
+  let errorMsg = pageParams.get("error");
   let hack_attempt = pageParams.get("hack_log");
   const gameInput = document.getElementById("FavGameUtilisateur");
   const gameHackMessage = document.getElementById("game-error-msg");
 
-  if (hack_attempt && gameInput) {
+  if (gameInput) {
     if (hack_attempt == "true") {
       gameInput.classList.add("error");
       gameHackMessage.style.display = "block";
@@ -30,6 +31,12 @@ window.onload = function () {
       gameInput.classList.remove("error");
       gameHackMessage.style.display = "none";
     }
+  }
+
+  if (errorMsg) {
+    let error = document.getElementById("error_container");
+    error.style.display = "block";
+    error.innerHTML = errorMsg.split("-").join(" ");
   }
 
   const burgers = document.querySelectorAll(".burger-menu");
