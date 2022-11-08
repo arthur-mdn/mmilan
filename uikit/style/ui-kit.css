@@ -428,7 +428,7 @@ button,
   width: -moz-fit-content;
   width: fit-content;
   font-family: "Work Sans", sans-serif;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
   font-weight: 800;
   color: var(--color-light);
   text-decoration: none;

@@ -554,6 +554,9 @@ form > textarea {
 .error {
   background-color: pink;
   border: 1px solid #ff0000;
+  color: red;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
 }
 
 #game-error-msg {

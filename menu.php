@@ -78,6 +78,16 @@
 
         @media only screen and (max-width:1300px) {
             .nav {
+                padding: 0 4rem;
+            }
+
+            .nav__links-container {
+                gap: 1rem;
+            }
+        }
+
+        @media only screen and (max-width:1000px) {
+            .nav {
                 padding: 0;
                 height: 85px;
             }
@@ -241,13 +251,13 @@
         const svg = document.querySelector('svg');
 
         //add an event listener for the button hover
-        if (button) {
-            svg.style.transition = 'all 0.3 ease';
-            button.addEventListener('mouseover', () => {
-                svg.style.fill = '#0A1929';
-            });
-            button.addEventListener('mouseout', () => {
-                svg.style.fill = '#fff';
-            });
-        }
+        /*    if (button) {
+               svg.style.transition = 'all 0.3 ease';
+               button.addEventListener('mouseover', () => {
+                   svg.style.fill = '#0A1929';
+               });
+               button.addEventListener('mouseout', () => {
+                   svg.style.fill = '#fff';
+               });
+           } */
     </script>
