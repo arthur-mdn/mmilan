@@ -92,11 +92,11 @@
                             $checkInvitationStatus->execute();
                             $resultInvitationStatus = $checkInvitationStatus->fetchAll(PDO::FETCH_ASSOC);
 
-                            if ($resultInvitationStatus[0]['InvitationStatus'] != 'En cours') {
+                            if ($resultInvitationStatus[0]['InvitationStatus'] != 'pending') {
                                 header('Location: login.php?error=Cette-invitation-n\'est-plus-valide');
                             } else if ($resultInvitationStatus[0]['InvitationEmail'] != $result['PlayerEmail']) {
                                 header('Location: login.php?error=Cette-invitation-n\'est-pas-pour-vous');
-                            } else if ($resultInvitationStatus[0]['InvitationStatus'] == 'En cours') {
+                            } else if ($resultInvitationStatus[0]['InvitationStatus'] == 'pending') {
                                 $_SESSION["PlayerId"] = $result['PlayerId'];
                                 $_SESSION["PlayerMail"] = $result['PlayerEmail'];
 
@@ -142,7 +142,7 @@
                                 $NewAppartientId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment;
 
                                 $query = $conn2->prepare("UPDATE invitations
-                                            SET InvitationStatus = 'Acceptée'
+                                            SET InvitationStatus = 'accepted'
                                             WHERE InvitationId = ?
                                             AND InvitationToken = ?");
 

@@ -569,6 +569,9 @@ form > textarea {
 .success {
   border: 1px solid #a2d246;
   background-color: #ebf8a4;
+  color: #333;
+  padding: 0.5rem 1rem;
+  width: fit-content;
 }
 
 .form {

@@ -109,7 +109,7 @@ if (!isset($_SESSION["PlayerId"])) {
         // check veracity of the invitation
         $query = $conn2->prepare("SELECT * 
                                     FROM players, invitations, teams
-                                    WHERE invitations.InvitationStatus = 'En cours'
+                                    WHERE invitations.InvitationStatus = 'pending'
                                     and invitations.InvitationTeamId = teams.TeamId
                                     and invitations.InvitationEmail = players.PlayerEmail
                                     and invitations.InvitationId = ?
@@ -147,7 +147,7 @@ if (!isset($_SESSION["PlayerId"])) {
 
                 $invitationId = htmlspecialchars($_POST['invitationId'], ENT_QUOTES, 'UTF-8');
                 $query = $conn2->prepare("UPDATE invitations
-                                            SET InvitationStatus = 'Acceptée'
+                                            SET InvitationStatus = 'accepted'
                                             WHERE InvitationId = ?
                                             ");
                 $query->bindValue(1, $invitationId);
@@ -174,7 +174,7 @@ if (!isset($_SESSION["PlayerId"])) {
         // check veracity of the invitation
         $query = $conn2->prepare("SELECT * 
                                     FROM players, invitations, teams
-                                    WHERE invitations.InvitationStatus = 'En cours'
+                                    WHERE invitations.InvitationStatus = 'pending'
                                     and invitations.InvitationTeamId = teams.TeamId
                                     and invitations.InvitationEmail = players.PlayerEmail
                                     and invitations.InvitationId = ?
@@ -187,7 +187,7 @@ if (!isset($_SESSION["PlayerId"])) {
             if ($result[0]['PlayerEmail'] === $_SESSION['PlayerMail']) {
                 $invitationId = htmlspecialchars($_POST['invitationId'], ENT_QUOTES, 'UTF-8');
                 $query = $conn2->prepare("UPDATE invitations
-                                            SET InvitationStatus = 'Refusée'
+                                            SET InvitationStatus = 'denied'
                                             WHERE InvitationId = ?
                                             ");
                 $query->bindValue(1, $invitationId);
@@ -220,7 +220,7 @@ if (!isset($_SESSION["PlayerId"])) {
 
         $query = $conn2->prepare("SELECT * 
                                     FROM players, invitations, teams
-                                    WHERE invitations.InvitationStatus = 'En cours'
+                                    WHERE invitations.InvitationStatus = 'pending'
                                     and invitations.InvitationTeamId = teams.TeamId
                                     and invitations.InvitationEmail = players.PlayerEmail
                                     and invitations.InvitationId = ?
@@ -233,7 +233,7 @@ if (!isset($_SESSION["PlayerId"])) {
 
         if (!empty($result)) {
             $cancelInvitation = $conn2->prepare("UPDATE invitations
-                                                SET invitations.InvitationStatus = 'Annulée'
+                                                SET invitations.InvitationStatus = 'cancelled'
                                                 WHERE invitations.InvitationId = ?
                                                 ");
             $cancelInvitation->bindValue(1, htmlspecialchars($_POST['invitationId'], ENT_QUOTES, 'UTF-8'));
@@ -249,7 +249,7 @@ if (!isset($_SESSION["PlayerId"])) {
         if (false) {
             $query = $conn2->prepare("SELECT * 
                                     FROM players, invitations, teams
-                                    WHERE invitations.InvitationStatus = 'En cours'
+                                    WHERE invitations.InvitationStatus = 'pending'
                                     and invitations.InvitationTeamId = teams.TeamId
                                     and invitations.InvitationEmail = players.PlayerEmail
                                     and invitations.InvitationId = ?
@@ -264,7 +264,7 @@ if (!isset($_SESSION["PlayerId"])) {
                 if ($result[0]['TeamId'] === $_SESSION['TeamId']) {
                     $invitationId = htmlspecialchars($_POST['invitationId'], ENT_QUOTES, 'UTF-8');
                     $query = $conn2->prepare("UPDATE invitations
-                                            SET InvitationStatus = 'Annulée'
+                                            SET InvitationStatus = 'cancelled'
                                             WHERE InvitationId = ?
                                             ");
                     $query->bindValue(1, $invitationId);
@@ -374,7 +374,7 @@ if (!isset($_SESSION["PlayerId"])) {
                 // si aucunes invitations, demander mail membres, vérifier qu'ils n'appartiennent pas à une autre équipe, insérer en bdd invitation avec status en attente
                 $query = $conn2->prepare("SELECT *
                                     FROM invitations
-                                    WHERE invitations.InvitationStatus = 'En cours'
+                                    WHERE invitations.InvitationStatus = 'pending'
                                     and invitations.InvitationTeamId = ?
                                     ");
                 $query->bindValue(1, htmlspecialchars($playerTeam["TeamId"], ENT_QUOTES, 'UTF-8'));
@@ -389,7 +389,7 @@ if (!isset($_SESSION["PlayerId"])) {
                                                         FROM invitations, teams
                                                         WHERE invitations.InvitationTeamId = teams.TeamId
                                                         and invitations.InvitationTeamId = ?
-                                                        and invitations.InvitationStatus = 'En cours'
+                                                        and invitations.InvitationStatus = 'pending'
                                                         ");
                     $checkInvitations->bindValue(1, htmlspecialchars($playerTeam["TeamId"], ENT_QUOTES, 'UTF-8'));
                     $checkInvitations->execute();
@@ -547,7 +547,7 @@ if (!isset($_SESSION["PlayerId"])) {
                                 $checkInvitation = $conn2->prepare("SELECT *
                                                             FROM invitations
                                                             WHERE invitations.InvitationEmail = ?
-                                                            AND invitations.InvitationStatus NOT IN ('Refusée', 'Acceptée', 'Annulée')
+                                                            AND invitations.InvitationStatus NOT IN ('denied','accepted', 'cancelled')
                                                             ");
                                 $checkInvitation->bindValue(1, htmlspecialchars($_POST['playerToInvite'], ENT_QUOTES, 'UTF-8'));
                                 $checkInvitation->execute();
@@ -614,13 +614,11 @@ if (!isset($_SESSION["PlayerId"])) {
                                             $insertInvitation->bindValue(1, $NewInvitationId['NewInvitationId']);
                                             $insertInvitation->bindValue(2, htmlspecialchars($_POST['playerToInvite'], ENT_QUOTES, 'UTF-8'));
                                             $insertInvitation->bindValue(3, htmlspecialchars($_POST['teamId'], ENT_QUOTES, 'UTF-8'));
-                                            $insertInvitation->bindValue(4, 'En cours');
+                                            $insertInvitation->bindValue(4, 'pending');
                                             $insertInvitation->bindValue(5, $token);
                                             $insertInvitation->execute();
 
-                                            echo $email_sent;
-                                            // reload page after 2 seconds
-                                            echo '<meta http-equiv="refresh" content="2;url=profile.php">';
+                                            echo '<meta http-equiv="refresh" content="0;url=profile?mailSent=success">';
                                         } catch (Exception $e) {
                                             echo $email_not_sent . "<br><p>Merci de transmettre ces informations à l'administrateur : {$mail->ErrorInfo}</p>";
                                         }
@@ -639,7 +637,7 @@ if (!isset($_SESSION["PlayerId"])) {
                             $checkInvitation = $conn2->prepare("SELECT *
                                                             FROM invitations
                                                             WHERE invitations.InvitationEmail = ?
-                                                            AND invitations.InvitationStatus NOT IN ('Acceptée', 'Refusée', 'Annulée')
+                                                            AND invitations.InvitationStatus NOT IN ('denied','accepted', 'cancelled')
                                                             ");
                             $checkInvitation->bindValue(1, htmlspecialchars($_POST['playerToInvite'], ENT_QUOTES, 'UTF-8'));
                             $checkInvitation->execute();
@@ -694,13 +692,11 @@ if (!isset($_SESSION["PlayerId"])) {
                                         $insertInvitation->bindValue(1, $NewInvitationId['NewInvitationId']);
                                         $insertInvitation->bindValue(2, htmlspecialchars($_POST['playerToInvite'], ENT_QUOTES, 'UTF-8'));
                                         $insertInvitation->bindValue(3, htmlspecialchars($_POST['teamId'], ENT_QUOTES, 'UTF-8'));
-                                        $insertInvitation->bindValue(4, 'En cours');
+                                        $insertInvitation->bindValue(4, 'pending');
                                         $insertInvitation->bindValue(5, $token);
                                         $insertInvitation->execute();
 
-                                        echo $email_sent;
-                                        // reload page after 2 seconds
-                                        echo '<meta http-equiv="refresh" content="2;url=profile.php">';
+                                        echo '<meta http-equiv="refresh" content="0;url=profile?mailSent=success">';
                                     } catch (Exception $e) {
                                         echo $email_not_sent . "<br>Merci de transmettre ces informations à l'administrateur : {$mail->ErrorInfo}";
                                     }
@@ -856,7 +852,7 @@ if (!isset($_SESSION["PlayerId"])) {
                             // If the player has no pending invitation, he/she can register as a solo player
                             echo '
                             <form action="" method="post">
-                                <button type="submit" class="btn btn__primary" name="validateJoinSolo">Confirmer</button>
+                                <button type="submit" class="btn btn__primary" name="validationSolo">Confirmer</button>
                                 <button type="submit" class="btn btn__secondary ">Annuler</button>
                             </form>
                             ';
@@ -866,7 +862,7 @@ if (!isset($_SESSION["PlayerId"])) {
                     } else if ($checkSoloResult['AppartientSoloStatus'] == "old") {
                         // s'inscrire en tant que joueur solo
                         // Check if the player with a pending invitation
-                        $checkInvitation = $conn2->prepare("select * from invitations where InvitationEmail = ?");
+                        $checkInvitation = $conn2->prepare("select * from invitations where InvitationEmail = ? and InvitationStatus = 'pending'");
                         $checkInvitation->bindValue(1, htmlspecialchars($_SESSION["PlayerMail"], ENT_QUOTES, 'UTF-8'));
                         $checkInvitation->execute();
                         $checkInvitationResult = $checkInvitation->fetch(PDO::FETCH_ASSOC);
@@ -882,7 +878,7 @@ if (!isset($_SESSION["PlayerId"])) {
                             echo '<div class="alert">Vous avez une invitation en attente de la part de ' . $teamName['TeamName'] . '. Si vous vous inscrivez en solo, celle-ci sera annulée.</div>';
                             echo '
                             <form action="" method="post">
-                                <button type="submit" class="btn btn__primary" name="validationSolo">Confirmer</button>
+                                <button type="submit" class="btn btn__primary" name="validateJoinSolo">Confirmer</button>
                                 <button type="submit" class="btn btn__secondary ">Annuler</button>
                             </form>
                             ';
@@ -892,8 +888,8 @@ if (!isset($_SESSION["PlayerId"])) {
                             $joinSolo->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
                             $joinSolo->execute();
                             echo "Vous êtes maintenant à nouveau inscrit en solo, la page va se recharger.";
-                            // reload page after 2 seconds
-                            echo '<meta http-equiv="refresh" content="2;url=profile.php">';
+                            // reload page
+                            echo '<meta http-equiv="refresh" content="0;url=profile?success=vous-êtes-inscrit-en-solo">';
                         }
                     }
                 }
@@ -918,34 +914,49 @@ if (!isset($_SESSION["PlayerId"])) {
                 $joinSolo = $conn2->prepare("UPDATE appartient_solo SET AppartientSoloStatus = 'ok' WHERE AppartientSoloPlayerId = ?");
                 $joinSolo->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
                 $joinSolo->execute();
+
                 echo "Vous êtes maintenant à nouveau inscrit en solo, la page va se recharger.";
-                // reload page after 2 seconds
-                echo '<meta http-equiv="refresh" content="2;url=profile.php">';
+                // reload page
+                echo '<meta http-equiv="refresh" content="0;url=profile?success=vous-êtes-inscrit-en-solo">';
             }
             if (isset($_POST['validateJoinSolo'])) {
                 // Check if the player with a pending invitation
-                $checkInvitation = $conn2->prepare("select * from invitations where InvitationEmail = ?");
+                $checkInvitation = $conn2->prepare("SELECT * from invitations where invitations.InvitationEmail = ? AND invitations.InvitationStatus = 'pending'");
                 $checkInvitation->bindValue(1, htmlspecialchars($_SESSION["PlayerMail"], ENT_QUOTES, 'UTF-8'));
                 $checkInvitation->execute();
-                $checkInvitationResult = $checkInvitation->fetch(PDO::FETCH_ASSOC);
+                $checkInvitationResult = $checkInvitation->fetchAll(PDO::FETCH_ASSOC);
 
                 if (!empty($checkInvitationResult)) {
 
                     // cancel invitation and join solo
-                    $cancelInvitation = $conn2->prepare("UPDATE invitations SET invitations.InvitationStatus = 'Refusée' WHERE InvitationEmail = ?");
+                    $cancelInvitation = $conn2->prepare("UPDATE invitations SET invitations.InvitationStatus = 'denied' WHERE InvitationEmail = ?");
                     $cancelInvitation->bindValue(1, htmlspecialchars($_SESSION["PlayerMail"], ENT_QUOTES, 'UTF-8'));
                     $cancelInvitation->execute();
 
-                    $query = "SELECT IFNULL(MAX(AppartientSoloId), 0) + 1 as NewAppartientSoloId FROM appartient_solo";
-                    $NewAppartientSoloId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment;
+                    $checkSolo = $conn2->prepare("select * from appartient_solo where AppartientSoloPlayerId = ?");
+                    $checkSolo->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+                    $checkSolo->execute();
+                    $checkSoloResult = $checkSolo->fetch(PDO::FETCH_ASSOC);
 
-                    $joinSolo = $conn2->prepare("INSERT INTO appartient_solo (AppartientSoloId, AppartientSoloPlayerId, AppartientSoloStatus) VALUES (?, ?, 'ok')");
-                    $joinSolo->bindValue(1, $NewAppartientSoloId['NewAppartientSoloId']);
-                    $joinSolo->bindValue(2, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
-                    $joinSolo->execute();
-                    echo "Vous êtes maintenant en tant que joueur solo, la page va se recharger.";
-                    // reload page after 2 seconds
-                    echo '<meta http-equiv="refresh" content="2;url=profile.php">';
+                    if (!empty($checkSoloResult)) {
+                        $joinSolo = $conn2->prepare("UPDATE appartient_solo SET AppartientSoloStatus = 'ok' WHERE AppartientSoloPlayerId = ?");
+                        $joinSolo->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+                        $joinSolo->execute();
+                        echo "Vous êtes maintenant à nouveau inscrit en solo, la page va se recharger.";
+                        // reload page
+                        echo '<meta http-equiv="refresh" content="0;url=profile?success=vous-êtes-inscrit-en-solo">';
+                    } else {
+                        $query = "SELECT IFNULL(MAX(AppartientSoloId), 0) + 1 as NewAppartientSoloId FROM appartient_solo";
+                        $NewAppartientSoloId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment;
+
+                        $joinSolo = $conn2->prepare("INSERT INTO appartient_solo (AppartientSoloId, AppartientSoloPlayerId, AppartientSoloStatus) VALUES (?, ?, 'ok')");
+                        $joinSolo->bindValue(1, $NewAppartientSoloId['NewAppartientSoloId']);
+                        $joinSolo->bindValue(2, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+                        $joinSolo->execute();
+                        echo "Vous êtes maintenant inscrit en solo, la page va se recharger.";
+                        // reload page
+                        echo '<meta http-equiv="refresh" content="0;url=profile?success=vous-êtes-inscrit-en-solo">';
+                    }
                 } else {
                     // join solo
                     $query = "SELECT IFNULL(MAX(AppartientSoloId), 0) + 1 as NewAppartientSoloId FROM appartient_solo";
@@ -956,8 +967,8 @@ if (!isset($_SESSION["PlayerId"])) {
                     $joinSolo->bindValue(2, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
                     $joinSolo->execute();
                     echo "Vous êtes maintenant en tant que joueur solo, la page va se recharger.";
-                    // reload page after 2 seconds
-                    echo '<meta http-equiv="refresh" content="2;url=profile.php">';
+                    // reload page
+                    echo '<meta http-equiv="refresh" content="0;url=profile?success=vous-êtes-inscrit-en-solo">';
                 }
             }
         }
@@ -966,7 +977,7 @@ if (!isset($_SESSION["PlayerId"])) {
                                                 FROM players, invitations, teams
                                                 WHERE players.PlayerStatus = 'ok'
                                                 and teams.TeamStatus = 'ok'
-                                                and invitations.InvitationStatus not in ('Refusée','Acceptée', 'Annulée')
+                                                and invitations.InvitationStatus not in ('denied','accepted', 'cancelled')
                                                 and invitations.InvitationTeamId = teams.TeamId
                                                 and invitations.InvitationEmail = players.PlayerEmail
                                                 and invitations.InvitationEmail = ?
@@ -989,7 +1000,25 @@ if (!isset($_SESSION["PlayerId"])) {
                     </form>';
         }
 
+        if (isset($_GET['mailSent']) && $_GET['mailSent'] == 'success') {
+            echo $email_sent;
+            //delete GET
+            $_GET['mailSent'] = null;
+        }
+
         ?>
+
+        <div class="success_msg">
+            <script>
+                let getSuccess = new URLSearchParams(window.location.search);
+                if (getSuccess.has('success')) {
+                    document.querySelector('.success_msg').innerHTML += `<p class="success">${getSuccess.get('success').split('-').join(' ')}</p>`;
+                }
+                document.addEventListener("click", () => {
+                    document.querySelector('.success_msg').innerHTML = '';
+                });
+            </script>
+        </div>
 
     </div>
 </body>

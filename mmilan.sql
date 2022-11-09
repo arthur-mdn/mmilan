@@ -83,7 +83,7 @@ CREATE TABLE `invitations` (
   `InvitationEmail` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `InvitationToken` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `InvitationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `InvitationStatus` varchar(8) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'ok'
+  `InvitationStatus` varchar(10) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'ok'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
