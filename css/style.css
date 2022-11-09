@@ -556,6 +556,7 @@ form > textarea {
   color: red;
   padding: 0.5rem 1rem;
   border-radius: 5px;
+  width: fit-content;
 }
 
 #game-error-msg {

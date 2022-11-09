@@ -7,6 +7,7 @@
  * @author     Arthur Mondon
  *
  * Contributors :
+ * - Mathis Lambert
  * -
  *
  */

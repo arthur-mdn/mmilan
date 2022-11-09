@@ -168,7 +168,7 @@
                             $query = $conn2->prepare("UPDATE tentative SET tentative.StatusTentative = 'old' WHERE tentative.PlayerId = ?  ");
                             $query->bindValue(1, $result['PlayerId']);
                             $query->execute(); // delete tentatives of the user logged
-                            header('Location: index.php');
+                            header('Location: profile');
                         }
                     } else {
                         $query = $conn2->prepare("INSERT INTO tentative (CodeTentative, DateTentative, LibTentative, PlayerId) 

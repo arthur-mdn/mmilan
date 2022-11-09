@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="uikit/style/ui-kit.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/loader.css" />
-    
+
 </head>
 
 <body class="body-panel">
@@ -49,7 +49,7 @@
     require('app/config.php');
     session_start();
     if (isset($_SESSION["PlayerId"])) {
-        header('location: index.php');
+        header('location: profile');
         exit();
     }
     require('menu.php');
@@ -201,7 +201,7 @@
                     <label for="PrenomUtilisateur">Prénom</label>
                     <input type="text" required class="box-input" style="width:100%" name="PrenomUtilisateur" id="PrenomUtilisateur" autocomplete="new-surname" placeholder="Entrez ici votre prénom">
                 </div>
-                <div class="input_group">
+                <div class="input_container">
                     <label class="mail_input" for="UsernameUtilisateur">Nom d'utilisateur</label>
                     <input type="text" required class="box-input" style="width:100%" name="UsernameUtilisateur" id="UsernameUtilisateur" placeholder=" ">
                 </div>
@@ -274,6 +274,8 @@
                 } ?>
                 <div>
                     <input type="checkbox" required id="accept_conditions"> <label for="accept_conditions">J'ai lu et j'accepte les conditions </label>
+                    <br>
+                    <input type="checkbox" required id="accept_image_exploitations"> <label for="accept_image_exploitations">En m'inscrivant j'accepte par défaut les règles de droits à l'image.</label>
                 </div>
                 <input type="submit" name="submit" style="font-weight:bold" value="S'inscrire" class="box-button " />
                 <p class="links_txt">
