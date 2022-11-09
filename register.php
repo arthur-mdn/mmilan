@@ -126,9 +126,9 @@
                     $resultInvitationStatus = $checkInvitationStatus->fetch(PDO::FETCH_ASSOC);
 
                     if (!empty($resultInvitationStatus)) {
-                        if ($resultInvitationStatus['InvitationStatus'] != 'En cours') {
+                        if ($resultInvitationStatus['InvitationStatus'] != 'pending') {
                             header('Location: register.php?error=Cette-invitation-n\'est-plus-valide');
-                        } else if ($resultInvitationStatus['InvitationStatus'] == 'En cours') {
+                        } else if ($resultInvitationStatus['InvitationStatus'] == 'pending') {
                             $getTeamId = $conn2->prepare("SELECT InvitationTeamId
                         FROM invitations 
                         WHERE InvitationId = ? and InvitationToken = ?");
@@ -221,7 +221,7 @@
                     <?php
                     $join_mail = "";
                     if ($redirect_join) {
-                        $query = $conn2->prepare("SELECT invitations.InvitationEmail FROM invitations WHERE InvitationId = ? and InvitationToken = ? and InvitationStatus = 'En cours'");
+                        $query = $conn2->prepare("SELECT invitations.InvitationEmail FROM invitations WHERE InvitationId = ? and InvitationToken = ? and InvitationStatus = 'pending'");
                         $query->bindValue(1, $_GET['JoinId']);
                         $query->bindValue(2, $_GET['JoinToken']);
                         $query->execute();
