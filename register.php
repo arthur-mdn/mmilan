@@ -273,7 +273,7 @@
                     echo '<input type="hidden" name="JoinToken" value="' . $_GET['JoinToken'] . '">';
                 } ?>
                 <div>
-                    <input type="checkbox" required id="accept_conditions"> <label for="accept_conditions">J'ai lu et j'accepte le <a href="docs/reglement_LAN_VF.pdf">réglement du tournoi</a></label>
+                    <input type="checkbox" required id="accept_conditions"> <label for="accept_conditions">J'ai lu et j'accepte le <a href="docs/reglement_LAN_VF.pdf" style="color:#aaf;text-decoration:underline;">réglement du tournoi</a></label>
                     <br>
                     <input type="checkbox" required id="accept_image_exploitations"> <label for="accept_image_exploitations">J'accepte les règles de droits à l'image.</label>
                 </div>
