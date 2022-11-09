@@ -639,7 +639,7 @@ if (!isset($_SESSION["PlayerId"])) {
                             $checkInvitation = $conn2->prepare("SELECT *
                                                             FROM invitations
                                                             WHERE invitations.InvitationEmail = ?
-                                                            AND invitations.InvitationStatus NOT IN ('Acceptée', 'Refusée')
+                                                            AND invitations.InvitationStatus NOT IN ('Acceptée', 'Refusée', 'Annulée')
                                                             ");
                             $checkInvitation->bindValue(1, htmlspecialchars($_POST['playerToInvite'], ENT_QUOTES, 'UTF-8'));
                             $checkInvitation->execute();
