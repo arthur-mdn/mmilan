@@ -186,7 +186,7 @@
         }
     }
     ?>
-    <section id="inscription">
+    <section id="inscription" style="max-width: 1400px; ">
         <h2 class="head_title primary" style="margin-top: -300px;margin-left: -650px;position: absolute;font-size: 35px;">Inscription Solo</h2>
         <!-- <div class="tgl1">
             <img src="Elements/others/TriangleJB.svg" alt="Triangle Blanc & Jaune" />
@@ -197,7 +197,7 @@
         <div class="frise">
             <img src="Elements/others/Vector.svg" alt="Chemin Vectoriel parcourant la page" />
         </div>
-        
+
         <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; align-content: flex-start; padding-top:100px;">
             <form method="post" class="form" onsubmit="active_loader()">
                 <div id="error_container" class="error" style="display: none;"></div>
@@ -243,18 +243,40 @@
                         <input type="tel" required class="box-input" style="width:100%;color: black;" name="TelUtilisateur" id="TelUtilisateur" autocomplete="new-tel" placeholder=" ">
                         <label for="TelUtilisateur">Numéro de téléphone</label>
                     </div>
-                    
                     <div class="input-group">
-        
-                    <select name="ProfilUtilisateur" id="ProfilUtilisateur" required style="width:100%;color: black;">
-                        <option value="mmi1">MMI 1</option>
-                        <option value="mmi2">MMI 2</option>
-                        <option value="enseignant">Enseignant</option>
-                        <option value="autre">Autre</option>
-                    </select>
-                    <label for="ProfilUtilisateur">Profil</label>
-                </div>
+                        
+                        <p class="error" id="game-error-msg">Veuillez choisir un jeux présent dans la liste. Toutes tentatives de hack est prohibée et sera sanctionnée.</p>
+                        <select name="FavGameUtilisateur" id="FavGameUtilisateur" required style="width:100%;color: black;">
+                            <?php
+                            $query = $conn2->prepare("SELECT * 
+									FROM games
+									WHERE games.GameStatus != 'del'");
+                            $query->execute();
+                            $games = $query->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($games as $game) {
+                                echo '
+                        <option value="' . $game['GameId'] . '">
+                            ' . $game['GameName'] . '
+                        </option>
+                        ';
+                            }
 
+                            ?>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <select name="ProfilUtilisateur" id="ProfilUtilisateur" required style="width:100%;color: black;">
+                            <option value="mmi1">MMI 1</option>
+                            <option value="mmi2">MMI 2</option>
+                            <option value="enseignant">Enseignant</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                        
+                    </div>
+                    <div class="input-group">
+                        <input type="password" required class="box-input" style="width:100%" name="MdpUtilisateur" id="MdpUtilisateur" autocomplete="new-password" placeholder=" ">
+                        <label for="MdpUtilisateur">Mot de passe</label>
+                    </div>
 
 
                     <?php if ($redirect_join) {
@@ -276,13 +298,13 @@
                     </p>
                 </form>
         </div>
-        
+
         <!-- <br><br><br>
     <br><br><br>
     <br><br><br> -->
     </section>
 
- 
+
 
 
 
