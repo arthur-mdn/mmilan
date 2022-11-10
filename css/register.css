@@ -1,0 +1,65 @@
+#inscription {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* height: 100vh; */
+    overflow: hidden;
+    height: 100%
+}
+
+#inscription .form {
+    margin-bottom: 5rem;
+    margin-top: 5rem;
+    /* backdrop-filter: blur(10px);
+    background: #53616e70; */
+}
+
+.form {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.tgl1 {
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+}
+
+.tgl1 img {
+    height: 894px;
+    margin-left: 651px;
+    margin-bottom: -590px;
+    rotate: -155deg;
+}
+
+.tgl2 {
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+}
+
+.tgl2 img {
+    height: 894px;
+    margin-left: -277px;
+    margin-bottom: 35px;
+    rotate: -335deg;
+}
+
+.frise {
+    position: absolute;
+    height: 100%;
+    overflow: hidden;
+}
+/* 
+.input_container {
+    width: 49% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+} */
+.input-group{
+    margin: 12px auto;
+}
