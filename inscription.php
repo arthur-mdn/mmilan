@@ -199,7 +199,7 @@
         </div>
 
         <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; align-content: flex-start; padding-top:100px; ">
-            <form method="post" class="form" onsubmit="active_loader()">
+            <form method="post" class="form" style="box-shadow:none ;" onsubmit="active_loader()">
                 <div id="error_container" class="error" style="display: none;"></div>
                 <form action="" method="post">
                     <div class="input-group" style="margin-right:10%; margin-left:10%;">
@@ -279,10 +279,10 @@
                         echo '<input type="hidden" name="JoinId" value="' . $_GET['JoinId'] . '">';
                         echo '<input type="hidden" name="JoinToken" value="' . $_GET['JoinToken'] . '">';
                     } ?>
-                    <div style="margin-right:40%; margin-left:40%;">
+                    <div style="margin-right:41%; margin-left:41%;">
                         <input type="checkbox" required id="accept_conditions"> <label for="accept_conditions">J'ai lu et j'accepte les conditions </label>
                     </div>
-                    <input class="btn btn__primary" type="submit" name="submit" style="font-weight:bold; margin-right:40%; margin-left:42%;"" value="S'inscrire" />
+                    <input class="btn btn__primary" type="submit" name="submit" style="font-weight:bold; margin-right:42%; margin-left:42%;"" value="S'inscrire" />
                     <p class="links_txt">
                         Déjà inscrit ?
                         <?php if ($redirect_join) {
