@@ -11,8 +11,8 @@
 #inscription .form {
     margin-bottom: 5rem;
     margin-top: 5rem;
-    /* backdrop-filter: blur(10px);
-    background: #53616e70; */
+    backdrop-filter: blur(10px);
+    background: #53616e70;
 }
 
 .form {
@@ -32,7 +32,7 @@
 .tgl1 img {
     height: 894px;
     margin-left: 651px;
-    margin-bottom: -590px;
+    margin-bottom: -390px;
     rotate: -155deg;
 }
 
@@ -40,6 +40,7 @@
     position: absolute;
     width: 100%;
     z-index: -1;
+    
 }
 
 .tgl2 img {

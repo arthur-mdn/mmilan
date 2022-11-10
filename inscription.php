@@ -187,19 +187,19 @@
     }
     ?>
     <section id="inscription">
-        <h2 class="head_title primary" style="margin-top: -500px;margin-left: -650px;position: absolute;font-size: 35px;">Inscription Solo</h2>
-        <!-- <div class="tgl1">
+        <h2 class="head_title primary" style="margin-top: -620px;margin-left: -650px;position: absolute;font-size: 35px;">Inscription Solo</h2>
+        <div class="tgl1" style="margin-left: 40%;">
             <img src="Elements/others/TriangleJB.svg" alt="Triangle Blanc & Jaune" />
-        </div> -->
-        <!-- <div class="tgl2">
+        </div>
+        <div class="tgl2">
             <img src="Elements/others/TriangleJB.svg" alt="Triangle Blanc & Jaune" />
-        </div> -->
+        </div>
         <div class="frise">
             <img src="Elements/others/Vector.svg" alt="Chemin Vectoriel parcourant la page" />
         </div>
 
         <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; align-content: flex-start; padding-top:100px; ">
-            <form method="post" class="form" style="box-shadow:none ;" onsubmit="active_loader()">
+            <form method="post" class="form"  onsubmit="active_loader()">
                 <div id="error_container" class="error" style="display: none;"></div>
                 <form action="" method="post">
                     <div class="input-group" style="margin-right:10%; margin-left:10%;">
@@ -281,8 +281,11 @@
                     } ?>
                     <div style="margin-right:41%; margin-left:41%;">
                         <input type="checkbox" required id="accept_conditions"> <label for="accept_conditions">J'ai lu et j'accepte les conditions </label>
+                        <br><br>
+                    <input type="checkbox" required id="accept_image_exploitations"> <label for="accept_image_exploitations">J'accepte les règles de droits à l'image.</label>
                     </div>
                     <input class="btn btn__primary" type="submit" name="submit" style="font-weight:bold; margin-right:42%; margin-left:42%;"" value="S'inscrire" />
+                    
                     <p class="links_txt">
                         Déjà inscrit ?
                         <?php if ($redirect_join) {
