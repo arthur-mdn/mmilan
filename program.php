@@ -7,7 +7,6 @@
  * @author     Arthur Mondon
  *
  * Contributors :
- * - Mathis Lambert
  * -
  *
  */
@@ -60,47 +59,12 @@ if (isset($_SESSION["PlayerId"])) {
     require('menu.php'); // afficher le menu en fonction de connecté ou pas.
     ?>
 
-    <div style="background-image: url(Elements/backgrounds/bg_1.jpg);
-    height:700px;
-    background-size: cover;
-    background-position: center;
-    margin: 0 auto;
-    width: 100%;
-    max-width: inherit;
-    ">
-        <div class="content-container" style="height:100%;display: flex;flex-direction: column;justify-content: center;">
-            <h3 style="    font-size: clamp(20px, 3vw, 40px);">MMI LAN</h3>
-            <h3 style="    font-size: clamp(30px, 5vw, 60px);">Accueil</h3>
-            <div>
-                <p>Site en construction.</p>
-                <p>Revenez plus tard !</p>
-                <p>Vous pouvez quand même créer un compte et commencer à composer votre équipe !</p>
-            </div>
-        </div>
+    <div class="content-container" style="height:100%;display: flex;flex-direction: column;justify-content: center; padding-top:100px;">
+        <h3 style="    font-size: clamp(20px, 3vw, 40px);">Programme</h3>
+
+    </div>
     </div>
 
-    <div class="content-container">
-        <?php
-        $query = $conn2->prepare("SELECT * 
-									FROM games
-									WHERE games.GameStatus != 'del'");
-        $query->execute();
-        $games = $query->fetchAll(PDO::FETCH_ASSOC); // get all games in bdd
-        if (!empty($games)) {
-            echo '<h2> Jeux </h2>';
-            foreach ($games as $game) {
-                echo '
-                <div>
-                <br>
-                    <h4>' . $game['GameName'] . '</h4>
-                    <p>' . $game['GameDescription'] . '</p>
-                    <img src="' . $game['GamePicture'] . '" style="width: 50px;">
-                </div>
-                ';
-            }
-        }
-        ?>
-    </div>
 
 </body>
 

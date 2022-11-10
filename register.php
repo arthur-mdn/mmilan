@@ -24,6 +24,7 @@
     
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/loader.css" />
+
 </head>
 
 <body class="body-panel">
@@ -48,7 +49,7 @@
     require('app/config.php');
     session_start();
     if (isset($_SESSION["PlayerId"])) {
-        header('location: index.php');
+        header('location: profile');
         exit();
     }
     require('menu.php');
@@ -120,54 +121,65 @@
 
 
                     // check if the invitation exists
-                    $checkInvitationStatus = $conn2->prepare("SELECT InvitationStatus
+                    $checkInvitationStatus = $conn2->prepare("SELECT *
                         FROM invitations 
                         WHERE InvitationId = ? and InvitationToken = ?");
                     $checkInvitationStatus->bindValue(1, $invitationId);
                     $checkInvitationStatus->bindValue(2, $invitationToken);
                     $checkInvitationStatus->execute();
-                    $resultInvitationStatus = $checkInvitationStatus->fetchAll(PDO::FETCH_ASSOC);
+                    $resultInvitationStatus = $checkInvitationStatus->fetch(PDO::FETCH_ASSOC);
 
-                    if ($resultInvitationStatus[0]['InvitationStatus'] != 'En cours') {
-                        header('Location: register.php?error=Cette-invitation-n\'est-plus-valide');
-                    } else if ($resultInvitationStatus[0]['InvitationStatus'] == 'En cours') {
-                        $getTeamId = $conn2->prepare("SELECT InvitationTeamId
+                    if (!empty($resultInvitationStatus)) {
+                        if ($resultInvitationStatus['InvitationStatus'] != 'pending') {
+                            header('Location: register.php?error=Cette-invitation-n\'est-plus-valide');
+                        } else if ($resultInvitationStatus['InvitationStatus'] == 'pending') {
+                            $getTeamId = $conn2->prepare("SELECT InvitationTeamId
                         FROM invitations 
                         WHERE InvitationId = ? and InvitationToken = ?");
-                        $getTeamId->bindValue(1, $invitationId);
-                        $getTeamId->bindValue(2, $invitationToken);
-                        $getTeamId->execute();
-                        $resultTeamId = $getTeamId->fetchAll(PDO::FETCH_ASSOC);
+                            $getTeamId->bindValue(1, $invitationId);
+                            $getTeamId->bindValue(2, $invitationToken);
+                            $getTeamId->execute();
+                            $resultTeamId = $getTeamId->fetchAll(PDO::FETCH_ASSOC);
 
 
-                        $query = "SELECT IFNULL(MAX(AppartientId), 0) + 1 as NewAppartientId FROM appartient";
-                        $NewAppartientId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment;
+                            $query = "SELECT IFNULL(MAX(AppartientId), 0) + 1 as NewAppartientId FROM appartient";
+                            $NewAppartientId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment;
 
-                        $query = $conn2->prepare("UPDATE invitations
-                                            SET InvitationStatus = 'Acceptée'
+                            $query = $conn2->prepare("UPDATE invitations
+                                            SET InvitationStatus = 'accepted'
                                             WHERE InvitationId = ?
                                             AND InvitationToken = ?");
 
-                        $query->bindValue(1, $invitationId);
-                        $query->bindValue(2, $invitationToken);
-                        $query->execute();
+                            $query->bindValue(1, $invitationId);
+                            $query->bindValue(2, $invitationToken);
+                            $query->execute();
 
-                        $query = $conn2->prepare("INSERT INTO appartient (AppartientId,AppartientPlayerId, AppartientTeamId, AppartientRole)
-                                            VALUES (?, ?, ?, 'player')
+                            $query = $conn2->prepare("INSERT INTO appartient (AppartientId,AppartientPlayerId, AppartientTeamId, AppartientRole)
+                                            VALUES (?, ?, ?, 'joueur')
                                             ");
-                        $query->bindValue(1, $NewAppartientId['NewAppartientId']);
-                        $query->bindValue(2, $result2['NewPlayerId']);
-                        $query->bindValue(3, $resultTeamId[0]['InvitationTeamId']);
-                        $query->execute();
+                            $query->bindValue(1, $NewAppartientId['NewAppartientId']);
+                            $query->bindValue(2, $result2['NewPlayerId']);
+                            $query->bindValue(3, $resultTeamId[0]['InvitationTeamId']);
+                            $query->execute();
+
+                            // new session for the new player
+                            $_SESSION["PlayerId"] = $result2['NewPlayerId'];
+                            $_SESSION['PlayerMail'] = $_POST['MailUtilisateur'];
+
+                            // redirect to the home page
+                            echo '<script type="text/javascript">window.location.href = "index";</script>';
+                        }
+                    } else {
+                        echo '<script type="text/javascript">window.location.href = "register?error=Invitation-invalide";</script>';
                     }
+                } else {
+                    // new session for the new player
+                    $_SESSION["PlayerId"] = $result2['NewPlayerId'];
+                    $_SESSION['PlayerMail'] = $_POST['MailUtilisateur'];
+
+                    // redirect to the home page
+                    echo '<script type="text/javascript">window.location.href = "index";</script>';
                 }
-
-                // new session for the new player
-                $_SESSION["PlayerId"] = $result2['NewPlayerId'];
-                $_SESSION['PlayerMail'] = $_POST['MailUtilisateur'];
-
-
-                echo '<script type="text/javascript">window.location = "index.php"</script>';
             } else {
                 // if the game selected does not exist, log hack attempt
                 $logHack = $conn2->prepare("INSERT INTO logs (LogMsg, LogUserMail) 
@@ -205,15 +217,15 @@
                     <input type="text" required class="box-input" style="width:100%" name="PrenomUtilisateur" id="PrenomUtilisateur" autocomplete="new-surname" placeholder="Entrez ici votre prénom">
                 </div>
                 <div class="input_container">
-                    <label for="UsernameUtilisateur">Nom d'utilisateur</label>
-                    <input type="text" required class="box-input" style="width:100%" name="UsernameUtilisateur" id="UsernameUtilisateur" placeholder="Entrez ici votre nom d'utilisateur">
+                    <label class="mail_input" for="UsernameUtilisateur">Nom d'utilisateur</label>
+                    <input type="text" required class="box-input" style="width:100%" name="UsernameUtilisateur" id="UsernameUtilisateur" placeholder=" ">
                 </div>
                 <div class="input_container">
                     <label for="MailUtilisateur">Adresse Email</label>
                     <?php
                     $join_mail = "";
                     if ($redirect_join) {
-                        $query = $conn2->prepare("SELECT invitations.InvitationEmail FROM invitations WHERE InvitationId = ? and InvitationToken = ? and InvitationStatus = 'En cours'");
+                        $query = $conn2->prepare("SELECT invitations.InvitationEmail FROM invitations WHERE InvitationId = ? and InvitationToken = ? and InvitationStatus = 'pending'");
                         $query->bindValue(1, $_GET['JoinId']);
                         $query->bindValue(2, $_GET['JoinToken']);
                         $query->execute();
@@ -276,7 +288,9 @@
                     echo '<input type="hidden" name="JoinToken" value="' . $_GET['JoinToken'] . '">';
                 } ?>
                 <div>
-                    <input type="checkbox" required id="accept_conditions"> <label for="accept_conditions">J'ai lu et j'accepte les conditions </label>
+                    <input type="checkbox" required id="accept_conditions"> <label for="accept_conditions">J'ai lu et j'accepte le <a href="docs/reglement_LAN_VF.pdf" style="color:#aaf;text-decoration:underline;">réglement du tournoi</a></label>
+                    <br>
+                    <input type="checkbox" required id="accept_image_exploitations"> <label for="accept_image_exploitations">J'accepte les règles de droits à l'image.</label>
                 </div>
                 <input type="submit" name="submit" style="font-weight:bold" value="S'inscrire" class="box-button " />
                 <p class="links_txt">

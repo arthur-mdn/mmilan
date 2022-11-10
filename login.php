@@ -92,13 +92,38 @@
                             $checkInvitationStatus->execute();
                             $resultInvitationStatus = $checkInvitationStatus->fetchAll(PDO::FETCH_ASSOC);
 
-                            if ($resultInvitationStatus[0]['InvitationStatus'] != 'En cours') {
-                                header('Location: register.php?error=Cette-invitation-n\'est-plus-valide');
+                            if ($resultInvitationStatus[0]['InvitationStatus'] != 'pending') {
+                                header('Location: login.php?error=Cette-invitation-n\'est-plus-valide');
                             } else if ($resultInvitationStatus[0]['InvitationEmail'] != $result['PlayerEmail']) {
                                 header('Location: login.php?error=Cette-invitation-n\'est-pas-pour-vous');
-                            } else if ($resultInvitationStatus[0]['InvitationStatus'] == 'En cours') {
+                            } else if ($resultInvitationStatus[0]['InvitationStatus'] == 'pending') {
                                 $_SESSION["PlayerId"] = $result['PlayerId'];
                                 $_SESSION["PlayerMail"] = $result['PlayerEmail'];
+
+                                /* Check if player is part of appartient_solo */
+                                $query = $conn2->prepare("SELECT * 
+                                    FROM players, appartient_solo
+                                    WHERE players.PlayerStatus = 'ok'
+                                    and appartient_solo.AppartientSoloStatus not in ('ancien','old')
+                                    and players.PlayerId = ?
+                                    and players.PlayerId = appartient_solo.AppartientSoloPlayerId
+                                    ");
+                                $query->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+                                $query->execute();
+                                $playerSolo = $query->fetchAll(PDO::FETCH_ASSOC); // données sur le joueur
+
+                                // set AppartientSoloStatus to 'old'
+                                if (!empty($playerSolo)) {
+                                    $setOld = $conn2->prepare("UPDATE appartient_solo
+                                    SET AppartientSoloStatus = 'old'
+                                    WHERE AppartientSoloPlayerId = ?
+                                    ");
+                                    $setOld->bindValue(
+                                        1,
+                                        htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8')
+                                    );
+                                    $setOld->execute();
+                                }
 
                                 $query = $conn2->prepare("UPDATE tentative SET tentative.StatusTentative = 'old' WHERE tentative.PlayerId = ?  ");
                                 $query->bindValue(1, $result['PlayerId']);
@@ -117,7 +142,7 @@
                                 $NewAppartientId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment;
 
                                 $query = $conn2->prepare("UPDATE invitations
-                                            SET InvitationStatus = 'Acceptée'
+                                            SET InvitationStatus = 'accepted'
                                             WHERE InvitationId = ?
                                             AND InvitationToken = ?");
 
@@ -143,7 +168,7 @@
                             $query = $conn2->prepare("UPDATE tentative SET tentative.StatusTentative = 'old' WHERE tentative.PlayerId = ?  ");
                             $query->bindValue(1, $result['PlayerId']);
                             $query->execute(); // delete tentatives of the user logged
-                            header('Location: index.php');
+                            header('Location: profile');
                         }
                     } else {
                         $query = $conn2->prepare("INSERT INTO tentative (CodeTentative, DateTentative, LibTentative, PlayerId) 
