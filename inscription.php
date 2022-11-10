@@ -232,7 +232,7 @@
                             $join_mail = "";
                         }
                         ?>
-                        <input type="email" pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" required class="box-input" style="width:100%" name="MailUtilisateur" id="MailUtilisateur" autocomplete="new-mail" value="<?= $join_mail ?>">
+                        <input type="email" placeholder=" " pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" required class="box-input" style="width:100%" name="MailUtilisateur" id="MailUtilisateur" autocomplete="new-mail" value="<?= $join_mail ?>">
                         <label for="MailUtilisateur">Adresse Email</label>
                     </div>
                     <div class="input-group">
@@ -243,6 +243,20 @@
                         <input type="tel" required class="box-input" style="width:100%;color: black;" name="TelUtilisateur" id="TelUtilisateur" autocomplete="new-tel" placeholder=" ">
                         <label for="TelUtilisateur">Numéro de téléphone</label>
                     </div>
+                    
+                    <div class="input-group">
+        
+                    <select name="ProfilUtilisateur" id="ProfilUtilisateur" required style="width:100%;color: black;">
+                        <option value="mmi1">MMI 1</option>
+                        <option value="mmi2">MMI 2</option>
+                        <option value="enseignant">Enseignant</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                    <label for="ProfilUtilisateur">Profil</label>
+                </div>
+
+
+
                     <?php if ($redirect_join) {
                         echo '<input type="hidden" name="JoinId" value="' . $_GET['JoinId'] . '">';
                         echo '<input type="hidden" name="JoinToken" value="' . $_GET['JoinToken'] . '">';
@@ -262,10 +276,17 @@
                     </p>
                 </form>
         </div>
+        
         <!-- <br><br><br>
     <br><br><br>
     <br><br><br> -->
     </section>
+
+ 
+
+
+
+
 </body>
 
 </html>
