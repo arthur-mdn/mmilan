@@ -19,7 +19,8 @@
        <?php
         include_once './includes/head.php';
         ?>
-       <link rel="stylesheet" href="css/login_style.css" />
+       <link rel="stylesheet" href="css/connexion.css" />
+
    </head>
 
    <body class="body-panel">
