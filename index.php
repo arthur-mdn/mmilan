@@ -108,22 +108,26 @@ if (isset($_SESSION["PlayerId"])) {
                 </div>
 
                 <style>
-                    #counter_status{
-                        font-size: clamp(15px,5vw,30px);
+                    #counter_status {
+                        font-size: clamp(15px, 5vw, 30px);
                     }
-                    #counters_container{
+
+                    #counters_container {
                         display: flex;
                         gap: 15px;
                     }
-                    .counter_container{
-                        background-color: rgba(0,0,0,0.7);
+
+                    .counter_container {
+                        background-color: rgba(0, 0, 0, 0.7);
                         padding: 25px;
                         border-radius: 15px;
                         width: fit-content;
                     }
-                    .precise_counter_container span{
-                        font-size: clamp(45px,12vw,115px);
+
+                    .precise_counter_container span {
+                        font-size: clamp(45px, 12vw, 115px);
                     }
+
                     .precise_counter_container {
                         display: flex;
                         flex-direction: column;
@@ -131,25 +135,25 @@ if (isset($_SESSION["PlayerId"])) {
                     }
                 </style>
                 <script>
-                    var countDownDate = new Date("<?php echo date('M j, Y H:i:s', strtotime($settings['event_starting_date']) ) ;?>").getTime();
-                    var countDownDateEnd = new Date("<?php echo date('M j, Y H:i:s', strtotime($settings['event_ending_date']) ) ;?>").getTime();
+                    let countDownDate = new Date("<?= date('M j, Y H:i:s', strtotime($settings['event_starting_date'])); ?>").getTime();
+                    let countDownDateEnd = new Date("<?= date('M j, Y H:i:s', strtotime($settings['event_ending_date'])); ?>").getTime();
 
-                    function update_counter(){
-                        var now = new Date().getTime();
+                    const update_counter = () => {
+                        let now = new Date().getTime();
+                        let distance = countDownDate - now;
+                        let distanceEnd = countDownDateEnd - now;
 
-                        var distance = countDownDate - now;
-                        var distanceEnd = countDownDateEnd - now;
-                        if(distanceEnd < 0){
-                            clearInterval(x);
+                        if (distanceEnd < 0) {
+                            clearInterval(interval);
                             document.getElementById("counter_status").innerHTML = "L'évènement est terminé. <br> Merci pour votre participation !";
                             document.getElementById("counters_container").style.display = "none";
                             return;
                         }
 
-                        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                         if (distance < 0) {
                             document.getElementById("days_counter_container").style.display = "none";
@@ -157,10 +161,10 @@ if (isset($_SESSION["PlayerId"])) {
                             document.getElementById("hours_counter").innerHTML = hours > -10 ? "0" + hours.toString().split("-").pop() : hours.toString().split("-").pop();
                             document.getElementById("minutes_counter").innerHTML = minutes > -10 ? "0" + minutes.toString().split("-").pop() : minutes.toString().split("-").pop();
                             document.getElementById("seconds_counter").innerHTML = seconds > -10 ? "0" + seconds.toString().split("-").pop() : seconds.toString().split("-").pop();
-                        }else{
-                            if(days <= 0){
+                        } else {
+                            if (days <= 0) {
                                 document.getElementById("days_counter_container").style.display = "none";
-                            }else{
+                            } else {
                                 document.getElementById("days_counter").innerHTML = days.toString();
                             }
                             document.getElementById("counter_status").innerHTML = "Début de l'évènement dans :";
@@ -170,13 +174,9 @@ if (isset($_SESSION["PlayerId"])) {
                         }
                     }
 
-                    var x = setInterval(function() {
-                        update_counter();
-                    }, 1000);
+                    const interval = setInterval(update_counter, 1000);
 
                     update_counter();
-
-
                 </script>
             </div>
         </div>
