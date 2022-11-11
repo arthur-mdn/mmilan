@@ -69,6 +69,7 @@
         }
       }
       body {
+        color: #000000;
         margin: 0;
         padding: 0;
       }
@@ -82,6 +83,7 @@
 
       p {
         margin: 0;
+        color: #000000;
       }
 
       .ie-container table,
@@ -138,10 +140,36 @@
           line-height: 170% !important;
         }
       }
+
+      /* FONT IMPORT */
+    /* 
+    * 1. WORK SANS
+    */
+    @import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
+    /*
+    * 2. Akira Expanded
+    */
+    @font-face {
+    font-family: "Akira";
+    src: url("../../fonts/Akira.otf");
+    type: "opentype";
+    font-weight: normal;
+    }
+
+    p {
+        font-family: "Work Sans", sans-serif;
+        font-size: 16px;
+        color: #000;
+    }
+
+    h1, h2, h3, h4, h5, h6, strong {
+        font-family: "Akira", sans-serif;
+        color: #0a1929;
+    }
     </style>
 
     <!--[if !mso]><!-->
-    <link
+    <!-- <link
       href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap"
       rel="stylesheet"
       type="text/css"
@@ -150,7 +178,7 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap"
       rel="stylesheet"
       type="text/css"
-    />
+    /> -->
     <!--<![endif]-->
   </head>
 
@@ -160,8 +188,7 @@
       margin: 0;
       padding: 0;
       -webkit-text-size-adjust: 100%;
-      background-color: #ffffff;
-      color: #000000;
+      color: #fff;
     "
   >
     <!--[if IE]><div class="ie-container"><![endif]-->
@@ -172,13 +199,14 @@
         border-collapse: collapse;
         table-layout: fixed;
         border-spacing: 0;
-        mso-table-lspace: 0pt;
-        mso-table-rspace: 0pt;
+        /* mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt; */
         vertical-align: top;
         min-width: 320px;
         margin: 0 auto;
         background-color: #ffffff;
         width: 100%;
+        height: 100vh;
       "
       cellpadding="0"
       cellspacing="0"
@@ -196,7 +224,7 @@
 
             <div
               class="u-row-container"
-              style="padding: 0px; background-color: #e9e9f3"
+              style="padding: 0px; background-color: #0a1929; height: 100%; display: flex; align-items: center;"
             >
               <div
                 class="u-row"
@@ -233,10 +261,10 @@
                   >
                     <div
                       style="
-                        background-color: #e9e9f3;
+                        background-color: #f8f8f8;
                         height: 100%;
                         width: 100% !important;
-                        border-radius: 0px;
+                        border-radius: 5px !important;
                         -webkit-border-radius: 0px;
                         -moz-border-radius: 0px;
                       "
@@ -271,7 +299,7 @@
                                   overflow-wrap: break-word;
                                   word-break: break-word;
                                   padding: 80px 10px 13px;
-                                  font-family: 'Montserrat', sans-serif;
+                                  
                                 "
                                 align="left"
                               >
@@ -290,7 +318,7 @@
                                   <div>
                                     <div>
                                       <strong
-                                        >Vous êtes invité à rejoindre une équipe
+                                        >Vous etes invite a rejoindre une equipe
                                         pour la MMI LAN !</strong
                                       >
                                     </div>
@@ -318,7 +346,7 @@
                                   overflow-wrap: break-word;
                                   word-break: break-word;
                                   padding: 13px 50px 40px;
-                                  font-family: 'Montserrat', sans-serif;
+                                  
                                 "
                                 align="left"
                               >
@@ -330,7 +358,7 @@
                                     word-wrap: break-word;
                                   "
                                 >
-                                  <p style="font-size: 14px; line-height: 160%">
+                                  <p style=" line-height: 160%">
                                     Vous recevez ce mail car vous avez été
                                     invité à rejoindre une équipe pour la MMI
                                     LAN.
@@ -358,7 +386,7 @@
                                   overflow-wrap: break-word;
                                   word-break: break-word;
                                   padding: 0px 10px 40px;
-                                  font-family: 'Montserrat', sans-serif;
+                                  
                                 "
                                 align="left"
                               >
@@ -371,12 +399,11 @@
                                     style="
                                       box-sizing: border-box;
                                       display: inline-block;
-                                      font-family: 'Montserrat', sans-serif;
+                                      
                                       text-decoration: none;
                                       -webkit-text-size-adjust: none;
                                       text-align: center;
-                                      color: #ffffff;
-                                      background-color: #da5345;
+                                      background-color: #f9d71c;
                                       border-radius: 25px;
                                       -webkit-border-radius: 25px;
                                       -moz-border-radius: 25px;
@@ -385,7 +412,7 @@
                                       overflow-wrap: break-word;
                                       word-break: break-word;
                                       word-wrap: break-word;
-                                      mso-border-alt: none;
+                                      /* mso-border-alt: none; */
                                     "
                                   >
                                     <span
@@ -397,14 +424,15 @@
                                       "
                                       ><p
                                         style="
-                                          font-size: 14px;
+                                          
                                           line-height: 120%;
                                         "
                                       >
                                         <span
                                           style="
-                                            font-size: 14px;
+                                            
                                             line-height: 16.8px;
+                                            color: #0a1929;
                                           "
                                           >Rejoindre maintenant</span
                                         >
@@ -420,7 +448,6 @@
 
                         <table
                           id="u_content_text_7"
-                          style="font-family: 'Montserrat', sans-serif"
                           role="presentation"
                           cellpadding="0"
                           cellspacing="0"
@@ -435,7 +462,7 @@
                                   overflow-wrap: break-word;
                                   word-break: break-word;
                                   padding: 0px 50px 40px;
-                                  font-family: 'Montserrat', sans-serif;
+                                  
                                 "
                                 align="left"
                               >
@@ -447,10 +474,10 @@
                                     word-wrap: break-word;
                                   "
                                 >
-                                  <p style="font-size: 14px; line-height: 160%">
+                                  <p style=" line-height: 160%">
                                     Ou copiez ce lien dans votre navigateur :
                                   </p>
-                                  <p style="font-size: 14px; line-height: 160%">
+                                  <p style=" line-height: 160%">
                                     <a
                                       rel="noopener"
                                       href="{[URL_INVITE]}"
@@ -481,7 +508,7 @@
                                   overflow-wrap: break-word;
                                   word-break: break-word;
                                   padding: 0px 60px 20px;
-                                  font-family: 'Montserrat', sans-serif;
+                                  
                                 "
                                 align="left"
                               >
@@ -493,7 +520,7 @@
                                     word-wrap: break-word;
                                   "
                                 >
-                                  <p style="font-size: 14px; line-height: 140%">
+                                  <p style=" line-height: 140%">
                                     <span
                                       style="
                                         font-size: 18px;
@@ -502,8 +529,8 @@
                                       "
                                       ><strong
                                         >Vous avez des questions ou rencontrez
-                                        un problème pour rejoindre l'équipe ou
-                                        créer votre compte ?</strong
+                                        un probleme pour rejoindre l'equipe ou
+                                        creer votre compte ?</strong
                                       ></span
                                     >
                                   </p>
@@ -530,7 +557,7 @@
                                   overflow-wrap: break-word;
                                   word-break: break-word;
                                   padding: 0px 50px 77px;
-                                  font-family: 'Montserrat', sans-serif;
+                                  
                                 "
                                 align="left"
                               >
@@ -542,12 +569,12 @@
                                     word-wrap: break-word;
                                   "
                                 >
-                                  <p style="font-size: 14px; line-height: 160%">
+                                  <p style=" line-height: 160%">
                                     Contacter le service technique par mail.
                                   </p>
                                   <a
                                     href="mailto:{[MAIL_INVITE]}"
-                                    style="font-size: 14px; line-height: 160%"
+                                    style=" line-height: 160%"
                                     >{[MAIL_INVITE]}</a
                                   >
                                 </div>
