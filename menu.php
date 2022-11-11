@@ -68,6 +68,11 @@
         display: none;
     }
 
+    .side-menu__mobile .button {
+        font-size: 1rem;
+        padding: 0.4rem 0.9rem;
+    }
+
     .nav.scrolled {
         background-color: #0A1929;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -128,13 +133,17 @@
             opacity: 1;
         }
 
+        .side-menu__mobile.toggled {
+            min-width: 240px;
+        }
+
         .side-menu__mobile {
             position: absolute;
             top: 0;
             right: -70%;
 
             width: 70%;
-            min-width: 275px;
+
             height: 100vh;
             background-color: #0A1929;
 
