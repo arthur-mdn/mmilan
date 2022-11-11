@@ -161,5 +161,6 @@ svg.controllers {
   object-fit: cover;
   width: 256px;
   height: 256px;
+  border-radius: 10px;
   background: #0a1929;
 }
