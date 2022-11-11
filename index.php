@@ -61,14 +61,14 @@ if (isset($_SESSION["PlayerId"])) {
     ?>
 
     <div style="background-image: url(Elements/backgrounds/bg_1.jpg);
-    height:700px;
+    height:100vh;
     background-size: cover;
     background-position: center;
     margin: 0 auto;
     width: 100%;
     max-width: inherit;
     ">
-        <div class="content-container" style="height:100%;display: flex;flex-direction: column;justify-content: center;">
+        <div class="content-container" style="height:100vh;display: flex;flex-direction: column;justify-content: center;">
             <h3 style="    font-size: clamp(20px, 3vw, 40px);">MMI LAN</h3>
             <h3 style="    font-size: clamp(30px, 5vw, 60px);">Accueil</h3>
             <div>
@@ -182,7 +182,7 @@ if (isset($_SESSION["PlayerId"])) {
         </div>
     </div>
 
-    <div class="content-container">
+    <!--     <div class="content-container">
         <?php
         $query = $conn2->prepare("SELECT * 
 									FROM games
@@ -203,7 +203,7 @@ if (isset($_SESSION["PlayerId"])) {
             }
         }
         ?>
-    </div>
+    </div> -->
 
 </body>
 

@@ -574,18 +574,6 @@ form > textarea {
   width: fit-content;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding: 30px;
-  box-shadow: 0px 0px 20px grey;
-  border-radius: 10px;
-  margin-top: 25px;
-  text-align: center;
-  align-items: center;
-}
-
 #tel_input {
   display: none;
 }

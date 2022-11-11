@@ -1,3 +1,13 @@
+// set current width and height of the screen to --screen-width and --screen-height
+const rootcss = document.documentElement.style;
+rootcss.setProperty("--screen-width", window.innerWidth + "px");
+rootcss.setProperty("--screen-height", window.innerHeight + "px");
+
+window.addEventListener("resize", () => {
+  rootcss.setProperty("--screen-width", window.innerWidth + "px");
+  rootcss.setProperty("--screen-height", window.innerHeight + "px");
+});
+
 function close_modal(id) {
   document.getElementById("modal_" + id).outerHTML = "";
 }
@@ -14,22 +24,27 @@ function hideIt(elId, timer = 5000) {
 }
 
 window.onload = function () {
+  rootcss.setProperty("--body-width", document.body.clientWidth + "px");
+  rootcss.setProperty("--body-height", document.body.clientHeight + "px");
+
+  window.addEventListener("resize", () => {
+    rootcss.setProperty("--body-width", document.body.clientWidth + "px");
+    rootcss.setProperty("--body-height", document.body.clientHeight + "px");
+  });
+
   let pageParams = new URLSearchParams(window.location.search);
   let errorMsg = pageParams.get("error");
   let hack_attempt = pageParams.get("hack_log");
   const gameInput = document.getElementById("FavGameUtilisateur");
-  const gameHackMessage = document.getElementById("game-error-msg");
 
   if (gameInput) {
     if (hack_attempt == "true") {
       gameInput.classList.add("error");
-      gameHackMessage.style.display = "block";
       gameInput.addEventListener("focus", () => {
         gameInput.classList.remove("error");
       });
     } else {
       gameInput.classList.remove("error");
-      gameHackMessage.style.display = "none";
     }
   }
 
@@ -65,6 +80,28 @@ window.onload = function () {
       } else {
         navbar.classList.remove("scrolled");
       }
+    });
+  }
+
+  const cursor = document.querySelector(".cursor");
+  const links_viewer = document.querySelectorAll(".section-viewer ul li a");
+
+  if (links_viewer && cursor) {
+    const sectionWidth = links_viewer[0].getBoundingClientRect().height;
+    // check where the user is on the page
+    window.addEventListener("scroll", () => {
+      const scroll = window.scrollY;
+      const sections = document.querySelectorAll("section");
+
+      sections.forEach((section, index) => {
+        if (scroll > section.offsetTop - window.innerHeight / 2) {
+          links_viewer.forEach((link) => {
+            link.classList.remove("active");
+          });
+          links_viewer[index].classList.add("active");
+          cursor.style.top = index * sectionWidth + "px";
+        }
+      });
     });
   }
 };
