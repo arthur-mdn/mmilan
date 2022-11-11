@@ -187,30 +187,30 @@
     }
     ?>
     <section id="inscription">
-        <h2 class="head_title primary" style="margin-top: -300px;margin-left: -650px;position: absolute;font-size: 35px;">Inscription Solo</h2>
-        <!-- <div class="tgl1">
+        <h2 class="head_title primary" style="margin-top: -620px;margin-left: -650px;position: absolute;font-size: 35px;">Inscription Solo</h2>
+        <div class="tgl1" style="margin-left: 40%;">
             <img src="Elements/others/TriangleJB.svg" alt="Triangle Blanc & Jaune" />
-        </div> -->
-        <!-- <div class="tgl2">
+        </div>
+        <div class="tgl2">
             <img src="Elements/others/TriangleJB.svg" alt="Triangle Blanc & Jaune" />
-        </div> -->
+        </div>
         <div class="frise">
             <img src="Elements/others/Vector.svg" alt="Chemin Vectoriel parcourant la page" />
         </div>
-        
-        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; align-content: flex-start; padding-top:100px;">
-            <form method="post" class="form" onsubmit="active_loader()">
+
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; align-content: flex-start; padding-top:100px; ">
+            <form method="post" class="form"  onsubmit="active_loader()">
                 <div id="error_container" class="error" style="display: none;"></div>
                 <form action="" method="post">
-                    <div class="input-group">
-                        <input type="text" required class="box-input" style="width:100%" name="NomUtilisateur" id="NomUtilisateur" autocomplete="new-name" placeholder=" ">
+                    <div class="input-group" style="margin-right:10%; margin-left:10%;">
+                        <input type="text" required class="box-input" style="width:100%;" name="NomUtilisateur" id="NomUtilisateur" autocomplete="new-name" placeholder=" ">
                         <label for="NomUtilisateur">Nom</label>
                     </div>
                     <div class="input-group">
                         <input type="text" required class="box-input" style="width:100%" name="PrenomUtilisateur" id="PrenomUtilisateur" autocomplete="new-surname" placeholder=" ">
                         <label for="PrenomUtilisateur">Prénom</label>
                     </div>
-                    <div class="input-group">
+                    <div class="input-group" style="margin-right:10%; margin-left:10%;">
                         <input type="text" required class="box-input" style="width:100%" name="UsernameUtilisateur" id="UsernameUtilisateur" placeholder=" ">
                         <label class="mail_input" for="UsernameUtilisateur">Nom d'utilisateur</label>
                     </div>
@@ -235,7 +235,7 @@
                         <input type="email" placeholder=" " pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" required class="box-input" style="width:100%" name="MailUtilisateur" id="MailUtilisateur" autocomplete="new-mail" value="<?= $join_mail ?>">
                         <label for="MailUtilisateur">Adresse Email</label>
                     </div>
-                    <div class="input-group">
+                    <div class="input-group"style="margin-right:10%; margin-left:10%">
                         <input type="text" required class="box-input" style="width:100%" name="DiscordUtilisateur" id="DiscordUtilisateur" placeholder=" ">
                         <label for="DiscordUtilisateur">Discord</label>
                     </div>
@@ -243,28 +243,49 @@
                         <input type="tel" required class="box-input" style="width:100%;color: black;" name="TelUtilisateur" id="TelUtilisateur" autocomplete="new-tel" placeholder=" ">
                         <label for="TelUtilisateur">Numéro de téléphone</label>
                     </div>
-                    
+                    <div class="input-group" style="margin-right:10%; margin-left:10%">
+                        <p class="error" id="game-error-msg">Veuillez choisir un jeux présent dans la liste. Toutes tentatives de hack est prohibée et sera sanctionnée.</p>
+                        <select name="FavGameUtilisateur" id="FavGameUtilisateur" required style="width:100%;color: black;">
+                            <?php
+                            $query = $conn2->prepare("SELECT * 
+									FROM games
+									WHERE games.GameStatus != 'del'");
+                            $query->execute();
+                            $games = $query->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($games as $game) {
+                                echo '
+                        <option value="' . $game['GameId'] . '">
+                            ' . $game['GameName'] . '
+                        </option>
+                        ';
+                            }
+
+                            ?>
+                        </select>
+                    </div>
                     <div class="input-group">
-        
-                    <select name="ProfilUtilisateur" id="ProfilUtilisateur" required style="width:100%;color: black;">
-                        <option value="mmi1">MMI 1</option>
-                        <option value="mmi2">MMI 2</option>
-                        <option value="enseignant">Enseignant</option>
-                        <option value="autre">Autre</option>
-                    </select>
-                    <label for="ProfilUtilisateur">Profil</label>
-                </div>
-
-
-
+                        <select name="ProfilUtilisateur" id="ProfilUtilisateur" required style="width:100%;color: black;">
+                            <option value="mmi1">MMI 1</option>
+                            <option value="mmi2">MMI 2</option>
+                            <option value="enseignant">Enseignant</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+                    <div class="input-group" style="margin-right:35%; margin-left:35%;">
+                        <input type="password" required class="box-input" style="width:100%" name="MdpUtilisateur" id="MdpUtilisateur" autocomplete="new-password" placeholder=" ">
+                        <label for="MdpUtilisateur">Mot de passe</label>
+                    </div>
                     <?php if ($redirect_join) {
                         echo '<input type="hidden" name="JoinId" value="' . $_GET['JoinId'] . '">';
                         echo '<input type="hidden" name="JoinToken" value="' . $_GET['JoinToken'] . '">';
                     } ?>
-                    <div style="margin-left:20%;">
+                    <div style="margin-right:41%; margin-left:41%;">
                         <input type="checkbox" required id="accept_conditions"> <label for="accept_conditions">J'ai lu et j'accepte les conditions </label>
+                        <br><br>
+                    <input type="checkbox" required id="accept_image_exploitations"> <label for="accept_image_exploitations">J'accepte les règles de droits à l'image.</label>
                     </div>
-                    <input class="btn btn__primary" type="submit" name="submit" style="font-weight:bold" value="S'inscrire" />
+                    <input class="btn btn__primary" type="submit" name="submit" style="font-weight:bold; margin-right:42%; margin-left:42%;"" value="S'inscrire" />
+                    
                     <p class="links_txt">
                         Déjà inscrit ?
                         <?php if ($redirect_join) {
@@ -276,13 +297,13 @@
                     </p>
                 </form>
         </div>
-        
+
         <!-- <br><br><br>
     <br><br><br>
     <br><br><br> -->
     </section>
 
- 
+
 
 
 
