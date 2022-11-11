@@ -1,0 +1,38 @@
+{
+  "name": "MMI LAN",
+  "short_name": "MMILAN",
+  "start_url": "https://mmilan.fr",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "./Elements/icons/favicon/mmilan_16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "./Elements/icons/favicon/mmilan_32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "./Elements/icons/favicon/mmilan_96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "./Elements/icons/favicon/mmilan_128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+
+    {
+      "src": "./Elements/icons/favicon/mmilan_512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#f9d71c",
+  "background_color": "#0a1929",
+  "orientation": "portrait",
+  "scope": "/"
+}

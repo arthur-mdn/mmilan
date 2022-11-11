@@ -34,13 +34,9 @@ if (isset($_SESSION["PlayerId"])) {
 
 <head>
     <title>Accueil</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <script src="js/main_script.js"></script>
-
-    <link rel="icon" type="image/png" href="Elements/placeholder_logo.svg" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/loader.css" />
+    <?php
+    include_once './includes/head.php';
+    ?>
 </head>
 
 <body>
@@ -60,7 +56,7 @@ if (isset($_SESSION["PlayerId"])) {
     require('menu.php'); // afficher le menu en fonction de connecté ou pas.
     ?>
 
-    <div style="background-image: url(Elements/backgrounds/bg_1.jpg);
+    <div style="background-image: url(Elements/backgrounds/main_bg.jpeg);
     height:100vh;
     background-size: cover;
     background-position: center;

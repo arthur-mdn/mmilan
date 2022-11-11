@@ -16,15 +16,12 @@
 
 <head>
     <title>Créer un compte</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <link rel="icon" type="image/png" href="Elements/placeholder_logo.svg" />
+    <?php
+    include_once './includes/head.php';
+    ?>
     <link rel="stylesheet" href="css/login_style.css" />
-    <script src="js/main_script.js"></script>
-    <link rel="stylesheet" href="uikit/style/ui-kit.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/loader.css" />
     <link rel="stylesheet" href="css/register.css" />
+
 
 </head>
 
@@ -193,12 +190,12 @@
     }
     ?>
     <section id="inscription">
-        <div class="triangle_1" id="forme_1">
+        <!--         <div class="triangle_1" id="forme_1">
             <img src="Elements/others/TriangleJB.svg" />
         </div>
         <div class="triangle_2">
             <img src="Elements/others/TriangleJB.svg" />
-        </div>
+        </div> -->
 
 
         <div class="inscription_form_container">
