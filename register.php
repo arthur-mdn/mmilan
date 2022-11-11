@@ -20,8 +20,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <link rel="icon" type="image/png" href="Elements/placeholder_logo.svg" />
     <link rel="stylesheet" href="css/login_style.css" />
+    <script src="js/main_script.js"></script>
+    
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/loader.css" />
+
 </head>
 
 <body class="body-panel">
@@ -37,20 +40,19 @@
             }
         </script>
     </div>
-    <br>
-    <br>
-    <br>
+
 
     <?php
+
     $redirect_join = (isset($_GET['JoinId']) and isset($_GET['JoinToken']));
-    var_dump($redirect_join);
     define('MyConst', TRUE);
     require('app/config.php');
     session_start();
     if (isset($_SESSION["PlayerId"])) {
-        header('location: index.php');
+        header('location: profile');
         exit();
     }
+    require('menu.php');
     $are_all_set = isset($_POST['NomUtilisateur'], $_POST['PrenomUtilisateur'], $_POST['MailUtilisateur'], $_POST['TelUtilisateur'], $_POST['MdpUtilisateur'], $_POST['DiscordUtilisateur'], $_POST['ProfilUtilisateur'], $_POST['UsernameUtilisateur']);
     $are_not_empty = (!empty($_POST['NomUtilisateur']) &&  !empty($_POST['PrenomUtilisateur']) &&  !empty($_POST['MailUtilisateur']) &&  !empty($_POST['TelUtilisateur']) &&  !empty($_POST['MdpUtilisateur']) &&  !empty($_POST['DiscordUtilisateur']) &&  !empty($_POST['ProfilUtilisateur']) &&  !empty($_POST['UsernameUtilisateur']));
 
@@ -114,36 +116,70 @@
 
                 // join the team if tokens and id are set
                 if (isset($_POST['JoinId']) and isset($_POST['JoinToken'])) {
-                    $check_teamId_who_invites = $conn2->prepare("SELECT InvitationTeamId
+                    $invitationId = htmlspecialchars($_GET['JoinId'], ENT_QUOTES, 'UTF-8');
+                    $invitationToken = htmlspecialchars($_GET['JoinToken'], ENT_QUOTES, 'UTF-8');
+
+
+                    // check if the invitation exists
+                    $checkInvitationStatus = $conn2->prepare("SELECT *
                         FROM invitations 
-                        WHERE InvitationId = ? and InvitationToken = ? and InvitationStatus = 'En cours'");
-                    $check_teamId_who_invites->bindValue(1, $_POST['JoinId']);
-                    $check_teamId_who_invites->bindValue(2, $_POST['JoinToken']);
-                    $check_teamId_who_invites->execute();
-                    $teamId_who_invites = $check_teamId_who_invites->fetchAll(PDO::FETCH_ASSOC);
+                        WHERE InvitationId = ? and InvitationToken = ?");
+                    $checkInvitationStatus->bindValue(1, $invitationId);
+                    $checkInvitationStatus->bindValue(2, $invitationToken);
+                    $checkInvitationStatus->execute();
+                    $resultInvitationStatus = $checkInvitationStatus->fetch(PDO::FETCH_ASSOC);
 
-                    var_dump($teamId_who_invites);
+                    if (!empty($resultInvitationStatus)) {
+                        if ($resultInvitationStatus['InvitationStatus'] != 'pending') {
+                            header('Location: register.php?error=Cette-invitation-n\'est-plus-valide');
+                        } else if ($resultInvitationStatus['InvitationStatus'] == 'pending') {
+                            $getTeamId = $conn2->prepare("SELECT InvitationTeamId
+                        FROM invitations 
+                        WHERE InvitationId = ? and InvitationToken = ?");
+                            $getTeamId->bindValue(1, $invitationId);
+                            $getTeamId->bindValue(2, $invitationToken);
+                            $getTeamId->execute();
+                            $resultTeamId = $getTeamId->fetchAll(PDO::FETCH_ASSOC);
 
-                    $update_invite = $conn2->prepare("UPDATE invitations 
-                        SET InvitationStatus = 'Acceptée' 
-                        WHERE InvitationId = ? and InvitationToken = ? and InvitationStatus = 'En cours'");
-                    $update_invite->bindValue(1, $_POST['JoinId']);
-                    $update_invite->bindValue(2, $_POST['JoinToken']);
-                    $update_invite->execute();
 
-                    $query = $conn2->prepare("INSERT INTO appartient (AppartientPlayerId, AppartientTeamId, AppartientRole, AppartientStatus)
-                    VALUES (?, ?, ?, ?)");
-                    $query->bindValue(1, $result2['NewPlayerId']);
-                    $query->bindValue(2, htmlspecialchars($teamId_who_invites[0]['InvitationTeamId'], ENT_QUOTES, 'UTF-8'));
-                    $query->bindValue(3, 'Joueur');
-                    $query->bindValue(4, 'ok');
-                    $query->execute(); // créer l'appartenance
+                            $query = "SELECT IFNULL(MAX(AppartientId), 0) + 1 as NewAppartientId FROM appartient";
+                            $NewAppartientId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment;
+
+                            $query = $conn2->prepare("UPDATE invitations
+                                            SET InvitationStatus = 'accepted'
+                                            WHERE InvitationId = ?
+                                            AND InvitationToken = ?");
+
+                            $query->bindValue(1, $invitationId);
+                            $query->bindValue(2, $invitationToken);
+                            $query->execute();
+
+                            $query = $conn2->prepare("INSERT INTO appartient (AppartientId,AppartientPlayerId, AppartientTeamId, AppartientRole)
+                                            VALUES (?, ?, ?, 'joueur')
+                                            ");
+                            $query->bindValue(1, $NewAppartientId['NewAppartientId']);
+                            $query->bindValue(2, $result2['NewPlayerId']);
+                            $query->bindValue(3, $resultTeamId[0]['InvitationTeamId']);
+                            $query->execute();
+
+                            // new session for the new player
+                            $_SESSION["PlayerId"] = $result2['NewPlayerId'];
+                            $_SESSION['PlayerMail'] = $_POST['MailUtilisateur'];
+
+                            // redirect to the home page
+                            echo '<script type="text/javascript">window.location.href = "index";</script>';
+                        }
+                    } else {
+                        echo '<script type="text/javascript">window.location.href = "register?error=Invitation-invalide";</script>';
+                    }
+                } else {
+                    // new session for the new player
+                    $_SESSION["PlayerId"] = $result2['NewPlayerId'];
+                    $_SESSION['PlayerMail'] = $_POST['MailUtilisateur'];
+
+                    // redirect to the home page
+                    echo '<script type="text/javascript">window.location.href = "index";</script>';
                 }
-
-                // new session for the new player
-                $_SESSION["PlayerId"] = $result2['NewPlayerId'];
-                $_SESSION['PlayerMail'] = $_POST['MailUtilisateur'];
-                header("location: index.php?msg=accountCreated");
             } else {
                 // if the game selected does not exist, log hack attempt
                 $logHack = $conn2->prepare("INSERT INTO logs (LogMsg, LogUserMail) 
@@ -164,14 +200,13 @@
         }
     }
     echo '<style> body{ background-image : url("Elements/backgrounds/background03.jpg");}</style>';
-    require('menu.php');
     ?>
 
-    <div style="display: flex; height: 90vh; flex-wrap: wrap; align-items: center; justify-content: center; align-content: flex-start;">
+    <div style="display: flex; height: 90vh; flex-wrap: wrap; align-items: center; justify-content: center; align-content: flex-start; padding-top:100px;">
         <form method="post" class="form" style="color:white;background-color:rgba(0,0,0,0.5); backdrop-filter: blur(5px);-webkit-backdrop-filter: blur(5px);width: 80%;    max-width: 500px;" onsubmit="active_loader()">
             <img src="Elements/placeholder_logo.svg" alt="logo" style="width:100px;max-width: 750px;">
 
-            <div id="error_container"></div>
+            <div id="error_container" class="error" style="display: none;"></div>
             <form class="box" action="" method="post" style="display:flex;flex-direction:column;gap:15px">
                 <div class="input_container">
                     <label for="NomUtilisateur">Nom</label>
@@ -182,15 +217,15 @@
                     <input type="text" required class="box-input" style="width:100%" name="PrenomUtilisateur" id="PrenomUtilisateur" autocomplete="new-surname" placeholder="Entrez ici votre prénom">
                 </div>
                 <div class="input_container">
-                    <label for="UsernameUtilisateur">Nom d'utilisateur</label>
-                    <input type="text" required class="box-input" style="width:100%" name="UsernameUtilisateur" id="UsernameUtilisateur" placeholder="Entrez ici votre nom d'utilisateur">
+                    <label class="mail_input" for="UsernameUtilisateur">Nom d'utilisateur</label>
+                    <input type="text" required class="box-input" style="width:100%" name="UsernameUtilisateur" id="UsernameUtilisateur" placeholder=" ">
                 </div>
                 <div class="input_container">
                     <label for="MailUtilisateur">Adresse Email</label>
                     <?php
                     $join_mail = "";
                     if ($redirect_join) {
-                        $query = $conn2->prepare("SELECT invitations.InvitationEmail FROM invitations WHERE InvitationId = ? and InvitationToken = ? and InvitationStatus = 'En cours'");
+                        $query = $conn2->prepare("SELECT invitations.InvitationEmail FROM invitations WHERE InvitationId = ? and InvitationToken = ? and InvitationStatus = 'pending'");
                         $query->bindValue(1, $_GET['JoinId']);
                         $query->bindValue(2, $_GET['JoinToken']);
                         $query->execute();
@@ -204,9 +239,7 @@
                         $join_mail = "";
                     }
                     ?>
-                    <input type="email" pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" required class="box-input" style="width:100%" name="MailUtilisateur" id="MailUtilisateur" autocomplete="new-mail" placeholder="Entrez ici votre adresse Email" value="<?= $join_mail ?>" <?php if ($redirect_join == true) {
-                                                                                                                                                                                                                                                                                            echo 'disabled';
-                                                                                                                                                                                                                                                                                        } ?>>
+                    <input type="email" pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" required class="box-input" style="width:100%" name="MailUtilisateur" id="MailUtilisateur" autocomplete="new-mail" placeholder="Entrez ici votre adresse Email" value="<?= $join_mail ?>">
                 </div>
                 <div class="input_container">
                     <label for="DiscordUtilisateur">Discord</label>
@@ -255,7 +288,9 @@
                     echo '<input type="hidden" name="JoinToken" value="' . $_GET['JoinToken'] . '">';
                 } ?>
                 <div>
-                    <input type="checkbox" required id="accept_conditions"> <label for="accept_conditions">J'ai lu et j'accepte les conditions </label>
+                    <input type="checkbox" required id="accept_conditions"> <label for="accept_conditions">J'ai lu et j'accepte le <a href="docs/reglement_LAN_VF.pdf" style="color:#aaf;text-decoration:underline;">réglement du tournoi</a></label>
+                    <br>
+                    <input type="checkbox" required id="accept_image_exploitations"> <label for="accept_image_exploitations">J'accepte les règles de droits à l'image.</label>
                 </div>
                 <input type="submit" name="submit" style="font-weight:bold" value="S'inscrire" class="box-button " />
                 <p class="links_txt">
@@ -273,8 +308,6 @@
     <br><br><br>
     <br><br><br>
     <br><br><br>
-
-    <script src="js/main_script.js"></script>
 </body>
 
 </html>
