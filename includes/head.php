@@ -18,7 +18,7 @@
     <link rel="icon" sizes="96X96" href="Elements/icons/favicons/mmilan_96.png" type="image/x-icon">
     <link rel="icon" sizes="512x512" href="Elements/icons/favicons/mmilan_512.png" type="image/x-icon">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="Elements/icons/favicons/mmilan_180.png" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="Elements/icons/favicons/mmilan_appleicon.png" type="image/x-icon">
 
     <script src="js/main_script.js"></script>
 
