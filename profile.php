@@ -28,7 +28,7 @@ require 'lib/PHPMailer/src/SMTP.php';
 
 $email_sent = ' <div style="display: flex;padding:15px;gap:15px;flex-direction: column;justify-content: center;align-items: center">
             <img src="Elements/icons/valid_check.gif" style="width:150px">
-            <h3>Demande d\'invitation envoyée !!</h3>
+            <h3>Demande d\'invitation envoyee !!</h3>
 
        </div> <br><br><br>';
 $email_not_sent = ' <div style="display: flex;padding:15px;gap:15px;flex-direction: column;justify-content: center;align-items: center">
@@ -46,7 +46,7 @@ $invalid_email_or_already_sent = ' <div style="display: flex;padding:15px;gap:15
 $expired_recover = ' <div style="display: flex;padding:15px;gap:15px;flex-direction: column;justify-content: center;align-items: center">
             <img src="Elements/icons/invalid_cross.gif" style="width:150px">
             <h3>Demande expirée</h3>
-            <p>Votre demande de réinitialisation a expiré. Veuillez réitérer votre demande </p>
+            <p>Votre demande de réinitialisation a expire. Veuillez réitérer votre demande </p>
 
        </div> <br><br><br>';
 
@@ -80,7 +80,13 @@ if (!isset($_SESSION["PlayerId"])) {
 
 </head>
 
-<body>
+<body style="min-height: 100vh;">
+    <div class="frise_container">
+        <div class="frise">
+            <img src="./Elements/others/Vector.svg">
+        </div>
+    </div>
+
     <div class="loader_container" id="loader_container">
         <div class="a">
             <div></div>
@@ -283,7 +289,9 @@ if (!isset($_SESSION["PlayerId"])) {
     require('menu.php');
     ?>
     <div class="container">
-        <a href="logout.php">Se déconnecter</a>
+        <br>
+        <a class="btn btn__secondary" href="logout.php" style="text-decoration: none;">Se déconnecter</a>
+        <br><br>
         <?php
         // Easter Egg - NE PAS TOUCHER
         goto yZY1K;
@@ -337,10 +345,18 @@ if (!isset($_SESSION["PlayerId"])) {
 
         if (!empty($playerTeam)) { // appartient à une équipe
             $playerTeam = $playerTeam[0];
-            echo '<h1>Votre Equipe !</h1>
-            <h2>' . $playerTeam['TeamName'] . '</h2>
-            <p>' . $playerTeam['TeamDesc'] . '</p>
+            echo '<h2 class="head_title primary">Votre Equipe !</h2>
+            <div class="profile_head">
+            <div class="profile_title">
+            <label for="team_name">Nom de l\'équipe</label>
+            <h1 id="team_name">' . $playerTeam['TeamName'] . '</h1>
+            </div>
+
             <img src="' . $playerTeam['TeamLogo'] . '" alt="team_logo" style="width: 100px;">
+            </div>
+
+            <label for="team_desc">Description</label>
+            <p class="team_desc" id="team_desc">' . $playerTeam['TeamDesc'] . '</p>
             <br>
             ';
             if ($playerTeam['AppartientRole'] === "chef") { // affichage en tant que chef d'équipe
@@ -360,7 +376,7 @@ if (!isset($_SESSION["PlayerId"])) {
                 $number_of_players = count($playersOfPlayerTeam);
 
                 if (!empty($playersOfPlayerTeam)) {
-                    echo '<h4>Membres de votre equipe</h4>';
+                    echo '<h3>Membres de votre equipe</h3>';
                     foreach ($playersOfPlayerTeam as $player) {
                         echo '<p>' . $player['PlayerLastname'] . ' ' . $player['PlayerFirstname'] . ' - ' . $player['AppartientRole'] . '</p>';
                     }
@@ -381,7 +397,7 @@ if (!isset($_SESSION["PlayerId"])) {
                 $invitations = $query->fetchAll(PDO::FETCH_ASSOC);
 
                 if ($number_of_players === 3) {
-                    echo '<h4>Vous avez atteint le nombre maximum de membres dans votre equipe</h4>';
+                    echo '<br /><h4 class="success">Vous avez atteint le nombre maximum de membres dans votre equipe</h4>';
                 } else {
                     //checker si invitations en cours
                     $checkInvitations = $conn2->prepare("SELECT *
@@ -412,7 +428,7 @@ if (!isset($_SESSION["PlayerId"])) {
                             }
                             echo '</ul>';
                         } else {
-                            echo '<p>Vous pouvez inviter un joueur à rejoindre votre équipe en utilisant le formulaire ci-dessous.</p>';
+                            echo '<br /><p>Vous pouvez inviter un joueur à rejoindre votre équipe en utilisant le formulaire ci-dessous.</p>';
                             // formulaire d'invitation pour le joueur restant
 
                             echo
@@ -455,7 +471,7 @@ if (!isset($_SESSION["PlayerId"])) {
                                 }
                                 echo '</ul>';
 
-                                echo '<p>Vous pouvez inviter un joueur à rejoindre votre équipe en utilisant le formulaire ci-dessous.</p>';
+                                echo '<br /><p>Vous pouvez inviter un joueur à rejoindre votre équipe en utilisant le formulaire ci-dessous.</p>';
                                 // formulaire d'invitation pour le joueur restant
                                 echo
                                 '<form action="" method="post">
@@ -733,7 +749,7 @@ if (!isset($_SESSION["PlayerId"])) {
                 $query->bindValue(1, htmlspecialchars($playerTeam["TeamId"], ENT_QUOTES, 'UTF-8'));
                 $query->execute();
                 $playersOfPlayerTeam = $query->fetchAll(PDO::FETCH_ASSOC); //
-
+                echo '<h3>Membres de votre equipe</h3>';
                 foreach ($playersOfPlayerTeam as $playerOfPlayerTeam) {
                     echo '<p>' . $playerOfPlayerTeam['PlayerFirstname'] . ' ' . $playerOfPlayerTeam['PlayerLastname'] . ' (' . $playerOfPlayerTeam['AppartientRole'] . ')</p>';
                 }

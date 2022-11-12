@@ -63,6 +63,7 @@ body {
   width: 100%;
   height: var(--body-height);
   overflow: hidden;
+  z-index: -1;
 }
 
 .frise {
@@ -72,7 +73,6 @@ body {
   transform: translateX(-50%);
   width: 100%;
   max-width: var(--screen-width);
-  z-index: -1;
 }
 .frise img {
   width: 100%;

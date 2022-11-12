@@ -741,3 +741,17 @@ button {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(306deg)
     brightness(103%) contrast(101%);
 }
+
+.team_desc {
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+
+.profile_head {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -225,16 +225,19 @@
 			}
 		} else {
 			echo '
-<div style="display: flex; flex-direction: column;    padding: 0px 50px; gap:15px;">
+<div style="display: flex; flex-direction: column;    padding: 0px 50px; gap:15px; max-width:1200px; margin:0 auto;">
 	
 		 <h3 class="box-title">Réinitialisez votre mot de passe</h3>
 		 <p class="box-title">Veuillez saisir votre adresse e-mail donnée lors de votre inscription. Si le compte existe :
 Nous vous enverrons par mail la procédure pour réinitialiser votre mot de passe</p>
-    <form method="post" style="display:flex;gap:15px;flex-direction: row; flex-wrap: wrap;" onsubmit="active_loader(); ">
-		<input type="email" id="mail_input" name="RecoverMailUtilisateur" style="min-width:300px" placeholder="Adresse Email" autocomplete="current-mail" required>
-		<input type="submit" value="Réinitialiser" class="box-button ">
+    <form method="post" style="display:flex;gap:15px;flex-direction: column; flex-wrap: wrap;" onsubmit="active_loader(); ">
+		<div class="input-group">
+		<input type="email" id="mail_input" name="RecoverMailUtilisateur" style="min-width:300px" placeholder=" " autocomplete="current-mail" required>
+		<label for="mail_input">Adresse Email</label>
+		</div>
+		<button class="btn btn__primary" type="submit">Réinitialiser</button>
 	</form>
-	<a href="login.php" style="" onclick="active_loader(); "> Retour </a>
+	<a href="login" style="" onclick="active_loader(); "> Retour </a>
 
 	</div>
 	';
