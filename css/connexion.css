@@ -233,6 +233,7 @@ label {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  padding-inline: 20px;
   overflow: hidden;
 }
 #connexion .form {
@@ -242,14 +243,17 @@ label {
 }
 .tgl1 {
   position: absolute;
+  right: calc(var(--screen-width));
+  top: 45%;
   width: 100%;
+  transform: translateY(-50%);
   z-index: -1;
 }
 .tgl1 img {
-  height: 1634px;
-  margin-left: -495px;
-  margin-bottom: -338px;
-  rotate: -335deg;
+  height: calc(var(--screen-width) * 1.5);
+  max-height: 5000px;
+  min-height: 900px;
+  object-fit: contain;
 }
 
 .frise {

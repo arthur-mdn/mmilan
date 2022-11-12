@@ -24,6 +24,11 @@
    </head>
 
    <body class="body-panel">
+       <div class="frise_container">
+           <div class="frise">
+               <img src="Elements/others/Vector.svg" />
+           </div>
+       </div>
        <div class="loader_container" id="loader_container">
            <div class="a">
                <div></div>
@@ -233,9 +238,6 @@
        <section id="connexion">
            <div class="tgl1">
                <img src="Elements/others/TriangleJB.svg" alt="Triangle Blanc & Jaune" />
-           </div>
-           <div class="frise">
-               <img src="Elements/others/Vector.svg" alt="Chemin Vectoriel parcourant la page" />
            </div>
 
            <form method="post" class="form" onsubmit="active_loader()">
