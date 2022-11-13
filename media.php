@@ -36,7 +36,7 @@ if (isset($_SESSION["PlayerId"])) {
     <?php
     include_once './includes/head.php';
     ?>
-    <link rel="stylesheet" href="css/mediaCss.css" />
+    <link rel="stylesheet" href="css/media-css.css" />
 
 
 </head>
@@ -82,11 +82,10 @@ if (isset($_SESSION["PlayerId"])) {
             <img src="Elements/others/Vector.svg" alt="Chemin Vectoriel parcourant la page" />
         </div>
         <div class="twitchtitle">
-            <h1 class="mediatitle"> Live Twitch </h1>
-            <div class="boxshadow3"></div>
+            <h1 class="head_title primary"> Live Twitch </h1>
         </div>
         <div id="1" class="sectiontwitch">
-            <iframe src="https://player.twitch.tv/?channel=oximuss_&parent=mmilan.fr" frameborder="0" allowfullscreen="true" scrolling="no" height="500" width="889" class="twitchflux">
+            <iframe src="https://player.twitch.tv/?channel=oximuss_&parent=mmilan.fr" frameborder="0" allowfullscreen="true" scrolling="no"  class="twitchflux">
             </iframe>
             <iframe class="twitchchat" id="chat_embed" src="https://www.twitch.tv/embed/oximuss_/chat?parent=mmilan.fr" height="500" width="350">
             </iframe>
@@ -99,8 +98,7 @@ if (isset($_SESSION["PlayerId"])) {
             <img id="2" src="Elements/others/01blue.svg" alt="Num01 Bleu" />
         </div>
         <div class="rstitle">
-            <h1 class="titrers">Reseaux sociaux</h1>
-            <div class="boxshadow"></div>
+            <h1 class="head_title primary">Reseaux sociaux</h1>
         </div>
         <div class="informations">
             <div class="infoslan">
@@ -126,13 +124,12 @@ if (isset($_SESSION["PlayerId"])) {
 
 
     <section id="sponsorSection">
-        <div class="el_3    ">
+        <div class="el_3">
             <img src="Elements/others/02White.svg" alt="Num02 Blanc" />
         </div>
         <div id="3" class="sponsor">
             <div class="sponsortitle">
-                <h1 class="titresponsor"> Sponsor de notre lan</h1>
-                <div class="boxshadow2"></div>
+                <h1 class="head_title secondary"> Sponsor de notre lan</h1>
             </div>
 
             <div class="sponsorrow1">
