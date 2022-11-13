@@ -45,6 +45,8 @@
 .gmaps-effect {
   border-radius: 15px;
   filter: grayscale(85%) invert(100%);
+  width:600px;
+  height:450px
 }
 .positions-info {
   width: 65%;
@@ -87,4 +89,46 @@
   height: 17%;
   left: 1000px;
   top: 800px;
+}
+
+@media only screen and (max-width: 670px) {
+  .infos-lan {
+    flex-direction: column-reverse;
+  }
+  .lan-explication{
+   display: flex;
+   justify-content: center;
+  }
+  .img-lan{
+    width: 65%;
+  }
+  .txt-lan{
+    
+    text-align: center;
+  }
+ .lan-information{
+  text-align: center;
+ }
+ .infos-position{
+  flex-direction: column-reverse;
+ }
+ .position{
+  align-items: center;
+ }
+ .positions-info{
+  text-align: center;
+ }
+ .gmaps-effect{
+  width: 450px;
+  height: 300px;
+ }
+ .el_1{
+  bottom:-300px;
+ }
+ .el_2{
+    right: 0;
+    left: 500px;
+    bottom: 0;
+    height: 93px;
+ }
 }
