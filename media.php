@@ -42,6 +42,11 @@ if (isset($_SESSION["PlayerId"])) {
 </head>
 
 <body>
+    <div class="frise_container">
+        <div class="frise">
+            <img src="Elements/others/Vector.svg" />
+        </div>
+    </div>
     <?php
     include 'menu.php';
     ?>
@@ -78,14 +83,12 @@ if (isset($_SESSION["PlayerId"])) {
         <div class="el_1">
             <img src="Elements/others/TriangleJB.svg" alt="Triangle Blanc & Jaune" />
         </div>
-        <div class="el_4">
-            <img src="Elements/others/Vector.svg" alt="Chemin Vectoriel parcourant la page" />
-        </div>
+
         <div class="twitchtitle">
             <h1 class="head_title primary"> Live Twitch </h1>
         </div>
         <div id="1" class="sectiontwitch">
-            <iframe src="https://player.twitch.tv/?channel=oximuss_&parent=mmilan.fr" frameborder="0" allowfullscreen="true" scrolling="no"  class="twitchflux">
+            <iframe src="https://player.twitch.tv/?channel=oximuss_&parent=mmilan.fr" frameborder="0" allowfullscreen="true" scrolling="no" class="twitchflux">
             </iframe>
             <iframe class="twitchchat" id="chat_embed" src="https://www.twitch.tv/embed/oximuss_/chat?parent=mmilan.fr" height="500" width="350">
             </iframe>

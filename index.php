@@ -110,7 +110,7 @@ if (isset($_SESSION["PlayerId"])) {
 
                     #counters_container {
                         display: flex;
-                        gap: 15px;
+                        gap: 8px;
                     }
 
                     .counter_container {
@@ -118,16 +118,24 @@ if (isset($_SESSION["PlayerId"])) {
                         padding: 25px;
                         border-radius: 15px;
                         width: fit-content;
+                        margin-block: 1rem;
                     }
 
                     .precise_counter_container span {
-                        font-size: clamp(45px, 12vw, 115px);
+                        font-size: clamp(25px, 10vw, 100px);
                     }
 
                     .precise_counter_container {
                         display: flex;
                         flex-direction: column;
                         align-items: center;
+                    }
+
+                    @media only screen and (max-width: 600px) {
+                        .counter_container {
+                            margin-inline: auto;
+
+                        }
                     }
                 </style>
                 <script>

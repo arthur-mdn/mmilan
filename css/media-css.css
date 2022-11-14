@@ -1,293 +1,257 @@
-
-
-.twitchtitle{
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    padding-left: 50px;
-    padding-top: 100px;
-
+.twitchtitle {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  padding-left: 50px;
+  padding-top: 100px;
 }
-.mediatitle{
-    width: 350px;
-    height: 50px;
-    position: absolute;
-    text-shadow: 2px 2px 5px #0A1929;
-    z-index: 1;
+.mediatitle {
+  width: 350px;
+  height: 50px;
+  position: absolute;
+  text-shadow: 2px 2px 5px #0a1929;
+  z-index: 1;
 }
-.boxshadow3{
-    position: absolute;
-    background-color:#f9d71c;
-    height: 30px;
-    width: 250px;
-    top: 110px;
-    left: 60px;
-    z-index: 0;
-
+.boxshadow3 {
+  position: absolute;
+  background-color: #f9d71c;
+  height: 30px;
+  width: 250px;
+  top: 110px;
+  left: 60px;
+  z-index: 0;
 }
-.sectiontwitch{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 70px;
-    padding: 100px;
-
+.sectiontwitch {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 70px;
+  padding: 100px;
 }
-.twitchflux{
-    border-radius:15px;
-    box-shadow:  10px 10px #f9d71c;
-    border: none;
-    height:500px;
-    width:889px;
-
+.twitchflux {
+  border-radius: 15px;
+  box-shadow: 10px 10px #f9d71c;
+  border: none;
+  height: 500px;
+  width: 889px;
 }
-.twitchchat{
-    border-radius: 15px;
-    box-shadow:  10px 10px #f9d71c;
-    border: none;
-
+.twitchchat {
+  border-radius: 15px;
+  box-shadow: 10px 10px #f9d71c;
+  border: none;
 }
 
-
-
-
-
-
-
-
-
-.rstitle{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    padding-right: 150px;
-    padding-top: 160px;
-
+.rstitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: 150px;
+  padding-top: 160px;
 }
-.titrers{
-    width: 365px;
-    position: absolute;
-    text-shadow: 2px 2px 5px #0A1929;
-    z-index:1;
-    }
-.boxshadow{
-    position: relative;
-    background-color: #f9d71c;
-    height: 30px;
-    width: 300px;
-    top: 10px;
-    left: -60px;
+.titrers {
+  width: 365px;
+  position: absolute;
+  text-shadow: 2px 2px 5px #0a1929;
+  z-index: 1;
 }
-.informations{
-    display: flex;
-    flex-direction:row;
-    justify-content: center;
-    gap: 200px;
-    padding-bottom: 150px;
+.boxshadow {
+  position: relative;
+  background-color: #f9d71c;
+  height: 30px;
+  width: 300px;
+  top: 10px;
+  left: -60px;
 }
-.infoslan{
-    display: flex;
-    flex-direction: column;
+.informations {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 200px;
+  padding-bottom: 150px;
 }
-.logolan{
-    width: 510px;
-    margin: 0;
+.infoslan {
+  display: flex;
+  flex-direction: column;
 }
-.landate{
-    padding-left: 20px;
-    margin: 0;
+.logolan {
+  width: 510px;
+  margin: 0;
 }
-.rssociaux{
-    display: flex;
-    flex-direction: row;
-    padding-top: 50px;
-    gap:20px;
-    justify-content: center;
+.landate {
+  padding-left: 20px;
+  margin: 0;
 }
-.youtubers{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.rssociaux {
+  display: flex;
+  flex-direction: row;
+  padding-top: 50px;
+  gap: 20px;
+  justify-content: center;
 }
-.instagramrs{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.youtubers {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.logoyt{
-
-    height: 180px;
-    width: 180px;
+.instagramrs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.logoinsta{
-
-    height: 120px;
-    width: 120px;
+.logoyt {
+  height: 180px;
+  width: 180px;
 }
-.logoinstatxt{
-    padding-top: 30px;
+.logoinsta {
+  height: 120px;
+  width: 120px;
 }
-.logoyttxt{
-    padding-bottom: 30px;
+.logoinstatxt {
+  padding-top: 30px;
 }
-.textcenter{
-    text-align: center;
+.logoyttxt {
+  padding-bottom: 30px;
 }
-.center{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+.textcenter {
+  text-align: center;
+}
+.center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
-
-
-
-
-
-.sponsor{
-    padding-bottom: 50px;
-    padding-top: 77px;
-    background-color:#f9d71c;
+.sponsor {
+  padding-bottom: 50px;
+  padding-top: 77px;
+  background-color: #f9d71c;
 }
-.sponsortitle{
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    padding-left: 250px;
+.sponsortitle {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  padding-left: 250px;
 }
-.titresponsor{
-    width: 600px;
-    height: 50px;
-    color:#0A1929;
-    position: absolute;
-    z-index: 1;
+.titresponsor {
+  width: 600px;
+  height: 50px;
+  color: #0a1929;
+  position: absolute;
+  z-index: 1;
 }
-.boxshadow2{
-    position: relative;
-    background-color:  rgba(23, 35, 46, 0.4);
-    height: 30px;
-    width:500px;
-    top: 15px;
-    left: 15px;
+.boxshadow2 {
+  position: relative;
+  background-color: rgba(23, 35, 46, 0.4);
+  height: 30px;
+  width: 500px;
+  top: 15px;
+  left: 15px;
 }
-.sponsorrow1{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 30px;
-    padding-top: 150px;
+.sponsorrow1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 30px;
+  padding-top: 150px;
 }
-.sponsorrow2{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 30px;
-    padding-top: 20px;
+.sponsorrow2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 30px;
+  padding-top: 20px;
 }
-.sponsorlogo{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 347px;
-    height: 80px;
-    background-color:#0A1929;
-    border-radius: 15px ;
-    
+.sponsorlogo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 347px;
+  height: 80px;
+  background-color: #0a1929;
+  border-radius: 15px;
 }
-
-
-
-
 
 #twitch #reseauxsocial #sponsorSection {
-    position: relative;
-    width: 100%;
-  }
+  position: relative;
+  width: 100%;
+}
 
-  #twitch .el_1  {
-    position: absolute;
-    z-index: -1;
-  }
+#twitch .el_1 {
+  position: absolute;
+  z-index: -1;
+}
 
-  .el_1 {
-    width:150%;
-    height:150%;
-    bottom: -300px;
-    right: 340px;
+.el_1 {
+  width: 150%;
+  height: 150%;
+  bottom: -300px;
+  right: 340px;
 }
-.el_4 {
-    position: absolute;
-    z-index: -1;
-    width:100%;
-    height:100%;
-    bottom:750px
+.el_2 {
+  position: absolute;
+  z-index: -1;
+  width: 20%;
+  height: 20%;
+  top: 850px;
+  left: 1050px;
 }
-.el_2{
-    position: absolute;
-    z-index: -1;
-    width: 20%;
-    height: 20%;
-    top:850px;
-    left:1050px
+#sectionSponsor {
+  z-index: 2;
 }
-#sectionSponsor{
-    z-index: 2;
-}
-.el_3{
-    position: absolute;
-    z-index: 1;
-    width: 20%;
-    height: 20%;
-    top:1420px;
-    left:50px;
- 
+.el_3 {
+  position: absolute;
+  z-index: 1;
+  width: 20%;
+  height: 20%;
+  top: 1420px;
+  left: 50px;
 }
 
 @media only screen and (max-width: 670px) {
-    .sectiontwitch{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 50px;
-    }
-    .twitchflux{
-        width: 85%;
-    }
-    .informations{
-        display: flex;
-        flex-direction: column;
-        gap:50px; 
-    }
-    .infoslan{
-        align-items: center;
-    }
-    .rstitle{
-        padding-left:50px;
-        justify-content: flex-start;
-    }
-    .sponsortitle{
-        padding-left: 50px;
-    }
-    .sponsorrow1{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-top: 20px;
-    }
-    .sponsorrow2{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .el_1{
-        bottom: -1600px;
-        right: 100px;
-    }
-    .el_2{
-       display: none;
-    }
-    .el_3{
-        display:none;
-    }
+  .sectiontwitch {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
   }
+  .twitchflux {
+    width: 85%;
+  }
+  .informations {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+  .infoslan {
+    align-items: center;
+  }
+  .rstitle {
+    padding-left: 50px;
+    justify-content: flex-start;
+  }
+  .sponsortitle {
+    padding-left: 50px;
+  }
+  .sponsorrow1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+  }
+  .sponsorrow2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .el_1 {
+    bottom: -1600px;
+    right: 100px;
+  }
+  .el_2 {
+    display: none;
+  }
+  .el_3 {
+    display: none;
+  }
+}
