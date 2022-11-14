@@ -34,6 +34,7 @@ window.onload = function () {
 
   let pageParams = new URLSearchParams(window.location.search);
   let errorMsg = pageParams.get("error");
+  let isFull = pageParams.get("full");
   let hack_attempt = pageParams.get("hack_log");
   const gameInput = document.getElementById("FavGameUtilisateur");
 
@@ -49,9 +50,23 @@ window.onload = function () {
   }
 
   if (errorMsg) {
+    if ((errorMsg = "mmi1-only")) {
+      let error = document.getElementById("error_container");
+      error.style.display = "block";
+      error.innerHTML =
+        "Pour le moment, les inscriptions ne sont ouvertes que pour les MMI 1, merci de patienter encore un peu !";
+    } else {
+      let error = document.getElementById("error_container");
+      error.style.display = "block";
+      error.innerHTML = errorMsg.split("-").join(" ");
+    }
+  }
+
+  if (isFull) {
     let error = document.getElementById("error_container");
     error.style.display = "block";
-    error.innerHTML = errorMsg.split("-").join(" ");
+    error.innerHTML =
+      "Les inscriptions sont terminées ! 60 personnes ont déjà été inscrites, merci de votre compréhension. Pour toutes questions, n'hésitez pas à nous contacter.";
   }
 
   const burgers = document.querySelectorAll(".burger-menu");

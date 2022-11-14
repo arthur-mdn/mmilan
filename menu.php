@@ -191,12 +191,6 @@
             </a>
         </li>
         <li>
-            <a href="program">Programme</a>
-        </li>
-        <li>
-            <a href="media">Médias</a>
-        </li>
-        <li>
             <a href="teams">Équipes</a>
         </li>
         </ul>
@@ -247,9 +241,7 @@
         <div class="nav__links">
 
 
-            <a href="program">Programme</a>
-
-            <a href="media">Médias</a>
+            <a href="/">Accueil</a>
 
             <a href="teams">Équipes</a>
 

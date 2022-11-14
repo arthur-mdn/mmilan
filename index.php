@@ -33,7 +33,7 @@ if (isset($_SESSION["PlayerId"])) {
 <html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Accueil</title>
+    <title>Accueil | MMI LAN</title>
     <?php
     include_once './includes/head.php';
     ?>

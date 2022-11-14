@@ -16,12 +16,10 @@
 
 <head>
 	<title> Récupération </title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<link rel="icon" type="image/png" href="Elements/placeholder_logo.svg" />
-	<link rel="stylesheet" href="css/style.css" />
-	<link rel="stylesheet" href="css/loader.css" />
-	<script src="js/main_script.js"></script>
+	<?php
+	include_once './includes/head.php';
+	?>
+
 </head>
 
 <body class="body-panel">
