@@ -321,7 +321,7 @@ if (!isset($_SESSION["PlayerId"])) {
         $query = $conn2->prepare("SELECT * 
 									FROM players, appartient, teams
 									WHERE players.PlayerStatus = 'ok'
-									and teams.TeamStatus = 'ok'
+									and teams.TeamStatus NOT IN ('banned', 'ban')
 									and appartient.AppartientStatus not in ('del','canceled')
 									and players.PlayerId = ?
                                     and players.PlayerId = appartient.AppartientPlayerId
@@ -363,7 +363,7 @@ if (!isset($_SESSION["PlayerId"])) {
                 $query = $conn2->prepare("SELECT * 
 									FROM players, appartient, teams
 									WHERE players.PlayerStatus = 'ok'
-									and teams.TeamStatus = 'ok'
+									and teams.TeamStatus NOT IN ('banned', 'ban')
 									and appartient.AppartientStatus not in ('del','canceled')
                                     and players.PlayerId = appartient.AppartientPlayerId
                                     and appartient.AppartientTeamId = teams.TeamId
@@ -740,7 +740,7 @@ if (!isset($_SESSION["PlayerId"])) {
                 $query = $conn2->prepare("SELECT * 
 									FROM players, appartient, teams
 									WHERE players.PlayerStatus = 'ok'
-									and teams.TeamStatus = 'ok'
+									and teams.TeamStatus NOT IN ('banned', 'ban')
 									and appartient.AppartientStatus not in ('del','canceled')
                                     and players.PlayerId = appartient.AppartientPlayerId
                                     and appartient.AppartientTeamId = teams.TeamId
@@ -991,7 +991,7 @@ if (!isset($_SESSION["PlayerId"])) {
         $checkInvitation = $conn2->prepare("SELECT *
                                                 FROM players, invitations, teams
                                                 WHERE players.PlayerStatus = 'ok'
-                                                and teams.TeamStatus = 'ok'
+                                                and teams.TeamStatus NOT IN ('banned', 'ban')
                                                 and invitations.InvitationStatus not in ('denied','accepted', 'cancelled')
                                                 and invitations.InvitationTeamId = teams.TeamId
                                                 and invitations.InvitationEmail = players.PlayerEmail
