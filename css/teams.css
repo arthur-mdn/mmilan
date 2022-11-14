@@ -2,166 +2,215 @@
 
 /* CSS pour la partie JOUEURS SOLO (réutilisable si besoin dans la partie précédente) */
 .teams_display_section {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    padding-top: 100px;
-    height: 900px;
-    margin: 0 0;
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
+  margin: 0 auto;
 
-    padding-left: 20px;
-    padding-right: 20px;
+  max-width: 1200px;
+
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .alone_players_display_section {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding-top: 100px;
-    background-color: #f9d71c;
-    margin: 0 0;
-    width: 100%;
-    padding: 0 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
+  background-color: #f9d71c;
+  margin: 0 0;
+  width: 100%;
+  padding: 0 20px;
 }
 
 .alone_players_display_section > .title_section > .head_title.secondary:after {
-    left: 6.5rem;
-    top: 1.8rem;
+  left: 6.5rem;
+  top: 1.8rem;
 }
 
 .alone_players_display_section > .title_section {
-    margin: 7% 0 0 9%;
+  margin: 7% 0 0 9%;
 }
 
 .alone_players_display_section > .text_content {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .text {
-    max-width: 70%;
-    font-size: 20px;
-    font-weight: 700;
-    color: black;
-    margin-top: 3%;
+  max-width: 70%;
+  font-size: 20px;
+  font-weight: 700;
+  color: black;
+  margin-top: 3%;
 }
 
 .alone_players_display_section > .btn_section > .btnregister {
-    background-color: #0a1929;
-    color: #f9d71c;
-    font-size: 20px;
-    padding: 0.4rem 2rem;
-    display: flex;
-    margin: 20px auto 20px;
+  background-color: #0a1929;
+  color: #f9d71c;
+  font-size: 20px;
+  padding: 0.4rem 2rem;
+  display: flex;
+  margin: 20px auto 20px;
 }
 
 .alone_players_display_section > .graphics > .element_right {
-    width: 30%;
-    position: absolute;
-    right: 0;
-    top: 500px;
+  width: 30%;
+  position: absolute;
+  right: 0;
+  top: 500px;
 }
 
 .alone_players_display_section > .graphics > .element_left {
-    width: 30%;
-    position: absolute;
-    left: 0;
-    top: 500px;
+  width: 30%;
+  position: absolute;
+  left: 0;
+  top: 500px;
 
-    -moz-transform: scale(-1, 1);
-    -webkit-transform: scale(-1, 1);
-    -o-transform: scale(-1, 1);
-    -ms-transform: scale(-1, 1);
-    transform: scale(-1, 1);
+  -moz-transform: scale(-1, 1);
+  -webkit-transform: scale(-1, 1);
+  -o-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
 }
 
 .textinfo {
-    font-size: 19px;
-    font-weight: 700;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
+  font-size: 19px;
+  font-weight: 700;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 }
 
 .informations {
-    position: absolute;
-    bottom: -40px;
-    left: 20px;
+  position: absolute;
+  bottom: -40px;
+  left: 20px;
 }
 
 .icon_info {
-    position: relative;
-    margin-left: 10px;
-    fill: #0a1929;
+  position: relative;
+  margin-left: 10px;
+  fill: #0a1929;
 }
 
 svg.controllers {
-    fill: #f9d71c;
+  fill: #f9d71c;
 }
 
 #wrapper {
-    width: 100%;
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    margin-top: 5%;
+  width: 100%;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  margin-top: 5%;
 }
 
 #carousel {
-    overflow: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
+  overflow: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
 }
 
 #carousel::-webkit-scrollbar {
-    height: 0;
+  height: 0;
 }
 
 #prev,
 #next {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    background: #0a1929;
-    border: none;
-    padding: 8px;
-    border-radius: 50%;
-    outline: 0;
-    cursor: pointer;
-    position: absolute;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background: #0a1929;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  outline: 0;
+  cursor: pointer;
+  position: absolute;
 }
 
 #prev {
-    top: 50%;
-    left: -10%;
-    transform: translate(50%, -50%);
-    display: none;
+  top: 50%;
+  left: -10%;
+  transform: translate(50%, -50%);
+  display: none;
 }
 
 #next {
-    top: 50%;
-    right: -10%;
-    transform: translate(-50%, -50%);
+  top: 50%;
+  right: -10%;
+  transform: translate(-50%, -50%);
 }
 
 #content {
-    display: grid;
-    justify-content: center;
-    grid-gap: 10%;
-    grid-auto-flow: column;
-    margin: auto;
-    box-sizing: border-box;
+  display: grid;
+  justify-content: center;
+  grid-gap: 10%;
+  grid-auto-flow: column;
+  margin: auto;
+  box-sizing: border-box;
 }
 
 .item {
-    object-fit: cover;
-    width: 256px;
-    height: 256px;
-    border-radius: 10px;
-    background: #0a1929;
+  object-fit: cover;
+  width: 256px;
+  height: 256px;
+  border-radius: 10px;
+  background: #0a1929;
+}
+
+.team_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-block: 3rem;
+}
+
+.team_container .team_logo {
+  width: 100px;
+}
+
+.team_container .team_logo img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.team_container .team_name {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.team_container .team_description {
+  font-size: 1rem;
+  font-weight: 400;
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 0.5rem;
+  width: 50%;
+}
+
+.team_container .team_players {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.team_container .team_players .team_players_list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.team_container .team_players .team_player {
+  list-style: none;
+  padding: 1rem;
+  border: 1px solid grey;
+  border-radius: 10px;
+  width: fit-content;
 }
