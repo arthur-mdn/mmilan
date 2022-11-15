@@ -154,7 +154,7 @@
                                 $query->execute();
 
                                 $query = $conn2->prepare("INSERT INTO appartient (AppartientId,AppartientPlayerId, AppartientTeamId, AppartientRole)
-                                            VALUES (?, ?, ?, 'joueur')
+                                            VALUES (?, ?, ?, 'player')
                                             ");
                                 $query->bindValue(1, $NewAppartientId['NewAppartientId']);
                                 $query->bindValue(2, $_SESSION["PlayerId"]);
