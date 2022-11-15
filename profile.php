@@ -509,7 +509,7 @@ if (!isset($_SESSION["PlayerId"])) {
                     $selectTeamId->execute();
                     $teamIdResult = $selectTeamId->fetch(PDO::FETCH_ASSOC);
 
-                    if ($_POST['teamId'] === $teamIdResult['AppartientTeamId']) {
+                    if (intval($_POST['teamId']) === $teamIdResult['AppartientTeamId']) {
 
 
                         //génération d'un token
