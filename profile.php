@@ -509,7 +509,7 @@ if (!isset($_SESSION["PlayerId"])) {
                     $selectTeamId->execute();
                     $teamIdResult = $selectTeamId->fetch(PDO::FETCH_ASSOC);
 
-                    if (intval($_POST['teamId']) === $teamIdResult['AppartientTeamId']) {
+                    if (intval($_POST['teamId']) === intval($teamIdResult['AppartientTeamId'])) {
 
 
                         //génération d'un token
@@ -633,6 +633,12 @@ if (!isset($_SESSION["PlayerId"])) {
                                             $insertInvitation->bindValue(5, $token);
                                             $insertInvitation->execute();
 
+                                            $logSuccess = $conn2->prepare("INSERT INTO logs (LogId, LogMsg, LogUserMail) VALUES (?,?,?)");
+                                            $logSuccess->bindValue(1, $newLogId['newLogId']);
+                                            $logSuccess->bindValue(2, "Successfully sent an invitation :" . $_SESSION['PlayerMail'] . " invited " . $_POST['playerToInvite'] . " to join team " . $_POST['teamId']);
+                                            $logSuccess->bindValue(3, $_SESSION['PlayerMail']);
+                                            $logSuccess->execute();
+
                                             echo '<meta http-equiv="refresh" content="0;url=profile?mailSent=success">';
                                         } catch (Exception $e) {
                                             echo $email_not_sent . "<br><p>Merci de transmettre ces informations à l'administrateur : {$mail->ErrorInfo}</p>";
@@ -711,6 +717,15 @@ if (!isset($_SESSION["PlayerId"])) {
                                         $insertInvitation->bindValue(5, $token);
                                         $insertInvitation->execute();
 
+                                        $query = "SELECT IFNULL(MAX(LogId), 0) + 1 as newLogId FROM logs";
+                                        $newLogId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment
+
+                                        $logSuccess = $conn2->prepare("INSERT INTO logs (LogId, LogMsg, LogUserMail) VALUES (?,?,?)");
+                                        $logSuccess->bindValue(1, $newLogId['newLogId']);
+                                        $logSuccess->bindValue(2, "Successfully sent an invitation :" . $_SESSION['PlayerMail'] . " invited " . $_POST['playerToInvite'] . " to join team " . $_POST['teamId']);
+                                        $logSuccess->bindValue(3, $_SESSION['PlayerMail']);
+                                        $logSuccess->execute();
+
                                         echo '<meta http-equiv="refresh" content="0;url=profile?mailSent=success">';
                                     } catch (Exception $e) {
                                         echo $email_not_sent . "<br>Merci de transmettre ces informations à l'administrateur : {$mail->ErrorInfo}";
@@ -724,7 +739,7 @@ if (!isset($_SESSION["PlayerId"])) {
                         }
                     } else {
 
-                        /* var_dump($_POST, $_SESSION, $teamIdResult); */
+                        var_dump($_POST, $_SESSION, $teamIdResult);
 
                         $query = "SELECT IFNULL(MAX(LogId), 0) + 1 as newLogId FROM logs";
                         $newLogId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment
