@@ -244,3 +244,9 @@ Nous vous enverrons par mail la procédure pour réinitialiser votre mot de pass
 
 
 	?>
+	<?php
+	include_once './includes/footer.php';
+	?>
+</body>
+
+</html>

@@ -185,6 +185,9 @@ if (isset($_SESSION["PlayerId"])) {
         let width = carousel.offsetWidth;
         window.addEventListener("resize", e => (width = carousel.offsetWidth));
     </script>
+    <?php
+    include_once './includes/footer.php';
+    ?>
 </body>
 
 

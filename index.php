@@ -209,6 +209,9 @@ if (isset($_SESSION["PlayerId"])) {
         ?>
     </div> -->
 
+    <?php
+    include_once './includes/footer.php';
+    ?>
 </body>
 
 </html>
