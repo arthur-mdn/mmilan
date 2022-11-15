@@ -509,7 +509,7 @@ if (!isset($_SESSION["PlayerId"])) {
                     $selectTeamId->execute();
                     $teamIdResult = $selectTeamId->fetch(PDO::FETCH_ASSOC);
 
-                    if ($_POST['TeamId'] === $teamIdResult['AppartientTeamId']) {
+                    if ($_POST['teamId'] === $teamIdResult['AppartientTeamId']) {
 
 
                         //génération d'un token
@@ -723,6 +723,7 @@ if (!isset($_SESSION["PlayerId"])) {
                             }
                         }
                     } else {
+
                         $query = "SELECT IFNULL(MAX(LogId), 0) + 1 as newLogId FROM logs";
                         $newLogId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment
 
@@ -732,7 +733,7 @@ if (!isset($_SESSION["PlayerId"])) {
                         $logHack->bindValue(3, $_SESSION['PlayerMail']);
                         $logHack->execute();
 
-                        echo '<p class="error">Merci de ne pas modifier les inputs! </p>';
+                        echo '<p class="error">Merci de ne pas modifier les inputs! Si vous n\'y êtes pour rien, contactez <a href="mailto:mathislambert.dev@gmail.com">mathislambert.dev@gmail.com</a> </p>';
                     }
                 }
             } else { // affichage en tant que membre équipe
