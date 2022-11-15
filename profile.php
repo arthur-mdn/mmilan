@@ -733,7 +733,7 @@ if (!isset($_SESSION["PlayerId"])) {
                         $logHack->bindValue(3, $_SESSION['PlayerMail']);
                         $logHack->execute();
 
-                        echo '<p class="error">Merci de ne pas modifier les inputs! Si vous n\'y êtes pour rien, contactez <a href="mailto:mathislambert.dev@gmail.com">mathislambert.dev@gmail.com</a> </p>';
+                        echo '<p class="error">Merci de ne pas modifier les inputs! Si vous n\'y êtes pour rien, contactez <a href="mailto:mathislambert.dev@gmail.com" style="color:red;">mathislambert.dev@gmail.com</a> </p>';
                     }
                 }
             } else { // affichage en tant que membre équipe
