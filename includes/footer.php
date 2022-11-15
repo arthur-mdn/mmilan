@@ -1,10 +1,14 @@
 <footer>
     <style>
+        footer {
+            background-color: #0a1929;
+            padding: 2rem 0;
+        }
+
         .flex-column {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 2rem 0;
         }
 
         .flex-row {
@@ -22,7 +26,12 @@
         }
 
         .footer-link {
-            text-decoration: none;
+            color: var(--color-light);
+        }
+
+        .footer-link,
+        .footer-container a {
+            text-decoration: none !important;
         }
 
         @media screen and (max-width: 600px) {
@@ -35,17 +44,22 @@
                 font-size: 0.6rem;
                 gap: .5rem;
             }
+
+            .connexion-btn {
+                font-size: 1rem;
+                padding: 0.4rem 0.9rem
+            }
         }
     </style>
 
-    <div class="flex-column">
+    <div class="footer-container flex-column">
         <a href="./index.php"><img src="./Elements/others/Logo_blanc.png" alt="logo mmilan" width="200px"></a>
         <div class="flex-row">
             <a class="footer-link" href="./index.php">ACCUEIL</a>
-            &VerticalLine;
+            <!--             &VerticalLine;
             <a class="footer-link" href="./program.php">PROGRAMME</a>
             &VerticalLine;
-            <a class="footer-link" href="./media.php">MEDIAS</a>
+            <a class="footer-link" href="./media.php">MEDIAS</a> -->
             &VerticalLine;
             <a class="footer-link" href="./teams.php">EQUIPES</a>
         </div>
@@ -65,7 +79,7 @@
         <?php
         } else {
         ?>
-            <a class="btn btn__light button no-style" href="login">
+            <a class="btn btn__light button no-style connexion-btn" href="login">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z" />
                     <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z" />
