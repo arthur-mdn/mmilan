@@ -175,7 +175,8 @@ if (!isset($_SESSION["PlayerId"])) {
             echo '<p class="error">Erreur : Cette invitation n\'existe pas ou a expirée</p>';
             exit();
         }
-    } elseif (isset($_POST['refuseInvitation'])) {
+    }
+    if (isset($_POST['refuseInvitation'])) {
         // check veracity of the invitation
         $query = $conn2->prepare("SELECT * 
                                     FROM players, invitations, teams
@@ -224,10 +225,9 @@ if (!isset($_SESSION["PlayerId"])) {
         $teamId = $team['TeamId'];
 
         $query = $conn2->prepare("SELECT * 
-                                    FROM players, invitations, teams
+                                    FROM invitations, teams
                                     WHERE invitations.InvitationStatus = 'pending'
                                     and invitations.InvitationTeamId = teams.TeamId
-                                    and invitations.InvitationEmail = players.PlayerEmail
                                     and invitations.InvitationId = ?
                                     and invitations.InvitationTeamId = ?
                                     ");
@@ -235,6 +235,8 @@ if (!isset($_SESSION["PlayerId"])) {
         $query->bindValue(2, $teamId);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        // var_dump($result, $teamId, $team);
 
         if (!empty($result)) {
             $cancelInvitation = $conn2->prepare("UPDATE invitations
@@ -244,46 +246,10 @@ if (!isset($_SESSION["PlayerId"])) {
             $cancelInvitation->bindValue(1, htmlspecialchars($_POST['invitationId'], ENT_QUOTES, 'UTF-8'));
             $cancelInvitation->execute();
 
-            header('Location: ' . $_SERVER['REQUEST_URI']);
+            echo '<meta http-equiv="refresh" content="0">';
         } else {
             echo '<p class="error">Erreur : Cette invitation n\'existe pas ou a expirée</p>';
             exit();
-        }
-
-
-        if (false) {
-            $query = $conn2->prepare("SELECT * 
-                                    FROM players, invitations, teams
-                                    WHERE invitations.InvitationStatus = 'pending'
-                                    and invitations.InvitationTeamId = teams.TeamId
-                                    and invitations.InvitationEmail = players.PlayerEmail
-                                    and invitations.InvitationId = ?
-                                    and invitations.InvitationTeamId = ?
-                                    ");
-            $query->bindValue(1, htmlspecialchars($_POST['invitationId'], ENT_QUOTES, 'UTF-8'));
-
-            $query->execute();
-            $result = $query->fetchAll(PDO::FETCH_ASSOC);
-
-            if (!empty($result)) {
-                if ($result[0]['TeamId'] === $_SESSION['TeamId']) {
-                    $invitationId = htmlspecialchars($_POST['invitationId'], ENT_QUOTES, 'UTF-8');
-                    $query = $conn2->prepare("UPDATE invitations
-                                            SET InvitationStatus = 'cancelled'
-                                            WHERE InvitationId = ?
-                                            ");
-                    $query->bindValue(1, $invitationId);
-                    $query->execute();
-
-                    header('Location: ' . $_SERVER['REQUEST_URI']);
-                } else {
-                    echo '<p class="error">Erreur : Vous n\'êtes pas le propriétaire de cette invitation</p>';
-                    exit();
-                }
-            } else {
-                echo '<p class="error">Erreur : Cette invitation n\'existe pas ou a expirée</p>';
-                exit();
-            }
         }
     }
     require('menu.php');
@@ -321,7 +287,7 @@ if (!isset($_SESSION["PlayerId"])) {
         $query = $conn2->prepare("SELECT * 
 									FROM players, appartient, teams
 									WHERE players.PlayerStatus = 'ok'
-									and teams.TeamStatus = 'ok'
+									and teams.TeamStatus NOT IN ('banned', 'ban')
 									and appartient.AppartientStatus not in ('del','canceled')
 									and players.PlayerId = ?
                                     and players.PlayerId = appartient.AppartientPlayerId
@@ -363,7 +329,7 @@ if (!isset($_SESSION["PlayerId"])) {
                 $query = $conn2->prepare("SELECT * 
 									FROM players, appartient, teams
 									WHERE players.PlayerStatus = 'ok'
-									and teams.TeamStatus = 'ok'
+									and teams.TeamStatus NOT IN ('banned', 'ban')
 									and appartient.AppartientStatus not in ('del','canceled')
                                     and players.PlayerId = appartient.AppartientPlayerId
                                     and appartient.AppartientTeamId = teams.TeamId
@@ -509,7 +475,7 @@ if (!isset($_SESSION["PlayerId"])) {
                     $selectTeamId->execute();
                     $teamIdResult = $selectTeamId->fetch(PDO::FETCH_ASSOC);
 
-                    if ($_POST['teamId'] === $teamIdResult['TeamId']) {
+                    if (intval($_POST['teamId']) === intval($teamIdResult['AppartientTeamId'])) {
 
 
                         //génération d'un token
@@ -621,6 +587,14 @@ if (!isset($_SESSION["PlayerId"])) {
 
                                             $mail->send();
 
+                                            $query = "SELECT IFNULL(MAX(LogId), 0) + 1 as newLogId FROM logs";
+                                            $newLogId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment
+
+                                            $logSuccess = $conn2->prepare("INSERT INTO logs (LogId, LogMsg, LogUserMail) VALUES (?,?,?)");
+                                            $logSuccess->bindValue(1, $newLogId['newLogId']);
+                                            $logSuccess->bindValue(2, "Successfully sent an invitation :" . $_SESSION['PlayerMail'] . " invited " . $_POST['playerToInvite']);
+                                            $logSuccess->bindValue(3, $_SESSION['PlayerMail']);
+                                            $logSuccess->execute();
 
 
                                             // enregistrement de l'invitation
@@ -631,7 +605,11 @@ if (!isset($_SESSION["PlayerId"])) {
                                             $insertInvitation->bindValue(3, htmlspecialchars($_POST['teamId'], ENT_QUOTES, 'UTF-8'));
                                             $insertInvitation->bindValue(4, 'pending');
                                             $insertInvitation->bindValue(5, $token);
-                                            $insertInvitation->execute();
+                                            try {
+                                                $insertInvitation->execute();
+                                            } catch (PDOException $e) {
+                                                echo "Une erreur inconnue est survenue, merci de contacter le staff en transmettant le message suivant :" . $e->getMessage();
+                                            }
 
                                             echo '<meta http-equiv="refresh" content="0;url=profile?mailSent=success">';
                                         } catch (Exception $e) {
@@ -699,6 +677,14 @@ if (!isset($_SESSION["PlayerId"])) {
 
                                         $mail->send();
 
+                                        $query = "SELECT IFNULL(MAX(LogId), 0) + 1 as newLogId FROM logs";
+                                        $newLogId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment
+
+                                        $logSuccess = $conn2->prepare("INSERT INTO logs (LogId, LogMsg, LogUserMail) VALUES (?,?,?)");
+                                        $logSuccess->bindValue(1, $newLogId['newLogId']);
+                                        $logSuccess->bindValue(2, "Successfully sent an invitation :" . $_SESSION['PlayerMail'] . " invited " . $_POST['playerToInvite']);
+                                        $logSuccess->bindValue(3, $_SESSION['PlayerMail']);
+                                        $logSuccess->execute();
 
 
                                         // enregistrement de l'invitation
@@ -723,6 +709,9 @@ if (!isset($_SESSION["PlayerId"])) {
                             }
                         }
                     } else {
+
+                        // var_dump($_POST, $_SESSION, $teamIdResult);
+
                         $query = "SELECT IFNULL(MAX(LogId), 0) + 1 as newLogId FROM logs";
                         $newLogId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment
 
@@ -732,7 +721,7 @@ if (!isset($_SESSION["PlayerId"])) {
                         $logHack->bindValue(3, $_SESSION['PlayerMail']);
                         $logHack->execute();
 
-                        echo '<p class="error">Merci de ne pas modifier les inputs! </p>';
+                        echo '<p class="error">Merci de ne pas modifier les inputs! Si vous n\'y êtes pour rien, contactez <a href="mailto:mathislambert.dev@gmail.com" style="color:red;">mathislambert.dev@gmail.com</a> </p>';
                     }
                 }
             } else { // affichage en tant que membre équipe
@@ -740,7 +729,7 @@ if (!isset($_SESSION["PlayerId"])) {
                 $query = $conn2->prepare("SELECT * 
 									FROM players, appartient, teams
 									WHERE players.PlayerStatus = 'ok'
-									and teams.TeamStatus = 'ok'
+									and teams.TeamStatus NOT IN ('banned', 'ban')
 									and appartient.AppartientStatus not in ('del','canceled')
                                     and players.PlayerId = appartient.AppartientPlayerId
                                     and appartient.AppartientTeamId = teams.TeamId
@@ -991,7 +980,7 @@ if (!isset($_SESSION["PlayerId"])) {
         $checkInvitation = $conn2->prepare("SELECT *
                                                 FROM players, invitations, teams
                                                 WHERE players.PlayerStatus = 'ok'
-                                                and teams.TeamStatus = 'ok'
+                                                and teams.TeamStatus NOT IN ('banned', 'ban')
                                                 and invitations.InvitationStatus not in ('denied','accepted', 'cancelled')
                                                 and invitations.InvitationTeamId = teams.TeamId
                                                 and invitations.InvitationEmail = players.PlayerEmail
