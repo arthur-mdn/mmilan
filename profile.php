@@ -225,10 +225,9 @@ if (!isset($_SESSION["PlayerId"])) {
         $teamId = $team['TeamId'];
 
         $query = $conn2->prepare("SELECT * 
-                                    FROM players, invitations, teams
+                                    FROM invitations, teams
                                     WHERE invitations.InvitationStatus = 'pending'
                                     and invitations.InvitationTeamId = teams.TeamId
-                                    and invitations.InvitationEmail = players.PlayerEmail
                                     and invitations.InvitationId = ?
                                     and invitations.InvitationTeamId = ?
                                     ");
