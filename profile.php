@@ -724,6 +724,8 @@ if (!isset($_SESSION["PlayerId"])) {
                         }
                     } else {
 
+                        var_dump($_POST, $_SESSION, $teamIdResult);
+
                         $query = "SELECT IFNULL(MAX(LogId), 0) + 1 as newLogId FROM logs";
                         $newLogId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment
 
