@@ -177,7 +177,7 @@
 }
 
 #twitch .el_1 {
-  position: absolute;
+  position: fixed;
   z-index: -1;
 }
 
@@ -216,7 +216,8 @@
     padding: 50px;
   }
   .twitchflux {
-    width: 85%;
+    height: 320px;
+    width: 569px;
   }
   .informations {
     display: flex;

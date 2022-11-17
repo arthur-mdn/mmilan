@@ -82,6 +82,142 @@ if (isset($_SESSION["PlayerId"])) {
         </div>
     </section>
 
+<section class="presentationJeux">
+    <div class="jeux">
+
+
+
+            <div class="jeux__item" data-game="mystere">
+
+                <div>
+                    <h2>JEU MYSTERE</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                        ugiat, sed. Corporis nulla dignissimos quo persm.</p>
+                    </div>
+
+            </div>
+
+            <div class="jeux__item" data-game="fallguys">
+
+                <div>
+                    <h2>FALL GUYS</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                        ugiat, sed. Corporis nulla dignissimos quo persm.</p>
+                    </div>
+
+            </div>
+
+            <div class="jeux__item" data-game="rocketleague">
+
+                <div>
+                    <h2>ROCKET LEAGUE</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                        ugiat, sed. Corporis nulla dignissimos quo persm.</p>
+                    </div>
+
+            </div>
+
+            <div class="jeux__item" data-game="overwatch">
+
+                <div>
+                    <h2>OVERWATCH 2</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                        ugiat, sed. Corporis nulla dignissimos quo persm.</p>
+                        </div>
+
+            </div>
+
+            <div class="jeux__item" data-game="cityguesser">
+
+                <div>
+                    <h2>CITY GUESSER</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                        ugiat, sed. Corporis nulla dignissimos quo persm.</p>
+                    </div>
+
+            </div>
+
+            <div class="jeux__item" data-game="switchsports">
+
+                <div>
+                    <h2>SWITCH SPORTS</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                        ugiat, sed. Corporis nulla dignissimos quo persm.</p>
+                    </div>
+
+            </div>
+
+
+
+    </div>
+    <div class="carouselSection">
+        <div class="carousel">
+            <ul class="carousel__list">
+
+            <li class="carousel__item" data-pos="-3" data-game="overwatch"></li>
+            <li class="carousel__item" data-pos="-2" data-game="fallguys"></li>
+            <li class="carousel__item" data-pos="-1" data-game="rocketleague"></li>
+            <li class="carousel__item" data-pos="0" data-game="mmilan"></li>
+            <li class="carousel__item" data-pos="1" data-game="cityguesser"></li>
+            <li class="carousel__item" data-pos="2" data-game="switchsports"></li>
+            <li class="carousel__item" data-pos="3" data-game="mystere"></li>
+
+            </ul>
+        </div>
+
+        <div class="game">
+        
+            <img src="Elements/images/left_arrow.png" class="left_arrow">
+            <div class="gametext">
+
+                <div class="overwatch">
+                    <h2>OVERWATCH 2</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                        ugiat, sed. Corporis nulla dignissimos quo persm.</p>
+                        </div>
+            
+                        <div class="rocketleague">
+                            <h2>ROCKET LEAGUE</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                ugiat, sed. Corporis nulla dignissimos quo persm.</p>
+                            </div>
+            
+                        <div class="cityguesser">
+                            <h2>CITY GUESSER</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                ugiat, sed. Corporis nulla dignissimos quo persm.</p>
+                            </div>
+            
+                            <div class="fallguys">
+                                <h2>FALL GUYS</h2>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                    ugiat, sed. Corporis nulla dignissimos quo persm.</p>
+                                </div>
+            
+                                <div class="mmilan">
+                                    <h2>NOS JEUX</h2>
+                                    <p>Swipe à droite ou à gauche pour voir les différents jeux de la lan !</p>
+                                    </div>
+            
+                                    <div class="switchsports">
+                                        <h2>SWITCH SPORTS</h2>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                            ugiat, sed. Corporis nulla dignissimos quo persm.</p>
+                                        </div>
+            
+                                        <div class="mystere">
+                                            <h2>JEU MYSTERE</h2>
+                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                                ugiat, sed. Corporis nulla dignissimos quo persm.</p>
+                                            </div>
+
+            </div>
+            <img src="Elements/images/right_arrow.png" class="right_arrow">
+        
+        </div>
+    </div>
+</section>
+
     <section id="games"></section>
 
 
@@ -106,7 +242,7 @@ if (isset($_SESSION["PlayerId"])) {
         </div>
     </section>
 
-
+        <script src="js/program_carousel.js"></script>
 </body>
 
 </html>
