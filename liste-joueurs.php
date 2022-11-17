@@ -119,6 +119,7 @@ if (isset($_SESSION["PlayerId"])) {
         $fetchPlayers->execute();
         $players = $fetchPlayers->fetchAll(PDO::FETCH_ASSOC);
         ?>
+        <h4>Il y actuellement <?= count($players) ?> Joueurs/ses inscrit(e)s</h4>
         <div class="table_container">
             <table>
                 <thead>
