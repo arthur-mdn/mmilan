@@ -84,14 +84,19 @@ if (isset($_SESSION["PlayerId"])) {
             <img src="Elements/others/TriangleJB.svg" alt="Triangle Blanc & Jaune" />
         </div>
 
-        <div class="twitchtitle">
-            <h1 class="head_title primary"> Live Twitch </h1>
-        </div>
-        <div id="1" class="sectiontwitch">
-            <iframe src="https://player.twitch.tv/?channel=oximuss_&parent=mmilan.fr" frameborder="0" allowfullscreen="true" scrolling="no" class="twitchflux">
-            </iframe>
-            <iframe class="twitchchat" id="chat_embed" src="https://www.twitch.tv/embed/oximuss_/chat?parent=mmilan.fr" height="500" width="350">
-            </iframe>
+        <div class="container">
+            <div class="twitchtitle">
+                <h1 class="head_title primary"> Live Twitch </h1>
+            </div>
+           
+            <div id="1" class="sectiontwitch"> 
+               
+                <iframe src="https://player.twitch.tv/?channel=oximuss_&parent=mmilan.fr" frameborder="0" allowfullscreen="true" scrolling="no" class="twitchflux">
+                </iframe>
+                <iframe class="twitchchat" id="chat_embed" src="https://www.twitch.tv/embed/oximuss_/chat?parent=mmilan.fr" height="500" width="350">
+                </iframe>
+            </div>
+
         </div>
     </section>
 
@@ -106,7 +111,7 @@ if (isset($_SESSION["PlayerId"])) {
         <div class="informations">
             <div class="infoslan">
                 <img class="logolan" src="Elements/others/Logo_blanc.png" />
-                <h1 class="landate">XX/XX/XXXX à XX:XX </h1>
+                <h1 class="landate">15/12/2022 à 08:00 </h1>
             </div>
             <div class="rssociaux">
                 <div class="youtubers">
@@ -157,6 +162,9 @@ if (isset($_SESSION["PlayerId"])) {
             </div>
         </div>
     </section>
+    <?php
+        include("includes/footer.php")
+    ?>
 </body>
 
 </html>
