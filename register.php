@@ -63,9 +63,7 @@
         $checkNumOfPlayers = $conn2->prepare("SELECT COUNT(*) FROM players WHERE players.PlayerStatus = 'ok' AND players.PlayerRole NOT IN ('admin', 'staff')");
         $checkNumOfPlayers->execute();
         $numOfPlayers = $checkNumOfPlayers->fetchColumn();
-        if (
-            $numOfPlayers >= 1
-        ) {
+        if ($numOfPlayers >= 60) {
             echo "<script>window.location.href = 'register?full=true';</script>";
         } else {
             if ($_POST['ProfilUtilisateur'] === "mmi1") {
