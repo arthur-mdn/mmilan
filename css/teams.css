@@ -160,8 +160,14 @@ svg.controllers {
 
 .item {
     object-fit: cover;
-    width: 256px;
-    height: 256px;
+    width: 128px;
+    height: 128px;
     border-radius: 10px;
-    background: #0a1929;
+}
+
+.players {
+    width: 140%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }

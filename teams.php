@@ -1,33 +1,4 @@
-<?php
 
-/**
- * mmilan, website that manage e-sport teams
- * Propulsed by Arthur Mondon.
- *
- * @author     Arthur Mondon
- *
- * Contributors :
- * -
- *
- */
-session_start();
-define('MyConst', TRUE);
-require('app/config.php');
-
-if (isset($_SESSION["PlayerId"])) {
-    $query = $conn2->prepare("SELECT * 
-									FROM players
-									WHERE players.PlayerStatus = 'ok'
-									and players.PlayerId = ?");
-    $query->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
-    $query->execute();
-    $result = $query->fetchAll(PDO::FETCH_ASSOC);
-    if (empty($result)) {
-        header("Location: logout.php?blocked=true");
-        exit();
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
 
@@ -109,7 +80,7 @@ require('menu.php'); // afficher le menu en fonction de connecté ou pas.
 
     <!-- Bouton de la section-->
     <div class="btn_section">
-        <button class="btn btnregister">S'inscrire</button>
+        <button class="btn btnregister" href="#">S'inscrire</button>
     </div>
     <!-- Carousel (avec JS en bas de page)-->
     <div id="wrapper">
@@ -118,7 +89,7 @@ require('menu.php'); // afficher le menu en fonction de connecté ou pas.
                 <!-- LES DIV DEVRONTS APPARAITRE DYNAMIQUEMENT EN FONCTION DE LA BDD, les éléments ci-dessous n'est qu'un exemple.-->
                 <!-- JOUEUR 1 -->
                 <div class="players">
-                    <img class="item" src="./Elements/avatars/players/p1.jpg" alt="img" />
+                    <img class="item" src="./Elements/avatars/players/profil.png" alt="img" />
                     <p class="textinfo">NOM PRÉNOM <svg class="icon_info" xmlns="http://www.w3.org/2000/svg"
                                                         width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#0a1929" stroke-width="2"
                                                         stroke-linecap="round" stroke-linejoin="round">
@@ -130,7 +101,7 @@ require('menu.php'); // afficher le menu en fonction de connecté ou pas.
 
                 <!-- JOUEUR 2 -->
                 <div class="players">
-                    <img class="item" src="./Elements/avatars/players/p1.jpg" alt="img" />
+                    <img class="item" src="./Elements/avatars/players/profil.png" alt="img" />
                     <p class="textinfo">NOM PRÉNOM <svg class="icon_info" xmlns="http://www.w3.org/2000/svg"
                                                         width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#0a1929" stroke-width="2"
                                                         stroke-linecap="round" stroke-linejoin="round">
@@ -141,7 +112,7 @@ require('menu.php'); // afficher le menu en fonction de connecté ou pas.
                 </div>
                 <!-- JOUEUR 3 -->
                 <div class="players">
-                    <img class="item" src="./Elements/avatars/players/p1.jpg" alt="img" />
+                    <img class="item" src="./Elements/avatars/players/profil.png" alt="img" />
                     <p class="textinfo">NOM PRÉNOM <svg class="icon_info" xmlns="http://www.w3.org/2000/svg"
                                                         width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#0a1929" stroke-width="2"
                                                         stroke-linecap="round" stroke-linejoin="round">
