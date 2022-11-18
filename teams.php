@@ -1,4 +1,33 @@
+<?php
 
+/**
+ * mmilan, website that manage e-sport teams
+ * Propulsed by Arthur Mondon.
+ *
+ * @author     Arthur Mondon
+ *
+ * Contributors :
+ * -
+ *
+ */
+session_start();
+define('MyConst', TRUE);
+require('app/config.php');
+
+if (isset($_SESSION["PlayerId"])) {
+    $query = $conn2->prepare("SELECT * 
+									FROM players
+									WHERE players.PlayerStatus = 'ok'
+									and players.PlayerId = ?");
+    $query->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+    $query->execute();
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    if (empty($result)) {
+        header("Location: logout.php?blocked=true");
+        exit();
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
 
