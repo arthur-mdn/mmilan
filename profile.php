@@ -970,7 +970,7 @@ if (!isset($_SESSION["PlayerId"])) {
                     $joinSolo->bindValue(1, $NewAppartientSoloId['NewAppartientSoloId']);
                     $joinSolo->bindValue(2, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
                     $joinSolo->execute();
-                    echo "Vous êtes maintenant en tant que joueur solo, la page va se recharger.";
+                    echo "Vous êtes maintenant inscrit en tant que joueur solo, la page va se recharger.";
                     // reload page
                     echo '<meta http-equiv="refresh" content="0;url=profile?success=vous-êtes-inscrit-en-solo">';
                 }
