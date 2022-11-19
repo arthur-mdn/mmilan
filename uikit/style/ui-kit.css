@@ -45,6 +45,14 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-size: clamp(1.3rem, 5vw, 1.75rem) !important;
+}
+
 .section {
   margin: 0 auto;
   padding: 6rem 0 1rem;
@@ -215,44 +223,55 @@ p {
   color: var(--color-primary);
 }
 
-.input-group input {
+.input-group input,
+.input-group textarea {
   padding: 10px;
   width: 100%;
   z-index: 1;
 }
-.input-group:not(.normal_label) input:not(:-moz-placeholder-shown) + label {
+.input-group:not(.normal_label) input:not(:-moz-placeholder-shown) + label,
+.input-group:not(.normal_label) textarea:not(:-moz-placeholder-shown) + label {
   top: -0.75rem;
   font-size: 0.85rem;
   color: var(--color-primary);
 }
-.input-group:not(.normal_label) input:not(:-ms-input-placeholder) + label {
+.input-group:not(.normal_label) input:not(:-ms-input-placeholder) + label,
+.input-group:not(.normal_label) textarea:not(:-ms-input-placeholder) + label {
   top: -0.75rem;
   font-size: 0.85rem;
   color: var(--color-primary);
 }
 .input-group:not(.normal_label) input:focus + label,
-.input-group:not(.normal_label) input:not(:placeholder-shown) + label {
+.input-group:not(.normal_label) input:not(:placeholder-shown) + label,
+.input-group:not(.normal_label) textarea:focus + label,
+.input-group:not(.normal_label) textarea:not(:placeholder-shown) + label {
   top: -0.75rem;
   font-size: 0.85rem;
   color: var(--color-primary);
 }
-.input-group.error input {
+.input-group.error input,
+.input-group.error textarea {
   border: 1px solid red !important;
   color: red !important;
   background-color: rgb(255, 189, 182) !important;
 }
-.input-group.error input:focus {
+.input-group.error input:focus,
+.input-group.error textarea:focus {
   border: 1px solid red !important;
   outline: none;
 }
-.input-group.error input:not(:-moz-placeholder-shown) + label {
+.input-group.error input:not(:-moz-placeholder-shown) + label,
+.input-group.error textarea:not(:-moz-input-placeholder) + label {
   color: red !important;
 }
-.input-group.error input:not(:-ms-input-placeholder) + label {
+.input-group.error input:not(:-ms-input-placeholder) + label,
+.input-group.error textarea:not(:-ms-input-placeholder) + label {
   color: red !important;
 }
 .input-group.error input:focus + label,
-.input-group.error input:not(:placeholder-shown) + label {
+.input-group.error input:not(:placeholder-shown) + label,
+.input-group.error textarea:focus + label,
+.input-group.error textarea:not(:placeholder-shown) + label {
   color: red !important;
 }
 .input-group::after {
@@ -268,7 +287,8 @@ p {
 }
 
 .input-group input,
-.input-group select {
+.input-group select,
+.input-group textarea {
   position: relative;
   z-index: 2;
 }
@@ -282,7 +302,8 @@ p {
   font-family: "Work Sans", sans-serif;
 }
 
-input {
+input,
+textarea {
   font-family: "Work Sans", sans-serif;
   color: var(--color-dark);
   background-color: var(--color-light);
@@ -291,7 +312,8 @@ input {
   border-radius: 3px;
   padding: 5px;
 }
-input:focus {
+input:focus,
+textarea:focus {
   border: 2px solid var(--color-primary);
   outline: none;
 }
