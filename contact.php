@@ -43,9 +43,51 @@
             }
         </script>
     </div>
-    <?php
+   
+   <?php
     require('menu.php'); // afficher le menu en fonction de connecté ou pas.
     ?>
+
+    <section id="contact">
+
+    <div class="inscription_form_container">
+            <h2 class="head_title primary">Contact</h2>
+            <form method="post" onsubmit="active_loader()">
+                <div id="error_container" class="error" style="display: none;"></div>
+                <form action="" method="post">
+                    <div class="input_container">
+                        <div class="input-group">
+                            <input type="text" required class="box-input" style="width:100%;" name="NomUtilisateur" id="NomUtilisateur" autocomplete="new-name" placeholder=" ">
+                            <label for="NomUtilisateur">Nom</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" required class="box-input" style="width:100%" name="PrenomUtilisateur" id="PrenomUtilisateur" autocomplete="new-surname" placeholder=" ">
+                            <label for="PrenomUtilisateur">Prénom</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" required class="box-input" style="width:100%" name="UsernameUtilisateur" id="UsernameUtilisateur" placeholder=" ">
+                            <label for="UsernameUtilisateur">Nom d'utilisateur</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" placeholder=" " pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" required class="box-input" style="width:100%" name="MailUtilisateur" id="MailUtilisateur" autocomplete="new-mail" value="">
+                            <label for="MailUtilisateur">Adresse Email</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" placeholder=" " required class="box-input" style="width:100%" name="Objet" id="Objet">
+                            <label for="Objet">Objet</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" placeholder=" " required class="box-input" style="width:100%" name="Message" id="Message">
+                            <label for="Message">Message</label>
+                        </div>
+                    </div>
+            </form>
+    </div>
+    
+
+
+    </section>
+
 </body>
 
 </html>
