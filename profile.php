@@ -76,6 +76,7 @@ if (!isset($_SESSION["PlayerId"])) {
     <?php
     include_once './includes/head.php';
     ?>
+    <link rel="stylesheet" href="./css/profile.css">
 
 
 </head>
@@ -255,9 +256,6 @@ if (!isset($_SESSION["PlayerId"])) {
     require('menu.php');
     ?>
     <div class="container">
-        <br>
-        <a class="btn btn__secondary" href="logout.php" style="text-decoration: none;">Se déconnecter</a>
-        <br><br>
         <?php
         // Easter Egg - NE PAS TOUCHER
         goto yZY1K;
@@ -433,7 +431,7 @@ if (!isset($_SESSION["PlayerId"])) {
                                         <input type="hidden" name="invitationId" value="<?php echo $invitation['InvitationId']; ?>">
                                         <button class="btn btn__primary" type="submit" name="cancelInvitation">Annuler l'invitation</button>
                                     </form>
-        <?php
+                            <?php
                                 }
                                 echo '</ul>';
 
@@ -854,12 +852,16 @@ if (!isset($_SESSION["PlayerId"])) {
                             ';
                         } else {
                             // If the player has no pending invitation, he/she can register as a solo player
-                            echo '
-                            <form action="" method="post">
-                                <button type="submit" class="btn btn__primary" name="validationSolo">Confirmer</button>
-                                <button type="submit" class="btn btn__secondary ">Annuler</button>
-                            </form>
-                            ';
+                            ?>
+                            <h1 class="head_title primary"> Faites un choix</h1>
+                            <p> Confirmez vous vouloir vous inscrire en tant que joueur solo ?</p>
+                            <div class="team-or-solo_container">
+                                <form action="" method="post" class="validate_choice">
+                                    <button type="submit" class="btn btn__primary" name="validateJoinSolo">Confirmer</button>
+                                    <button type="submit" class="btn btn__secondary ">Annuler</button>
+                                </form>
+                            </div>
+                <?php
                         }
                     } else if ($checkSoloResult['AppartientSoloStatus'] == "ok") {
                         echo "Vous êtes déjà inscrit en solo";
@@ -897,20 +899,24 @@ if (!isset($_SESSION["PlayerId"])) {
                         }
                     }
                 }
-            } else { // aucune équipe
-                //vérifier en bdd si une invitation a été adressée au joueur connecté, possibilité d'accepter ou refuser = changer statut de l'invitation en bdd, et de rejoindre, ou pas, l'équipe
-                echo '
-        <form method="post">
-            <input type="hidden" name="select" value="team">
-            <button  class="btn btn__primary" type="submit">Je crée une équipe</button>
-        </form>
-        ';
-                echo '
-        <form method="post">
-            <input type="hidden" name="select" value="solo">
-            <button class="btn btn__primary"  type="submit">Je suis solo pour le moment</button>
-        </form>
-        ';
+            } else {
+                ?>
+                <!--  // aucune équipe
+                //vérifier en bdd si une invitation a été adressée au joueur connecté, possibilité d'accepter ou refuser = changer statut de l'invitation en bdd, et de rejoindre, ou pas, l'équipe -->
+                <h1 class="head_title primary"> Faites un choix</h1>
+                <div class="team-or-solo_container">
+                    <form method="post" class="make_choice">
+                        <input type="hidden" name="select" value="team">
+                        <button class="btn btn__primary" type="submit">Je crée une équipe</button>
+                    </form>
+
+                    <form method="post" class="make_choice">
+                        <input type="hidden" name="select" value="solo">
+                        <button class="btn btn__primary" type="submit">Je suis solo pour le moment</button>
+                    </form>
+                </div>
+
+        <?php
             }
             //* Si le bouton de validation de l'inscription solo est submit
             if (isset($_POST["validationSolo"])) {
@@ -1025,6 +1031,10 @@ if (!isset($_SESSION["PlayerId"])) {
         </div>
 
     </div>
+
+    <?php
+    include './includes/footer.php';
+    ?>
 </body>
 
 </html>

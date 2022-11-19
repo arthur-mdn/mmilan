@@ -66,15 +66,8 @@
         <?php
         if (isset($_SESSION['PlayerId'])) {
         ?>
-            <a class="btn btn__light button no-style" href="profile">
-                <?php
-                $getUsername = $conn2->prepare('SELECT * FROM players WHERE PlayerId = ?');
-                $getUsername->bindValue(1, $_SESSION['PlayerId']);
-                $getUsername->execute();
-                $UsernameResult = $getUsername->fetch(PDO::FETCH_ASSOC);
-
-                echo $UsernameResult['PlayerUsername'];
-                ?>
+            <a class="btn btn__secondary button no-style" href="logout">
+                Se déconnecter
             </a>
         <?php
         } else {
