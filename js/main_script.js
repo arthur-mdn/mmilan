@@ -104,4 +104,18 @@ window.onload = function () {
       });
     });
   }
+
+  const inputFileGroup = document.querySelectorAll(".group-file");
+
+  // change value of label when file is selected
+  if (inputFileGroup) {
+    inputFileGroup.forEach((input) => {
+      const inputFile = input.querySelector("input[type='file']");
+      const label = input.querySelector("label");
+
+      inputFile.addEventListener("change", () => {
+        label.innerHTML = inputFile.value.split("\\").pop();
+      });
+    });
+  }
 };
