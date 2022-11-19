@@ -76,6 +76,7 @@ if (!isset($_SESSION["PlayerId"])) {
     <?php
     include_once './includes/head.php';
     ?>
+    <link rel="stylesheet" href="./css/profile.css">
 
 
 </head>
@@ -255,9 +256,6 @@ if (!isset($_SESSION["PlayerId"])) {
     require('menu.php');
     ?>
     <div class="container">
-        <br>
-        <a class="btn btn__secondary" href="logout.php" style="text-decoration: none;">Se déconnecter</a>
-        <br><br>
         <?php
         // Easter Egg - NE PAS TOUCHER
         goto yZY1K;
@@ -279,9 +277,61 @@ if (!isset($_SESSION["PlayerId"])) {
         i09Iu:
         // FIN - Easter Egg - NE PAS TOUCHER
 
+        /* PARTIE INFORMATIONS DU PROFIL */
+        $fetchPlayersInfos = $conn2->prepare("SELECT * 
+                                                FROM players
+                                                WHERE players.PlayerId = ?
+                                                ");
+        $fetchPlayersInfos->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
+        $fetchPlayersInfos->execute();
+        $PlayerResult = $fetchPlayersInfos->fetch(PDO::FETCH_ASSOC);
+        ?>
+        <h1 class="head_title primary">Vous revoila !</h1>
+        <div class="profil-infos">
+            <h3>Vos informations :</h3>
+            <p><b>Prénom :</b> <?= $PlayerResult['PlayerFirstname'] ?></p>
+            <p><b>Nom :</b> <?= $PlayerResult['PlayerLastname'] ?></p>
+            <p><b>Discord :</b> <?= $PlayerResult['PlayerDiscord'] ?></p>
+            <p><b>Mail :</b> <?= $PlayerResult['PlayerEmail'] ?></p>
+            <p><b>Téléphone :</b> <?= $PlayerResult['PlayerTel'] ?></p>
+            <p><b>Promo :</b> <?= $PlayerResult['PlayerProfil'] ?></p>
+        </div>
+
+        <?php
         if (isset($_POST['msg']) and $_POST['msg'] === "successfullAddedTeam") {
             $generated_id = generateRandomString(5);
             echo '<div class="modal success" id="modal_' . $generated_id . '" onclick="close_modal(\'' . $generated_id . '\')" > Équipe créée avec succès. <script> hideIt("modal_' . $generated_id . '"); </script> </div>';
+        }
+
+        //check invitations of the player
+        $checkInvitation = $conn2->prepare("SELECT *
+                                                FROM players, invitations, teams
+                                                WHERE players.PlayerStatus = 'ok'
+                                                and teams.TeamStatus NOT IN ('banned', 'ban')
+                                                and invitations.InvitationStatus not in ('denied','accepted', 'cancelled')
+                                                and invitations.InvitationTeamId = teams.TeamId
+                                                and invitations.InvitationEmail = players.PlayerEmail
+                                                and invitations.InvitationEmail = ?
+                                                ");
+        $checkInvitation->bindValue(1, htmlspecialchars($_SESSION['PlayerMail'], ENT_QUOTES, 'UTF-8'));
+        $checkInvitation->execute();
+        $invitation = $checkInvitation->fetchAll(PDO::FETCH_ASSOC);
+
+        if (!empty($invitation)) {
+        ?>
+            <h1 class='head_title primary'> Vos invitations </h1>
+            <div class="actual_invitations">
+                <p>Vous avez une invitation en attente.</p>
+                <div class="invitation">
+                    <h3 class="invitation_title"><?= $invitation[0]['TeamName'] ?> - <?php echo $invitation[0]['InvitationStatus'] === "pending" ? "En attente" : " "; ?></h3>
+                    <form action="" method="post" class="invitation_buttons">
+                        <input type="hidden" name="invitationId" value="<?= $invitation[0]['InvitationId'] ?>">
+                        <button type="submit" class="btn btn__primary" name="acceptInvitation">Accepter</button>
+                        <button type="submit" class="btn btn__dark" name="refuseInvitation">Refuser</button>
+                    </form>
+                </div>
+            </div>
+            <?php
         }
 
         $query = $conn2->prepare("SELECT * 
@@ -385,7 +435,7 @@ if (!isset($_SESSION["PlayerId"])) {
                             echo '<ul>';
                             foreach ($invitations as $invitation) {
                                 echo '<li>' . $invitation['InvitationEmail'] . ' - ' . $invitation['InvitationStatus'] . '</li>';
-        ?>
+            ?>
                                 <form action="" method="post">
                                     <input type="hidden" name="invitationId" value="<?php echo $invitation['InvitationId']; ?>">
                                     <button class="btn btn__primary" type="submit" name="cancelInvitation">Annuler l'invitation</button>
@@ -433,7 +483,7 @@ if (!isset($_SESSION["PlayerId"])) {
                                         <input type="hidden" name="invitationId" value="<?php echo $invitation['InvitationId']; ?>">
                                         <button class="btn btn__primary" type="submit" name="cancelInvitation">Annuler l'invitation</button>
                                     </form>
-        <?php
+            <?php
                                 }
                                 echo '</ul>';
 
@@ -480,8 +530,6 @@ if (!isset($_SESSION["PlayerId"])) {
 
                         //génération d'un token
                         $token = generateRandomString();
-
-                        //TODO: vérifier si l'input n'est pas trafiqué et si l'équipe existe bien
 
                         $query = "SELECT IFNULL(MAX(InvitationId), 0) + 1 as NewInvitationId FROM invitations";
                         $NewInvitationId = $conn2->query($query)->fetch(); // look for the highest number of TeamId and add 1. ==> Home-made Auto-Increment
@@ -745,8 +793,16 @@ if (!isset($_SESSION["PlayerId"])) {
             }
         } else if (!empty($playerSolo)) {
             // affichage en tant que joueur solo
-            echo '<p>Vous êtes inscrit en solo.</p>';
-            echo '<form method="post"><button class="btn btn__primary" name="leaveSolo" type="submit">Quitter le mode solo</button></form>';
+            ?>
+            <h1 class="head_title primary"> Ton status</h1>
+            <p>Tu es actuellement inscrit en tant que joueur solo.</p>
+            <div class="team-or-solo_container">
+
+                <form method="post" class="make_choice">
+                    <button class="btn btn__primary" name="leaveSolo" type="submit">Quitter le mode solo</button>
+                </form>
+            </div>
+            <?php
         } else { // affichage en tant que joueur non inscrit
             if (isset($_POST['TeamName']) and isset($_POST['TeamDesc']) and isset($_FILES['TeamLogo'])) { // si le formulaire pour créer une équipe est rempli :
                 $upload = true;
@@ -803,26 +859,43 @@ if (!isset($_SESSION["PlayerId"])) {
                         echo ' <form method="post" id="refresher" ><input type="hidden" name="msg" value="successfullAddedTeam"><input type="submit" value="Suite" style="background-color:white"><script>document.getElementById("refresher").submit()</script> </form>';
                         die();
                     } else {
-                        echo '<p>Le nom de l\'équipe est déjà utilisé. Veuillez en choisir un différent</p>';
+                        echo '<p>Le nom de l\'équipe est déjà utilisé. Veuillez en choisir un différent</p> <br>';
+                        echo '<form method="post"><input type="hidden" name="select" value="team" /><input type="submit" class="btn btn__primary" value="D\'accord" /></form>';
                     }
                 }
             } elseif (isset($_POST['select']) and in_array($_POST['select'], ['team', 'solo'])) { // si le bouton solo ou chef d'équipe a été cliqué
 
                 if ($_POST['select'] === "team") { // si le bouton chef d'équipe a été cliqué
-                    echo '
-                        <form method="post">
-                            <button type="submit" class="N_button">Retour</button>
-                        </form>
-                        ';
-                    echo ' inscrivez votre équipe';
-                    echo '
-                    <form method="post" enctype="multipart/form-data" style="display: flex;flex-direction: column;gap: 15px">
-                        <input type="text" name="TeamName" required minlength="3" placeholder="Nom de l\'équipe">
-                        <textarea name="TeamDesc" required minlength="15" placeholder="Description de l\'équipe" style="resize: none;height: 80px;padding-top: 10px;"></textarea>
-                        <input type="file" name="TeamLogo" required accept="image/*">
-                        <button class="Y_button" type="submit">Enregistrer l\'équipe</button>
+            ?>
+                    <h1 class="head_title primary">Votre equipe</h1>
+
+                    <form method="post" enctype="multipart/form-data" class="team_form">
+                        <div class="input-group">
+                            <input type="text" name="TeamName" id="team_name" required minlength="3" placeholder=" ">
+                            <label for="team_name">Nom de l'équipe</label>
+                        </div>
+                        <div class="input-group">
+
+                            <textarea name="TeamDesc" id="team_desc" required minlength="15" placeholder=" " style="resize: none;height: 80px;padding-top: 10px;"></textarea>
+                            <label for="team_desc">Description de l'équipe</label>
+                        </div>
+
+                        <div class="group-file">
+                            <input type="file" name="TeamLogo" id="team_logo" accept="image/*" required>
+                            <label for="team_logo" class="file_label">
+                                <svg focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path d="M296 384h-80c-13.3 0-24-10.7-24-24V192h-87.7c-17.8 0-26.7-21.5-14.1-34.1L242.3 5.7c7.5-7.5 19.8-7.5 27.3 0l152.2 152.2c12.6 12.6 3.7 34.1-14.1 34.1H320v168c0 13.3-10.7 24-24 24zm216-8v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h136v8c0 30.9 25.1 56 56 56h80c30.9 0 56-25.1 56-56v-8h136c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"></path>
+                                </svg>
+                                Logo de l'équipe
+                            </label>
+                        </div>
+
+                        <div class="row">
+                            <button class="btn btn__primary" type="submit">Enregistrer l'équipe</button>
+                            <a href="profile" class="btn btn__secondary">Retour</a>
+                        </div>
                     </form>
-                    ';
+                    <?php
                 } elseif ($_POST['select'] === "solo") { // si le bouton solo a été cliqué 
                     $checkSolo = $conn2->prepare("select * from appartient_solo where AppartientSoloPlayerId = ?");
                     $checkSolo->bindValue(1, htmlspecialchars($_SESSION["PlayerId"], ENT_QUOTES, 'UTF-8'));
@@ -845,21 +918,29 @@ if (!isset($_SESSION["PlayerId"])) {
                             $query->execute();
                             $teamName = $query->fetch(PDO::FETCH_ASSOC);
 
-                            echo '<div class="alert">Vous avez une invitation en attente de la part de ' . $teamName['TeamName'] . '. Si vous vous inscrivez en solo, celle-ci sera annulée.</div>';
-                            echo '
-                            <form action="" method="post">
-                                <button type="submit" class="btn btn__primary" name="validateJoinSolo">Confirmer</button>
-                                <button type="submit" class="btn btn__secondary ">Annuler</button>
-                            </form>
-                            ';
+                    ?>
+                            <h1 class="head_title primary"> Faites un choix</h1>
+                            <div class="alert">Vous avez une invitation en attente de la part de <?= $teamName['TeamName'] ?>. Si vous vous inscrivez en solo, celle-ci sera annulée.</div>
+                            <div class="team-or-solo_container">
+                                <form action="" method="post" class="validate_choice">
+                                    <button type="submit" class="btn btn__primary" name="validateJoinSolo">Confirmer</button>
+                                    <button type="submit" class="btn btn__secondary ">Annuler</button>
+                                </form>
+                            </div>
+                        <?php
+
                         } else {
                             // If the player has no pending invitation, he/she can register as a solo player
-                            echo '
-                            <form action="" method="post">
-                                <button type="submit" class="btn btn__primary" name="validateJoinSolo">Confirmer</button>
-                                <button type="submit" class="btn btn__secondary ">Annuler</button>
-                            </form>
-                            ';
+                        ?>
+                            <h1 class="head_title primary"> Faites un choix</h1>
+                            <p> Confirmez vous vouloir vous inscrire en tant que joueur solo ?</p>
+                            <div class="team-or-solo_container">
+                                <form action="" method="post" class="validate_choice">
+                                    <button type="submit" class="btn btn__primary" name="validateJoinSolo">Confirmer</button>
+                                    <button type="submit" class="btn btn__secondary ">Annuler</button>
+                                </form>
+                            </div>
+                <?php
                         }
                     } else if ($checkSoloResult['AppartientSoloStatus'] == "ok") {
                         echo "Vous êtes déjà inscrit en solo";
@@ -897,20 +978,24 @@ if (!isset($_SESSION["PlayerId"])) {
                         }
                     }
                 }
-            } else { // aucune équipe
-                //vérifier en bdd si une invitation a été adressée au joueur connecté, possibilité d'accepter ou refuser = changer statut de l'invitation en bdd, et de rejoindre, ou pas, l'équipe
-                echo '
-        <form method="post">
-            <input type="hidden" name="select" value="team">
-            <button  class="btn btn__primary" type="submit">Je crée une équipe</button>
-        </form>
-        ';
-                echo '
-        <form method="post">
-            <input type="hidden" name="select" value="solo">
-            <button class="btn btn__primary"  type="submit">Je suis solo pour le moment</button>
-        </form>
-        ';
+            } else {
+                ?>
+                <!--  // aucune équipe
+                //vérifier en bdd si une invitation a été adressée au joueur connecté, possibilité d'accepter ou refuser = changer statut de l'invitation en bdd, et de rejoindre, ou pas, l'équipe -->
+                <h1 class="head_title primary"> Faites un choix</h1>
+                <div class="team-or-solo_container">
+                    <form method="post" class="make_choice">
+                        <input type="hidden" name="select" value="team">
+                        <button class="btn btn__primary" type="submit">Je crée une équipe</button>
+                    </form>
+
+                    <form method="post" class="make_choice">
+                        <input type="hidden" name="select" value="solo">
+                        <button class="btn btn__primary" type="submit">Je suis solo pour le moment</button>
+                    </form>
+                </div>
+
+        <?php
             }
             //* Si le bouton de validation de l'inscription solo est submit
             if (isset($_POST["validationSolo"])) {
@@ -976,38 +1061,10 @@ if (!isset($_SESSION["PlayerId"])) {
                 }
             }
         }
-        //check invitations of the player
-        $checkInvitation = $conn2->prepare("SELECT *
-                                                FROM players, invitations, teams
-                                                WHERE players.PlayerStatus = 'ok'
-                                                and teams.TeamStatus NOT IN ('banned', 'ban')
-                                                and invitations.InvitationStatus not in ('denied','accepted', 'cancelled')
-                                                and invitations.InvitationTeamId = teams.TeamId
-                                                and invitations.InvitationEmail = players.PlayerEmail
-                                                and invitations.InvitationEmail = ?
-                                                ");
-        $checkInvitation->bindValue(1, htmlspecialchars($_SESSION['PlayerMail'], ENT_QUOTES, 'UTF-8'));
-        $checkInvitation->execute();
-        $invitation = $checkInvitation->fetchAll(PDO::FETCH_ASSOC);
 
-        if (!empty($invitation)) {
-            echo "<h1> Vos invitations </h1> <br />";
-            // si invitation en cours, afficher statut
-            echo '<p>Vous avez une invitation en attente.</p><br />';
-            echo '<ul>';
-            echo '<li><h3>' . $invitation[0]['TeamName'] . ' - ' . $invitation[0]['InvitationStatus'] . '</h3></li>';
-            echo '</ul>';
-            echo '<form action="" method="post">
-                        <input type="hidden" name="invitationId" value="' . $invitation[0]['InvitationId'] . '">
-                        <button type="submit"  class="btn btn__light" name="acceptInvitation">Accepter</button>
-                        <button type="submit"  class="btn btn__light" name="refuseInvitation">Refuser</button>
-                    </form>';
-        }
 
         if (isset($_GET['mailSent']) && $_GET['mailSent'] == 'success') {
             echo $email_sent;
-            //delete GET
-            $_GET['mailSent'] = null;
         }
 
         ?>
@@ -1025,8 +1082,9 @@ if (!isset($_SESSION["PlayerId"])) {
         </div>
 
     </div>
+
     <?php
-    include_once './includes/footer.php';
+    include './includes/footer.php';
     ?>
 </body>
 

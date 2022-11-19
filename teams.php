@@ -144,41 +144,81 @@ if (isset($_SESSION["PlayerId"])) {
         </div> -->
 
     <!-- Bouton de la section-->
-    <!--         <div class="btn_section">
-            <button class="btn btnregister">S'inscrire</button>
-        </div> -->
+    <div class="btn_section">
+        <button class="btn btnregister" href="#">S'inscrire</button>
+    </div>
     <!-- Carousel (avec JS en bas de page)-->
-    <!--         <div id="wrapper">
-            <div id="carousel">
-                <div id="content">
-                   
-                    <div class="players">
-                        <img class="item" src="./Elements/avatars/players/p1.jpg" alt="img" />
-                        <p class="textinfo">NOM PRÉNOM <svg class="icon_info" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#0a1929" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="16" x2="12" y2="12" stroke="white"></line>
-                                <line x1="12" y1="8" x2="12.01" y2="8" stroke="white"></line>
-                            </svg></p>
-                    </div>
-
-                    
-
+    <div id="wrapper">
+        <div id="carousel">
+            <div id="content">
+                <!-- LES DIV DEVRONTS APPARAITRE DYNAMIQUEMENT EN FONCTION DE LA BDD, les éléments ci-dessous n'est qu'un exemple.-->
+                <!-- JOUEUR 1 -->
+                <div class="players">
+                    <img class="item" src="./Elements/avatars/players/profil.png" alt="img" />
+                    <p class="textinfo">NOM PRÉNOM <svg class="icon_info" xmlns="http://www.w3.org/2000/svg"
+                                                        width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#0a1929" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12" stroke="white"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8" stroke="white"></line>
+                        </svg></p>
                 </div>
 
-    
-                <button id="prev">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="controllers" width="24" height="24" viewBox="0 0 24 24">
-                        <path fill="none" d="M0 0h24v24H0V0z" />
-                        <path d="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" />
-                    </svg>
-                </button>
-                <button id="next">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="controllers" width="24" height="24" viewBox="0 0 24 24">
-                        <path fill="none" d="M0 0h24v24H0V0z" />
-                        <path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z" />
-                    </svg>
-                </button>
-            </div> -->
+                <!-- JOUEUR 2 -->
+                <div class="players">
+                    <img class="item" src="./Elements/avatars/players/profil.png" alt="img" />
+                    <p class="textinfo">NOM PRÉNOM <svg class="icon_info" xmlns="http://www.w3.org/2000/svg"
+                                                        width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#0a1929" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12" stroke="white"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8" stroke="white"></line>
+                        </svg></p>
+                </div>
+                <!-- JOUEUR 3 -->
+                <div class="players">
+                    <img class="item" src="./Elements/avatars/players/profil.png" alt="img" />
+                    <p class="textinfo">NOM PRÉNOM <svg class="icon_info" xmlns="http://www.w3.org/2000/svg"
+                                                        width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#0a1929" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12" stroke="white"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8" stroke="white"></line>
+                        </svg></p>
+                </div>
+                <!-- JOUEUR 4 -->
+                <div class="players">
+                    <img class="item" src="./Elements/avatars/players/p1.jpg" alt="img" />
+                    <p class="textinfo">NOM PRÉNOM <svg class="icon_info" xmlns="http://www.w3.org/2000/svg"
+                                                        width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#0a1929" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12" stroke="white"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8" stroke="white"></line>
+                        </svg></p>
+                </div>
+                <!-- JOUEUR 5 -->
+                <div class="players">
+                    <img class="item" src="./Elements/avatars/players/p1.jpg" alt="img" />
+                    <p class="textinfo">NOM PRÉNOM <svg class="icon_info" xmlns="http://www.w3.org/2000/svg"
+                                                        width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#0a1929" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12" stroke="white"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8" stroke="white"></line>
+                        </svg></p>
+                </div>
+                <!-- JOUEUR 6 -->
+                <div class="players">
+                    <img class="item" src="./Elements/avatars/players/p1.jpg" alt="img" />
+                    <p class="textinfo">NOM PRÉNOM <svg class="icon_info" xmlns="http://www.w3.org/2000/svg"
+                                                        width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#0a1929" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12" stroke="white"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8" stroke="white"></line>
+                        </svg></p>
+                </div>
 
     <!-- </section> -->
 
