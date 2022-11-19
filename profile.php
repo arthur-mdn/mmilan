@@ -856,7 +856,7 @@ if (!isset($_SESSION["PlayerId"])) {
                             // If the player has no pending invitation, he/she can register as a solo player
                             echo '
                             <form action="" method="post">
-                                <button type="submit" class="btn btn__primary" name="validationSolo">Confirmer</button>
+                                <button type="submit" class="btn btn__primary" name="validateJoinSolo">Confirmer</button>
                                 <button type="submit" class="btn btn__secondary ">Annuler</button>
                             </form>
                             ';
