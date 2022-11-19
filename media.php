@@ -36,7 +36,7 @@ if (isset($_SESSION["PlayerId"])) {
     <?php
     include_once './includes/head.php';
     ?>
-    <link rel="stylesheet" href="css/media-css.css" />
+    <link rel="stylesheet" href="css/mediaCss.css" />
 
 
 </head>
@@ -84,12 +84,12 @@ if (isset($_SESSION["PlayerId"])) {
             <img src="Elements/others/TriangleJB.svg" alt="Triangle Blanc & Jaune" />
         </div>
 
-        <div class="container">
+        <div id="1"  class="container">
             <div class="twitchtitle">
                 <h1 class="head_title primary"> Live Twitch </h1>
             </div>
            
-            <div id="1" class="sectiontwitch"> 
+            <div class="sectiontwitch"> 
                
                 <iframe src="https://player.twitch.tv/?channel=oximuss_&parent=mmilan.fr" frameborder="0" allowfullscreen="true" scrolling="no" class="twitchflux">
                 </iframe>
@@ -116,13 +116,13 @@ if (isset($_SESSION["PlayerId"])) {
             <div class="rssociaux">
                 <div class="youtubers">
                     <div class="center">
-                        <img src="Elements/others/Logo_YT_jaune.png" class="logoyt"></img>
+                        <a href="https://youtube.com/"><img src="Elements/others/Logo_YT_jaune.png"  class="logoyt"/></a>
                     </div>
                     <h2 class="textcenter logoyttxt">Youtube</h2>
                 </div>
                 <div class="instagramrs">
                     <div class="center">
-                        <img src="Elements/others/Logo_Instagram_jaune.png" class="logoinsta"></img>
+                        <a href="https://instagram.com/mmi_lan2022"><img src="Elements/others/Logo_Instagram_jaune.png"  class="logoinsta"/></a>
                     </div>
                     <h2 class="textcenter logoinstatxt">MMi_lan2022</h2>
                 </div>

@@ -24,6 +24,7 @@
   flex-direction: row;
   justify-content: center;
   gap: 70px;
+  padding-top: 50px;
   
 }
 .twitchflux {
@@ -180,36 +181,36 @@
   z-index: -1;
   width: 150%;
   height: 150%;
-  bottom: 10%;
+  bottom:11%;
   right: 30%;
 }
-.el_2 {
+.el_2 img{
   position: absolute;
   z-index: -1;
   width: 20%;
   height: 20%;
-  top: 850px;
-  left: 1050px;
+  top: 28%;
+  left: 80%;
 }
 #sectionSponsor {
   z-index: 2;
 }
-.el_3 {
+.el_3 img {
   position: absolute;
   z-index: 1;
   width: 20%;
   height: 20%;
-  top: 1420px;
-  left: 50px;
+  top: 52%;
+  left: 5%;
 }
 @media only screen and (max-width: 1150px) {
    
-   .el_2 {
-     display: none;
-   }
-   .el_3 {
-     display: none;
-   }
+  .el_2{
+    display: none;
+  }
+  .el_3{
+    display: none;
+  }
    .section-viewer{
      display: none;
    }
@@ -256,4 +257,17 @@
     align-items: center;
   }
   
+}
+@media only screen and (max-width: 670px) {
+  .logolan{
+    width: 450px;
+  }
+  .logoinsta{
+    width: 100px;
+    height: 100px;
+  }
+  .logoyt{
+    width: 160px;
+    height: 160px;
+  }
 }
