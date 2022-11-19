@@ -47,11 +47,11 @@
    <?php
     require('menu.php'); // afficher le menu en fonction de connecté ou pas.
     ?>
-
+<h2 class="head_title primary">Contact</h2>
     <section id="contact">
 
     <div class="inscription_form_container">
-            <h2 class="head_title primary">Contact</h2>
+            
             <form method="post" onsubmit="active_loader()">
                 <div id="error_container" class="error" style="display: none;"></div>
                 <form action="" method="post">
