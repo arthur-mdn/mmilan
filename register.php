@@ -267,7 +267,7 @@
                                 </select>
                             </div>
                             <div class="input-group normal_label">
-                                <label for="ProfilUtilisateur">Votre status :</label>
+                                <label for="ProfilUtilisateur">Votre statut :</label>
                                 <select name="ProfilUtilisateur" id="ProfilUtilisateur" required style="width:100%;color: black;">
                                     <option value="mmi1">MMI 1</option>
                                     <option value="mmi2">MMI 2</option>
