@@ -795,7 +795,7 @@ if (!isset($_SESSION["PlayerId"])) {
             // affichage en tant que joueur solo
             ?>
             <h1 class="head_title primary"> Ton status</h1>
-            <p>Tu es actuellement inscrit en tant que joueur solo.</p>
+            <p>Tu es actuellement inscrit(e) en tant que joueur/se solo.</p>
             <div class="team-or-solo_container">
 
                 <form method="post" class="make_choice">
@@ -933,7 +933,7 @@ if (!isset($_SESSION["PlayerId"])) {
                             // If the player has no pending invitation, he/she can register as a solo player
                         ?>
                             <h1 class="head_title primary"> Faites un choix</h1>
-                            <p> Confirmez vous vouloir vous inscrire en tant que joueur solo ?</p>
+                            <p> Confirmez vous vouloir vous inscrire en tant que joueur/se solo ?</p>
                             <div class="team-or-solo_container">
                                 <form action="" method="post" class="validate_choice">
                                     <button type="submit" class="btn btn__primary" name="validateJoinSolo">Confirmer</button>

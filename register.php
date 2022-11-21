@@ -196,17 +196,17 @@
     ?>
         <section id="inscription">
             <div class="inscription_form_container">
-                <h2 class="head_title primary">Inscription Solo</h2>
+                <h2 class="head_title primary">Inscription</h2>
                 <form method="post" onsubmit="active_loader()">
                     <div id="error_container" class="error" style="display: none;"></div>
                     <form action="" method="post">
                         <div class="inputs_container">
                             <div class="input-group">
-                                <input type="text" required class="box-input" style="width:100%;" name="NomUtilisateur" id="NomUtilisateur" autocomplete="new-name" placeholder=" ">
+                                <input type="text" required class="box-input" style="width:100%;" name="NomUtilisateur" id="NomUtilisateur" autocomplete="first-name" placeholder=" ">
                                 <label for="NomUtilisateur">Nom</label>
                             </div>
                             <div class="input-group">
-                                <input type="text" required class="box-input" style="width:100%" name="PrenomUtilisateur" id="PrenomUtilisateur" autocomplete="new-surname" placeholder=" ">
+                                <input type="text" required class="box-input" style="width:100%" name="PrenomUtilisateur" id="PrenomUtilisateur" autocomplete="family-surname" placeholder=" ">
                                 <label for="PrenomUtilisateur">Prénom</label>
                             </div>
                             <div class="input-group">
@@ -247,7 +247,7 @@
                                 <label for="TelUtilisateur">Numéro de téléphone</label>
                             </div>
                             <div class="input-group normal_label">
-                                <label for="FavGameUtilisateur"> Votre jeu favori :</label>
+                                <label for="FavGameUtilisateur">Jeu favori :</label>
                                 <select name="FavGameUtilisateur" id="FavGameUtilisateur" required style="width:100%;color: black;">
                                     <?php
                                     $query = $conn2->prepare("SELECT * 
@@ -267,7 +267,7 @@
                                 </select>
                             </div>
                             <div class="input-group normal_label">
-                                <label for="ProfilUtilisateur">Votre statut :</label>
+                                <label for="ProfilUtilisateur">Promo :</label>
                                 <select name="ProfilUtilisateur" id="ProfilUtilisateur" required style="width:100%;color: black;">
                                     <option value="mmi1">MMI 1</option>
                                     <option value="mmi2">MMI 2</option>
