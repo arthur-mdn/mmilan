@@ -103,7 +103,7 @@ if (isset($_SESSION["PlayerId"])) {
                     } else {
                     ?>
                         <a href="register" class="btn btn__primary" style="margin-top: 1rem;">S'inscrire</a>
-                        <a href="register" class="btn btn__light" style="margin-top: 1rem;">Se connecter</a>
+                        <a href="login" class="btn btn__light" style="margin-top: 1rem;">Se connecter</a>
                     <?php
                     }
                     ?>
