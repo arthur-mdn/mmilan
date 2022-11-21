@@ -150,7 +150,7 @@ require 'lib/PHPMailer/src/SMTP.php';
             $mail->addReplyTo($_POST['MailUtilisateur'], $_POST['MailUtilisateur']);
 
             $mail->isHTML(true);
-            $mail->Subject = 'Formulaire de contact - MMI LAN';
+            $mail->Subject = $_POST['Objet'];
             $mail->Body    = 'Message envoyé de :' . $_POST['NomUtilisateur'] . ' ' . $_POST['PrenomUtilisateur'] . '<br>
             Contenu du message :' . $_POST['Message'];
 
