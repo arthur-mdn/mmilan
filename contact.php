@@ -111,7 +111,7 @@ require 'lib/PHPMailer/src/SMTP.php';
 
     </section>
 
-    <<<<<<< HEAD <?php
+    <?php
 
     $email_sent = ' <div style="display: flex;padding:15px;gap:15px;flex-direction: column;justify-content: center;align-items: center">
 <img src="Elements/icons/valid_check.gif" style="width:150px">
@@ -164,7 +164,7 @@ require 'lib/PHPMailer/src/SMTP.php';
 
     ?> <?php
     include './includes/footer.php';
-    ?>=======<?php include './includes/footer.php'; ?>>>>>>>> 45cfa1e9ca538248a7bdf1d4e56a0177a32d0ea9
+    ?>
 </body>
 
 </html>
