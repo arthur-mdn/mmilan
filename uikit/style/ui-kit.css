@@ -209,7 +209,7 @@ p {
   color: var(--color-dark);
   transition: all 0.3s ease;
   transform: translateY(-50%);
-  cursor: pointer;
+  cursor: text;
 }
 
 .input-group.normal_label label {
