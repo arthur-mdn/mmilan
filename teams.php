@@ -92,7 +92,7 @@ if (isset($_SESSION["PlayerId"])) {
                 $fetchPlayers->execute();
                 $players = $fetchPlayers->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($players as $player) {
-                    echo '<li class="team_player"> <div class="player_main_infos"><h4>' . $player['PlayerFirstname'] . ' ' . $player['PlayerLastname'] . ' (' . $player['PlayerUsername'] . ') </h4></div> <div class="player_contact"><b>mail : </b>' . $player['PlayerEmail'] . ', <b>discord :</b> ' . $player['PlayerDiscord']  . '</div> </li>';
+                    echo '<li class="team_player"> <div class="player_main_infos"><h4>' . $player['PlayerFirstname'] . ' ' . $player['PlayerLastname'] . ' (' . $player['PlayerUsername'] . ') </h4></div> <div class="player_contact"><b>discord :</b> ' . $player['PlayerDiscord']  . '</div> </li>';
                 }
                 echo '</ul>
                         </div>
