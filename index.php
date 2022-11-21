@@ -96,7 +96,18 @@ if (isset($_SESSION["PlayerId"])) {
             <div>
                 <p style="max-width:600px;width:100%;font-size: clamp(1.1rem, 3vw, 1.4rem);">La MMI LAN arrive bientôt, ne la manquez pas !
                     Nous vous attendons très nombreux lors de cet événement incroyable, organisé par les étudiants de 2ème année de la promotion MMI à l’université de Toulon.</p>
-
+                <div class="row" style="gap:1rem;">
+                    <?php
+                    if (isset($_SESSION["PlayerId"])) {
+                        echo '<a href="profile" class="btn btn__primary" >Mon compte</a>';
+                    } else {
+                    ?>
+                        <a href="register" class="btn btn__primary" style="margin-top: 1rem;">S'inscrire</a>
+                        <a href="register" class="btn btn__light" style="margin-top: 1rem;">Se connecter</a>
+                    <?php
+                    }
+                    ?>
+                </div>
                 <style>
                     #counter_status {
                         font-size: clamp(15px, 5vw, 30px);

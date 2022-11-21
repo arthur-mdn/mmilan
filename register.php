@@ -52,7 +52,7 @@
     require('app/config.php');
     session_start();
     if (isset($_SESSION["PlayerId"])) {
-        header('location: index.php');
+        header('location: profile');
         exit();
     }
     require('menu.php');
@@ -172,7 +172,7 @@
                     $_SESSION['PlayerMail'] = $_POST['MailUtilisateur'];
 
 
-                    echo '<script type="text/javascript">window.location = "index.php"</script>';
+                    echo '<script type="text/javascript">window.location = "profile"</script>';
                 } else {
                     // if the game selected does not exist, log hack attempt
                     $logHack = $conn2->prepare("INSERT INTO logs (LogMsg, LogUserMail) 
