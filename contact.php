@@ -80,6 +80,9 @@
                             <input type="text" placeholder=" " required class="box-input" style="width:100%" name="Message" id="Message">
                             <label for="Message">Message</label>
                         </div>
+                        <div class="end_of_form">
+                        <button class="btn btn__primary" type="submit">valider</button>
+                        </div>
                     </div>
             </form>
     </div>
@@ -87,6 +90,9 @@
 
 
     </section>
+
+
+    <?php include './includes/footer.php'; ?>
 
 </body>
 
