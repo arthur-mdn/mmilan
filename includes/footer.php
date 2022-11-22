@@ -47,11 +47,37 @@
             justify-content: center;
             align-items: center;
         }
+        .footer-nav {
+            gap: .5rem;
+        }
         .socials-container {
             margin: 1rem;
         }
+        .sponsors {
+            width: 120px;
+            height: 120px;
+        }
         .sponsors-container {
             margin: inherit;
+            flex-wrap: wrap;
+        }
+    }
+    @media screen and (min-width: 980px) {
+        .sponsors-container::before {
+            content: "";
+            position: relative;
+            right: 5rem;
+            width: 2px;
+            background-color: #f9d71c;
+            transform: rotate(90deg);
+        }
+        .sponsors-container::after {
+            content: "";
+            position: relative;
+            left: 5rem;
+            width: 2px;
+            background-color: #f9d71c;
+            transform: rotate(90deg);
         }
     }
 </style>
