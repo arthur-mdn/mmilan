@@ -65,49 +65,52 @@ if (isset($_SESSION["PlayerId"])) {
 
 
     <!-- Partie Équipe a remplir par Roman.S & Axel.G -->
-    <section class="teams_display_section">
+    <div class="container">
 
-        <h2 class="head_title primary" style="font-size: clamp(20px, 3vw, 40px);">Les Equipes</h2>
+        <section class="teams_display_section">
 
-        <?php
-        $fetchTeams = $conn2->prepare("SELECT * FROM teams WHERE TeamStatus = 'ok'");
-        $fetchTeams->execute();
-        $teams = $fetchTeams->fetchAll(PDO::FETCH_ASSOC);
+            <h2 class="head_title primary" style="font-size: clamp(20px, 3vw, 40px);">Les Equipes</h2>
 
-        if (!empty($teams)) {
-            foreach ($teams as $team) {
-                echo '<div class="team_container">
-                        <div class="team_logo">
-                            <img src="' . $team['TeamLogo'] . '" alt="Logo de l\'équipe ' . $team['TeamName'] . '">
-                        </div>
-                        <div class="team_infos">
-                            <h3 class="team_name">' . $team['TeamName'] . '</h3>
-                            <div class="team_description"><p>' . $team['TeamDesc'] . '</p></div>
-                        </div>
-                        <div class="team_players">
-                            <h4 class="team_players_title">Joueurs</h4>
-                            <ul class="team_players_list">';
-                $fetchPlayers = $conn2->prepare("SELECT * FROM players, appartient WHERE appartient.AppartientTeamId = ? AND appartient.AppartientPlayerId = players.PlayerId AND players.PlayerStatus = 'ok'");
-                $fetchPlayers->bindValue(1, $team['TeamId']);
-                $fetchPlayers->execute();
-                $players = $fetchPlayers->fetchAll(PDO::FETCH_ASSOC);
-                foreach ($players as $player) {
-                    echo '<li class="team_player"> <div class="player_main_infos"><h4>' . $player['PlayerFirstname'] . ' ' . $player['PlayerLastname'] . ' (' . $player['PlayerUsername'] . ') </h4></div> <div class="player_contact"><b>discord :</b> ' . $player['PlayerDiscord']  . '</div> </li>';
+            <?php
+            $fetchTeams = $conn2->prepare("SELECT * FROM teams WHERE TeamStatus = 'ok'");
+            $fetchTeams->execute();
+            $teams = $fetchTeams->fetchAll(PDO::FETCH_ASSOC);
+
+            if (!empty($teams)) {
+                foreach ($teams as $team) {
+                    echo '<div class="team_container">
+                            <div class="team_logo">
+                                <img src="' . $team['TeamLogo'] . '" alt="Logo de l\'équipe ' . $team['TeamName'] . '">
+                            </div>
+                            <div class="team_infos">
+                                <h3 class="team_name">' . $team['TeamName'] . '</h3>
+                                <div class="team_description"><p>' . $team['TeamDesc'] . '</p></div>
+                            </div>
+                            <div class="team_players">
+                                <h4 class="team_players_title">Joueurs</h4>
+                                <ul class="team_players_list">';
+                    $fetchPlayers = $conn2->prepare("SELECT * FROM players, appartient WHERE appartient.AppartientTeamId = ? AND appartient.AppartientPlayerId = players.PlayerId AND players.PlayerStatus = 'ok'");
+                    $fetchPlayers->bindValue(1, $team['TeamId']);
+                    $fetchPlayers->execute();
+                    $players = $fetchPlayers->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($players as $player) {
+                        echo '<li class="team_player"> <div class="player_main_infos"><h4>' . $player['PlayerFirstname'] . ' ' . $player['PlayerLastname'] . ' (' . $player['PlayerUsername'] . ') </h4></div> <div class="player_contact"><b>discord :</b> ' . $player['PlayerDiscord']  . '</div> </li>';
+                    }
+                    echo '</ul>
+                            </div>
+    
+                        </div>';
                 }
-                echo '</ul>
-                        </div>
-
-                    </div>';
+            } else {
+                echo '<p class="no_team">Aucune équipe n\'est disponible pour le moment.</p>';
             }
-        } else {
-            echo '<p class="no_team">Aucune équipe n\'est disponible pour le moment.</p>';
-        }
 
 
 
-        ?>
+            ?>
 
-    </section>
+        </section>
+    </div>
 
 
 
