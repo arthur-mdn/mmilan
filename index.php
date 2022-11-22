@@ -204,8 +204,7 @@ if (isset($_SESSION["PlayerId"])) {
         }
         ?>
     </div> -->
-
-    <?php include './includes/footer.php'; ?>
+    <?php include './includes/footer2.php'; ?>
 
 </body>
 
