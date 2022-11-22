@@ -9,6 +9,7 @@
         padding: 0 20px;
         background-color: transparent;
 
+        top: 0;
         height: 95px;
         z-index: 10000;
 
