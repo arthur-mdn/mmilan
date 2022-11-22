@@ -94,7 +94,7 @@ if (isset($_SESSION["PlayerId"])) {
             </div>
             <h1 style="font-size: clamp(1.25rem, 4vw, 2rem);">MMI LAN</h1>
             <div>
-                <p style="max-width:600px;width:100%;font-size: clamp(1.1rem, 3vw, 1.4rem);">La MMI LAN arrive bientôt, ne la manquez pas !
+                <p style="max-width:600px;width:100%;font-size: clamp(0.9rem, 1vw, 1.2rem);">La MMI LAN arrive bientôt, ne la manquez pas !
                     Nous vous attendons très nombreux lors de cet événement incroyable, organisé par les étudiants de 2ème année de la promotion MMI à l’université de Toulon.</p>
                 <div class="row" style="gap:1rem;">
                     <?php
@@ -110,7 +110,7 @@ if (isset($_SESSION["PlayerId"])) {
                 </div>
                 <style>
                     #counter_status {
-                        font-size: clamp(15px, 5vw, 30px);
+                        font-size: clamp(10px, 6vw, 25px);
                     }
 
                     #counters_container {
@@ -124,7 +124,8 @@ if (isset($_SESSION["PlayerId"])) {
                     }
 
                     .precise_counter_container span {
-                        font-size: clamp(25px, 10vw, 100px);
+                        font-size: clamp(25px, 5vw, 100px);
+                        line-height: 1em;
                     }
 
                     .precise_counter_container {
