@@ -39,6 +39,7 @@ require 'lib/PHPMailer/src/SMTP.php';
     <link rel="icon" type="image/png" href="Elements/placeholder_logo.svg" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/loader.css" />
+    <link rel="stylesheet" href="css/contact.css" />
 </head>
 
 <body class="body-panel">
@@ -55,9 +56,9 @@ require 'lib/PHPMailer/src/SMTP.php';
         </div>
         <p>Un instant ...</p>
         <script>
-        function active_loader() {
-            document.getElementById('loader_container').style.display = 'flex';
-        }
+            function active_loader() {
+                document.getElementById('loader_container').style.display = 'flex';
+            }
         </script>
     </div>
 
@@ -66,50 +67,63 @@ require 'lib/PHPMailer/src/SMTP.php';
 
     ?>
 
+    <div>
+        <h2 class="head_title primary">Nous Contacter</h2>
+        <section id="contact" style="margin-top:10rem;display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center; margin-left:20px;margin-right:20px;">
 
-    <h2 class="head_title primary">Contact</h2>
-    <section id="contact" style="margin-top:10rem;">
 
-        <div class="inscription_form_container">
+            <img style="max-width: 650px; width: 85%;" src="Elements/images/image_contact.jpg">
+            <div class="inscription_form_container">
 
-            <div id="error_container" class="error" style="display: none;"></div>
+                <div id="error_container" class="error" style="display: none;"></div>
 
-            <form action="" method="post">
-                <div class="input_container">
-                    <div class="input-group">
-                        <input type="text" required class="box-input" style="width:100%;" name="NomUtilisateur"
-                            id="NomUtilisateur" autocomplete="new-name" placeholder=" ">
-                        <label for="NomUtilisateur">Nom</label>
+                <form action="" method="post">
+
+                    <div class="input_container">
+                        <ul class="StepProgress">
+                            <li class="StepProgress-item current">
+                                <div class="input-group" style="width:450px;">
+                                    <input type="text" required class="box-input" style="width:100%;" name="NomUtilisateur" id="NomUtilisateur" autocomplete="new-name" placeholder=" ">
+                                    <label for="NomUtilisateur">Nom</label>
+                                </div>
+                            </li>
+                            <li class="StepProgress-item current">
+                                <div class="input-group">
+                                    <input type="text" required class="box-input" style="width:100%" name="PrenomUtilisateur" id="PrenomUtilisateur" autocomplete="new-surname" placeholder=" ">
+                                    <label for="PrenomUtilisateur">Prénom</label>
+                                </div>
+                            </li>
+                            <li class="StepProgress-item current">
+                                <div class="input-group">
+                                    <input type="email" placeholder=" " pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" required class="box-input" style="width:100%" name="MailUtilisateur" id="MailUtilisateur" autocomplete="new-mail" value="">
+                                    <label for="MailUtilisateur">Adresse Email</label>
+                                </div>
+                            </li>
+                            <li class="StepProgress-item current">
+                                <div class="input-group">
+                                    <input type="text" placeholder=" " required class="box-input" style="width:100%" name="Objet" id="Objet">
+                                    <label for="Objet">Objet</label>
+                                </div>
+                            </li>
+                            <li class="StepProgress-item current">
+                                <div class="input-group">
+                                    <input type="text" placeholder=" " required class="box-input" style="width:100%" name="Message" id="Message">
+                                    <label for="Message">Message</label>
+                                </div>
+                            </li>
+                            <center><button class="btn btn__primary" type="submit" name="send_mail">Envoyer</button></center>
+
+                        </ul>
                     </div>
-                    <div class="input-group">
-                        <input type="text" required class="box-input" style="width:100%" name="PrenomUtilisateur"
-                            id="PrenomUtilisateur" autocomplete="new-surname" placeholder=" ">
-                        <label for="PrenomUtilisateur">Prénom</label>
-                    </div>
-                    <div class="input-group">
-                        <input type="email" placeholder=" " pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}"
-                            required class="box-input" style="width:100%" name="MailUtilisateur" id="MailUtilisateur"
-                            autocomplete="new-mail" value="">
-                        <label for="MailUtilisateur">Adresse Email</label>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" placeholder=" " required class="box-input" style="width:100%" name="Objet"
-                            id="Objet">
-                        <label for="Objet">Objet</label>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" placeholder=" " required class="box-input" style="width:100%" name="Message"
-                            id="Message">
-                        <label for="Message">Message</label>
-                    </div>
-                    <button class="btn btn__primary" type="submit" name="send_mail">Envoyer</button>
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
 
+        </section>
+    </div>
 
-
-    </section>
 
     <?php
 
@@ -163,8 +177,8 @@ require 'lib/PHPMailer/src/SMTP.php';
     }
 
     ?> <?php
-    include './includes/footer.php';
-    ?>
+        include './includes/footer.php';
+        ?>
 </body>
 
 </html>
