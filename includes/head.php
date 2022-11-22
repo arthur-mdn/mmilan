@@ -12,13 +12,13 @@
     <link rel="manifest" href="site.webmanifest">
 
     <!-- link favicon -->
-    <link rel="shortcut icon" href="Elements/icons/favicons/mmilan_96.png" type="image/x-icon">
-    <link rel="icon" sizes="16x16" href="Elements/icons/favicons/mmilan_16.png" type="image/x-icon">
-    <link rel="icon" sizes="32x32" href="Elements/icons/favicons/mmilan_32.png" type="image/x-icon">
-    <link rel="icon" sizes="96X96" href="Elements/icons/favicons/mmilan_96.png" type="image/x-icon">
-    <link rel="icon" sizes="512x512" href="Elements/icons/favicons/mmilan_512.png" type="image/x-icon">
+    <link rel="shortcut icon" href="Elements/icons/favicons/faviconj96.png" type="image/x-icon">
+    <link rel="icon" sizes="16x16" href="Elements/icons/favicons/faviconj16.png" type="image/x-icon">
+    <link rel="icon" sizes="32x32" href="Elements/icons/favicons/faviconj32.png" type="image/x-icon">
+    <link rel="icon" sizes="96X96" href="Elements/icons/favicons/faviconj96.png" type="image/x-icon">
+    <link rel="icon" sizes="512x512" href="Elements/icons/favicons/faviconj512.png" type="image/x-icon">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="Elements/icons/favicons/mmilan_appleicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="Elements/icons/favicons/faviconjApple.png" type="image/x-icon">
 
     <script src="js/main_script.js"></script>
 
