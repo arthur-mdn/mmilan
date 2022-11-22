@@ -69,7 +69,7 @@ if (isset($_SESSION["PlayerId"])) {
         <div class="container">
             <div id="1" class="infos-lan">
                 <div class="img-lan">
-                    <img  class="imgarcade" src="Elements/others/arcade.jpg" alt="Photo de la borne d'arcade">
+                    <img class="imgarcade" src="Elements/others/arcade.jpg" alt="Photo de la borne d'arcade">
                 </div>
                 <div class="second-part">
                     <div class="lan-information">
@@ -85,7 +85,7 @@ if (isset($_SESSION["PlayerId"])) {
     </section>
 
     <section class="presentationJeux" id="games">
-    <h1 class="head_title secondary titre_jeux">Les jeux de notre lan:</h1>
+        <h1 class="head_title secondary titre_jeux">Les jeux :</h1>
         <div class="el_4">
             <img src="Elements/others/02White.svg" alt="Triangle Blanc & Jaune" />
         </div>

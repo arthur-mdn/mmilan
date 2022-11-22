@@ -1,592 +1,588 @@
 .infos-lan {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 50px;
-    width: 100%;
-    padding-bottom: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  width: 100%;
+  padding-bottom: 100px;
+}
+.second-part {
+  display: flex;
+  flex-direction: column;
+}
+.img-lan {
+  flex: 1 0 auto;
+  height: 500px;
+  box-shadow: 5px 5px #f9d71c;
+  border-radius: 15px;
+}
+.lan-explication {
+  width: 100%;
+  font-size: 15px;
+}
+.date-lan {
+  width: 65%;
+  padding-bottom: 5%;
+}
+.lan-information,
+.lan-explication {
+  width: 300px;
+}
+
+.infos-position {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 3rem;
+  padding-bottom: 100px;
+}
+.gmaps {
+  flex: 1 0 550px;
+}
+.gmaps-effect {
+  border-radius: 15px;
+  filter: grayscale(85%) invert(100%);
+  width: 100%;
+  height: 400px;
+}
+.positions-info {
+  width: 65%;
+  font-size: 20px;
+}
+.lan-position {
+  padding-right: 0px;
+  padding-bottom: 50px;
+}
+.position {
+  display: flex;
+  flex-direction: column;
+}
+
+#laninfos,
+#gmaps,
+#games {
+  position: relative;
+  width: 100%;
+}
+
+.el_1 img {
+  position: absolute;
+  z-index: -1;
+  width: 120%;
+  height: 120%;
+  bottom: 31%;
+  right: 45%;
+}
+.el_2 img {
+  position: absolute;
+  z-index: -1;
+  width: 15%;
+  height: 15%;
+  left: 82%;
+  top: -1%;
+}
+.el_3 img {
+  position: absolute;
+  z-index: -1;
+  width: 40%;
+  height: 40%;
+  left: 70%;
+  top: -5%;
+}
+.el_4 img {
+  position: absolute;
+  z-index: 0;
+  width: 30%;
+  height: 30%;
+  top: -3%;
+  left: 5%;
+}
+
+.imgarcade {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+}
+.presentationJeux {
+  background-color: #f9d71c;
+  padding-bottom: 100px;
+  overflow: hidden;
+}
+.titre_jeux {
+  margin-bottom: 100px;
+  margin-left: 200px;
+  margin-top: 100px;
+}
+
+.carousel {
+  display: none;
+  width: 100%;
+  height: 550px;
+  font-family: Arial;
+  align-items: center;
+}
+.carousel__list {
+  display: flex;
+  list-style: none;
+  padding: none;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  perspective: 300px;
+  padding-left: 0px;
+  align-items: center;
+}
+
+.carousel__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  width: 253px;
+  height: 450px;
+  border-radius: 30px;
+  box-shadow: 1px 1px 40px 4px black;
+  position: absolute;
+  transition: all 0.4s ease-in;
+}
+.carousel__item[data-game="mmilan"] {
+  background: url("../Elements/images/mmilan.png");
+  background-size: cover;
+}
+.carousel__item[data-game="fallguys"] {
+  background: url("../Elements/images/fallguys.jpg");
+  background-size: cover;
+  filter: grayscale(0.2);
+}
+.carousel__item[data-game="rocketleague"] {
+  background: url("../Elements/images/rocketleague.jpg");
+  background-size: cover;
+}
+.carousel__item[data-game="overwatch"] {
+  background: url("../Elements/images/overwatch.jpg");
+  background-size: cover;
+}
+.carousel__item[data-game="cityguesser"] {
+  background: url("../Elements/images/cityguesser.jpg");
+  background-size: cover;
+}
+.carousel__item[data-game="switchsports"] {
+  background: url("../Elements/images/switchsports.jpg");
+  background-size: cover;
+}
+.carousel__item[data-game="mystere"] {
+  background: url("../Elements/images/mystere.jpg");
+  background-size: cover;
+}
+
+.carousel__item[data-pos="0"] {
+  z-index: 5;
+}
+
+.carousel__item[data-pos="-1"] {
+  transform: translateX(-60%) scale(0.8);
+  z-index: 4;
+}
+
+.carousel__item[data-pos="1"] {
+  transform: translateX(60%) scale(0.8);
+  z-index: 4;
+}
+
+.carousel__item[data-pos="-2"] {
+  transform: translateX(-100%) scale(0.7);
+  z-index: 3;
+}
+
+.carousel__item[data-pos="2"] {
+  transform: translateX(100%) scale(0.7);
+  z-index: 3;
+}
+
+.carousel__item[data-pos="3"] {
+  opacity: 0;
+  transform: translateX(-100%) scale(0.7);
+}
+
+.carousel__item[data-pos="-3"] {
+  opacity: 0;
+  transform: translateX(100%) scale(0.7);
+}
+
+.game {
+  display: none;
+  justify-content: center;
+  flex-direction: row;
+  height: 150px;
+  align-items: center;
+}
+
+.left_arrow {
+  height: 80px;
+  width: 80px;
+}
+
+.gametext {
+  display: flex;
+  width: 400px;
+  padding-left: 60px;
+  padding-right: 60px;
+  text-align: center;
+}
+
+.gametext div {
+  flex-direction: column;
+}
+
+.gametext h2 {
+  color: black;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 2.5em;
+}
+
+.gametext p {
+  color: black;
+  font-size: large;
+}
+
+.right_arrow {
+  height: 80px;
+  width: 80px;
+}
+
+.overwatch {
+  display: none;
+}
+
+.rocketleague {
+  display: none;
+}
+
+.cityguesser {
+  display: none;
+}
+
+.fallguys {
+  display: none;
+}
+
+.mmilan {
+  display: flex;
+}
+
+.switchsports {
+  display: none;
+}
+
+.mystere {
+  display: none;
+}
+
+.TitreJeux {
+  display: flex;
+  justify-content: center;
+  padding-right: 25%;
+}
+
+.TitreJeux h2 {
+  font-weight: 800;
+  font-size: xx-large;
+  color: #0a1929;
+}
+
+.jeux {
+  display: flex;
+  width: 110%;
+  margin-left: -5%;
+  height: 600px;
+
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.jeux__item {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 0 auto;
+
+  height: 100%;
+
+  box-shadow: 0px 0px 20px black;
+  transform: skewX(-7deg);
+  transition: ease-in-out 0.3s;
+
+  overflow: hidden;
+}
+
+.jeux__item img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) skewX(7deg);
+
+  height: 100%;
+
+  image-rendering: optimizeQuality;
+}
+
+.jeux__item:hover {
+  flex-grow: 1.5;
+}
+
+.jeumystere {
+  display: flex;
+  width: 100%;
+  height: 200px;
+  padding-top: 50px;
+
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.jeux__item .overlay {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(3px);
+
+  opacity: 0;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+
+  transition: ease 0.2s;
+}
+
+.overlay .text-content {
+  font-family: "Work Sans", sans-serif;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) skewX(7deg);
+
+  width: 90%;
+
+  opacity: 0;
+  transition: ease 0.2s;
+}
+
+.jeux__item div:hover {
+  opacity: 0.4;
+}
+
+.jeux__item[data-game="switchsports"] div {
+  padding-left: 3%;
+  padding-right: 16%;
+}
+
+.jeux__item[data-game="mystere"] div {
+  padding-left: 16%;
+  padding-right: 3%;
+}
+
+.jeux__item:hover div {
+  opacity: 1;
+}
+
+/* Passage des jeux en carousel pour les petits écrans*/
+@media (max-width: 1150px) {
+  .jeux {
+    display: none;
   }
-  .second-part {
-    display: flex;
-    flex-direction: column;
+  .jeumystere {
+    display: none;
   }
   .img-lan {
-    flex: 1 0 auto;
-    height: 500px;
-    box-shadow: 5px 5px #f9d71c;
-    border-radius: 15px;
-  }
-  .lan-explication {
     width: 100%;
-    font-size: 15px;
   }
-  .date-lan {
-    width: 65%;
-    padding-bottom: 5%;
-  }
-  .lan-information,
-  .lan-explication {
-    width: 300px;
-  }
-  
-  .infos-position {
+  .carousel {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 3rem;
-    padding-bottom: 100px;
   }
-  .gmaps {
-    flex: 1 0 550px;
+  .game {
+    display: flex;
   }
-  .gmaps-effect {
-    border-radius: 15px;
-    filter: grayscale(85%) invert(100%);
-    width: 100%;
-    height: 400px;
+  .el_1 {
+    display: none;
   }
-  .positions-info {
-    width: 65%;
-    font-size: 20px;
+  .el_2 {
+    display: none;
+  }
+  .el_3 {
+    display: none;
+  }
+  .el_4 {
+    display: none;
+  }
+  .titre_jeux {
+    margin-left: 30px;
+  }
+  .section-viewer {
+    display: none;
+  }
+  .infos-lan {
+    flex-direction: column-reverse;
+  }
+  .infos-position {
+    flex-direction: column-reverse;
+    padding: 0;
   }
   .lan-position {
-    padding-right: 0px;
-    padding-bottom: 50px;
+    justify-content: flex-start;
+    text-align: left;
   }
   .position {
+    align-items: center;
+    text-align: center;
+  }
+  .second-part {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .lan-explication {
+    width: 100%;
+  }
+  .date-lan {
+    justify-content: center;
+    text-align: center;
+  }
+  .lan-information {
     display: flex;
     flex-direction: column;
-  }
-  
-  #laninfos,
-  #gmaps,
-  #games {
-    position: relative;
-    width: 100%;
-  }
-  
-  .el_1 img {
-    position: absolute;
-    z-index: -1;
-    width: 120%;
-    height: 120%;
-    bottom: 31%;
-    right:45% ;
-  }
-  .el_2 img {
-    position: absolute;
-    z-index: -1;
-    width: 15%;
-    height: 15%;
-    left: 82%;
-    top: -1%;
-  }
-  .el_3  img{
-    position: absolute;
-    z-index: -1;
-    width: 40%;
-    height: 40%;
-    left: 70%;
-    top: -5%;
-  }
-  .el_4 img{
-    position: absolute;
-    z-index: 0;
-    width: 30%;
-    height: 30%;
-    top: -3%;
-    left: 5%;
-  }
-  
-  .imgarcade{
-    width: 100%;
-    height: 100%;
-    border-radius: 15px;
-  }
-  .presentationJeux {
-    background-color: #f9d71c;
-    padding-bottom: 100px;
-    overflow: hidden;
-  }
-  .titre_jeux{
-    margin-bottom: 100px;
-    margin-left: 200px;
-    margin-top: 100px;
-  }
-  
-  .carousel {
-    display: none;
-    width: 100%;
-    height: 550px;
-    font-family: Arial;
-    align-items: center;
-  }
-  .carousel__list {
-    display: flex;
-    list-style: none;
-    padding: none;
-    width: 100%;
-    height: 100%;
     justify-content: center;
-    perspective: 300px;
-    padding-left: 0px;
     align-items: center;
   }
-  
+}
+
+/* responsive tablette */
+@media (max-width: 805px) {
   .carousel__item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    width: 253px;
-    height: 450px;
-    border-radius: 30px;
-    box-shadow: 1px 1px 40px 4px black;
-    position: absolute;
-    transition: all 0.4s ease-in;
+    width: 220px;
+    height: 391px;
   }
-  .carousel__item[data-game="mmilan"] {
-    background: url("../Elements/images/mmilan.png");
-    background-size: cover;
-  }
-  .carousel__item[data-game="fallguys"] {
-    background: url("../Elements/images/fallguys.jpg");
-    background-size: cover;
-    filter: grayscale(0.2);
-  }
-  .carousel__item[data-game="rocketleague"] {
-    background: url("../Elements/images/rocketleague.jpg");
-    background-size: cover;
-  }
-  .carousel__item[data-game="overwatch"] {
-    background: url("../Elements/images/overwatch.jpg");
-    background-size: cover;
-  }
-  .carousel__item[data-game="cityguesser"] {
-    background: url("../Elements/images/cityguesser.jpg");
-    background-size: cover;
-  }
-  .carousel__item[data-game="switchsports"] {
-    background: url("../Elements/images/switchsports.jpg");
-    background-size: cover;
-  }
-  .carousel__item[data-game="mystere"] {
-    background: url("../Elements/images/mystere.jpg");
-    background-size: cover;
-  }
-  
-  .carousel__item[data-pos="0"] {
-    z-index: 5;
-  }
-  
-  .carousel__item[data-pos="-1"] {
-    transform: translateX(-60%) scale(0.8);
-    z-index: 4;
-  }
-  
-  .carousel__item[data-pos="1"] {
-    transform: translateX(60%) scale(0.8);
-    z-index: 4;
-  }
-  
-  .carousel__item[data-pos="-2"] {
-    transform: translateX(-100%) scale(0.7);
-    z-index: 3;
-  }
-  
-  .carousel__item[data-pos="2"] {
-    transform: translateX(100%) scale(0.7);
-    z-index: 3;
-  }
-  
-  .carousel__item[data-pos="3"] {
-    opacity: 0;
-    transform: translateX(-100%) scale(0.7);
-  }
-  
-  .carousel__item[data-pos="-3"] {
-    opacity: 0;
-    transform: translateX(100%) scale(0.7);
-  }
-  
-  .game {
-    display: none;
-    justify-content: center;
-    flex-direction: row;
-    height: 150px;
-    align-items: center;
-  }
-  
-  .left_arrow {
-    height: 80px;
-    width: 80px;
-  }
-  
   .gametext {
-    display: flex;
-    width: 400px;
-    padding-left: 60px;
-    padding-right: 60px;
-    text-align: center;
+    padding-left: 0px;
+    padding-right: 0px;
   }
-  
-  .gametext div {
-    flex-direction: column;
+  .game {
+    padding-top: 25px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
-  
+  .carousel {
+    height: 391px;
+    padding-bottom: 15px;
+  }
   .gametext h2 {
-    color: black;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    font-size: 2.5em;
+    font-size: 2em;
   }
-  
-  .gametext p {
-    color: black;
-    font-size: large;
-  }
-  
-  .right_arrow {
-    height: 80px;
-    width: 80px;
-  }
-  
-  .overwatch {
-    display: none;
-  }
-  
-  .rocketleague {
-    display: none;
-  }
-  
-  .cityguesser {
-    display: none;
-  }
-  
-  .fallguys {
-    display: none;
-  }
-  
-  .mmilan {
-    display: flex;
-  }
-  
-  .switchsports {
-    display: none;
-  }
-  
-  .mystere {
-    display: none;
-  }
-  
   .TitreJeux {
-    display: flex;
-    justify-content: center;
-    padding-right: 25%;
+    padding-bottom: 15px;
   }
-  
-  .TitreJeux h2 {
-    font-weight: 800;
-    font-size: xx-large;
-    color: #0a1929;
+  .gametext p {
+    padding-bottom: 20px;
   }
-  
-  .jeux {
-    display: flex;
-    width: 110%;
-    margin-left: -5%;
-    height: 600px;
-  
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+  .img-lan {
+    height: 50%;
   }
-  
-  .jeux__item {
-    position: relative;
-  
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex: 1 0 auto;
-  
-    height: 100%;
-  
-    box-shadow: 0px 0px 20px black;
-    transform: skewX(-7deg);
-    transition: ease-in-out 0.3s;
-  
-    overflow: hidden;
+  .titre_jeux {
+    margin-left: 10px;
   }
-  
-  .jeux__item img {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) skewX(7deg);
-  
-    height: 100%;
-  
-    image-rendering: optimizeQuality;
+}
+
+/* responsive petite tablette */
+@media (max-width: 670px) {
+  .carousel {
+    height: 350px;
   }
-  
-  .jeux__item:hover {
-    flex-grow: 1.5;
+  .carousel__item {
+    width: 157px;
+    height: 280px;
   }
-  
-  .jeumystere {
-    display: flex;
-    width: 100%;
-    height: 200px;
-    padding-top: 50px;
-  
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+  .left_arrow {
+    width: 50px;
+    height: 50px;
   }
-  
-  .jeux__item .overlay {
-    position: absolute;
-    inset: 0;
-  
-    width: 100%;
-  
-    background-color: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(3px);
-  
-    opacity: 0;
-    flex-direction: column;
-    text-align: center;
-    color: white;
-  
-    transition: ease 0.2s;
+  .right_arrow {
+    width: 50px;
+    height: 50px;
   }
-  
-  .overlay .text-content {
-    font-family: "Work Sans", sans-serif;
-  
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) skewX(7deg);
-  
+  .gametext p {
+    font-size: medium;
+    padding-left: 15px;
+    padding-right: 15px;
     width: 90%;
-  
-    opacity: 0;
-    transition: ease 0.2s;
   }
-  
-  .jeux__item div:hover {
-    opacity: .4;
+}
+
+@media only screen and (max-width: 670px) {
+  .presentationJeux {
+    margin-top: 50px;
   }
-  
-  .jeux__item[data-game="switchsports"] div {
-    padding-left: 3%;
-    padding-right: 16%;
+}
+/* responsive gros téléphone */
+@media (max-width: 430px) {
+  .carousel {
+    padding-bottom: 0px;
+    height: 248px;
   }
-  
-  .jeux__item[data-game="mystere"] div {
-    padding-left: 16%;
-    padding-right: 3%;
+  .carousel__item {
+    width: 140px;
+    height: 248px;
   }
-  
-  .jeux__item:hover div {
-    opacity: 1;
+  .game {
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
-  
-  /* Passage des jeux en carousel pour les petits écrans*/
-  @media (max-width: 1150px) {
-    .jeux {
-      display: none;
-    }
-    .jeumystere {
-      display: none;
-    }
-    .img-lan{
-      width: 100%;
-    }
-    .carousel {
-      display: flex;
-    }
-    .game {
-      display: flex;
-    }
-    .el_1 {
-      display: none;
-    }
-    .el_2 {
-      display: none;
-    }
-    .el_3 {
-      display: none;
-    }
-    .el_4{
-      display: none;
-    }
-    .titre_jeux{
-      margin-left: 30px;
-    }
-    .section-viewer {
-      display: none;
-    }
-    .infos-lan {
-      flex-direction: column-reverse;
-    }
-    .infos-position {
-      flex-direction: column-reverse;
-      padding: 0;
-    }
-    .lan-position{
-      justify-content: flex-start;
-      text-align: left;
-    }
-    .position{
-      align-items: center;
-      text-align: center;
-    }
-    .second-part{
-      width: 100%;
-      justify-content: center;
-      align-items: center;
-    }
-    .lan-explication{
-      width: 80%;
-      text-align: center;
-    }
-    .date-lan{
-      justify-content: center;
-      text-align: center;
-    }
-    .lan-information{
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+  .left_arrow {
+    width: 50px;
+    height: 50px;
   }
-  
-  /* responsive tablette */
-  @media (max-width: 805px) {
-    .carousel__item {
-      width: 220px;
-      height: 391px;
-    }
-    .gametext {
-      padding-left: 0px;
-      padding-right: 0px;
-    }
-    .game {
-      padding-top: 25px;
-      padding-left: 15px;
-      padding-right: 15px;
-    }
-    .carousel {
-      height: 391px;
-      padding-bottom: 15px;
-    }
-    .gametext h2 {
-      font-size: 2em;
-    }
-    .TitreJeux {
-      padding-bottom: 15px;
-    }
-    .gametext p {
-      padding-bottom: 20px;
-    }
-    .img-lan{
-      height: 50%;
-    }
-    .titre_jeux{
-      margin-left: 10px;
-    }
-    
+  .right_arrow {
+    width: 50px;
+    height: 50px;
   }
-  
-  /* responsive petite tablette */
-  @media (max-width: 670px) {
-    .carousel {
-      height: 350px;
-    }
-    .carousel__item {
-      width: 157px;
-      height: 280px;
-    }
-    .left_arrow {
-      width: 50px;
-      height: 50px;
-    }
-    .right_arrow {
-      width: 50px;
-      height: 50px;
-    }
-    .gametext p {
-      font-size: medium;
-      padding-left: 15px;
-      padding-right: 15px;
-      width: 90%;
-    }
+  .gametext h2 {
+    font-size: 1.5em;
   }
-  
-  @media only screen and (max-width: 670px) {
-    .presentationJeux {
-      margin-top: 50px;
-    }
-   
+  .gametext p {
+    font-size: 0.9em;
+    padding-left: 15px;
+    padding-right: 15px;
   }
-  /* responsive gros téléphone */
-  @media (max-width: 430px) {
-    .carousel {
-      padding-bottom: 0px;
-      height: 248px;
-    }
-    .carousel__item {
-      width: 140px;
-      height: 248px;
-    }
-    .game {
-      padding-top: 15px;
-      padding-left: 15px;
-      padding-right: 15px;
-    }
-    .left_arrow {
-      width: 50px;
-      height: 50px;
-    }
-    .right_arrow {
-      width: 50px;
-      height: 50px;
-    }
-    .gametext h2 {
-      font-size: 1.5em;
-    }
-    .gametext p {
-      font-size: 0.9em;
-      padding-left: 15px;
-      padding-right: 15px;
-    }
-    .carousel__item[data-pos="-2"] {
-      transform: translateX(-90%) scale(0.7);
-      z-index: 3;
-    }
-  
-    .carousel__item[data-pos="2"] {
-      transform: translateX(90%) scale(0.7);
-      z-index: 3;
-    }
+  .carousel__item[data-pos="-2"] {
+    transform: translateX(-90%) scale(0.7);
+    z-index: 3;
   }
-  
-  /* responsive petit téléphone */
-  @media (max-width: 360px) {
-    .carousel__item {
-      width: 125px;
-      height: 222px;
-    }
-    .gametext h2 {
-      font-size: 1.3em;
-    }
-    .gametext p {
-      font-size: 0.8em;
-    }
+
+  .carousel__item[data-pos="2"] {
+    transform: translateX(90%) scale(0.7);
+    z-index: 3;
   }
-  
+}
+
+/* responsive petit téléphone */
+@media (max-width: 360px) {
+  .carousel__item {
+    width: 125px;
+    height: 222px;
+  }
+  .gametext h2 {
+    font-size: 1.3em;
+  }
+  .gametext p {
+    font-size: 0.8em;
+  }
+}
