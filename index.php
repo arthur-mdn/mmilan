@@ -33,7 +33,7 @@ if (isset($_SESSION["PlayerId"])) {
 <html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Accueil</title>
+    <title>Accueil | MMI LAN</title>
     <?php
     include_once './includes/head.php';
     ?>
@@ -56,86 +56,82 @@ if (isset($_SESSION["PlayerId"])) {
     require('menu.php'); // afficher le menu en fonction de connecté ou pas.
     ?>
 
-    <div style="background-image: url(Elements/backgrounds/main_bg.jpeg);
-    height:100vh;
-    background-size: cover;
-    background-position: center;
-    margin: 0 auto;
-    width: 100%;
-    max-width: inherit;
-    ">
-        <div class="content-container" style="height:100vh;display: flex;flex-direction: column;justify-content: center;">
-            <h3 style="    font-size: clamp(20px, 3vw, 40px);">MMI LAN</h3>
-            <h3 style="    font-size: clamp(30px, 5vw, 60px);">Accueil</h3>
-            <div>
-                <p>Site en construction.</p>
-                <p>Revenez plus tard !</p>
-                <p>Vous pouvez quand même créer un compte et commencer à composer votre équipe !</p>
-
-                <div class="counter_container">
-                    <span id="counter_status"></span>
-                    <div id="counters_container">
-                        <div class="precise_counter_container" id="days_counter_container">
-                            <span id="days_counter">00</span>
-                            <p>Jours</p>
-                        </div>
-                        <div class="precise_counter_container">
-                            <span>&nbsp;</span>
-                        </div>
-                        <div class="precise_counter_container">
-                            <span id="hours_counter">00</span>
-                            <p>Heures</p>
-                        </div>
-                        <div class="precise_counter_container">
-                            <span>:</span>
-                        </div>
-                        <div class="precise_counter_container">
-                            <span id="minutes_counter">00</span>
-                            <p>Minutes</p>
-                        </div>
-                        <div class="precise_counter_container">
-                            <span>:</span>
-                        </div>
-                        <div class="precise_counter_container">
-                            <span id="seconds_counter">00</span>
-                            <p>Secondes</p>
-                        </div>
+    <div class="landing-page">
+        <div class="overlay-blur">
+            <div class="blur"></div>
+            <img src="./Elements/backgrounds/bg_1.jpg" alt="">
+        </div>
+        <div class="content-container" style="height:100%;display: flex;flex-direction: column;justify-content: center;">
+            <div class="counter_container">
+                <span id="counter_status"></span>
+                <div id="counters_container">
+                    <div class="precise_counter_container" id="days_counter_container">
+                        <span id="days_counter">00</span>
+                        <p>Jours</p>
+                    </div>
+                    <div class="precise_counter_container">
+                        <span>&nbsp;</span>
+                    </div>
+                    <div class="precise_counter_container">
+                        <span id="hours_counter">00</span>
+                        <p>Heures</p>
+                    </div>
+                    <div class="precise_counter_container">
+                        <span>:</span>
+                    </div>
+                    <div class="precise_counter_container">
+                        <span id="minutes_counter">00</span>
+                        <p>Minutes</p>
+                    </div>
+                    <div class="precise_counter_container">
+                        <span>:</span>
+                    </div>
+                    <div class="precise_counter_container">
+                        <span id="seconds_counter">00</span>
+                        <p>Secondes</p>
                     </div>
                 </div>
-
+            </div>
+            <h1 style="font-size: clamp(1.25rem, 4vw, 2rem);">MMI LAN</h1>
+            <div>
+                <p style="max-width:600px;width:100%;font-size: clamp(0.9rem, 1vw, 1.2rem);">La MMI LAN arrive bientôt, ne la manquez pas !
+                    Nous vous attendons très nombreux lors de cet événement incroyable, organisé par les étudiants de 2ème année de la promotion MMI à l’université de Toulon.</p>
+                <div class="row" style="gap:1rem;">
+                    <?php
+                    if (isset($_SESSION["PlayerId"])) {
+                        echo '<a href="profile" class="btn btn__primary" >Mon compte</a>';
+                    } else {
+                    ?>
+                        <a href="register" class="btn btn__primary" style="margin-top: 1rem;">S'inscrire</a>
+                        <a href="login" class="btn btn__light" style="margin-top: 1rem;">Se connecter</a>
+                    <?php
+                    }
+                    ?>
+                </div>
                 <style>
                     #counter_status {
-                        font-size: clamp(15px, 5vw, 30px);
+                        font-size: clamp(10px, 6vw, 25px);
                     }
 
                     #counters_container {
                         display: flex;
-                        gap: 8px;
+                        font-family: 'Work Sans', sans-serif;
+                        font-weight: 800;
                     }
 
                     .counter_container {
-                        background-color: rgba(0, 0, 0, 0.7);
-                        padding: 25px;
-                        border-radius: 15px;
-                        width: fit-content;
                         margin-block: 1rem;
                     }
 
                     .precise_counter_container span {
-                        font-size: clamp(25px, 10vw, 100px);
+                        font-size: clamp(25px, 5vw, 100px);
+                        line-height: 1em;
                     }
 
                     .precise_counter_container {
                         display: flex;
                         flex-direction: column;
                         align-items: center;
-                    }
-
-                    @media only screen and (max-width: 600px) {
-                        .counter_container {
-                            margin-inline: auto;
-
-                        }
                     }
                 </style>
                 <script>
