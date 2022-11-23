@@ -124,7 +124,7 @@ if (isset($_SESSION["PlayerId"])) {
                     }
 
                     .precise_counter_container span {
-                        font-size: clamp(25px, 5vw, 100px);
+                        font-size: clamp(25px, 13vw, 100px);
                         line-height: 1em;
                     }
 
