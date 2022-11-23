@@ -66,7 +66,7 @@ if (isset($_SESSION["PlayerId"])) {
             <img src="Elements/others/01blue.svg" alt="Num 01 Bleu" />
         </div>
 
-        <div class="container">
+        <div class="container" style="min-height: 100vh;display: flex;">
             <div id="1" class="infos-lan">
                 <div class="img-lan">
                     <img class="imgarcade" src="Elements/others/arcade.jpg" alt="Photo de la borne d'arcade">

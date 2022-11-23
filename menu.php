@@ -192,7 +192,16 @@
             </a>
         </li>
         <li>
+            <a href="programme">Programme</a>
+        </li>
+        <li>
             <a href="teams">Équipes</a>
+        </li>
+        <li>
+            <a href="live">Live</a>
+        </li>
+        <li>
+            <a href="sponsors">Sponsors</a>
         </li>
         </ul>
 
@@ -240,7 +249,10 @@
 
             <a href="/">Accueil</a>
 
+            <a href="programme">Programme</a>
             <a href="teams">Équipes</a>
+            <a href="live">Live</a>
+            <a href="sponsors">Sponsors</a>
 
             <?php
             if (isset($_SESSION['PlayerId'])) {
