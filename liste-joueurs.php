@@ -110,7 +110,7 @@ if (isset($_SESSION["PlayerId"])) {
     require('menu.php'); // afficher le menu en fonction de connecté ou pas.
     ?>
 
-    <section class="teams_display_section">
+    <section class="container">
 
         <h2 class="head_title primary" style="font-size: clamp(20px, 3vw, 40px);">Les Joueurs</h2>
 
