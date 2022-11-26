@@ -1,0 +1,131 @@
+.sponsors-section{
+    background: #F9D71C;
+    margin-top: 100px;
+    display: flex;
+   flex-direction: column;
+   justify-content: center; 
+   gap:50px;
+   padding-bottom: 75px;
+   padding-top: 75px;
+}
+.sponsor-title{
+    margin-left: 10%;
+}
+.sponsor-row{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    gap:50px
+}
+.sponsor-vignet{
+    background: #0A1929;
+    border-radius: 16px;
+    width: 25%;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.logo-txt{
+    color: white;
+    text-align: center;
+    font-size: 20px;
+}
+.ekinsport{
+    width: 35%;
+}
+.goodfood{
+    width: 35%;
+}
+.podium{
+    width: 35%;
+}
+.rct{
+    width: 35%;
+}
+.reseaux-social{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.rs-title{
+    margin-left:60%;
+    margin-bottom:50px;
+}
+.rs-row{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+ 
+    gap:50px
+}
+.rs-vignet{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap:55px;
+    width: 30%;
+}
+.rs-content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:30px;
+}
+.logo-title{
+    font-size: 35px;
+    font-weight: 700;
+    width: 230px;
+}
+.rs-insta{
+    width: 35%;
+}
+.rs-youtube{
+    width: 35%;
+}
+.id-rs{
+    font-size: 25px;
+    font-weight: 700;
+}
+.join-us{
+    background: linear-gradient(265.55deg, #0A1929 24.96%, #F9D71C 53.15%);
+}
+.ju-txt{
+    font-size: 60px;
+    font-weight: 700;
+    margin-left: 70px;
+}
+.sponsors-section, .reseaux-social{
+    position: relative;
+}
+.el_1 img{
+    position: absolute;
+    width: 20%;
+    top: -1%;
+}
+.el_2 img{
+    position: absolute;
+    width: 20%;
+    top: -40%;
+    left:80%
+}
+@media only screen and (max-width:1150px){
+    .rs-row{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .rs-content{
+        flex-direction: column;
+    }
+    .logo-title{
+        text-align: center;
+       
+    }
+    .rs-title{
+        margin-left:10%;
+    }
+    .el_1, .el_2{
+        display: none;
+    }
+}
