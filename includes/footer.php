@@ -32,6 +32,13 @@
       color: #fff;
    }
 
+   .contact-link {
+      text-decoration: none;
+      color: #fff;
+      text-transform: uppercase;
+      text-align: center;
+   }
+
    .sponsors-container {
       display: flex;
       justify-content: center;
@@ -107,8 +114,6 @@
          <li class="footer-item"><a class="footer-link" href="live">live</a></li>
          &VerticalLine;
          <li class="footer-item"><a class="footer-link" href="sponsors">sponsors</a></li>
-         &VerticalLine;
-         <li class="footer-item"><a class="footer-link" href="contact ">contact</a></li>
       </ul>
       <div class="socials-container" style="width: 200px; display:flex; justify-content:space-around;">
          <a href="https://instagram.com/mmi_lan2022" target="_blank" class="no-style">
@@ -128,6 +133,7 @@
          </a>
       </div>
    </div>
+   <a class="btn btn__light button no-style" href="./contact.php" style="display: block; text-align: center; margin: 0 auto;">CONTACT</a>
    <div class="footer-container2">
       <div class="sponsors-container">
          <div class="sponsor">
