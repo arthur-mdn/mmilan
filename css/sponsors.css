@@ -20,7 +20,7 @@
 .sponsor-vignet{
     background: #0A1929;
     border-radius: 16px;
-    width: 25%;
+    width: 180px;
     height: 180px;
     display: flex;
     flex-direction: column;
@@ -33,16 +33,16 @@
     font-size: 20px;
 }
 .ekinsport{
-    width: 35%;
+    width: 150px;
 }
 .goodfood{
-    width: 35%;
+    width: 150px;
 }
 .podium{
-    width: 35%;
+    width: 150px;
 }
 .rct{
-    width: 35%;
+    width: 150px;
 }
 .reseaux-social{
     margin-top: 100px;
@@ -78,10 +78,10 @@
     width: 230px;
 }
 .rs-insta{
-    width: 35%;
+    width: 150px;
 }
 .rs-youtube{
-    width: 35%;
+    width: 160px;
 }
 .id-rs{
     font-size: 25px;
@@ -91,7 +91,7 @@
     background: linear-gradient(265.55deg, #0A1929 24.96%, #F9D71C 53.15%);
 }
 .ju-txt{
-    font-size: 60px;
+    font-size: 5rem;
     font-weight: 700;
     margin-left: 70px;
 }
@@ -113,19 +113,45 @@
     .rs-row{
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        margin-left: 10%;
     }
     .rs-content{
-        flex-direction: column;
-    }
-    .logo-title{
-        text-align: center;
-       
+        flex-direction: row;
     }
     .rs-title{
         margin-left:10%;
     }
-    .el_1, .el_2{
+    .el_1, .el_2, .section-viewer{
         display: none;
     }
+    /*.rs-insta{
+        width: 50%;
+    }
+    .rs-youtube{
+        width: 50%;
+    }*/
 }
+@media only screen and (max-width:740px){
+    .ju-txt{
+        font-size: 40px;
+    }
+}
+/*@media only screen and (max-width:620px){
+    .podium{
+        width: 100px;
+    }
+    .ekinsport{
+        width: 100px;
+    }
+    .goodfood{
+        width: 100px;
+    }
+    .rct{
+        width: 100px;
+    }
+}
+@media only screen and (max-width:480px){
+    .logo-txt{
+        font-size: 15px;
+    }
+}*/
