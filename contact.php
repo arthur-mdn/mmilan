@@ -67,15 +67,15 @@ require 'lib/PHPMailer/src/SMTP.php';
 
     ?>
 
-    <div>
+    <div class="container" style=" min-height:100vh;">
         <h2 class="head_title primary">Nous Contacter</h2>
         <section id="contact" style="margin-top:10rem;display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    align-items: center; margin-left:20px;margin-right:20px;">
+    align-items: center;">
 
 
-            <img style="max-width: 650px; width: 85%;" src="Elements/images/image_contact.jpg">
+            <img style=" max-width: 650px; width: 85%;" src="Elements/images/image_contact.jpg">
             <div class="inscription_form_container">
 
                 <div id="error_container" class="error" style="display: none;"></div>
