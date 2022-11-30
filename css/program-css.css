@@ -149,31 +149,38 @@
 .carousel__item[data-game="mmilan"] {
   background: url("../Elements/images/mmilan.png");
   background-size: cover;
+
 }
 .carousel__item[data-game="fallguys"] {
-  background: url("../Elements/images/fallguys.jpg");
+  background: url("../Elements/programme/FallGuysVisu.jpg");
   background-size: cover;
-  filter: grayscale(0.2);
+  background-position: center;
+
 }
 .carousel__item[data-game="rocketleague"] {
   background: url("../Elements/images/rocketleague.jpg");
   background-size: cover;
 }
 .carousel__item[data-game="overwatch"] {
-  background: url("../Elements/images/overwatch.jpg");
+  background: url("../Elements/programme/OverWatchVisu.png");
   background-size: cover;
+  background-position: center;
+
 }
 .carousel__item[data-game="cityguesser"] {
-  background: url("../Elements/images/cityguesser.jpg");
+  background: url("../Elements/programme/CityGuesserVisu.png");
   background-size: cover;
+  background-position: center;
+
 }
 .carousel__item[data-game="switchsports"] {
   background: url("../Elements/images/switchsports.jpg");
   background-size: cover;
 }
 .carousel__item[data-game="mystere"] {
-  background: url("../Elements/images/mystere.jpg");
+  background: url("../Elements/programme/JeuMystereVisu.jpg");
   background-size: cover;
+  background-position: center;
 }
 
 .carousel__item[data-pos="0"] {
