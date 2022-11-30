@@ -79,57 +79,62 @@ if (isset($_SESSION["PlayerId"])) {
     </div>
 
     <section id="1" class="sponsors-section">
-            <div class="el_1">
-                <img src="Elements/others/01White.svg" alt="Num 01White">
+        <div class="el_1">
+            <img src="Elements/others/01White.svg" alt="Num 01White">
+        </div>
+        <h1 class="head_title secondary sponsor-title">Sponsors</h1>
+        <div class="sponsor-row">
+            <div class="sponsor-vignet">
+                <img src="Elements/sponsors/Logo_Ekinsport.svg" alt="Logo d'Ekinsport" class="ekinsport">
+                <p class="logo-txt">EKINSPORT</p>
             </div>
-            <h1 class="head_title secondary sponsor-title">Sponsors</h1>
-            <div class="sponsor-row">
-                <div class="sponsor-vignet">
-                    <img src="Elements/sponsors/Logo_Ekinsport.svg" alt="Logo d'Ekinsport" class="ekinsport">
-                    <p class="logo-txt">EKINSPORT</p>
-                </div>
-                <div class="sponsor-vignet">
-                    <img src="Elements/sponsors/Logo_GoodFood.svg" alt="Logo de GoodFood" class="goodfood">
-                    <p class="logo-txt">GOODFOOD</p>
-                </div>
+            <div class="sponsor-vignet">
+                <img src="Elements/sponsors/Logo_GoodFood.svg" alt="Logo de GoodFood" class="goodfood">
+                <p class="logo-txt">GOODFOOD</p>
             </div>
-            <div class="sponsor-row">
-                <div class="sponsor-vignet">
-                    <img src="Elements/sponsors/Logo_Podium.svg" alt="Logo de Podium" class="podium">
-                    <p class="logo-txt">PODIUM</p>
-                </div>
-                <div class="sponsor-vignet">
-                    <img src="Elements/sponsors/Logo_RCT.svg" alt="Logo du RCT" class="rct">
-                    <p class="logo-txt">RCT</p>
-                </div>
+        </div>
+        <div class="sponsor-row">
+            <div class="sponsor-vignet">
+                <img src="Elements/sponsors/Logo_podium.svg" alt="Logo de Podium" class="podium">
+                <p class="logo-txt">PODIUM</p>
             </div>
+            <div class="sponsor-vignet">
+                <img src="Elements/sponsors/Logo_RCT.svg" alt="Logo du RCT" class="rct">
+                <p class="logo-txt">RCT</p>
+            </div>
+        </div>
     </section>
 
     <section id="2" class="reseaux-social">
         <div class="el_2">
             <img src="Elements/others/02Blue.svg" alt="Num 02 Blue">
         </div>
-            <h1 class="head_title primary rs-title">Reseaux sociaux</h1>
-            <div class="rs-row">      
-                <div class="rs-vignet">
-                    <p class="logo-title">Instragram</p>
-                    <div class="rs-content">
-                        <img src="Elements/others/Logo_Instagram_jaune.png" alt="Logo Instagram" class="rs-insta">
-                        <a href="https://instagram.com/mmi_lan2022"><p class="id-rs">@MMI_lan2022</p></a>
-                    </div>
+        <h1 class="head_title primary rs-title">Reseaux sociaux</h1>
+        <div class="rs-row">
+            <div class="rs-vignet">
+                <p class="logo-title">Instragram</p>
+                <div class="rs-content">
+                    <img src="Elements/others/Logo_Instagram_jaune.png" alt="Logo Instagram" class="rs-insta">
+                    <a href="https://instagram.com/mmi_lan2022">
+                        <p class="id-rs">@MMI_lan2022</p>
+                    </a>
                 </div>
-                <div class="rs-vignet">
-                    <p class="logo-title">Youtube</p>
-                    <div class="rs-content">
-                        <img src="Elements/others/Logo_YT_jaune.png" alt="Logo Youtube" class="rs-youtube">
-                        <a href="https://youtube.com/"><p class="id-rs">@MMI_lan2022</p></a>
-                    </div>
+            </div>
+            <div class="rs-vignet">
+                <p class="logo-title">Youtube</p>
+                <div class="rs-content">
+                    <img src="Elements/others/Logo_YT_jaune.png" alt="Logo Youtube" class="rs-youtube">
+                    <a href="https://youtube.com/">
+                        <p class="id-rs">@MMI_lan2022</p>
+                    </a>
                 </div>
-            </div>         
+            </div>
+        </div>
     </section>
     <?php
-        include("includes/footer.php");
+    include("includes/footer.php");
     ?>
 
 </body>
+
 </html>
