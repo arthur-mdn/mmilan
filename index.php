@@ -114,7 +114,7 @@ if (isset($_SESSION["PlayerId"])) {
                         <input type="submit" class="btn btn__primary" value="Se connecter"/>
                     </form>
                     <form action="register.php">
-                        <input type="submit" class="btn btn__primary" value="S'inscrire'"/>
+                        <input type="submit" class="btn btn__primary" value="S'inscrire"/>
                     </form>
                 </div>
                 
