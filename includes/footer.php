@@ -11,6 +11,7 @@
       background-color: #0a1929;
       color: #fff;
       padding: 2rem;
+      border-top: 1px solid #38444d;
    }
 
    .footer-container {
