@@ -158,8 +158,10 @@
 
 }
 .carousel__item[data-game="rocketleague"] {
-  background: url("../Elements/images/rocketleague.jpg");
+  background: url("../Elements/programme/RocketLeagueVisu.png");
   background-size: cover;
+  background-position: center;
+
 }
 .carousel__item[data-game="overwatch"] {
   background: url("../Elements/programme/OverWatchVisu.png");
@@ -174,8 +176,10 @@
 
 }
 .carousel__item[data-game="switchsports"] {
-  background: url("../Elements/images/switchsports.jpg");
+  background: url("../Elements/programme/SwitchSportVisu.png");
   background-size: cover;
+  background-position: center;
+
 }
 .carousel__item[data-game="mystere"] {
   background: url("../Elements/programme/JeuMystereVisu.jpg");

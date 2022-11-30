@@ -118,7 +118,7 @@ if (isset($_SESSION["PlayerId"])) {
 
             <div class="jeux__item" data-game="rocketleague">
 
-                <img src="Elements/images/rl2.jpg" alt="">
+                <img src="Elements/programme/RocketLeagueVisu.png" alt="">
 
                 <div class="overlay">
                     <div class="text-content">
@@ -157,7 +157,7 @@ if (isset($_SESSION["PlayerId"])) {
 
             <div class="jeux__item" data-game="switchsports">
 
-                <img src="Elements/images/sp2.jpg" alt="">
+                <img src="Elements/programme/SwitchSportVisu.png" alt="">
 
                 <div class="overlay">
                     <div class="text-content">
