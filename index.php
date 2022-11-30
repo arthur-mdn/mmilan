@@ -229,29 +229,24 @@ if (isset($_SESSION["PlayerId"])) {
 
                 <img src="Elements/images/left_arrow.png" class="left_arrow">
                 <div class="gametext">
-
-                    <div class="overwatch">
+                <div class="overwatch">
                         <h2>OVERWATCH 2</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            ugiat, sed. Corporis nulla dignissimos quo persm.</p>
+                        <p>Ce jeu d’action et de combat pourra faire basculer le destin de chaque équipe. Choisissez vos héros et affrontez vos adversaires dans des combats sans pitié !</p>
                     </div>
 
                     <div class="rocketleague">
                         <h2>ROCKET LEAGUE</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            ugiat, sed. Corporis nulla dignissimos quo persm.</p>
+                        <p>Le jeu qui mélange football et sport motorisé, affrontez-vous dans une arène enflammée ! Marquez le maximum de buts pour mener votre équipe à la victoire </p>
                     </div>
 
                     <div class="cityguesser">
                         <h2>CITY GUESSER</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            ugiat, sed. Corporis nulla dignissimos quo persm.</p>
+                        <p>Atterrissez dans un champ de blé, une route abandonnée ou au milieu d’une grande ville, explorez et devinez à quel endroit vous êtes dans le monde entier !</p>
                     </div>
 
                     <div class="fallguys">
                         <h2>FALL GUYS</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            ugiat, sed. Corporis nulla dignissimos quo persm.</p>
+                        <p>Venez incarner un petit bonhomme coloré dans un décor psychédélique ! Évitez les obstacles et tapez votre meilleur sprint afin de franchir la ligne d’arrivée.</p>
                     </div>
 
                     <div class="mmilan">
@@ -261,15 +256,15 @@ if (isset($_SESSION["PlayerId"])) {
 
                     <div class="switchsports">
                         <h2>SWITCH SPORTS</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            ugiat, sed. Corporis nulla dignissimos quo persm.</p>
+                        <p>Frappez, lancez et smashez dans Nintendo Switch Sport ! Affrontez vous sur un terrain de  volley, une piste de bowling ou un ring de chambara.</p>
                     </div>
 
                     <div class="mystere">
                         <h2>JEU MYSTERE</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            ugiat, sed. Corporis nulla dignissimos quo persm.</p>
+                        <p>C'est le jeu mystère de notre lan que personne ne connait, il sera dévoillé environ 48 à 72h avant le début de lan! Alors à très bientôt!</p>
                     </div>
+
+                </div>
 
                 </div>
                 <img src="Elements/images/right_arrow.png" class="right_arrow">
