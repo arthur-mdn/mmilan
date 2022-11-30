@@ -82,7 +82,7 @@ if (isset($_SESSION["PlayerId"])) {
             <div class="el_1">
                 <img src="Elements/others/01White.svg" alt="Num 01White">
             </div>
-            <h1 class="head_title secondary sponsor-title">Sponsors de notre lan</h1>
+            <h1 class="head_title secondary sponsor-title">Sponsors</h1>
             <div class="sponsor-row">
                 <div class="sponsor-vignet">
                     <img src="Elements/sponsors/Logo_Ekinsport.svg" alt="Logo d'Ekinsport" class="ekinsport">
@@ -126,9 +126,6 @@ if (isset($_SESSION["PlayerId"])) {
                     </div>
                 </div>
             </div>         
-    </section>
-    <section id="3" class="join-us">
-        <p class="ju-txt">Rejoignez-Nous</p>
     </section>
     <?php
         include("includes/footer.php");
