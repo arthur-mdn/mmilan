@@ -110,12 +110,7 @@ if (isset($_SESSION["PlayerId"])) {
             <h1 class=" head_title primary infos-title">Informations </h1>
             <p class="infos-txt">Le premier tournoi de jeux vidéos fait par des étudiants pour des étudiants arrive bientôt ! Cet événement rassemble toutes les promotions MMI de l’université de Toulon passionnés de jeux vidéos. Tous les étudiants de 2ème année se sont regroupés pour vous offrir une LAN incroyable, qui se déroulera à l’université de Toulon le jeudi 15 décembre. Les participants s’affronteront sur 5 jeux, et un jeu surprise est réservé pour la finale. On vous attend nombreux !</p>
             <div class="button-section">
-                <form action="login.php">
-                    <input type="submit" class="btn btn__primary" value="Se connecter" />
-                </form>
-                <form action="register.php">
-                    <input type="submit" class="btn btn__primary" value="S'inscrire" />
-                </form>
+                <a href="login" class="btn btn__primary">Se connecter</a>
             </div>
 
         </div>
