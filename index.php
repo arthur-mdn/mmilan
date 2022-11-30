@@ -260,8 +260,6 @@ if (isset($_SESSION["PlayerId"])) {
                     </div>
 
                 </div>
-
-                </div>
                 <img src="Elements/images/right_arrow.png" class="right_arrow">
 
             </div>
