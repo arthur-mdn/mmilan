@@ -104,7 +104,7 @@ if (isset($_SESSION["PlayerId"])) {
     </div>
     <section class="infos-lan container">
         <div class="el_1">
-            <img src="Elements/others/01Blue.svg" alt="Num 01 Blue" />
+            <img src="Elements/others/01blue.svg" alt="Num 01 Blue" />
         </div>
         <div class="written-infos">
             <h1 class=" head_title primary infos-title">Informations </h1>
