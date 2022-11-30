@@ -296,7 +296,7 @@ if (!isset($_SESSION["PlayerId"])) {
             <p><b>Téléphone :</b> <?= $PlayerResult['PlayerTel'] ?></p>
             <p><b>Promo :</b> <?= $PlayerResult['PlayerProfil'] ?></p>
         </div>
-        <a href="logout" class="btn btn__white">Déconnexion</a>
+        <a href="logout" class="btn btn__light">Déconnexion</a>
 
         <?php
         if (isset($_POST['msg']) and $_POST['msg'] === "successfullAddedTeam") {
