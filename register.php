@@ -59,7 +59,7 @@
     $are_all_set = isset($_POST['NomUtilisateur'], $_POST['PrenomUtilisateur'], $_POST['MailUtilisateur'], $_POST['TelUtilisateur'], $_POST['MdpUtilisateur'], $_POST['DiscordUtilisateur'], $_POST['ProfilUtilisateur'], $_POST['UsernameUtilisateur']);
     $are_not_empty = (!empty($_POST['NomUtilisateur']) &&  !empty($_POST['PrenomUtilisateur']) &&  !empty($_POST['MailUtilisateur']) &&  !empty($_POST['TelUtilisateur']) &&  !empty($_POST['MdpUtilisateur']) &&  !empty($_POST['DiscordUtilisateur']) &&  !empty($_POST['ProfilUtilisateur']) &&  !empty($_POST['UsernameUtilisateur']));
 
-    if ($are_all_set && $are_not_empty) {
+    if ($are_all_set && $are_not_empty && $redirect_join) {
         $checkNumOfPlayers = $conn2->prepare("SELECT COUNT(*) FROM players WHERE players.PlayerStatus = 'ok' AND players.PlayerRole NOT IN ('admin', 'staff')");
         $checkNumOfPlayers->execute();
         $numOfPlayers = $checkNumOfPlayers->fetchColumn();
@@ -198,123 +198,128 @@
             echo '<div class="modal error" id="modal_' . $generated_id . '" onclick="close_modal(\'' . $generated_id . '\')" > Merci de remplir tous les champs <script> hideIt("modal_' . $generated_id . '"); </script> </div>';
         }
     }
+    if ($redirect_join) {
     ?>
-    <section id="inscription">
-        <div class="inscription_form_container">
-            <h2 class="head_title primary">Inscription Solo</h2>
-            <form method="post" onsubmit="active_loader()">
-                <div id="error_container" class="error" style="display: none;"></div>
-                <form action="" method="post">
-                    <div class="inputs_container">
-                        <div class="input-group">
-                            <input type="text" required class="box-input" style="width:100%;" name="NomUtilisateur" id="NomUtilisateur" autocomplete="new-name" placeholder=" ">
-                            <label for="NomUtilisateur">Nom</label>
-                        </div>
-                        <div class="input-group">
-                            <input type="text" required class="box-input" style="width:100%" name="PrenomUtilisateur" id="PrenomUtilisateur" autocomplete="new-surname" placeholder=" ">
-                            <label for="PrenomUtilisateur">Prénom</label>
-                        </div>
-                        <div class="input-group">
-                            <input type="text" required class="box-input" style="width:100%" name="UsernameUtilisateur" id="UsernameUtilisateur" placeholder=" ">
-                            <label for="UsernameUtilisateur">Nom d'utilisateur</label>
-                        </div>
-                        <div class="input-group">
+        <section id="inscription">
+            <div class="inscription_form_container">
+                <h2 class="head_title primary">Inscription Solo</h2>
+                <form method="post" onsubmit="active_loader()">
+                    <div id="error_container" class="error" style="display: none;"></div>
+                    <form action="" method="post">
+                        <div class="inputs_container">
+                            <div class="input-group">
+                                <input type="text" required class="box-input" style="width:100%;" name="NomUtilisateur" id="NomUtilisateur" autocomplete="new-name" placeholder=" ">
+                                <label for="NomUtilisateur">Nom</label>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" required class="box-input" style="width:100%" name="PrenomUtilisateur" id="PrenomUtilisateur" autocomplete="new-surname" placeholder=" ">
+                                <label for="PrenomUtilisateur">Prénom</label>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" required class="box-input" style="width:100%" name="UsernameUtilisateur" id="UsernameUtilisateur" placeholder=" ">
+                                <label for="UsernameUtilisateur">Nom d'utilisateur</label>
+                            </div>
+                            <div class="input-group">
 
-                            <?php
-                            $join_mail = "";
-                            if ($redirect_join) {
-                                $query = $conn2->prepare("SELECT invitations.InvitationEmail FROM invitations WHERE InvitationId = ? and InvitationToken = ? and InvitationStatus = 'En cours'");
-                                $query->bindValue(1, $_GET['JoinId']);
-                                $query->bindValue(2, $_GET['JoinToken']);
-                                $query->execute();
-                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                                if (!empty($result)) {
-                                    $join_mail = $result[0]['InvitationEmail'];
-                                } else {
-                                    $redirect_join = false;
-                                }
-                            } else {
-                                $join_mail = "";
-                            }
-                            ?>
-                            <input type="email" placeholder=" " pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" required class="box-input" style="width:100%" name="MailUtilisateur" id="MailUtilisateur" autocomplete="new-mail" value="<?= $join_mail ?>">
-                            <label for="MailUtilisateur">Adresse Email</label>
-                        </div>
-
-
-
-                        <div class="input-group">
-                            <input type="text" required class="box-input" style="width:100%" name="DiscordUtilisateur" id="DiscordUtilisateur" placeholder=" ">
-                            <label for="DiscordUtilisateur">Discord</label>
-                        </div>
-                        <div class="input-group">
-                            <input type="tel" required class="box-input" style="width:100%;color: black;" name="TelUtilisateur" id="TelUtilisateur" autocomplete="new-tel" placeholder=" ">
-                            <label for="TelUtilisateur">Numéro de téléphone</label>
-                        </div>
-                        <div class="input-group normal_label">
-                            <label for="FavGameUtilisateur"> Votre jeu favori :</label>
-                            <select name="FavGameUtilisateur" id="FavGameUtilisateur" required style="width:100%;color: black;">
                                 <?php
-                                $query = $conn2->prepare("SELECT * 
+                                $join_mail = "";
+                                if ($redirect_join) {
+                                    $query = $conn2->prepare("SELECT invitations.InvitationEmail FROM invitations WHERE InvitationId = ? and InvitationToken = ? and InvitationStatus = 'En cours'");
+                                    $query->bindValue(1, $_GET['JoinId']);
+                                    $query->bindValue(2, $_GET['JoinToken']);
+                                    $query->execute();
+                                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                                    if (!empty($result)) {
+                                        $join_mail = $result[0]['InvitationEmail'];
+                                    } else {
+                                        $redirect_join = false;
+                                    }
+                                } else {
+                                    $join_mail = "";
+                                }
+                                ?>
+                                <input type="email" placeholder=" " pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}" required class="box-input" style="width:100%" name="MailUtilisateur" id="MailUtilisateur" autocomplete="new-mail" value="<?= $join_mail ?>">
+                                <label for="MailUtilisateur">Adresse Email</label>
+                            </div>
+
+
+
+                            <div class="input-group">
+                                <input type="text" required class="box-input" style="width:100%" name="DiscordUtilisateur" id="DiscordUtilisateur" placeholder=" ">
+                                <label for="DiscordUtilisateur">Discord</label>
+                            </div>
+                            <div class="input-group">
+                                <input type="tel" required class="box-input" style="width:100%;color: black;" name="TelUtilisateur" id="TelUtilisateur" autocomplete="new-tel" placeholder=" ">
+                                <label for="TelUtilisateur">Numéro de téléphone</label>
+                            </div>
+                            <div class="input-group normal_label">
+                                <label for="FavGameUtilisateur"> Votre jeu favori :</label>
+                                <select name="FavGameUtilisateur" id="FavGameUtilisateur" required style="width:100%;color: black;">
+                                    <?php
+                                    $query = $conn2->prepare("SELECT * 
 									FROM games
 									WHERE games.GameStatus != 'del'");
-                                $query->execute();
-                                $games = $query->fetchAll(PDO::FETCH_ASSOC);
-                                foreach ($games as $game) {
-                                    echo '
+                                    $query->execute();
+                                    $games = $query->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach ($games as $game) {
+                                        echo '
                         <option value="' . $game['GameId'] . '">
                             ' . $game['GameName'] . '
                         </option>
                         ';
-                                }
+                                    }
 
-                                ?>
-                            </select>
-                        </div>
-                        <div class="input-group normal_label">
-                            <label for="ProfilUtilisateur">Votre status :</label>
-                            <select name="ProfilUtilisateur" id="ProfilUtilisateur" required style="width:100%;color: black;">
-                                <option value="mmi1">MMI 1</option>
-                                <option value="mmi2">MMI 2</option>
-                                <option value="enseignant">Enseignant</option>
-                                <option value="autre">Autre</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <input type="password" required class="box-input" style="width:100%" name="MdpUtilisateur" id="MdpUtilisateur" autocomplete="new-password" placeholder=" ">
-                            <label class="mail_input" for="MdpUtilisateur">Mot de passe</label>
-                        </div>
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="input-group normal_label">
+                                <label for="ProfilUtilisateur">Votre status :</label>
+                                <select name="ProfilUtilisateur" id="ProfilUtilisateur" required style="width:100%;color: black;">
+                                    <option value="mmi1">MMI 1</option>
+                                    <option value="mmi2">MMI 2</option>
+                                    <option value="enseignant">Enseignant</option>
+                                    <option value="autre">Autre</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <input type="password" required class="box-input" style="width:100%" name="MdpUtilisateur" id="MdpUtilisateur" autocomplete="new-password" placeholder=" ">
+                                <label class="mail_input" for="MdpUtilisateur">Mot de passe</label>
+                            </div>
 
-                    </div>
-                    <div class="end_of_form">
-                        <?php if ($redirect_join) {
-                            echo '<input type="hidden" name="JoinId" value="' . $_GET['JoinId'] . '">';
-                            echo '<input type="hidden" name="JoinToken" value="' . $_GET['JoinToken'] . '">';
-                        } ?>
-                        <div class="conditions_text">
-                            <input type="checkbox" required id="accept_conditions"> <label for="accept_conditions">J'ai lu et j'accepte les conditions </label>
-                            <br><br>
-                            <input type="checkbox" required id="accept_image_exploitations"> <label for="accept_image_exploitations">J'accepte les règles de droits à l'image.</label>
                         </div>
-                        <input class="btn btn__primary btn_submit" type="submit" name="submit" value="S'inscrire" />
-
-                        <p class="links_txt">
-                            Déjà inscrit ?
+                        <div class="end_of_form">
                             <?php if ($redirect_join) {
-                                echo '<a href="login.php?JoinToken=' . htmlspecialchars($_GET['JoinToken'], ENT_QUOTES, 'UTF-8') . '&JoinId=' . htmlspecialchars($_GET['JoinId'], ENT_QUOTES, 'UTF-8') . '" class="links_txt " onclick="active_loader(); ">';
-                            } else {
-                                echo '<a href="login.php" class="links_txt " onclick="active_loader(); ">';
+                                echo '<input type="hidden" name="JoinId" value="' . $_GET['JoinId'] . '">';
+                                echo '<input type="hidden" name="JoinToken" value="' . $_GET['JoinToken'] . '">';
                             } ?>
-                            Connectez-vous ici</a>
-                        </p>
-                    </div>
-                </form>
-        </div>
+                            <div class="conditions_text">
+                                <input type="checkbox" required id="accept_conditions"> <label for="accept_conditions">J'ai lu et j'accepte les conditions </label>
+                                <br><br>
+                                <input type="checkbox" required id="accept_image_exploitations"> <label for="accept_image_exploitations">J'accepte les règles de droits à l'image.</label>
+                            </div>
+                            <input class="btn btn__primary btn_submit" type="submit" name="submit" value="S'inscrire" />
 
-        <!-- <br><br><br>
-    <br><br><br>
-    <br><br><br> -->
-    </section>
+                            <p class="links_txt">
+                                Déjà inscrit ?
+                                <?php if ($redirect_join) {
+                                    echo '<a href="login.php?JoinToken=' . htmlspecialchars($_GET['JoinToken'], ENT_QUOTES, 'UTF-8') . '&JoinId=' . htmlspecialchars($_GET['JoinId'], ENT_QUOTES, 'UTF-8') . '" class="links_txt " onclick="active_loader(); ">';
+                                } else {
+                                    echo '<a href="login.php" class="links_txt " onclick="active_loader(); ">';
+                                } ?>
+                                Connectez-vous ici</a>
+                            </p>
+                        </div>
+                    </form>
+            </div>
+        </section>
+
+    <?php } else {
+    ?>
+        <section class="container">
+            <div class="error">Les inscriptions sont closes, si vous avez une demande particulière merci de nous contacter.</div>
+        </section>
+    <?php
+    } ?>
 
 
 
