@@ -123,10 +123,7 @@ if (isset($_SESSION["PlayerId"])) {
                 <div class="overlay">
                     <div class="text-content">
                         <h2>ROCKET LEAGUE</h2>
-                        <p>Le jeu qui mélange football et sport motorisé, 
-                            affrontez-vous dans une arène enflammée ! 
-                            Marquez le maximum de buts pour mener votre équipe à la victoire !
-                        </p>
+                        <p>Le jeu qui mélange football et sport motorisé, affrontez-vous dans une arène enflammée ! Marquez le maximum de buts pour mener votre équipe à la victoire !</p>
                     </div>
                 </div>
 
