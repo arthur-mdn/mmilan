@@ -14,6 +14,12 @@
   type: "opentype";
   font-weight: normal;
 }
+@font-face {
+  font-family: "Modius";
+  src: url("../../fonts/Modius_Bold.otf");
+  type: "opentype";
+  font-weight: normal;
+}
 :root {
   --color-primary: #f9d71c;
   --color-dark: #0a1929;
@@ -183,7 +189,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Akira", sans-serif;
+  font-family: "Modius", sans-serif;
   color: var(--color-light);
 }
 

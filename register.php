@@ -184,7 +184,7 @@
                 }
             } else {
                 $generated_id = generateRandomString(5);
-                echo '<div class="modal error" id="modal_' . $generated_id . '" onclick="close_modal(\'' . $generated_id . '\')"> Un compte utilisant cette adresse mail et/ou ce numÃƒÂ©ro de tÃƒÂ©lÃƒÂ©phone existe dÃƒÂ©jÃƒÂ . <script> hideIt("modal_' . $generated_id . '"); </script> </div>';
+                echo '<div class="modal error" id="modal_' . $generated_id . '" onclick="close_modal(\'' . $generated_id . '\')"> Un compte utilisant cette adresse mail et/ou ce numéro de téléphone existe déjà . <script> hideIt("modal_' . $generated_id . '"); </script> </div>';
             }
         } else {
             if (!empty($_POST)) {
