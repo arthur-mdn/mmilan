@@ -110,6 +110,7 @@ a.back_teams::before {
   font-size: 5rem !important;
   font-weight: 700;
   margin-bottom: 0.5rem;
+  text-align: end;
 }
 
 .landing-team .team .team_description p {
