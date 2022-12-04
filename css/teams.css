@@ -115,6 +115,7 @@ a.back_teams::before {
 
 .landing-team .team .team_description p {
   font-size: 2rem;
+  text-align: end;
 }
 
 .landing-team .team_logo img {
