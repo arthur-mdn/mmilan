@@ -134,7 +134,7 @@
          </a>
       </div>
    </div>
-   <a class="btn btn__light button no-style" href="./contact.php" style="display: block; text-align: center; margin: 0 auto;">CONTACT</a>
+   <a class="btn btn__light button no-style" href="./contact.php" style="display: block; text-align: center; margin: 0 auto; margin-bottom:2rem;">CONTACT</a>
    <div class="footer-container2">
       <div class="sponsors-container">
          <div class="sponsor">

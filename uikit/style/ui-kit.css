@@ -68,10 +68,10 @@ h1 {
 
 .container {
   padding-top: 100px;
-  max-width: 1300px;
+  width: min(100% - 2rem, 1300px);
   height: auto;
   margin: 0 auto;
-  padding-inline: 20px;
+  position: relative;
 }
 
 .frise_container {

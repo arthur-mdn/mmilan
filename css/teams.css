@@ -1,217 +1,123 @@
-/* CSS pour la partie Équipe */
-
-/* CSS pour la partie JOUEURS SOLO (réutilisable si besoin dans la partie précédente) */
-.teams_display_section {
+.teams_container {
   display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.alone_players_display_section {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding-top: 100px;
-  background-color: #f9d71c;
-  margin: 0 0;
-  width: 100%;
-  padding: 0 20px;
-}
-
-.alone_players_display_section > .title_section > .head_title.secondary:after {
-  left: 6.5rem;
-  top: 1.8rem;
-}
-
-.alone_players_display_section > .title_section {
-  margin: 7% 0 0 9%;
-}
-
-.alone_players_display_section > .text_content {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
-
-.text {
-  max-width: 70%;
-  font-size: 20px;
-  font-weight: 700;
-  color: black;
-  margin-top: 3%;
-}
-
-.alone_players_display_section > .btn_section > .btnregister {
-  background-color: #0a1929;
-  color: #f9d71c;
-  font-size: 20px;
-  padding: 0.4rem 2rem;
-  display: flex;
-  margin: 20px auto 20px;
-}
-
-.alone_players_display_section > .graphics > .element_right {
-  width: 30%;
-  position: absolute;
-  right: 0;
-  top: 500px;
-}
-
-.alone_players_display_section > .graphics > .element_left {
-  width: 30%;
-  position: absolute;
-  left: 0;
-  top: 500px;
-
-  -moz-transform: scale(-1, 1);
-  -webkit-transform: scale(-1, 1);
-  -o-transform: scale(-1, 1);
-  -ms-transform: scale(-1, 1);
-  transform: scale(-1, 1);
-}
-
-.textinfo {
-  font-size: 19px;
-  font-weight: 700;
-  color: black;
-  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   align-content: center;
-}
-
-.informations {
-  position: absolute;
-  bottom: -40px;
-  left: 20px;
-}
-
-.icon_info {
-  position: relative;
-  margin-left: 10px;
-  fill: #0a1929;
-}
-
-svg.controllers {
-  fill: #f9d71c;
-}
-
-#wrapper {
   width: 100%;
-  max-width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  margin-top: 5%;
-}
-
-#carousel {
-  overflow: auto;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-}
-
-#carousel::-webkit-scrollbar {
-  height: 0;
-}
-
-#prev,
-#next {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  background: #0a1929;
-  border: none;
-  padding: 8px;
-  border-radius: 50%;
-  outline: 0;
-  cursor: pointer;
-  position: absolute;
-}
-
-#prev {
-  top: 50%;
-  left: -10%;
-  transform: translate(50%, -50%);
-  display: none;
-}
-
-#next {
-  top: 50%;
-  right: -10%;
-  transform: translate(-50%, -50%);
-}
-
-#content {
-  display: grid;
-  justify-content: center;
-  grid-gap: 10%;
-  grid-auto-flow: column;
-  margin: auto;
-  box-sizing: border-box;
-}
-
-.item {
-  object-fit: cover;
-  width: 128px;
-  height: 128px;
-  border-radius: 10px;
-}
-
-.players {
-  width: 140%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  gap: 2rem;
 }
 
 .team_container {
-  width: 100%;
+  flex: 1 0 25%;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-block: 3rem;
+  padding: 1rem;
 }
 
 .team_container .team_logo {
-  width: 100px;
+  height: 300px;
+  aspect-ratio: 1/1;
+  padding: 10%;
+  background-color: hsl(212, 61%, 13%);
+  border-radius: 1rem;
+  box-shadow: 0.5rem 0.5rem 0 #f9d71c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .team_container .team_logo img {
+  height: 100%;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+}
+
+.team_infos {
+  min-height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  object-fit: cover;
 }
 
 .team_container .team_name {
   font-size: 1.5rem;
   font-weight: 700;
+  text-align: center;
 }
 
-.team_container .team_description {
-  font-size: 1rem;
-  font-weight: 400;
-  border: 1px solid grey;
-  border-radius: 10px;
-  padding: 0.5rem;
+.team_link {
+  margin-inline: auto;
+}
+
+.landing-team {
   width: 100%;
-  max-width: 400px;
+  background-image: linear-gradient(
+    225deg,
+    rgba(10, 25, 41, 0.3),
+    rgba(78, 59, 203, 0.4) 85%
+  );
+  height: 100vh;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
 }
 
-.team_container .team_players {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.team_container .team_players .team_players_list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.team_container .team_players .team_player {
-  list-style: none;
+a.back_teams {
   padding: 1rem;
-  border: 1px solid grey;
-  border-radius: 10px;
-  width: fit-content;
+  font-size: 1.25rem;
+  position: relative;
+}
+
+a.back_teams::before {
+  content: "<";
+  line-height: 1;
+  margin-inline: 1rem;
+  position: absolute;
+  left: -1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #f9d71c;
+}
+
+.landing-team .team {
+  width: min(100%, 640px);
+  height: calc(100% - 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.landing-team .team_logo {
+  z-index: -1;
+  right: 5vw;
+  bottom: 0;
+  position: absolute;
+  height: 80%;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  /* opacity: 0.5; */
+}
+
+.landing-team .team .team_name h1 {
+  font-size: 5rem !important;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.landing-team .team .team_description p {
+  font-size: 2rem;
+}
+
+.landing-team .team_logo img {
+  height: 100%;
+  aspect-ratio: 1/1;
+  object-fit: contain;
 }
