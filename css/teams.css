@@ -107,14 +107,14 @@ a.back_teams::before {
 }
 
 .landing-team .team .team_name h1 {
-  font-size: 5rem !important;
+  font-size: clamp(1.75rem, 4vw, 3.25rem) !important;
   font-weight: 700;
   margin-bottom: 0.5rem;
   text-align: end;
 }
 
 .landing-team .team .team_description p {
-  font-size: 2rem;
+  font-size: clamp(1.25rem, 4vw, 2rem);
   text-align: end;
 }
 
@@ -122,4 +122,27 @@ a.back_teams::before {
   height: 100%;
   aspect-ratio: 1/1;
   object-fit: contain;
+}
+
+.team_members {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  gap: 2rem;
+  height: 100vh;
+}
+
+.team_member {
+  flex: 1 0 25%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.team_member .team_member_name {
+  font-size: 1.5rem;
+  font-weight: 700;
 }

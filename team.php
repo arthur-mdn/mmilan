@@ -87,6 +87,42 @@ if (isset($_GET['team'])) {
         </div>
     </section>
 
+    <section class="team_members">
+        <div class="container">
+            <div class="team_members_title">
+                <h2>Membres de l'équipe</h2>
+            </div>
+            <div class="team_members_list">
+                <?php
+                $query = $conn2->prepare("SELECT * 
+                                    FROM players, appartient
+                                    WHERE appartient.AppartientTeamId = ?
+                                    and appartient.AppartientPlayerId = players.PlayerId");
+                $query->bindValue(1, htmlspecialchars($_GET['team'], ENT_QUOTES, 'UTF-8'));
+                $query->execute();
+                $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                if (empty($result)) {
+                    echo '<p>Aucun membre dans cette équipe.</p>';
+                } else {
+                    foreach ($result as $row) {
+                        echo '<div class="team_member">
+
+                        <div class="team_member_name">
+                            <p>Pseudo : ' . $row['PlayerUsername'] . '</p>
+                            <p>Prénom : ' . $row['PlayerFirstname'] . '</p>
+                            <p>Nom : ' . $row['PlayerLastname'] . '</p>
+                        </div>
+                        <div class="team_member_discord">
+                            <p>Discord : ' . $row['PlayerDiscord'] . '</p>
+                        </div>
+                    </div>';
+                    }
+                }
+                ?>
+            </div>
+        </div>
+    </section>
+
     <!-- Partie Équipe a remplir par Roman.S & Axel.G -->
     <?php
     include_once './includes/footer.php';
