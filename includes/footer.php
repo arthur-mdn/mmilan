@@ -11,6 +11,7 @@
       background-color: #0a1929;
       color: #fff;
       padding: 2rem;
+      border-top: 1px solid #38444d;
    }
 
    .footer-container {
@@ -142,7 +143,11 @@
          </a>
       </div>
    </div>
+<<<<<<< HEAD
    <a class="btn btn__light button no-style" href="./contact.php" style="display: block; text-align: center; margin: 0 auto">CONTACT</a>
+=======
+   <a class="btn btn__light button no-style" href="./contact.php" style="display: block; text-align: center; margin: 0 auto; margin-bottom:2rem;">CONTACT</a>
+>>>>>>> de8600ad7055be52d621be814e797db47a8130b0
    <div class="footer-container2">
       <div class="sponsors-container">
          <div class="sponsor">

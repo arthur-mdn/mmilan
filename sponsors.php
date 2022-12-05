@@ -32,7 +32,7 @@ if (isset($_SESSION["PlayerId"])) {
 <html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Page Sponsors - Mmi Lan</title>
+    <title>Sponsors - Mmi Lan</title>
     <?php
     include_once './includes/head.php';
     ?>
@@ -42,11 +42,6 @@ if (isset($_SESSION["PlayerId"])) {
 </head>
 
 <body>
-    <div class="frise_container">
-        <div class="frise">
-            <img src="Elements/others/Vector.svg" />
-        </div>
-    </div>
     <?php
     include 'menu.php';
     ?>
@@ -77,62 +72,61 @@ if (isset($_SESSION["PlayerId"])) {
             });
         </script>
     </div>
-
-    <section id="1" class="sponsors-section">
+    <section>
+        <h1 class="head_title primary sponsor-title">Nos sponsors</h1>
+        <div id="1" class="sponsor-row">
+            <div class="sponsors-img">
+                <img src="Elements/sponsors/Logo_Ekinsport.svg" alt="Logo d'Ekinsport">
+            </div>
+            <div class="sponsor-txt">
+                <p class="nom-sponsor">Ekinsport</p>
+                <p class="sponsor-exp">Ils nous ont offert des T-Shirt pour pouvoir représenter le staff le jour de l'évènement.</p>
+            </div>
             <div class="el_1">
-                <img src="Elements/others/01White.svg" alt="Num 01White">
+                <img src="Elements/others/01blue.svg" alt="Numéro O1 Bleu">
             </div>
-            <h1 class="head_title secondary sponsor-title">Sponsors de notre lan</h1>
-            <div class="sponsor-row">
-                <div class="sponsor-vignet">
-                    <img src="Elements/sponsors/Logo_Ekinsport.svg" alt="Logo d'Ekinsport" class="ekinsport">
-                    <p class="logo-txt">EKINSPORT</p>
-                </div>
-                <div class="sponsor-vignet">
-                    <img src="Elements/sponsors/Logo_GoodFood.svg" alt="Logo de GoodFood" class="goodfood">
-                    <p class="logo-txt">GOODFOOD</p>
-                </div>
-            </div>
-            <div class="sponsor-row">
-                <div class="sponsor-vignet">
-                    <img src="Elements/sponsors/Logo_Podium.svg" alt="Logo de Podium" class="podium">
-                    <p class="logo-txt">PODIUM</p>
-                </div>
-                <div class="sponsor-vignet">
-                    <img src="Elements/sponsors/Logo_RCT.svg" alt="Logo du RCT" class="rct">
-                    <p class="logo-txt">RCT</p>
-                </div>
-            </div>
-    </section>
-
-    <section id="2" class="reseaux-social">
-        <div class="el_2">
-            <img src="Elements/others/02Blue.svg" alt="Num 02 Blue">
         </div>
-            <h1 class="head_title primary rs-title">Reseaux sociaux</h1>
-            <div class="rs-row">      
-                <div class="rs-vignet">
-                    <p class="logo-title">Instragram</p>
-                    <div class="rs-content">
-                        <img src="Elements/others/Logo_Instagram_jaune.png" alt="Logo Instagram" class="rs-insta">
-                        <a href="https://instagram.com/mmi_lan2022"><p class="id-rs">@MMI_lan2022</p></a>
-                    </div>
-                </div>
-                <div class="rs-vignet">
-                    <p class="logo-title">Youtube</p>
-                    <div class="rs-content">
-                        <img src="Elements/others/Logo_YT_jaune.png" alt="Logo Youtube" class="rs-youtube">
-                        <a href="https://youtube.com/"><p class="id-rs">@MMI_lan2022</p></a>
-                    </div>
-                </div>
-            </div>         
-    </section>
-    <section id="3" class="join-us">
-        <p class="ju-txt">Rejoignez-Nous</p>
+        <div id="2" class="sponsor-row-reverse">
+            <div class="sponsors-img">
+                <img src="Elements/sponsors/Logo_GoodFood.svg" alt="Logo de GoodFood">
+            </div>
+            <div class="sponsor-txt">
+                <p class="nom-sponsor">GoodFood</p>
+                <p class="sponsor-exp-reverse">Ils nous ont offert des prix pour les gagnants de notre lan.</p>
+            </div>
+            <div class="el_1">
+                <img src="Elements/others/02White.svg" alt="Numéro O2 Blanc">
+            </div>
+        </div>
+        <div id="3" class="sponsor-row">
+            <div class="sponsors-img">
+                <img src="Elements/sponsors/Logo_podium.svg" alt="Logo de Podium">
+            </div>
+            <div class="sponsor-txt">
+                <p class="nom-sponsor">Podium</p>
+                <p class="sponsor-exp">Ils nous ont offert les trophées personalisés pour les gagnants.</p>
+            </div>
+            <div class="el_1">
+                <img src="Elements/others/03blue.svg" alt="Numéro O3 Bleu">
+            </div>
+        </div>
+        <div id="4" class="sponsor-row-reverse">
+            <div class="sponsors-img">
+                <img src="Elements/sponsors/Logo_RCT.svg" alt="Logo d'Ekinsport">
+            </div>
+            <div class="sponsor-txt">
+                <p class="nom-sponsor">RCT</p>
+                <p class="sponsor-exp-reverse">Ils nous ont offert des prix pour les gagnants de notre lan.</p>
+            </div>
+            <div class="el_1">
+                <img src="Elements/others/04White.svg" alt="Numéro O4 Blanc">
+            </div>
+        </div>
+
     </section>
     <?php
-        include("includes/footer.php");
+    include("includes/footer.php");
     ?>
-
 </body>
+
 </html>

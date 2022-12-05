@@ -110,7 +110,6 @@
 				header("Location: login.php?msg=passwordEdited");
 			}
 		}
-		require('menu.php');
 		$generated_id = generateRandomString(5);
 		echo '<div class="modal error" id="modal_' . $generated_id . '" onclick="close_modal(\'' . $generated_id . '\')" > Ce compte ne vous appartient pas.<script> hideIt("modal_' . $generated_id . '"); </script> </div>';
 		exit();

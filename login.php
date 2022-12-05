@@ -258,14 +258,6 @@
                 } ?>
                <button class="btn btn__primary" type="submit">valider</button>
 
-               <?php if ($redirect_join) {
-                    echo '<a href="register.php?JoinToken=' . htmlspecialchars($_GET['JoinToken'], ENT_QUOTES, 'UTF-8') . '&JoinId=' . htmlspecialchars($_GET['JoinId'], ENT_QUOTES, 'UTF-8') . '" class="links_txt " onclick="active_loader(); ">';
-                } else {
-                    echo '<a href="register.php" class="links_txt " onclick="active_loader(); ">';
-                } ?>
-               Inscription ?
-               </a>
-
            </form>
 
        </section>

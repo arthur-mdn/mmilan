@@ -22,6 +22,7 @@
 
     <script src="js/main_script.js"></script>
 
-    <link rel="stylesheet" href="uikit/style/ui-kit.css" />
+    
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/loader.css" />
+    <link rel="stylesheet" href="uikit/style/ui-kit.css" />

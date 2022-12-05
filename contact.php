@@ -32,13 +32,10 @@ require 'lib/PHPMailer/src/SMTP.php';
 <html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Accueil</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <script src="js/main_script.js"></script>
-    <link rel="icon" type="image/png" href="Elements/placeholder_logo.svg" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/loader.css" />
+    <title>Contact</title>
+    <?php
+    include_once './includes/head.php';
+    ?>
     <link rel="stylesheet" href="css/contact.css" />
 </head>
 
@@ -67,15 +64,15 @@ require 'lib/PHPMailer/src/SMTP.php';
 
     ?>
 
-    <div>
+    <div class="container" style=" min-height:100vh;">
         <h2 class="head_title primary">Nous Contacter</h2>
         <section id="contact" style="margin-top:10rem;display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    align-items: center; margin-left:20px;margin-right:20px;">
+    align-items: center;">
 
 
-            <img style="max-width: 650px; width: 85%;" src="Elements/images/image_contact.jpg">
+            <img style=" max-width: 650px; width: 85%;" src="Elements/images/image_contact.jpg">
             <div class="inscription_form_container">
 
                 <div id="error_container" class="error" style="display: none;"></div>
