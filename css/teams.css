@@ -95,15 +95,13 @@ a.back_teams::before {
 .landing-team .team_logo {
   z-index: -1;
   right: 5vw;
-  bottom: 0;
+  bottom: 1rem;
   position: absolute;
-  height: 80%;
+  max-height: 80%;
   aspect-ratio: 1/1;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1rem;
-  /* opacity: 0.5; */
 }
 
 .landing-team .team .team_name h1 {
@@ -111,11 +109,15 @@ a.back_teams::before {
   font-weight: 700;
   margin-bottom: 0.5rem;
   text-align: end;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .landing-team .team .team_description p {
   font-size: clamp(1.25rem, 4vw, 2rem);
   text-align: end;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .landing-team .team_logo img {
