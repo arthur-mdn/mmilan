@@ -13,6 +13,7 @@
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  transition: all 0.3s ease-in-out;
 }
 
 .team_container .team_logo {
