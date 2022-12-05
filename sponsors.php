@@ -80,10 +80,10 @@ if (isset($_SESSION["PlayerId"])) {
             </div>
             <div class="sponsor-txt">
                 <p class="nom-sponsor">Ekinsport</p>
-                <p class="sponsor-exp">Ils nous ont offert des T-Shirt pour pouvoir représenter le staff le jour de l'évènement.</p> 
+                <p class="sponsor-exp">Ils nous ont offert des T-Shirt pour pouvoir représenter le staff le jour de l'évènement.</p>
             </div>
             <div class="el_1">
-                <img src="Elements/others/01Blue.svg" alt="Numéro O1 Bleu">
+                <img src="Elements/others/01blue.svg" alt="Numéro O1 Bleu">
             </div>
         </div>
         <div id="2" class="sponsor-row-reverse">
@@ -92,7 +92,7 @@ if (isset($_SESSION["PlayerId"])) {
             </div>
             <div class="sponsor-txt">
                 <p class="nom-sponsor">GoodFood</p>
-                <p class="sponsor-exp-reverse">Ils nous ont offert des prix pour les gagnants de notre lan.</p> 
+                <p class="sponsor-exp-reverse">Ils nous ont offert des prix pour les gagnants de notre lan.</p>
             </div>
             <div class="el_1">
                 <img src="Elements/others/02White.svg" alt="Numéro O2 Blanc">
@@ -104,7 +104,7 @@ if (isset($_SESSION["PlayerId"])) {
             </div>
             <div class="sponsor-txt">
                 <p class="nom-sponsor">Podium</p>
-                <p class="sponsor-exp">Ils nous ont offert les trophées personalisés pour les gagnants.</p> 
+                <p class="sponsor-exp">Ils nous ont offert les trophées personalisés pour les gagnants.</p>
             </div>
             <div class="el_1">
                 <img src="Elements/others/03Blue.svg" alt="Numéro O3 Bleu">
@@ -116,16 +116,17 @@ if (isset($_SESSION["PlayerId"])) {
             </div>
             <div class="sponsor-txt">
                 <p class="nom-sponsor">RCT</p>
-                <p class="sponsor-exp-reverse">Ils nous ont offert des prix pour les gagnants de notre lan.</p> 
+                <p class="sponsor-exp-reverse">Ils nous ont offert des prix pour les gagnants de notre lan.</p>
             </div>
             <div class="el_1">
                 <img src="Elements/others/04White.svg" alt="Numéro O4 Blanc">
             </div>
         </div>
-       
-    </section>  
+
+    </section>
     <?php
-        include("includes/footer.php");
+    include("includes/footer.php");
     ?>
 </body>
+
 </html>
