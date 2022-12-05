@@ -107,7 +107,7 @@ if (isset($_SESSION["PlayerId"])) {
                 <p class="sponsor-exp">Ils nous ont offert les trophées personalisés pour les gagnants.</p>
             </div>
             <div class="el_1">
-                <img src="Elements/others/03Blue.svg" alt="Numéro O3 Bleu">
+                <img src="Elements/others/03blue.svg" alt="Numéro O3 Bleu">
             </div>
         </div>
         <div id="4" class="sponsor-row-reverse">
