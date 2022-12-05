@@ -100,7 +100,7 @@ if (isset($_SESSION["PlayerId"])) {
         </div>
         <div id="3" class="sponsor-row">
             <div class="sponsors-img">
-                <img src="Elements/sponsors/Logo_Podium.svg" alt="Logo de Podium">
+                <img src="Elements/sponsors/Logo_podium.svg" alt="Logo de Podium">
             </div>
             <div class="sponsor-txt">
                 <p class="nom-sponsor">Podium</p>
