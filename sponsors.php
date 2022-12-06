@@ -76,7 +76,7 @@ if (isset($_SESSION["PlayerId"])) {
         <h1 class="head_title primary sponsor-title">Nos sponsors</h1>
         <div id="1" class="sponsor-row">
             <div class="sponsor-img">
-                <img src="Elements/sponsors/ekinsport_logo.svg" alt="Logo d'Ekinsport">
+                <img src="Elements/sponsors/ekinsport_logo_color.svg" alt="Logo d'Ekinsport">
             </div>
             <div class="sponsor-txt">
                 <p class="nom-sponsor">Ekinsport</p>
@@ -88,7 +88,7 @@ if (isset($_SESSION["PlayerId"])) {
         </div>
         <div id="2" class="sponsor-row-reverse">
             <div class="sponsor-img">
-                <img src="Elements/sponsors/goodfood_logo.svg" alt="Logo de GoodFood">
+                <img src="Elements/sponsors/goodfood_logo_color.svg" alt="Logo de GoodFood">
             </div>
             <div class="sponsor-txt">
                 <p class="nom-sponsor">GoodFood</p>
@@ -100,7 +100,7 @@ if (isset($_SESSION["PlayerId"])) {
         </div>
         <div id="3" class="sponsor-row">
             <div class="sponsor-img">
-                <img src="Elements/sponsors/podium_logo.svg" alt="Logo de Podium">
+                <img src="Elements/sponsors/podium_logo_color.svg" alt="Logo de Podium">
             </div>
             <div class="sponsor-txt">
                 <p class="nom-sponsor">Podium</p>
@@ -112,7 +112,7 @@ if (isset($_SESSION["PlayerId"])) {
         </div>
         <div id="4" class="sponsor-row-reverse">
             <div class="sponsor-img">
-                <img src="Elements/sponsors/rct_logo.svg" alt="Logo du RCT">
+                <img src="Elements/sponsors/rct_logo_color.svg" alt="Logo du RCT">
             </div>
             <div class="sponsor-txt">
                 <p class="nom-sponsor">RCT</p>
