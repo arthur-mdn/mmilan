@@ -42,7 +42,9 @@
   gap: 10px;
   width: 300px;
 }
-.nom-sponsor {
+
+p.nom-sponsor {
+  color: #fff !important;
   font-size: 25px;
   font-weight: 500;
   width: 100%;
