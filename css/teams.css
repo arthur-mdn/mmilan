@@ -98,7 +98,7 @@ a.back_teams::before {
   right: 5vw;
   bottom: 1rem;
   position: absolute;
-  max-height: 80%;
+  height: 80%;
   aspect-ratio: 1/1;
   display: flex;
   justify-content: center;
