@@ -1,15 +1,4 @@
 <?php
-
-/**
- * mmilan, website that manage e-sport teams
- * Propulsed by Arthur Mondon.
- *
- * @author     Arthur Mondon
- *
- * Contributors :
- * -
- *
- */
 session_start();
 define('MyConst', TRUE);
 require('app/config.php');

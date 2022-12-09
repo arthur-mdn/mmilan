@@ -149,3 +149,35 @@ a.back_teams::before {
   font-size: 1.5rem;
   font-weight: 700;
 }
+
+@media only screen and (max-width: 1300px) {
+  .landing-team {
+    flex-direction: column;
+  }
+
+  .landing-team .team {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
+  .landing-team .team_logo {
+    position: unset;
+    width: 100%;
+  }
+
+  .landing-team .team_logo img {
+    width: 80%;
+    max-height: 50vh;
+    height: unset;
+  }
+
+  .landing-team .team .team_name h1 {
+    text-align: left;
+  }
+
+  .landing-team .team .team_description p {
+    text-align: left;
+  }
+}
