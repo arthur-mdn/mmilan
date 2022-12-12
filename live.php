@@ -62,6 +62,8 @@ margin-top: 10px;
 
 
 </style>
+<!DOCTYPE html>
+<html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
 <?php 
 session_start();
 define('MyConst', TRUE);
@@ -92,6 +94,7 @@ if (isset($_SESSION["PlayerId"])) {
     <link rel="stylesheet" href="css/mediaCss.css" />
 
 </head>
+<body>
 <div class="frise_container">
         <div class="frise">
             <img src="Elements/others/Vector.svg" />
@@ -159,3 +162,6 @@ for ($i = 0; $i < count($teams); $i++) {
 <?php
             include_once './includes/footer.php';
             ?>
+</body>
+</html>
+
