@@ -28,7 +28,7 @@
         gap: 1rem;
         background-color: #FFFF;
         color: black;
-        box-shadow: 0.35rem 0.35rem #f9d71c;
+        box-shadow: 0.35rem 0.35rem 0 #f9d71c;
         border-radius: 5px;
         margin-left: 3rem;
         padding: 0.5rem 1rem;
@@ -37,7 +37,7 @@
 
     .Classement_Team:hover {
         transform: scale(1.025);
-        box-shadow: 0.05rem 0.05rem #f9d71c;
+        box-shadow: 0 0 0.5rem #f9d71c;
     }
 
     .Team_Rank {
@@ -145,7 +145,7 @@ if (isset($_SESSION["PlayerId"])) {
             <?php
 
 
-            $sql = "SELECT teams.TeamId, teams.TeamRank, teams.TeamName FROM `teams` ORDER BY teams.TeamRank DESC";
+            $sql = "SELECT teams.TeamId, teams.TeamRank, teams.TeamName FROM `teams` WHERE TeamStatus = 'ok' ORDER BY teams.TeamRank DESC ";
             $result = $conn2->prepare($sql);
             $result->execute();
             $teams = $result->fetchAll(PDO::FETCH_ASSOC);
