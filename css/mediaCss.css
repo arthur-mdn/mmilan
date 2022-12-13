@@ -1,5 +1,4 @@
 .twitchtitle {
-
   margin-bottom: 1rem;
   padding-top: 100px;
 }
@@ -25,7 +24,6 @@
   justify-content: center;
   gap: 70px;
   padding-top: 50px;
-  
 }
 .twitchflux {
   border-radius: 15px;
@@ -121,8 +119,6 @@
 }
 
 .sponsor {
-  padding-bottom: 50px;
-  padding-top: 77px;
   background-color: #f9d71c;
 }
 .sponsortitle {
@@ -175,16 +171,15 @@
   width: 100%;
 }
 
-
 .el_1 img {
   position: absolute;
   z-index: -1;
   width: 150%;
   height: 150%;
-  bottom:11%;
+  bottom: 11%;
   right: 30%;
 }
-.el_2 img{
+.el_2 img {
   position: absolute;
   z-index: -1;
   width: 20%;
@@ -204,16 +199,15 @@
   left: 5%;
 }
 @media only screen and (max-width: 1150px) {
-   
-  .el_2{
+  .el_2 {
     display: none;
   }
-  .el_3{
+  .el_3 {
     display: none;
   }
-   .section-viewer{
-     display: none;
-   }
+  .section-viewer {
+    display: none;
+  }
 }
 @media only screen and (max-width: 1150px) {
   .sectiontwitch {
@@ -227,8 +221,8 @@
     height: unset;
     width: 100%;
   }
-  .twitchchat{
-    display: none;  
+  .twitchchat {
+    display: none;
   }
   .informations {
     display: flex;
@@ -256,17 +250,16 @@
     flex-direction: column;
     align-items: center;
   }
-  
 }
 @media only screen and (max-width: 670px) {
-  .logolan{
+  .logolan {
     width: 450px;
   }
-  .logoinsta{
+  .logoinsta {
     width: 100px;
     height: 100px;
   }
-  .logoyt{
+  .logoyt {
     width: 160px;
     height: 160px;
   }
