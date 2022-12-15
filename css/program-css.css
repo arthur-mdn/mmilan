@@ -236,6 +236,7 @@
   text-align: center;
 }
 
+
 .gametext div {
   flex-direction: column;
 }
@@ -259,30 +260,43 @@
 
 .overwatch {
   display: none;
+  align-items: center;
 }
+
+.overwatch h2{
+  font-size:2em;
+}
+
+
 
 .rocketleague {
   display: none;
+  align-items: center;
 }
 
 .cityguesser {
   display: none;
+  align-items: center;
 }
 
 .fallguys {
   display: none;
+  align-items: center;
 }
 
 .mmilan {
   display: flex;
+  align-items: center;
 }
 
 .switchsports {
   display: none;
+  align-items: center;
 }
 
 .mystere {
   display: none;
+  align-items: center;
 }
 
 .TitreJeux {
