@@ -129,9 +129,9 @@ if (isset($_SESSION["PlayerId"])) {
 
             <div class="sectiontwitch">
 
-                <iframe src="https://player.twitch.tv/?channel=oximuss_&parent=mmilan.fr" frameborder="0" allowfullscreen="true" scrolling="no" class="twitchflux">
+                <iframe src="https://player.twitch.tv/?channel=lanmmi&parent=mmilan.fr" frameborder="0" allowfullscreen="true" scrolling="no" class="twitchflux">
                 </iframe>
-                <iframe class="twitchchat" id="chat_embed" src="https://www.twitch.tv/embed/oximuss_/chat?parent=mmilan.fr" height="500" width="350">
+                <iframe class="twitchchat" id="chat_embed" src="https://www.twitch.tv/embed/lanmmi/chat?parent=mmilan.fr" height="300" width="350">
                 </iframe>
             </div>
 
